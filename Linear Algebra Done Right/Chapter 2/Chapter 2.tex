@@ -1,0 +1,226 @@
+\input{/Users/kylec/Documents/LaTeX/Preamble}
+
+\title{Chapter 2 Exercises}
+
+\begin{document}
+  \pagestuff
+  \renewcommand{\chapternum}{2.A}
+  \ex{1} Suppose $v_1, v_2, v_3, v_4$ spans $V$. Prove that the list
+  \[
+    v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4
+  \]
+  also spans $V$.
+  \begin{proof}
+    Let $u_1 = v_1 - v_2$, $u_2 = v_2 - v_3$, $u_3 = v_3 - v_4$, $u_4 = v_4$. Then
+    \begin{align*}
+      v_1 &= u_1 + u_2 + u_3 + u_4 \\
+      v_2 &= u_2 + u_3 + u_4 \\
+      v_3 &= u_3 + u_4 \\
+      v_4 &= u_4
+    \end{align*}
+    Thus the list also spans $V$.
+  \end{proof}
+  \ex{2} Verify the following:
+  \begin{enumerate}[label=(\alph*)]
+    \item A list $v$ of one vector $v \in V$ is linearly independent if and only if $v \neq 0$.
+      \begin{proof}
+        ($\Rightarrow$, Contrapositive) Suppose $v = 0$. Then $1\cdot v = 0$ and there exists a non-trivial solution to $av = 0$, so $v$ is a linearly dependent list. \\
+        ($\Leftarrow$, Contrapositive) Suppose $v$ is a linearly dependent list. Then there must exist some non-zero $a \in \mathbf F$ such that $av = 0$. Therefore $v = 0$.
+      \end{proof}
+    \item A list of two vectors in $V$ is linearly independent if and only if neither vector is a scalar multiple of the other.
+      \begin{proof}
+        ($\Rightarrow$) Suppose that a list of two vectors $v_1, v_2$ is linearly independent. Without loss of generality, let $v_1 \notin \vspan(v_2)$. Thus $v_1$ is not a scalar multiple of $v_2$. \\
+        ($\Leftarrow$, Contrapositive) Suppose that a list of two vectors $v_1, v_2$ is linearly dependent. Then there exists a non-trivial solution to the equation $a_1v_1 + a_2v_2 = 0$, so $v_2 = -\frac{a_1}{a_2}v_1$. Thus one of the vectors is a scalar multiple of the other.
+      \end{proof}
+    \item $(1, 0, 0, 0), (0, 1, 0, 0), (0, 0, 1, 0)$ is linearly independent in $\mathbf F^4$.
+      \begin{proof}
+        Let $u = (1, 0, 0, 0)$, $v = (0, 1, 0, 0)$, and $w = (0, 0, 1, 0)$. There exists no $a_1, a_2 \in \mathbf F$ such that $a_1u + a_2v = w$, because $w_3$ is non-zero.
+      \end{proof}
+    \item The list $1, z, \dotsc, z^m$ is linearly independent in $\mathcal P(\mathbf F)$ for each nonnegative integer $m$.
+      \begin{proof}
+        This problem sucks
+      \end{proof}
+  \end{enumerate}
+  \ex{4} Verify that a list $v_1, \dotsc, v_m$ of vectors in $V$ is linearly dependent if there exist $a_1, \dotsc, a_m \in \mathbf F$, not all 0, such that $a_1v_1 + \dotsb + a_mv_m = 0$.
+  \begin{proof}
+    Suppose there exists $a_1, \dotsc, a_m \in \mathbf F$, not all 0, such that $a_1v_1 + \dotsb + a_mv_m = 0$. Then the vectors are not linearly independent, so they must be linearly dependent.
+  \end{proof}
+  \newpage
+  \ex{6} Suppose $v_1, v_2, v_3, v_4$ is linearly independent in $V$. Prove that the list
+  \[
+    v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4
+  \]
+  is also linearly independent.
+  \begin{proof}
+    Suppose $a_1, a_2, a_3, a_4 \in \mathbf F$. Consider the equation
+    \[
+      a_1(v_1 - v_2) + a_2(v_2 - v_3) + a_3(v_3 - v_4) + a_4v_4.
+    \]
+    We can rewrite this as
+    \[
+      a_1v_1 + (a_2 - a_1)v_2 + (a_3 - a_2)v_3 + (a_4 - a_3)v_4 = 0.
+    \]
+    However, because $v_1, v_2, v_3, v_4$ is linearly independent, all of the coefficients must be 0. Thus $a_1 = (a_2 - a_1) = (a_3 - a_2) = (a_4 - a_3) = 0$. Therefore $a_1 = a_2 = a_3 = a_4$ and the list of vectors is linearly independent.
+  \end{proof}
+  \ex{7} Prove or give a counterexample: If $v_1, v_2, \dotsc, v_m$ is a linearly independent list of vectors in $V$, then
+  \[
+    5v_1 - 4v_2, v_2, v_3, \dotsc, v_m
+  \]
+  is linearly independent.
+  \begin{proof}
+    Suppose $a_1, a_2, \dotsc, a_m \in \mathbf F$. Consider the equation
+    \[
+      a_1(5v_1 - 4v_2) + a_2v_2 + a_3v_3 + \dotsb + a_mv_m = 0,
+    \]
+    which can be rewritten to
+    \[
+      (5a_1)v_1 + (a_2 - 4a_1)v_2 + a_3v_3 + \dotsb + a_mv_m = 0.
+    \]
+    Then, because $v_1, v_2, \dotsc, v_m$ is linearly independent, $(5a_1) = (a_2 - 4a_1) = a_3 = \dotsc = a_m = 0$. Thus $a_1 = a_2 = \dotsc = a_m = 0$ so the list is linearly independent.
+  \end{proof}
+  \ex{8} Prove or give a counterexample: If $v_1, v_2, \dotsc, v_m$ is a linearly independent list of vectors in $V$ and $\lambda \in \mathbf F$ with $\lambda \neq 0$, then $\lambda v_1, \lambda v_2, \dotsc, \lambda v_m$ is linearly independent.
+  \begin{proof}
+    Because $v_1, v_2, \dotsc, v_m$ is a linearly independent list of vectors, we know that
+    \[
+      a_1v_1 + a_2v_2 + \dotsb + a_mv_m = 0
+    \]
+    is true only if $a_1 = a_2 = \dotsc = a_m = 0$. Multiplying both sides by $\lambda$, we get
+    \[
+      a_1\lambda v_1 + a_2\lambda v_2 + \dotsb + a_m\lambda v_m = 0,
+    \]
+    which is also only true when all of the coefficients are 0. Thus the list of vectors is linearly independent.
+  \end{proof}
+  \ex{9} Prove or give a counterexample: If $v_1, \dotsc, v_m$ and $w_1, \dotsc, w_m$ are linearly independent lists of vectors in $V$, then $v_1 + w_1, \dotsc, v_m + w_m$ is linearly independent.
+  \begin{proof}
+    Consider the vectors $v = (1, 0)$ and $w = (-1, 0)$. Then $v + w = (0, 0)$ is not a linearly independent list. The statement is false.
+  \end{proof}
+  \ex{10} Suppose $v_1, \dotsc, v_m$ is linearly independent in $V$ and $w \in V$. Prove that if $v_1 + w, \dotsc, v_m + w$ is linearly dependent, then $w \in \vspan(v_1, \dotsc, v_m)$.
+  \begin{proof}
+    Suppose $b_1, \dotsc, b_m \in \mathbf F$. Because $v_1 + w, \dotsc, v_m + m$ is linearly dependent, there exists some $b_1, \dotsc, b_n$ not all zero such that
+    \[
+      b_1(v_1 + w) + \dotsb + b_m(v_m + w) = 0.
+    \]
+    Observe that
+    \begin{align*}
+      b_1(v_1 + w) + \dotsb + b_m(v_m + w) &= 0 \\
+      b_1v_1 + \dotsb + b_mv_m &= -(b_1 + \dotsb + b_m)w \\
+      -\frac1{b_1 + \dotsb + b_m}(b_1v_1 + \dotsb b_mv_m) &= w \tag{Not all $b$ are 0}
+    \end{align*}
+    Thus $w$ can be written as a linear combination of $v_1, \dotsc, v_m$ so $w \in \vspan(v_1, \dotsc, v_m)$.
+  \end{proof}
+  \newpage
+  \ex{14} Prove that $V$ is infinite-dimensional if and only if there is a sequence $v_1, v_2, \dotsc$ of vectors in $V$ such that $v_1, \dotsc, v_m$ is linearly independent for every positive integer $m$.
+  \begin{proof}
+    ($\Rightarrow$) Suppose $V$ is infinite-dimensional. Then there exists no list of vectors that spans $V$. Thus we may keep adding linearly independent vectors to a sequence indefinitely. \\
+    ($\Leftarrow$) Suppose that for every integer $m$, there exists a sequence of vectors $v_1, \dotsc, v_m$ in $V$ such that the list is linearly independent. Suppose, for the sake of contradiction, that $V$ is finite-dimensional with dimension $k$. However, when $m > k$, $v_1, \dotsc, v_m$ is not linearly independent because it is longer than the spanning list of vectors. Thus $V$ must be infinite-dimensional.
+  \end{proof}
+  \newpage
+  \renewcommand{\chapternum}{2.B}
+  \ex{1} Find all vector spaces that have exactly one basis.
+  \begin{proof}
+    The $\set{0}$ vector space is spanned by the empty set and is the only vector space to have exactly one basis. We will now show that all other vector spaces have more than one basis. \par
+    Let $v$ be a vector in a finite-dimensional vector space $V$, and $\mathcal B = \set{b_1, \dotsc, b_n}$ be a basis for $V$. Consider the set of vectors $\mathcal C = \set{2b_1, \dotsc, 2b_n}$. Because $\mathcal B$ is a basis for $V$, there exists a unique $a_1, \dotsc, a_n \in \mathbf F$ such that
+    \[
+      v = a_1b_1 + a_2b_2 + \dotsb + a_nb_n.
+    \]
+    However, we may express any $v$ as
+    \[
+      v = \frac{a_1}2(2b_1) + \frac{a_2}2(2b_2) + \dotsb + \frac{a_n}2(2b_n),
+    \]
+    so $\mathcal C$ spans $V$. We also know that $\mathcal C$ is linearly independent because if the only solution to $a_1b_1 + \dotsb + a_nb_n = 0$ is the trivial solution, then the only solution to $a_1(2b_1) + \dotsb + a_n(2b_n) = 0$ is also the trivial solution. Thus $\mathcal C$ is a basis for $V$. Because $\mathcal B$ and $\mathcal C$ are both bases of $V$, there is no vector space with exactly one basis besides $\set0$.
+  \end{proof}
+  \ex{5} Prove or disprove: there exists a basis $p_0, p_1, p_2, p_3$ of $\mathcal P_3(\mathbf F)$ such that none of the polynomials $p_0, p_1, p_2, p_3$ has degree 2.
+  \begin{proof}
+    Let $p_0 = 1, p_1 = x, p_2 = x^3 - x^2, p_3 = x^3$. Because $p_3 - p_2 = x^2$, we may replace $p_2$ with $x^2$ without changing the span of the polynomials. Thus $p_0, p_1, p_2, p_3$ span $\mathcal P(\mathbf F)$ and the statement is false.
+  \end{proof}
+  \ex{6} Suppose $v_1, v_2, v_3, v_4$ is a basis of $V$. Prove that
+  \[
+    v_1 + v_2, v_2 + v_3, v_3 + v_4, v_4
+  \]
+  is also a basis of $V$.
+  \begin{proof}
+    Let $u$ be a vector in the vector space $V$. Because $v_1, v_2, v_3, v_4$ is a basis for $V$, there exist unique $a_1, a_2, a_3, a_4$ such that
+    \[
+      u = a_1v_1 + a_2v_2 + a_3v_3 + a_4v_4.
+    \]
+    However, the same vector can be rewritten as
+    \begin{align*}
+      u &= a_1v_1 + a_2v_2 + a_3v_3 + a_4v_4 \\
+      &= a_1(v_1 + v_2) + (a_2 - a_1)(v_2 + v_3) + (a_3 - a_2 + a_1)(v_3 + v_4) + (a_4 - a_3 + a_2 - a_1)v_4.
+    \end{align*}
+    Thus the set of vectors spans $V$. We will now show that they are linearly independent. Consider the following equation:
+    \begin{align*}
+      \alpha_1(v_1 + v_2) + \alpha_2(v_2 + v_3) + \alpha_3(v_3 + v_4) + \alpha_4v_4 &= 0 \\
+      \alpha_1v_1 + (\alpha_1 + \alpha_2)v_2 + (\alpha_2 + \alpha_3)v_3 + (\alpha_3 + \alpha_4)v_4 &= 0.
+    \end{align*}
+    Because $v_1, v_2, v_3, v_4$ is a basis for $V$ we have that $\alpha_1 = \alpha_1 + \alpha_2 = \alpha_2 + \alpha_3 = \alpha_3 + \alpha_4 = 0$. Thus $\alpha_1 = \alpha_2 = \alpha_3 = \alpha_4 = 0$ and the given set of vectors is linearly independent. Therefore it is a basis of $V$.
+  \end{proof}
+  \ex{7} Prove or give a counterexample: If $v_1, v_2, v_3, v_4$ is a basis of $V$ and $U$ is a subspace of $V$ such that $v_1, v_2 \in U$ and $v_3 \notin U$ and $v_4 \notin U$, then $v_1, v_2$ is a basis of $U$.
+  \begin{proof}
+    The statement is false. Let $V = \R^4$, $U = \set{(a, b, c, 0)\mid a, b, c \in \mathbf F}$, and
+    \[
+      v_1 = \begin{bmatrix}1 \\ 0 \\ 0 \\ 0\end{bmatrix}\!,\quad
+      v_2 = \begin{bmatrix}0 \\ 1 \\ 0 \\ 0\end{bmatrix}\!,\quad
+      v_3 = \begin{bmatrix}1 \\ 0 \\ 1 \\ 1\end{bmatrix}\!,\quad \text{and}\quad
+      v_4 = \begin{bmatrix}1 \\ 0 \\ 0 \\ 1\end{bmatrix}\!.
+    \]
+  \end{proof}
+  \ex{8} Suppose $U$ and $W$ are subspaces of $V$ such that $V = U \oplus W$. Suppose also that $u_1, \dotsc, u_m$ is a basis of $U$ and $w_1, \dotsc, w_n$ is a basis of $W$. Prove that
+  \[
+    u_1, \dotsc, u_m, w_1, \dotsc, w_n
+  \]
+  is a basis of $V$.
+  \begin{proof}
+    Because $V = U \oplus W$, there is a unique way to describe every vector in $V$ using a linear combination of $U$ and $W$ and thus $u_1, \dotsc, u_m, w_1,\dotsc, w_n$ spans $V$. Additionally, because the linear combination is unique, $u_1, \dotsc, u_m, w_1, \dotsc, w_n$ is linearly independent, otherwise there would be more than one way to sum to each vector $v \in V$. Thus the set is a basis of $V$.
+  \end{proof}
+  \newpage
+  \renewcommand{\chapternum}{2.C}
+  \ex{1} Suppose $V$ is finite-dimensional and $U$ is a subspace of $V$ such that $\dim U = \dim V$. Prove that $U = V$.
+  \begin{proof}
+    Because the basis of $U$ is linearly independent and has length $\dim V$, it is also a basis for $V$. Then $U$ and $V$ share a basis, so they must be the same vector space.
+  \end{proof}
+  \ex{2} Show that the subspaces of $\mathbf R^2$ are precisely \set{0}, $\mathbf R^2$, and all lines in $\mathbf R^2$ through the origin.
+  \begin{proof}
+    We will begin by showing that the above are all subspaces of $\R^2$. The first is trivially true. The second is also trivially true because $\R^2$ is a vector space. Finally, we will show that all lines through the origin are subspaces of \R. Observe that all lines through the origin are in the set $A = \set{(x, y)\mid ax + by = 0}$ for some $a, b \in \R$. Then for some $k \in \R$ and $(x_1, y_1), (x_2, y_2) \in A$, we have
+    \begin{align*}
+      k(x_1, y_1) + (x_2, y_2) &= (kx_1 + ky_1) + (x_2, y_2) \\
+      &= (kx_1 + x_2, ky_1 + y_2).
+    \end{align*}
+    Then
+    \begin{align*}
+      a(kx_1 + x_2) + b(ky_1 y_2) &= k(ax_1) + ax_2 + k(by_1) + by_2 \\
+      &= k(ax_1 + by_1) + (ax_2 + by_2) \\
+      &= k\cdot0 + 0 \\
+      &= 0.
+    \end{align*}
+    Thus $k(x_1, y_1) + (x_2, y_2) \in A$, so all lines through the origin form subspaces of $\R^2$. \par
+    We must now show that there exist no other subspaces of $\R^2$. The only subspace of $\R^2$ with dimension 0 is the trivial subspace. The only subspace of $\R^2$ with dimension 2 is $\R^2$ itself. We must now show that the only subspaces of $\R^2$ with dimension 1 are lines through the origin. Consider the set \set{(x, y) \mid ax + by = c} where $a, b, c$ are nonzero. Then the set does not contain the zero vector, so it is not a subspace. Therefore the only subspaces of $\R^2$ are \set{0}, $\R^2$, and all lines going through the origin.
+  \end{proof}
+  \ex{9} Suppose $v_1, \dotsc, v_m$ is linearly independent in $V$ and $w \in V$. Prove that
+  \[
+    \dim\vspan(v_1 + w, \dotsc, v_m + w) \geq m - 1.
+  \]
+  \begin{proof}
+
+  \end{proof}
+  \ex{10} Suppose $p_0, p_1, \dotsc, p_m \in \mathcal P(\mathbf F)$ are such that each $p_j$ has degree $j$.\hspace{-2.2pt} Prove that $p_0, p_1, \dotsc, p_m$ is a basis of $\mathcal P_m(\mathbf F)$.
+  \begin{proof}
+    Observe that for every $p_j$, we may write
+    \[
+      p_j = a_jz^j + \sum_{n = 0}^{j - 1}a_{j, n}z^n\text,\quad\text{with}\quad p_0 = a_0z^0.
+    \]
+    Thus the $p_0, \dotsc, p_m$ is a linearly independent set. Additionally, it has length $m + 1$, so it is a basis of $\mathcal P(\mathbf F)$.
+  \end{proof}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+%comment

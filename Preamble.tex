@@ -1,0 +1,56 @@
+\usepackage[margin=1in]{geometry}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{multicol}
+\usepackage{tcolorbox}
+\usepackage{tikz}
+\usepackage{tikz-cd}
+
+\usetikzlibrary{decorations.pathreplacing}
+
+\DeclareMathOperator{\lcm}{lcm}
+\DeclareMathOperator{\proj}{proj}
+\DeclareMathOperator{\vspan}{span}
+
+\newcommand{\N}{\ensuremath{\mathbb{N}}}
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+\newcommand{\Q}{\ensuremath{\mathbb{Q}}}
+\newcommand{\R}{\ensuremath{\mathbb{R}}}
+\newcommand{\C}{\ensuremath{\mathbb{C}}}
+
+\newcommand{\abs}[1]{\ensuremath{\left| #1 \right|}}
+\newcommand{\bigpar}[1]{\ensuremath{\left( #1 \right)}}
+\newcommand{\norm}[1]{\ensuremath{\|#1\|}}
+\newcommand{\set}[1]{\ensuremath{\left\{#1\right\}}}
+\newcommand{\tuple}[1]{\ensuremath{\left\langle #1 \right\rangle}}
+\newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
+\newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
+
+\newcommand{\chapternum}{}
+\newcommand{\ex}[1]{\noindent\textbf{Exercise \chapternum.{#1}.}}
+\newcommand{\fog}{\ensuremath{f \circ g}}
+\newcommand{\gof}{\ensuremath{g \circ f}}
+
+\newcommand{\dx}[1]{\, \mathrm{d}#1}
+\newcommand{\inv}{\ensuremath{^{-1}}}
+\newcommand{\sm}{\setminus}
+
+\definecolor{problemBackground}{RGB}{212,232,246}
+\newenvironment{problem}[1]
+  {
+    \begin{tcolorbox}[boxrule=.5pt, titlerule=.5pt, sharp corners, colback=problemBackground]
+      \textbf{Problem #1.}
+  }
+  {
+    \end{tcolorbox}
+  }
+
+
+\date{\the\year-\the\month-\the\day}
+\author{Kyle Chui}
