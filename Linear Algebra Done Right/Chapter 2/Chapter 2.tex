@@ -1,9 +1,19 @@
-\input{/Users/kylec/Documents/LaTeX/Preamble}
+\documentclass{article}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+\pagenumbering{gobble}
 
 \title{Chapter 2 Exercises}
 
 \begin{document}
-  \pagestuff
+  \maketitle
+  \newpage
+  \noindent
+  \pagenumbering{arabic}
   \renewcommand{\chapternum}{2.A}
   \ex{1} Suppose $v_1, v_2, v_3, v_4$ spans $V$. Prove that the list
   \[
