@@ -1,9 +1,19 @@
-\input{/Users/kylec/Documents/LaTeX/Preamble}
+\documentclass{article}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+\pagenumbering{gobble}
 
 \title{Chapter 1 Exercises}
 
 \begin{document}
-  \pagestuff
+  \maketitle
+  \newpage
+  \noindent
+  \pagenumbering{arabic}
   \renewcommand{\chapternum}{1.B}
   \indent\ex{1} Prove that $-(-v) = v$ for every $v \in V$.
   \begin{proof}
