@@ -1,0 +1,99 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+
+\title{Lecture 4 Notes}
+
+\begin{document}
+  \maketitle
+  \newpage
+  \pagenumbering{arabic}
+  \section{Subspaces}
+  \begin{note}{Subset $\neq$ Subspace}
+    Most subsets of vector spaces are not subspaces!
+  \end{note}
+  \begin{example}{Subspaces}
+    \begin{enumerate}
+      \item Let $F$ be a field. Then $F = F[t]_0 < F[t]_1 < \dotsb < F[t]_n < \dotsb < F[t]$ are vector spaces over $F$, each a subspace of the vector space that contains them.
+      \item If $W_1 \sse W_2 \sse V$, where $W_1, W_2$ are subspaces of $V$, then $W_1 \sse W_2$ is a subspace.
+      \item If $W_1 \sse W_2$ is a subspace and $W_2 \sse V$ is a subspace, then $W \sse V$ is a subspace.
+      \item Let $W\ceq \set{(0, \alpha_1, \dotsc, \alpha_n)\mid \alpha_i \in F, 2 \leq i \leq n} \sse \F^n$.
+      \item Every line or plane through the origin in $\R^3$ is a subspace.
+    \end{enumerate}
+  \end{example}
+  \subsection{Linear Combinations and Span}
+  \begin{definition}{Linear Combination}
+    Let $V$ be a vector space over a field $F$, $v_1, v_2, \dotsc, v_n \in V$. We say $v\in V$ is a \emph{linear combination} of $v_1, \dotsc, v_n$ if there exists $\alpha_1, \dotsc, \alpha_n\in F$ such that $v = \alpha_1v_1 + \dotsb + \alpha_nv_n$.
+  \end{definition}
+  Let $\vspan(v_1,\dotsc,v_n)\ceq\set{\text{All linear combinations of }v_1, v_2, \dotsc, v_n}$. We may also write
+  \[
+    \vspan(v_1,\dotsc,v_n) = \set{\sum_{i=1}^{n}\alpha_iv_i\mid \alpha_1, \dotsc, \alpha_n \in F}.
+  \]
+  This is a subspace of $V$ (by Subspace Theorem) called the \emph{span} of $v_1, \dotsc, v_n$. It is the (unique) ``smallest" subspace of $V$ containing $v_1, \dotsc, v_n$. i.e. if $W \sse V$ is a subspace and $v_1, \dotsc, v_n \in W$, then $\vspan(v_1,\dotsc, v_n)\sse W$. We also let $\vspan(\es) \ceq \set{0_V} = 0$. The smallest vector space containing no vectors. \par
+  \textbf{Question.} If we view $\C$ as a vector space over $\R$, then $\R$ is a subspace of $\C$, but if we view $\C$ as a vector space over $\C$, then $\R$ is \emph{not} a subspace of $\C$ (why?). What is going on?
+  \begin{definition}{Span of a Set of Vectors}
+    Let $V$ be a vector space over a field $F$, $\es \neq S \sse V$ a subset. Then
+    \[
+      \vspan(S) \ceq \text{the set of all \emph{finite} linear combinations of vectors in }S.
+    \]
+  \end{definition}
+  i.e. if $v\in \vspan(S)$, then
+  \[
+  \exists v_1, \dotsc, v_n\in S, \alpha_1, \dotsc, \alpha_n \in F \text{ such that } v = \alpha_1v_1 + \dotsb + \alpha_nv_n.
+  \]
+  Thus $\vspan(S)\sse V$ is a subspace. \par
+  \textbf{Question.} What is the smallest set of vectors in $V$ such that $\vspan(S) = V$?
+  \begin{note}{Vector spaces}
+    There exist sets that are not vector spaces over one field, but are vector spaces over other fields.
+  \end{note}
+  \begin{definition}{Kernel of a Matrix}
+    The \emph{kernel} of a matrix $A$ is the set of all vectors that get mapped to the zero vector. In other words,
+    \[
+      \ker A \ceq \set{x\in F^{n\times1}\mid Ax = 0}.
+    \]
+  \end{definition}
+  \begin{theorem}{Intersection of Subspaces is a Subspace}
+    Let $W_i \in V$, $i\in I$ be subspaces. Then
+    \[
+      \bigcap_I W = \bigcap_{i\in I}W_i = \set{x\in V\mid x\in W_i, \forall i\in I}
+    \]
+    is a subspace of $V$.
+  \end{theorem}
+  \begin{note}{Union of Subspaces}
+    The union of subspaces is not necessarily a subspace. For instance, consider two lines going through the origin in $\R^2$ that are not the same line.
+  \end{note}
+  \begin{definition}{Sum of Subspaces}
+    Let $W_1, W_2\sse V$ be subspaces. Define
+    \begin{align*}
+      W_1 + W_2 &\ceq \set{w_1 + w_2\mid w_1\in W_1, w_2\in W_2} \\
+      &= \vspan(W_1 \cup W_2).
+    \end{align*}
+  \end{definition}
+  So $W_1 + W_2\sse V$ is a subspace and the smallest subspace of $V$ containing $W_1$ and $W_2$.
+  \subsection{Linear Independence}
+  We know that $\R^n$ is an $n$-dimensional vector space over $\R$. Since we need $n$ coordinates to describe all vectors in $\R^n$ but no fewer will do. We want something like the following: \par
+  Let $V$ be a vector space over a field $F$ with $V \neq 0$. Can we find distinct vectors $v_1, \dotsc, v_n$ in $V$, some $n$ with the following properties:
+  \begin{enumerate}
+    \item $V = \vspan(v_1, \dotsc, v_n)$
+    \item No $v_i$ is a linear combination of $v_1, \dotsc, v_{i-1}, v_{i+1}, \dotsc, v_n$
+  \end{enumerate}
+  Then we want to call $V$ an $n$-dimensional vector space over $F$. \par
+  \textbf{Lemma.} Let $V$ be a vector space over $F$, and $n > 1$. Suppose $v_1, \dotsc, v_n$ are distinct. Then $(2)$ is equivalent to if
+  \[
+    \alpha_1v_1 + \dotsb + \alpha_nv_n = \beta_1v_1 + \dotsb + \beta_nv_n, \alpha_i,\beta_i\in F,\forall i,
+  \]
+  then $\alpha_i = \beta_i,\forall i$. In other words, the ``coordinates" are unique.
+  \begin{proof}
+    (Contradiction) Without loss of generality, suppose $\alpha_1 \neq \beta_1$. Then $\alpha_1 - \beta_1 \neq 0$, so it has a multiplicative inverse. Thus
+    \begin{align*}
+      (\alpha_1 - \beta_1)v_1 &= \sum_{i=2}^{n}(\beta_i-\alpha_i)v_i  \\
+      v_1 &= \frac{1}{\alpha_1-\beta_1} \cdot \sum_{i=2}^{n}(\beta_i-\alpha_i)v_i\tag{$\alpha_1-\beta_1\neq0$}
+    \end{align*}
+     so $v_1 \in \vspan(v_2,\dotsc,v_n)$, which is a contradiction.
+  \end{proof}
+\end{document}

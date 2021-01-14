@@ -1,0 +1,120 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+
+\title{Lecture 4 Notes}
+
+\begin{document}
+  \maketitle
+  \newpage
+  \pagenumbering{arabic}
+  \section{Sets and Functions}
+  \subsection{Power Sets}
+  \begin{definition}{Power Set}
+    If $X$ is a set, the \emph{power set} of $X$, denoted $\mathscr{P}(X)$, is the set of subsets of $X$.
+  \end{definition}
+  \begin{example}{Power Sets}
+    \begin{itemize}
+      \item $\mathscr{P}(\es) = \set{\es}$
+      \item $\mathscr{P}(\set{a, b}) = \set{\es, \set{a}, \set{b}, \set{a, b}}$
+      \item $\mathscr{P}(\set{a, b, c}) = \set{\es, \set{a}, \set{b}, \set{c}, \set{a, b}, \set{b, c}, \set{a, c}, \set{a, b, c}}$
+    \end{itemize}
+  \end{example}
+  \begin{definition}{Cardinality of Finite Sets}
+    If $X$ has finitely many elements, then $|X|$ denotes the number of elements of $X$.
+  \end{definition}
+  \begin{theorem}{Cardinality of Power Sets}
+    If $X$ is finite, then $\abs{\mathscr{P}(X)} = 2^{\abs{X}}$.
+  \end{theorem}
+  \begin{proof}
+    Let us induct on the cardinality of the set $X$. Suppose $\abs{X} = 0$, so that $X = \es$. Then $\mathscr{P}(X) = \set{\es}$, so $\abs{\mathscr{P}(X)} = 1 = 2^0$. Thus the statement is true when $\abs{X} = 0$. \par
+    Suppose that the statement holds for some non-negative integer $k$. Let $Y$ be a set such that $\abs{Y} = k + 1$, and $y\in Y$. Observe that we may split $\mathscr{P}(Y)$ into two groups: the subsets containing $y$, and the subsets that do not contain $y$. A subset of $Y$ that does not contain $y$ is exactly $Y \sm \set{y}$, which has $k$ elements. By the inductive hypothesis, there exist $2^k$ such subsets. A subset of $Y$ that does contain $y$ is obtained by adding $y$ to a subset of $Y$ which does not contain $y$. Again, there are $2^k$ such subsets. Any subset of $Y$ either does or does not contain $y$ (but not both), so there are $2^k + 2^k = 2^{k + 1}$ subsets of $Y$. Therefore $\mathscr{P}(X) = 2^{\abs{X}}$ for all finite sets $\abs{X}$.
+  \end{proof}
+  \subsection{Functions}
+  \begin{definition}{Function}
+    If $X, Y$ are sets, a function $f$ from $X$ to $Y$, written $f\colon X\to Y$ is a subset of $X\times Y$ satisfying two properties:
+    \begin{itemize}
+      \item For all $a\in X$, there exists $b\in Y$ such that $(a, b)\in f$
+      \begin{itemize}
+        \item Everything in the domain must get mapped to something in the codomain
+      \end{itemize}
+      \item For all $a\in X$ and $b, b'\in Y$, if $(a, b), (a, b')\in f$, then $b = b'$
+      \begin{itemize}
+        \item Every element in the domain can map to at most one element in the codomain
+      \end{itemize}
+    \end{itemize}
+  \end{definition}
+  \begin{note}{Function Notation}
+    If $(a, b)\in f$, we write $f(a) = b$.
+  \end{note}
+  \begin{example}{Functions}
+    \begin{itemize}
+      \item $f\colon \Z\to \N$ such that $f(x) = x^2$
+      \item $g\colon \N\to \N$ such that $g(x) = x^2$
+    \end{itemize}
+    Note that $f$ and $g$ are different functions.
+  \end{example}
+  \begin{definition}{Domain and Codomain of a Function}
+    If $f\colon X\to Y$, $X$ is the domain of $f$ and $Y$ is the codomain of $f$.
+  \end{definition}
+  \begin{definition}{Range of a Function}
+    For $f\colon X\to Y$, the range of $f$ is:
+    \[
+      \range f = \set{y\in Y\mid y = f(x) \text{ for some }x\in X}
+    \]
+  \end{definition}
+  \begin{definition}{Surjectivity}
+    A function $f\colon X\to Y$ is \emph{onto} or \emph{surjective} if $\range f = Y$. In other words, a function is surjective if its range is equal to its codomain.
+  \end{definition}
+  \begin{example}{Surjective Functions}
+    \begin{itemize}
+      \item $f\colon \set{a, b, c}\to \set{d, e, f}$ defined by $f = \set{(a, d), (b, e), (c, f)}$
+      \item $f\colon \Z\to \N$ defined by $f(x) = |x|$
+    \end{itemize}
+  \end{example}
+  \begin{definition}{Injectivity}
+    A function $f\colon X\to Y$ is \emph{one-to-one} or \emph{injective} if, for all $x, y\in X$, $f(x) = f(y)$ implies that $x = y$. In other words, different elements in the domain map to different elements in the codomain.
+  \end{definition}
+  \begin{example}{Injective Functions}
+    \begin{itemize}
+      \item $g\colon \N\to \N$ defined by $g(x) = x^2$
+    \end{itemize}
+  \end{example}
+  \begin{note}{Properties of Functions}
+    Observe that the both the domain and codomain of a function matter when it comes to determining whether the function satisfies certain properties. For instance, $f\colon \Z\to \N$ defined by $f(x) = x^2$ is not injective, but restricting the domain to $\N$ would make it injective. Similarly, a function $f\colon \Z\to \Z$ defined by $f(x) = x^2$ is not surjective, but restricting the codomain to $\N$ would make it surjective.
+  \end{note}
+  \begin{definition}{Composition of Functions}
+    If $f\colon X\to Y, g\colon Y\to Z$ are functions, then $g\circ f\colon X\to Z$ is a function defined by $(g\circ f)(x) = g(f(x))$.
+  \end{definition}
+  \newpage
+  \begin{theorem}{Composition of Injective/Surjective Functions is Injective/Surjective}
+    Let $f\colon X\to Y$, $g\colon Y\to Z$.
+    \begin{itemize}
+      \item If $f, g$ are injective, so is $g\circ f$
+      \item If $f, g$ are surjective, so is $g\circ f$
+    \end{itemize}
+  \end{theorem}
+  \begin{proof}
+    Suppose $f, g$ are injective functions. Let $x, x' \in X$ such that $(g\circ f)(x) = (g\circ f)(x')$. Then
+    \begin{align*}
+      g(f(x)) &= g(f(x')) \\
+      f(x) &= f(x') \tag{Because $g$ is injective} \\
+      x &= x' \tag{Because $f$ is injective}
+    \end{align*}
+    Therefore $g\circ f$ is injective.
+  \end{proof}
+  \begin{proof}
+    Suppose $f, g$ are surjective functions. Let $z\in Z$. Because $g$ is surjective, there exists some $y\in Y$ such that $g(y) = z$. Furthermore, because $f$ is surjective, there exists some $x\in X$ such that $f(x) = y$. Thus, for every $z\in Z$, there exists some $x\in X$ such that $(g\circ f)(x) = g(f(x)) = g(y) = z$, so $g\circ f$ is surjective.
+  \end{proof}
+  \begin{definition}{Bijectivity}
+    If a function is both injective and surjective, then we say that it is \emph{bijective}.
+  \end{definition}
+  \begin{note}{Cardinality and Bijections}
+    If there is a bijection between two sets, they have the same number of elements.
+  \end{note}
+\end{document}

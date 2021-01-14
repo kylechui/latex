@@ -8,17 +8,24 @@
 \usepackage{fancyhdr}
 \usepackage{hyperref}
 \usepackage{mathrsfs}
-\usepackage{multicol}
+\usepackage{mathtools}
 \usepackage{standalone}
 \usepackage{tcolorbox}
 \usepackage{tikz}
-\usepackage{tikz-cd}
+\usepackage{xcolor}
 
 \usetikzlibrary{decorations.pathreplacing}
+\tcbuselibrary{skins}
 
 \DeclareMathOperator{\lcm}{lcm}
 \DeclareMathOperator{\proj}{proj}
 \DeclareMathOperator{\vspan}{span}
+\DeclareMathOperator{\im}{im}
+\DeclareMathOperator{\range}{range}
+\DeclareMathOperator{\Diff}{Diff}
+\DeclareMathOperator{\Int}{Int}
+\DeclareMathOperator{\fcn}{fcn}
+\DeclareMathOperator{\id}{id}
 
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
@@ -29,10 +36,11 @@
 \newcommand{\lam}{\ensuremath{\lambda}}
 \newcommand{\nab}{\ensuremath{\nabla}}
 \newcommand{\eps}{\ensuremath{\varepsilon}}
+\newcommand{\es}{\ensuremath{\varnothing}}
 
-\newcommand{\abs}[1]{\ensuremath{\left| #1 \right|}}
+\newcommand{\abs}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
 \newcommand{\bigpar}[1]{\ensuremath{\left( #1 \right)}}
-\newcommand{\norm}[1]{\ensuremath{\|#1\|}}
+\newcommand{\norm}[1]{\ensuremath{\lVert #1\rVert}}
 \newcommand{\set}[1]{\ensuremath{\left\{#1\right\}}}
 \newcommand{\tuple}[1]{\ensuremath{\left\langle #1 \right\rangle}}
 \newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
@@ -44,17 +52,98 @@
 \newcommand{\dx}[1]{\,\mathrm{d}#1}
 \newcommand{\inv}{\ensuremath{^{-1}}}
 \newcommand{\sm}{\setminus}
+\newcommand{\sse}{\subseteq}
+\newcommand{\ceq}{\coloneqq}
 
 \definecolor{problemBackground}{RGB}{212,232,246}
 \newenvironment{problem}[1]
   {
-    \begin{tcolorbox}[boxrule=.5pt, titlerule=.5pt, sharp corners, colback=problemBackground]
+    \begin{tcolorbox}[
+      boxrule=.5pt,
+      titlerule=.5pt,
+      sharp corners,
+      colback=problemBackground
+    ]
       \textbf{Problem #1.}
   }
   {
     \end{tcolorbox}
   }
 
+\definecolor{exampleBackground}{RGB}{255,249,248}
+\definecolor{exampleAccent}{RGB}{158,60,14}
+\newenvironment{example}[1]
+  {
+    \begin{tcolorbox}[
+      boxrule=.5pt,
+      sharp corners,
+      colback=exampleBackground,
+      colframe=exampleAccent,
+    ]
+    \color{exampleAccent}\textbf{Example.} \emph{#1}\color{black}
+  }
+  {
+    \end{tcolorbox}
+  }
 
+\definecolor{theoremBackground}{RGB}{234,243,251}
+\definecolor{theoremAccent}{RGB}{0,116,183}
+\newenvironment{theorem}[1]
+  {
+    \begin{tcolorbox}[
+      boxrule=.5pt,
+      titlerule=.5pt,
+      sharp corners,
+      colback=theoremBackground,
+      colframe=theoremAccent
+    ]
+      \color{theoremAccent}\textbf{Theorem --- }\emph{#1}\\\color{black}
+  }
+  {
+    \end{tcolorbox}
+  }
+
+\definecolor{noteBackground}{RGB}{244,249,244}
+\definecolor{noteAccent}{RGB}{34,139,34}
+\newenvironment{note}[1]
+  {
+  \begin{tcolorbox}[
+    enhanced,
+    boxrule=0pt,
+    frame hidden,
+    sharp corners,
+    colback=noteBackground,
+    borderline west={3pt}{-1.5pt}{noteAccent}
+    ]
+    \color{noteAccent}\textbf{Note (#1). }\color{black}
+    }
+    {
+  \end{tcolorbox}
+  }
+
+\definecolor{definitionBackground}{RGB}{246,246,246}
+\newenvironment{definition}[1]
+  {
+    \begin{tcolorbox}[
+      enhanced,
+      boxrule=0pt,
+      frame hidden,
+      sharp corners,
+      colback=definitionBackground,
+      borderline west={3pt}{-1.5pt}{black}
+    ]
+    \textbf{Definition. }\emph{#1}\\
+  }
+  {
+    \end{tcolorbox}
+  }
+\newenvironment{amatrix}[2]{
+    \left[
+      \begin{array}{*{#1}{c}|*{#2}c}
+  }
+  {
+      \end{array}
+    \right]
+  }
 \date{\the\year-\the\month-\the\day}
 \author{Kyle Chui}

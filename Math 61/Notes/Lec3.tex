@@ -1,0 +1,88 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+
+\title{Lecture 3 Notes}
+
+\begin{document}
+  \maketitle
+  \newpage
+  \noindent
+  \pagenumbering{arabic}
+  \section{Sets and Functions}
+  \subsection{What are sets?}
+  \boxed{\textbf{Definition.}} A \emph{set} is a collection of objects. We usually denote sets using capital letters. Here's an example of a set:
+  \[
+    X = \set{a, b, c, d} \quad a\in X.
+  \]
+  We say $a \in X$ means that $a$ is an element of $X$. The order of elements in a set does not matter, and neither do repetitions, so we have:
+  \[
+    \set{a, b, c, d} = \set{a, c, d, b} = \set{a, a, b, b, c, c, d, d}.
+  \]
+  The elements of a set don't matter either, so we may have a set like
+  \[
+    \set{\sqrt{2}, \text{James Cameron (the director)}, \text{James Cameron (the professor)}}
+  \]
+  Sets can have other sets as elements, for example
+  \[
+    \set{\set{0, 1}, 0, 1}.
+  \]
+  The three elements of the above set are: $\set{0, 1}, \set{0}$, and $\set{1}$.
+  \subsection{Set-builder notation}
+  We use set builder notation to make sets. For example,
+  \[
+    \text{UCLA} = \set{x : x \text{ is a person who is a student at UCLA}}.
+  \]
+  Common sets that we use in this class:
+  \begin{itemize}
+    \item $\N$ is the set of natural numbers. $\set{0, 1, 2, \dotsc}$
+    \item $\Z$ is the set of integers. $\set{\dotsc, -2, -1, 0, 1, 2, \dotsc}$
+    \item $\Q$ is the set of rationals (fractions)
+    \item $\R$ is the set of reals
+    \item $\C$ is the set of complex numbers
+  \end{itemize}
+  Consider the set $E = \set{x\in \Z\mid x=  2k\text{ for some }k\in \Z}$, which is the even integers. The empty set has no items in it, and is denoted $\varnothing = \set{}$. \\
+  \boxed{\textbf{Definition.}} Suppose $X, Y$ are sets. We say that $X$ is a subset of $Y$ (we write $X \subseteq Y$) if $a \in X$ implies $a \in Y$. In other words, every element of $X$ is also an element of $Y$. \\
+  \boxed{\textbf{Definition.}} For sets $X, Y$ we have that $X = Y$ if they have the same statements. \\
+  \boxed{\textbf{Proposition.}} For sets $X, Y$ we have $X = Y$ if and only if $X \subseteq Y$ and $Y \subseteq X$.
+  \begin{proof}
+    Suppose that $X = Y$. Let $a \in X$. Since $X = Y$, we have $a \in Y$ as well, so $X \subseteq Y$. Similarly, if $b \in Y$ then $b \in X$ because $X = Y$, so $Y \subseteq X$. \par
+    We will now show the other direction of the statement. Suppose $X \subseteq Y$ and $Y \subseteq X$. Thus if $a \in X$ then $a \in Y$ and if $b \in Y$ then $b \in X$, so $X$ and $Y$ have the same elements and $X = Y$.
+  \end{proof}
+  \noindent\boxed{\textbf{Note.}} If $X$ is any set, then $\varnothing \subseteq X$. \\
+  The empty set is not an element of every set, although it \emph{could} be an element of a set. For example, $\varnothing \notin \Z$ but $\varnothing \subseteq \Z$.
+  \[
+    \varnothing \in \set{\varnothing} = \set{\set{}} \tag{Note: $\varnothing \neq \set{\varnothing}$}
+  \]
+  \newpage
+  \begin{center}\[\begin{array}{c|c|c}
+    \text{It is raining} & \text{I got wet} & \text{If it is raining, then I got wet} \\
+    \hline
+    T & T & T \\
+    T & F & F \\
+    F & T & T \\
+    F & F & T
+  \end{array}\]\end{center}
+  The last two statements are vacuously true, because the first part is false. Think about it in terms of ``lying". If it is not raining and you did not get wet, that does not mean that the person who said ``If it is raining, then I got wet" is lying. Their statement was just not applicable in the situation.
+  \subsection{Constructing sets from other sets}
+  \begin{enumerate}[label=(\roman*)]
+    \item $X\cup Y = \set{a\mid a \in X \text{ or } a \in Y}$
+    \item $X\cap Y = \set{a\mid a\in X \text{ and } a \in Y}$
+    \item $X\times Y = \set{(a, b)\mid a\in X \text{ and } b\in Y}$
+    \item $Y \sm X = \set{y\in Y\mid y\notin X}$
+  \end{enumerate}
+  \boxed{\textbf{Proposition.}} If $X, Y$ are sets:
+  \begin{itemize}
+    \item $X\subseteq X\cup Y$ and $Y \subseteq X\cup Y$
+    \item $X \cap Y \subseteq X$, $X\cap Y\subseteq Y$
+    \item $Y\sm X \subseteq Y$
+    \item $X\cap (Y\sm X) = \varnothing$
+  \end{itemize}
+  \boxed{\textbf{Definition.}} If $X$ is a set, $\mathscr{P}(X)$ (the ``power set" of $X$) is the set of subsets of $X$. \\
+  \boxed{\textbf{Proposition.}} If $X$ has $n$ elements, then $\mathscr{P}(X)$ has $2^n$ elements.
+\end{document}

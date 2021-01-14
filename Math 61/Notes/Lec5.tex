@@ -1,0 +1,62 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+
+\title{Lecture 5}
+
+\begin{document}
+  \maketitle
+  \newpage
+  \pagenumbering{arabic}
+  \subsection{Inverses of Functions}
+  \begin{definition}{Inverse of a function}
+    Suppose $f\colon X\to Y$, $g\colon Y\to X$ is an inverse to $f$ (soon we'll prove that inverses are unique if they exist) if $f\circ g$ and $g\circ f$ are the identity. In other words, $(g\circ f)(x) = x$, $(f\circ g)(y) = y$ for all $x\in X$, $y\in Y$.
+  \end{definition}
+  \begin{theorem}{Bijective $\iff$ Inverse}
+    For $f\colon X\to Y$, $f$ is a bijection if and only if $f$ has an inverse.
+  \end{theorem}
+  \begin{proof}
+    Suppose $f$ has an inverse function $g$. Then $f\circ g$ and $g\circ f$ are the identity. Suppose $f(a) = f(b)$. Then
+    \begin{align*}
+      f(a) &= f(b) \\
+      g(f(a)) &= g(f(b)) \\
+      (g\circ f)(a) &= (g\circ f)(b)\ \\
+      a &= b.
+    \end{align*}
+    Thus $f$ is injective. \par
+    Suppose $b\in Y$. Since $f\circ g$ is the identity, we have that $(f\circ g)(b) = b$, so $f(g(b)) = b$. Thus $f$ is surjective. Therefore $f$ is a bijection. \par
+    Now suppose that $f$ is a bijection. We define $f\inv(a)$ by $f\inv(a) = b$, where $a=f(b)$.
+    \begin{itemize}
+      \item Because $f$ is surjective, we have that for all $a\in Y$, there exists some $b\in X$ such that $a = f(b)$.
+      \item Because $f$ is injective, any $a\in Y$ is \emph{uniquely} mapped by some $b\in X$.
+    \end{itemize}
+    Thus $f\inv$ is a function. We will now show that $f\inv$ is the inverse of $f$. For all $x\in X$, $(f\inv\circ f)(x) = x$ by definition. For all $y\in Y$,
+    \begin{align*}
+      (f\circ f\inv)(y) &= f(f\inv(y)) \\
+      &= f(f\inv(f(x))) \tag{Because $f$ is surjective} \\
+      &= f(x) \tag{$(f\inv\circ f)(x)=x$} \\
+      &= y.
+    \end{align*}
+    Therefore $f\inv$ is the inverse of $f$.
+  \end{proof}
+  \begin{theorem}{Uniqueness of Inverses}
+    Inverses of functions are unique, provided they exist. \par
+    Suppose $f\colon X\to Y$. If $f$ has inverses $g,h\colon Y\to X$ such that $g\circ f = h\circ f = \id_X$, $f\circ g = f\circ h = \id_Y$, then $g = h$.
+  \end{theorem}
+  \begin{proof}
+    Let $y\in Y$. By the previous theorem we know that $f$ is surjective, so $y = f(x)$, for some $x\in X$. Thus
+    \begin{align*}
+      g(y) &= g(f(x)) \\
+      &= x \\
+      &= h(f(x)) \\
+      &= h(y).
+    \end{align*}
+    Thus $g = h$ and the inverse is unique.
+  \end{proof}
+
+\end{document}

@@ -1,0 +1,53 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Math 61 \\Worksheet 2}
+\rhead{Kyle Chui \\Page \thepage}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+
+\title{Worksheet 2}
+
+\begin{document}
+  \maketitle
+  \newpage
+  \pagenumbering{arabic}
+  \begin{problem}{1}
+    Let $\set{0, 1}^X$ denote the set of functions $X\to2$ for some set $X$.\par
+    Define a function $F$ from $\mathcal{P}(X)$ to $\set{0, 1}^X$ by for $A \in \mathcal{P}(X)$, $F(A)$ is the function $X\to \set{0, 1}^X$ defined by $F(A)(x) = \begin{cases}0 & x\in A \\ 1 & x\notin A\end{cases}$.
+    \begin{enumerate}[label=(\alph*)]
+      \item List the elements of the set $\set{0, 1}^{\set{a, b}}$.
+      \item Let $X = \set{a, b, c}$. Compute $F(\set{b, c})$, $F(\set{a})$, and $F(\set{a, b, c})$. (Remember all the outputs are functions $X\to \set{0, 1}$).
+      \item Again let $X = \set{a, b, c}$. Let $g\colon X\to \set{0, 1}$ be the function defined by $g(a) = 1$, $g(b) = 1$, $g(c) = 1$. Find a subset $A$ of $X$ so that $F(A) = g$.
+      \item Show that for any set $X$ the function $F\colon \mathcal{P}(X)\to \set{0, 1}^X$ is a bijection (is injective and surjective).
+      \item Use this bijection to give another proof that if $X$ is a finite set then $\abs{\mathcal{P}(X)}=2^{\abs{X}}$.
+    \end{enumerate}
+  \end{problem}
+  \begin{enumerate}[label=(\alph*)]
+    \item The elements of the set $\set{0, 1}^{\set{a, b}}$ are:
+    \[
+      \set{(a,0),(b,0)}, \set{(a,1),(b,0)}, \set{(a,0),(b,1)}, \set{(a,1),(b,1)}.
+    \]
+    \item
+    \begin{align*}
+      F(\set{b, c}) &= \set{(a, 1), (b, 0), (c, 0)} \\
+      F(\set{a}) &= \set{(a, 0), (b, 1), (c, 1)} \\
+      F(\set{a, b, c}) &= \set{(a, 0), (b, 0), (c, 0)}
+    \end{align*}
+    \item Because all elements of $X$ map to 1, we know that none of the elements of $X$ are in $A$. Thus $A = \es$.
+    \item
+    \begin{proof}
+      We will first show that $F$ is injective. Let $A \neq B$. Without loss of generality, there exists some $x\in A$ such that $x \notin B$. Because $F$ is a function, every element in the domain must get mapped to something, so either $(x, 0)$ or $(x, 1)$ is in $F(A)$, but not in $F(B)$. Therefore $F(A) \neq F(B)$ and $F$ is injective. \par
+      We will now show that $F$ is surjective. Observe that for every function $f\in \set{0, 1}^{X}$, the set
+      \[
+        S = \set{x\in X\mid (x, 0)\in f}
+      \]
+      maps to $f$. Thus $F$ is a bijection.
+    \end{proof}
+    \item
+    \begin{proof}
+      Observe that $\abs{\set{0, 1}^X} = 2^X$, because every element in $X$ can map to one of two elements, 0 or 1. We will show that a bijection between finite sets implies that they are of the same cardinality. 
+    \end{proof}
+  \end{enumerate}
+\end{document}
