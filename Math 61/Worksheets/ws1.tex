@@ -1,0 +1,90 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Math 61 \\Worksheet 1}
+\rhead{Kyle Chui \\Page \thepage}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+
+\title{Worksheet 1}
+
+\begin{document}
+  \maketitle
+  \newpage
+  \noindent
+  \pagenumbering{arabic}
+  \begin{problem}{1}
+    Use induction to show that $\sum_{i=0}^{n-1}(2i+1) = n^2$.
+  \end{problem}
+  \begin{proof}
+    Observe that for $n = 1$, we have that $\sum_{i=0}^{1-1}(2i+1) = \sum_{i=0}^{0}(2i+1) = 1 = 1^2$. Thus the statement holds for $n = 1$. \\
+    Suppose that the statement holds for some positive integer $k$. Then
+    \begin{align*}
+      \sum_{i=0}^{k}(2i+1) &= \sum_{i=0}^{k-1}(2i+1) + (2k+1) \\
+      &= k^2 + 2k + 1 \tag{Inductive Hypothesis} \\
+      &= (k + 1)^2.
+    \end{align*}
+    Thus the statement holds for the $k + 1$ case. Therefore, by induction, $\sum_{i=0}^{n-1}(2i+1) = n^2$ for all positive integers $n$.
+  \end{proof}
+  \begin{problem}{2}
+    Show that for $r \neq 1$ we have: $\sum_{i=0}^{n}ar^i = \frac{a(r^{n+1}-1)}{r-1}$.
+  \end{problem}
+  \begin{proof}
+    Observe that for $n = 0$, we have that $\sum_{i=0}^{0}ar^i = a = \frac{a(r^1-1)}{r-1}$. Thus the statement holds for $n = 0$. \\
+    Suppose that the statement holds for some non-negative integer $k$. Then
+    \begin{align*}
+      \sum_{i=0}^{k+1}ar^i &= \sum_{i=0}^{k}ar^i + ar^{k+1} \\
+      &= \frac{a(r^{k+1}-1)}{r-1} + ar^{k+1} \tag{Inductive Hypothesis} \\
+      &= \frac{(r-1+1)ar^{k+1}-a}{r-1} \\
+      &= \frac{a(r^{k+2}-1)}{r-1}.
+    \end{align*}
+    Thus the statement holds for the $k + 1$ case. Therefore, by induction, $\sum_{i=0}^{n}ar^i = \frac{a(r^{n+1}-1)}{r-1}$ for all non-negative integers $n$.
+  \end{proof}
+  \begin{problem}{3}
+    Suppose that there are $n$ lines drawn on a plane, where no two of the lines are parallel or collinear and no three intersect at one point. Into how many regions do the lines divide the plane? Does the number depend on how the lines are drawn? Prove that your answer is correct with induction.
+  \end{problem}
+  \begin{proof}
+    The lines divide the plane into $\frac{n(n+1)}{2}+1$ regions. Consider the case where there are no lines. The plane is then divided into $\frac{0(1)}{2}+1 = 1$ region. \\
+    Suppose that the statement holds for some non-negative integer $k$. Observe that adding another line to a plane with $k$ lines will introduce $k+1$ new regions. Then the number of regions in a plane with $k + 1$ lines is
+    \begin{align*}
+      \frac{k(k+1)}{2}+1  + (k+1) &= \frac{k(k+1)}{2} + \frac{2(k+1)}{2} + 1 \\
+      &= \frac{(k+1)(k+2)}{2} + 1.
+    \end{align*}
+    Thus the statement holds for $k + 1$ lines. Therefore, by induction, $n$ lines divide a plane into $\frac{n(n+1)}{2}+1$ regions for all non-negative integers $n$.
+  \end{proof}
+  \newpage
+  \begin{problem}{4}
+    Show that for all $n > 4$ we have $2^n > n^2$.
+  \end{problem}
+  \begin{proof}
+    It is clearly true that $2^n > 2$ for all $n > 4$. \par
+    We will first show that $2^n > 2n+1$ for all $n > 4$. Observe that for $n = 5$, we have $2^5 = 32 > 11 = 2(5) + 1$. Suppose that $2^k > 2k+1$ for some integer $k$. Then
+    \begin{align*}
+      2^k &> 2(k + 1) \\
+      2^k + 2^k &> 2(k + 1) + 2 \tag{$2^k > 2$ when $k > 4$} \\
+      2^{k + 1} &> 2(k + 2) + 1,
+    \end{align*}
+    so the statement holds for $k + 1$. Therefore $2^n > 2n + 1$ for all integers $n > 4$. We may now move on to the actual proof. \par
+    Observe that for $n = 5$, we have $2^5 = 32 > 25 = 5^2$. Thus the statement holds for $n = 5$. Suppose $2^k > k^2$ for some integer $k$. Then
+    \begin{align*}
+      2^k &> k^2 \\
+      2^k + 2^k &> k^2 + 2k + 1 \tag{$2^k > 2k + 1$ when $k > 4$} \\
+      2^{k + 1} &> (k + 1)^2,
+    \end{align*}
+    so the statement holds for $k + 1$. Therefore $2^n > n^2$ for all integers $n > 4$.
+  \end{proof}
+  \begin{problem}{5}
+    You have access to an unlimited supply of 4 and 5 cent stamps. Show that you can make the exact amount of postage using these stamps for any amount of 12 cents or greater.
+  \end{problem}
+  \begin{proof}
+    Observe that you can make the exact amount of postage for amounts between 12 cents and 15 cents, inclusive, as follows:
+    \begin{itemize}
+      \item 12 cents: 3 stamps worth 4 cents
+      \item 13 cents: 2 stamps worth 4 cents and 1 stamp worth 5 cents
+      \item 14 cents: 1 stamps worth 4 cents and 2 stamp worth 5 cents
+      \item 15 cents: 3 stamp worth 5 cents
+    \end{itemize}
+    Suppose that the exact amount of postage can be made for all values between 12 and $k$, inclusive, for some $k \geq 15$. By assumption, we are able to make the exact amount of postage for $k - 3$ cents. Thus, by adding a stamp worth 4 cents, we are able to make the exact amount of postage for $k + 1$ cents. Therefore, by strong induction, it is possible to make exact postage for any amount 12 cents or greater by using only 4 and 5 cent stamps.
+  \end{proof}
+\end{document}
