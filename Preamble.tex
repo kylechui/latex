@@ -64,7 +64,8 @@
       sharp corners,
       colback=problemBackground
     ]
-      \textbf{Problem #1.}
+    \ifx &#1& \textbf{Problem. }
+    \else \textbf{Problem #1.} \fi
   }
   {
     \end{tcolorbox}
@@ -115,7 +116,8 @@
     colback=noteBackground,
     borderline west={3pt}{-1.5pt}{noteAccent}
     ]
-    \color{noteAccent}\textbf{Note (#1). }\color{black}
+    \ifx &#1& \color{noteAccent}\textbf{Note. }\color{black}
+    \else \color{noteAccent}\textbf{Note (#1). }\color{black} \fi
     }
     {
   \end{tcolorbox}
