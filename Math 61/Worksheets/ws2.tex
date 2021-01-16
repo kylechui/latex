@@ -47,7 +47,19 @@
     \end{proof}
     \item
     \begin{proof}
-      Observe that $\abs{\set{0, 1}^X} = 2^X$, because every element in $X$ can map to one of two elements, 0 or 1. We will show that a bijection between finite sets implies that they are of the same cardinality. 
+      Observe that $\abs{\set{0, 1}^X} = 2^X$, because every element in $X$ can map to one of two elements, 0 or 1. We will show that a bijection between finite sets implies that they are of the same cardinality.
     \end{proof}
   \end{enumerate}
+  \newpage
+  \begin{problem}{2}
+    Let $\N_{>1}$ be the set of natural numbers that are bigger than one. For $i \geq 2$, set $X_i = \set{ik\mid k \in \N_{>1}}$. Describe $\N_{>1} \sm \bigpar{\bigcup_{i=2}^\infty X_i}$.
+  \end{problem}
+  Observe that $X_2$ is the set of all even numbers, $X_3$ the set of all multiples of three, et cetera. Thus the union of all such sets is $\set{x\mid x \text{ is an integer larger than one}}$. Therefore the indicated set is just the empty set.
+  \begin{problem}{3}
+    Let $f\colon X\to Y$ be a function. Show that $f$ is onto if and only if for every onto function $g\colon Y\to Z$ the function $g\circ f$ is onto.
+  \end{problem}
+  \begin{proof}
+    (\Rightarrow) Suppose $f, g$ are surjective functions. Then for all $z\in Z$, there exists some $y\in Y$ such that $g(y) = z$. Furthermore, for all $y\in Y$ there exists some $x\in X$ such that $f(x) = y$. Thus, for all $z\in Z$, we have $g(f(x)) = (g\circ f)(x) = z$, so $g\circ f$ is surjective. \par
+    (\Leftarrow) Suppose $g, g\circ f$ are surjective functions. Then for all $z\in Z$, there exists some $x\in X$ such that $(g\circ f)(x) = z$.
+  \end{proof}
 \end{document}
