@@ -1,0 +1,74 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \subsection{Equivalence Relations}
+  \begin{definition}{Equivalence relation}
+    A relation $R$ on  aset $X$ is an \emph{equivalence relation} if it is reflexive, symmetric, and transitive.
+  \end{definition}
+  \begin{note}{}
+    An equivalence relation gives us a notion of two different elements in a set being ``the same".
+    \begin{itemize}
+      \item Reflexive: Everything is ``the same" as itself
+      \item Symmetric: If $x$ is ``the same" as $y$, then $y$ is ``the same" as $x$
+      \item Transitive: If $x$ is ``the same" as $y$, and $y$ is ``the same" as $z$, then $x$ is ``the same" as $z$
+    \end{itemize}
+  \end{note}
+  \begin{example}{Equivalence Relations}
+    \begin{enumerate}[label=(\alph*)]
+      \item The relation $E$ on the integers where $xEy$ if $x-y$ is even.
+      \begin{itemize}
+        \item Reflexive: For all $x\in\Z$, $x - x = 0$, which is even, so $xEx$
+        \item Symmetric: For all $x, y\in\Z$, if $x - y$ is even, so is $-(x-y)=y-x$. Thus if $xEy$, then $yEx$
+        \item Transitive: For all $x,y,z\in\Z$, if $x-y$ is even and $y-z$ is even, then their sum, $x-z$, is also even. Thus if $xEy$ and $yEz$, then $xEz$.
+      \end{itemize}
+      Observe that this relation relates two integers if they have the same parity.
+      \item Let $Y$ be any finite set, and $a,b\in Y^*$ (the set of all strings constructed using $Y$). Consider the relation $L$ over $Y^*$ such that $aLb$ if $a$ and $b$ have the same length.
+      \item Let $X$ be the set of all animals, with animals $x,y\in X$. Consider the relation $S$ over $X$ such that $xSy$ if $x$ and $y$ are of the same species.
+      \item Let $x,y\in\R$. Consider the relation $C$ over $\R$ such that $xCy$ if $x-y$ is an integer.
+    \end{enumerate}
+  \end{example}
+  \begin{definition}{Equivalence Classes}
+    If $R$ is an equivalence relation on a set $X$, then for $x\in X$, the \emph{equivalence class} of $X$ is the set (with respect to $R$), denoted by $[x] = [x]_R = \set{y\in X\mid xRy}$.
+  \end{definition}
+  \begin{example}{Equivalence Classes}
+    \begin{enumerate}[label=(\alph*)]
+      \item Let $E$ be a relation on $\Z$, where $xEy$ if $x-y$ is even. The equivalence classes for $E$ are $[0]$ (the evens) and $[1]$ (the odds). So, the set of equivalence classes $= \set{[0], [1]}$.
+      \item Let $x, y\in\R$, with the relation $C$ over $\R$ defined by $xCy$ if $x - y$ is an integer. The set of equivalence classes $= \set{[x]\mid x\in[0, 1)}$.
+    \end{enumerate}
+  \end{example}
+  If $R$ is an equivalence relation on a set $X$, then:
+  \begin{itemize}
+    \item For all $x\in X$, if $x\in [y]$ and $x\in [z]$, then $[y] = [z]$.
+    \begin{proof}
+      Suppose $x\in [y]$ and $x\in [z]$. Let $w\in [y]$. Because $w\in [y]$, we know that $yRw$. We also know that $yRx$ because $x\in[y]$. By symmetry of $R$, we have $wRy$, and by transitivity, we have $wRx$. But $x\in [z]$, so $zRx$, and by symmetry we have $xRw$. By transitivity, $zRw$ so $w\in [z]$. Thus $[y]\sse[z]$. \par
+      By a similar argument, we have that $[z]\sse[y]$, so $[y]=[z]$.
+    \end{proof}
+    \item For any $x\in X$, $x$ is in some equivalence class, $x\in [x]$ by reflexivity. \\
+    So, for every $x\in X$, $x$ is in exactly one equivalence class. If $x$ is in another equivalence class $[y]$, then by the above $[x] = [y]$.
+  \end{itemize}
+  \begin{definition}{Partition}
+    For $X$ a set, a \emph{partition} $\mathcal{S}$ of $X$ is a set of nonempty subsets of $X$ such that every element of $X$ is an element of exactly one of the subsets. In other words, for all $A, B\in \mathcal{S}$
+    \begin{itemize}
+      \item $A, B\sse X$
+      \item $A, B\neq\es$
+      \item If $A\cap B \neq\es$ then $A = B$
+      \item For all $x\in X$, there exists exactly one $A\in \mathcal{S}$ such that $x\in A$
+    \end{itemize}
+  \end{definition}
+  \begin{note}{}
+    We showed that if $R$ is an equivalence relation on $X$ then $\set{[x]_R\mid x\in X}$ is a partition of $X$.
+  \end{note}
+  \begin{theorem}{Equivalence Relations and Partitions}
+    For $X$ a set, there is a bijection $F\colon \text{Set of equivalence relations on $X$}\to \text{Set of partitions of $X$}$, defined by
+    \[
+      F(E) = \set{[x]_E\mid x\in X},
+    \]
+    the inverse function $F\inv$ sends a partition $\mathcal{S}$ to the equivalence relation $F\inv(\mathcal{S})$ defined by $xF\inv(\mathcal{S})y$ if and only if $x$ and $y$ are in the same set of $\mathcal{S}$ (in the same equivalence class of $E$).
+  \end{theorem}
+\end{document}
