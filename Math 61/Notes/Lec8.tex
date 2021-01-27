@@ -1,0 +1,64 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \begin{note}{}
+    For the theorem above, we need to verify:
+    \begin{itemize}
+      \item $F\inv(\mathcal{S})$ is an equivalence relation,
+      \item $F\circ F\inv(\mathcal{S}) = \mathcal{S}$ for all partitions $\mathcal{S}$,
+      \item $F\inv\circ F(R) = R$ for all equivalence relations $R$.
+    \end{itemize}
+  \end{note}
+  \begin{example}{Equivalence relations $\iff$ partitions}\\
+    Let
+    \begin{align*}
+      X &= \set{1, 2, 3, 4, 5} \\
+      R &= \set{(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (1, 5), (5, 1), (1, 3), (3, 1), (3, 5), (5, 3), (2, 4), (4, 2)}.
+    \end{align*}
+    What is the corresponding partition, i.e. what is $F(R)$? \par
+    The corresponding partition to the aforementioned relation $R$ is $\set{\set{1,3,5}, \set{2,4}}$.\\[10pt]
+    Let $\mathcal{S} = \set{\set{1, 2, 3}, \set{4, 5}}$ what is the corresponding equivalence relation? i.e. what is $F\inv(\mathcal{S})$?\par
+    The corresponding equivalence relation for $S$ is
+    \[
+      \set{(1, 1), (2, 2), (3, 3), (4, 4), (5, 5), (1, 2), (2, 1), (1, 3), (3, 1), (2, 3), (3, 2), (4, 5), (5, 4)}.
+    \]
+  \end{example}
+  \section{Counting}
+  \textbf{Question.} If $\abs{X} = n$, and $\abs{Y} = m$, how many functions are there from $X$ to $Y$? \par
+  Every element in the domain must get mapped to something in the codomain, but it does not matter \emph{which} element in the codomain. Furthermore, the function maps each element in the domain to \emph{exactly one} element in the codomain. Observe that for each $x\in X$, there are $m$ ``choices" for where $x$ gets mapped. Thus there are $\underbrace{m \cdot m \dotsm m}_{n \text{ times}} = m^n$ total functions.
+  \begin{theorem}{Multiplication principle}
+    If a set can be enumerated/constructed in $t$ steps (where each step is independent of the other steps) and each step has $n_i$ choices/outcomes, then the set has $n_1n_2\dotsm n_t$ elements.
+  \end{theorem}
+  \begin{example}{}
+    I am going to get a pizza from Vito's or D'more's:
+    \begin{center}\begin{tabular}{cc}
+      Vito's: & D'more's: \\
+      2 crusts & 1 crust \\
+      6 toppings & 2 sauces \\
+      2 cheeses & 3 toppings
+    \end{tabular}\end{center}
+    The total number of pizzas I could order is: $2 \cdot 6 \cdot 2 + 1 \cdot 2 \cdot 3 = 30$.
+  \end{example}
+  \begin{theorem}{Addition principle}
+    If $X$ and $Y$ are disjoint finite sets, then $\abs{X\cup Y} = \abs{X} + \abs{Y}$.
+  \end{theorem}
+  \begin{example}{}
+    How many strings of length $5$ in $\set{0, 1}$ start with $10$ or end with $01$?\\[10pt]
+    By the multiplication principle, we know there are $2^3$ strings that start with $10$. By similar reasoning, there are $2^3$ strings that end with $01$. Furthermore, there are $2$ strings that satisfy both of these properties. Thus the total number of strings satisfying the statement above is $2^3 + 2^3 - 2 = 16$.
+  \end{example}
+  \begin{theorem}{Inclusion/Exclusion principle}
+    If $X, Y$ are finite sets, then
+    \[
+      \abs{X\cup Y} = \abs{X} + \abs{Y} - \abs{X\cap Y}.
+    \]
+  \end{theorem}
+  \begin{note}{}
+    The addition principle is just a special case of the inclusion/exclusion principle where $X\cap Y = \es$.
+  \end{note}
+\end{document}

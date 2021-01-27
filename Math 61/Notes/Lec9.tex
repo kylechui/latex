@@ -1,0 +1,75 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \textbf{Proposition.} If $X_1, X_2, \dotsc , x_n$ are finite sets, then
+  \[
+    \abs{X_1 \times X_2 \times \dotsb \times X_n} = \abs{X_1} \cdot \abs{X_2} \dotsm \abs{X_n}.
+  \]
+  \begin{proof}
+    Let the $n_i$ be the cardinality of $X_i$. The proposition is true by the multiplication principle and definition of cartesian product.
+  \end{proof}
+  \begin{example}{}
+    How many injective functions are there from $\set{a, b, c}$ to $\set{1, 2, 3, 4, 5}$? \\[10pt]
+    There are $5 \cdot 4 \cdot 3$ functions. When constructing $f$, there are five elements that $a$ can map to, four elements that $b$ can map to (because it cannot map to $f(a)$), and three elements that $c$ can map to (because it cannot map to $f(a)$ or $f(b)$).
+  \end{example}
+  \begin{example}{}
+    If the cardinality of a set $X$ is $50$, how many symmetric relations are there on $X$? \\[10pt]
+    Let the elements of $X$ be $x_1, \dotsc, x_{50}$. We can depict the set of all relations on $X$ as shown:
+    \[\begin{bmatrix}
+    (x_1, x_1) & \dotsc & (x_1, x_{50}) \\
+    \vdots & \ddots & \vdots \\
+    (x_{50}, x_1) & \dotsc & (x_{50}, x_{50})
+    \end{bmatrix}\]
+    Observe that every symmetric relation on $X$ can be represented as a subset of the top right triangle of the matrix. There are $\frac{50(51)}{2}$ elements in that triangle (observe that the diagonals form the integers from $1$ to $50$), so there are $2^{\frac{50(51)}{2}}$ symmetric relations on $X$.
+  \end{example}
+  \subsection{Permutations and Combinations}
+  \begin{example}{}
+    My, my wife, my cat, and my baby are going to line up for a photo. In how many ways can this be done? \\[10pt]
+    There are four ``choices" for where I go, 3 choices for where the cat goes, 2 for where the baby goes, and 1 for where the wife goes. Thus there are $4! = 24$ ways to line up for a photo.
+  \end{example}
+  \begin{note}{}
+    This is the same as the number of bijections on the set $\set{\text{me}, \text{wife}, \text{cat}, \text{baby}}$.
+  \end{note}
+  \begin{definition}{Permutation}
+    A \emph{permutation} of an $n$-element set is an ordering of the $n$ elements. In other words, a permutation of a set $X$ is a bijection from $X$ to itself. \\
+    An $n$ element set has $n!$ permutations.
+  \end{definition}
+  \begin{example}{}
+    Ten distinct people form a circle. How many different circles are there? (We define two circles to be the same if you can rotate one of them to get the other) \\[10pt]
+    Pick one ``favorite" person from the group. Then each circle has a unique representation where the favorite person remains at the top of the circle, so there are $9$ remaining slots for the others to fill. There are $9!$ different circles.
+  \end{example}
+  \begin{example}{}
+    In my family of four, in how many ways can two of us line up for a photo? \\[10pt]
+    There are four choices for the first person, and three choices for the second person (note that the order of the people taking the photo still matters). There are $4 \cdot 3 = 12$ ways to do this.
+  \end{example}
+  \begin{definition}{$r$-permutation}
+    An \emph{$r$-permutation} from an $n$ element set is an ordering of $r$ elements from the set. In other words, it is a function $f\colon \set{1, 2, \dotsc , r}\to \set{1, 2, \dotsc , n}$. \\
+    The number of $r$-permutations from a set with $n$ elements is denoted
+    \[
+      P(n, r) = \frac{n!}{(n-r)!} = n(n-1)\dotsm(n-r+1).
+    \]
+    We say $P(n, r) = 0$ if $r > n$ (or if $n$ or $r$ is negative).
+  \end{definition}
+  \begin{example}{}
+    Five people are stranded on an island. They find a boat that can hold three people. In how many ways can they choose three people to escape? \\[10pt]
+    Note that the order of the people being rescued \emph{does not} matter. Say we choose the first three people out of a permutation of the five people. We overcount because the order of the first three people doesn't matter, nor does the order of the two people left on the island. Thus the total number is $\binom{5}{3} = \frac{5!}{3!(5-3)!}$ ways to choose three survivors.
+  \end{example}
+  \begin{definition}{$r$-combination}
+    An \emph{$r$-combination} from an $n$-element set is a choice of $r$ elements from the set. \\
+    The number of $r$-combinations from an $n$-element set is denoted
+    \[
+      C(n, r) = \binom{n}{r} = \frac{P(n,r)}{r!} = \frac{n!}{r!(n-r)!}.
+    \]
+    We say $\binom{n}{r} = 0$ if $r > n$ (or if $n$ or $r$ is negative).
+  \end{definition}
+  \begin{note}{}
+    If $\abs{X} = n$ for some set $X$, then there are $\binom{n}{r}$ subsets of $X$ with $r$ elements.
+  \end{note}
+
+\end{document}
