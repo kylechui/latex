@@ -1,0 +1,39 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \begin{example}{}
+    There is a number consisting only of $1$s (i.e. $11111\dotsc 111$) that is divisible by $137529$. \\[10pt]
+    Notice that if $n_1$ has remainder $r_1$ when divided by $m$ and $n_2$ has remainder $r_2$ when divided by $m$, then $n_1+n_2=mk+r_1+r_2$, for some integer $k$. \\[10pt]
+    $39$ has a remainder of $4$ when divided by $5$, and $41$ has a remainder of $1$ when divided by $5$, so $39+41$ has a remainder of $5$ when divided by $5$ (aka no remainder). \\[10pt]
+    Two numbers consisting only of $1$s have the same remainder when dividing by $137529$, provided that the string of $1$s is sufficiently long, so their difference is divisible by $137529$. Notice that their difference will be of the form $111\dotsc 1100\dotsc 0$. Thus $137529$ divides this number consisting of only $1$s (because we can factor out some $10^k$).
+  \end{example}
+  \begin{example}{}
+    In any group of six people, there are either $3$ people that know each other or $3$ people that don't know each other (where knowing is symmetric). \\[10pt]
+    In other words: Take six nodes, and draw all possible edges between them. Color each edge blue or red. There is a triangle with all blue or all red edges. \\[10pt]
+    By the generalized pigeonhole principle, each person either knows at least three people or they don't know at least three people. Consider the case where one person knows three other people, say $P_1$ knows $P_2, P_3, P_4$. Then if any of $P_2, P_3, P_4$ knows anyone else in the group, then we have our group of $3$ people that know each other. However, if all of them don't know each other, then we have a group of $3$ people that don't know each other.
+  \end{example}
+  \subsection{Recurrence Relations}
+  Say we are building a garden wall. It's $20$ feet long, $2$ feet high, and made out of $1\times 2$ foot bricks. In how many ways can I build the wall(the many combinations come from either stacking the bricks vertically or horizontally)? \\[10pt]
+  Let $w_n$ be the number of ways to build an $n$ foot wall. Then
+  \[\begin{array}{c|ccccccccc}
+    n & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & \dotsb\\
+    \hline
+    w_n & 1 & 2 & 3 & 5 & 8 & 13 & 21 & 34 & \dotsb
+  \end{array}\]
+  In building a wall, observe that the number of ways to build an $n$ foot wall where the first brick is upright is $w_{n-1}$, because after putting down the first brick you need to build a $n-1$ foot wall. Similarly, the number of ways to build a $n$ foot wall where the first brick is sideways is $w_{n-2}$, because after putting down the first brick (or two), you need to build a $n-2$ foot wall. Thus for $n \geq 3$, we have $w_n = w_{n-1} + w_n-2$.
+  \begin{definition}{Recurrence Relation}
+    A \emph{recurrence relation} is an equation for the $n$th term of a sequence in terms of the previous terms of the sequence. Given \emph{initial conditions}, you can use the relation to compute all terms of the sequence (in the example above, we computed $w_1$ and $w_2$). 
+  \end{definition}
+  \begin{example}{}
+    I have \$$1000$, it earns 7\% interest, compounded annually. How much do I have after $n$ years? \\[10pt]
+    Let $P_n$ be the amount of money I have after $n$ years. Then $P_n = (1.07)P_{n-1}$, $P_0 = 1000$. \\[10pt]
+    What if I add \$$1000$ dollars each year? \\[10pt]
+    Then the new recurrence relation becomes $P_n = (1.07)P_{n-1} + 1000$.
+  \end{example}
+\end{document}

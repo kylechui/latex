@@ -1,0 +1,70 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \subsection{More Counting}
+  \begin{example}{Poker Hands}\\
+    A deck of cards has 52 cards in four suits. There are thirteen different denominations:
+    \begin{itemize}
+      \item The numbers 2-10
+      \item Jack
+      \item Queen
+      \item King
+      \item Ace
+    \end{itemize}
+    A hand in poker is just five cards.
+    \begin{enumerate}[label=(\alph*)]
+      \item How many distinct hands are there? \\[10pt]
+      There are $\binom{52}{5} \sim 2.5$ million ways to choose 5 cards out of 52.
+      \item How many flushes are there? (When all the cards are the same suit)\\[10pt]
+      There are $\binom{13}{5} \cdot 4$ ways, because there are $\binom{13}{5}$ ways to get a flush for a given suit, and you multiply by 4 because there are 4 suits.
+      \item How many hands have three cards of one denomination and two of another? \\[10pt]
+      There are $13 \cdot \binom{4}{3} \cdot 12 \cdot \binom{4}{2}$ such hands. There are 13 choices for the first denomination, and you choose 3 out of the 4 cards to form your hand, then 12 remaining denominations, and you choose 2 out of those 4 cards to form your hand.
+    \end{enumerate}
+  \end{example}
+  \begin{example}{}
+    How many words/strings can be formed using all of the letters of COMBINATORICS? (i.e. how many ways are there to rearrange the letters of COMBINATORICS) \\[10pt]
+    Although the word has 13 letters, it is not $13!$ because you have repeated letters that are indistinguishable from each other, so you will overcount. For example, C\textsubscript{1}OMBINATORIC\textsubscript{2}S and C\textsubscript{2}OMBINATORIC\textsubscript{1}S are the same word, although $13!$ would count them differently. Thus we divide by the number of ways to rearrange the indistinct letters, namely the 2 C's, 2 O's, and 2 I's. We get $\frac{13!}{2!2!2!}$.\par
+    Alternatively, we could also imagine filling thirteen slots with the letters in the word combinatorics. There are $\binom{13}{2}$ ways to put down the two C's, $\binom{11}{2}$ ways to put the two O's in the remaining 11 slots, and $\binom{9}{2}$ ways to put down the two I's in the 9 remaining slots. Finally, the last 7 letters may be put in any order. Thus we have $\binom{13}{2}\binom{11}{2}\binom{9}{2}7!$ ways.
+  \end{example}
+  \begin{note}{Generalized permutations}
+    If a collection of $n$ items has: $n_1$ of one type (all identical), $n_2$ of another type (also all identical), $\dotsc,$ $n_t$ of type $t$ (where $n_1 + n_2 + \dotsb + n_t = n$), then the number of ways to order the $n$ items is:
+    \[
+      \binom{n}{n_1}\binom{n-n_1}{n_2}\dotsm \binom{n-(n_1+\dotsb n_{t-1})}{n_t},
+    \]
+    or we may also write
+    \[
+      \frac{n!}{n_1!n_2!\dotsm n_t!}.
+    \]
+  \end{note}
+  \begin{example}{}
+    Harry, Ron, and Hermione are sharing $10$ (distinct) every flavor beans. Harry gets $5$, Hermione $3$, and Ron gets $2$. In how many ways can they distribute the beans? \\[10pt]
+    There are $10!$ total ways to arrange $10$ distinct beans. We then divide by the number of ways to rearrange each person's beans, so we have $\frac{10!}{5!3!2!}$ total ways to distribute the beans.\par
+    Alternatively, we may choose 5 beans from 10 to give to Harry, 3 from the remaining 5 for Hermione, and 2 from the last 2 for Ron. Thus we have $\binom{10}{5}\binom{5}{3}\binom{2}{2}$ ways to distribute the beans.
+  \end{example}
+  \begin{example}{}
+    Harry, Ron, and Hermione have $10$ identical beans. In how many ways can they divide up the beans? \\[10pt]
+    We will denote the beans as stars, and use bars to divvy up the beans between the three people. Thus we have $10$ stars and $2$ bars. An example distribution looks like this:
+    \[
+      \underbrace{**}_{\text{Harry's beans}}|\underbrace{*****}_{\text{Hermione's beans}}|\underbrace{***}_{\text{Ron's beans}}
+    \]
+    Observe that any such distribution is akin to having $12$ items total and just choosing where the $2$ bars go. Thus we have $\binom{10+3-1}{3-1}$ ways to distribute the beans (The $-1$ is because three people only need $2$ bars, not $3$).
+  \end{example}
+  \begin{note}{Stars and Bars}
+    If a set has $t$ elements, the number of unordered selections from the set with $k$-elements (with repetitions allowed) is $\binom{k+t+1}{t-1}$.
+  \end{note}
+  \begin{example}{}
+    How many solutions are there to the equation:
+    \[
+      x_1 + x_2 + x_3 + x_4 + x_5 = 25, \text{where all }x_i \geq0 \text{ and } x_i\in\Z
+    \]
+    We have $25$ stars (the total sum) and $4$ bars (dividing the $25$ stars into 5 categories). The number of stars in each area represents the value of each variable. Thus we have $\binom{25+5-1}{5-1} = \binom{29}{4}$ ways to satisfy the equation with the given restrictions. \\[10pt]
+    \textbf{Problem.} What if all $x_i\geq 1$? \\[10pt]
+    This is the same as if the number of solutions to $x_1 + x_2 + x_3 + x_4 + x_5 = 20$.
+  \end{example}
+\end{document}

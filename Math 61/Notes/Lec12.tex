@@ -1,0 +1,47 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \textbf{Claim.} $\sum_{i=k}^{n}\binom{i}{k}=\binom{n+1}{k+1}$.
+  \begin{proof}
+    We know that $\binom{n+1}{k+1}$ is the number of ways to choose $k+1$ distinct objects from $n+1$ objects. We partition these ways into sets $S_k, S_{k+1}, S_n$, where $\abs{S_i} = \binom{i}{k}$. Consider fixing the maximum of the set, and then choosing the remaining $k$ items from the items less than the ``max". Then for some maximum $i+1$, there are $\binom{i}{k}$ ways to choose the remaining $k$ items from the first $i$ items. Iterating from $i=k$ to $i=n$, we see that this counts the ways to choose $k+1$ items from $n+1$ total items, so the statement holds.
+  \end{proof}
+  \begin{example}{}
+    How many ways are there to choose $4$ items from the numbers $1$-$7$ where the largest item is $6$? \\[10pt]
+    You first pick $6$, then you need to pick $3$ items from the first $5$ items, so we have $\binom{6-1}{4-1} = \binom{5}{3}$ ways to do this. This is the same logic that we are using in the above, except we are also steadily increasing the maximum to form a partition.
+  \end{example}
+  \textbf{Alternative Proof of the Above Claim.} We will use the fact that $\binom{n}{i}+\binom{n}{i-1}=\binom{n+1}{i}$.
+  \begin{proof}
+    \begin{align*}
+      \binom{k}{k}+\binom{k+1}{k}+ \dotsb+\binom{n}{k} &= \binom{k}{k}+\bigpar{\binom{k+2}{k+1}-\binom{k+1}{k+1}}+ \dotsb+\bigpar{\binom{n+1}{k+1}-\binom{n}{k+1}} \\
+                                                       &= \binom{k}{k} - \binom{k+1}{k+1} + \binom{n+1}{k+1} \\
+                                                       &= \binom{n+1}{k+1}.
+    \end{align*}
+  \end{proof}
+  \subsection{Pigeonhole Principle}
+  If $n$ pigeons fly into $k$ holes, and $n>k$, at least one hole will contain more than one pigeon. \\[10pt]
+  \textbf{Claim.} There are at least two people in this Zoom room that were born on the same day of the month (not necessarily the same month). \\[10pt]
+  There are $31$ possible days of the month to be born on (the holes), and there are $45$ people in the Zoom room (the pigeons), so there is at least one day which has more than one person born on it.
+  \begin{definition}{Pigeonhole Principle}
+    If $X$ and $Y$ are finite sets and $\abs{X} > \abs{Y}$, then every function $f\colon X\to Y$ is \emph{not} injective.
+  \end{definition}
+  \begin{example}{}
+    There is a party with $10$ people---at least $2$ people know the same number of people there (assume knowing is symmetric). \\[10pt]
+    Let the ten people be denoted $p_1, p_2, \dotsc, p_{10}$. There are $10$ options for how many other people they can know (0-9). However, because knowing is symmetric, we cannot simultaneously have someone who knows $0$ people and someone who knows $9$ people (everyone else). So, there are really $9$ options (either 0-8 or 1-9). Thus, by pigeonhole principle, there exists two people that know the same number of people.
+  \end{example}
+  \begin{note}{}
+    The pigeonhole principle is an \emph{existence proof}. It doesn't tell us who the people are, how many of them there are---just that they \emph{exist}. It is also called \emph{non-constructive}, because we don't explicitly say who the two people are (construct the group).
+  \end{note}
+  \begin{example}{}
+    In this class there are $170$ people. What's the largest number of people (in the class) that we know for sure are born in the same month? \\[10pt]
+    Because $170 > 12\cdot 14$, we know that it can't be the case that in each month $\leq 14$ people were born in that month. So, there must exist some month where at least $15$ of us were born in that month.
+  \end{example}
+  \begin{definition}{Generalized Pigeonhole Principle}
+    If there are more than $m\cdot k$ pigeons that go into $k$ holes, then some hole has more than $m$ pigeons. In other words, if $f\colon X\to Y$, $\abs{X}=n$, $\abs{Y}=m$, $k=\ceil{\frac{n}{m}}$, then there are $k$ distinct values $a_1, \dotsc, a_k\in X$ with $f(a_1) = f(a_2) = \dotsb = f(a_k)$.
+  \end{definition}
+\end{document}

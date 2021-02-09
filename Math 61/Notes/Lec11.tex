@@ -1,0 +1,72 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \textbf{Warm Up.} Find the number of solutions to $x_1+x_2+x_3+x_4=20$, where $x_i\in\N$.\\[10pt]
+  We have $20$ ``stars" and $3$ bars, so the number of possible solutions to this is $\binom{23}{3}$.\\[10pt]
+  What if $x_4\geq 5$? \\[10pt]
+  We will first allocate $5$ stars to the compartment for $x_4$, so this is equivalent to finding the number of solutions to the equation $x_1+x_2+x_3+x_4=15$. There are $\binom{18}{3}$ such solutions. \\[10pt]
+  What if $x_4\leq 4$? (and all $x_i\in\N$) \\[10pt]
+  We can do complementary counting--we subtract the solutions to $x_1+x_2+x_3+x_4=20$ with $x_4\geq 5$ from the solutions to $x_1+x_2+x_3+x_4=20$.
+  Thus we have $\binom{23}{3}-\binom{18}{3}$. \\
+  \emph{or} we may count the cases where $x_4=0, 1, 2, 3, 4$. In other words, adding the number of solutions to the equations $x_1+x_2+x_3=20,19,18,17,16$. Thus we have
+  \[
+    \binom{22}{2}+\binom{21}{2}+\binom{20}{2}+\binom{19}{2}+\binom{18}{2}=\binom{23}{3}+\binom{18}{3}.
+  \]
+  \subsection{Combinatorial Identities}
+  \begin{example}{}
+    Let's expand $(x+y)^5 = (x+y)(x+y)(x+y)(x+y)(x+y)$. \par
+    When creating a term in their product, observe that we either choose an $x$ term or a $y$ term from each $x+y$. Thus every term is a sum of monomials of the form $x^iy^j$ where $i+j=5$. There are $2^5$ terms before gathering like terms. We ask ourselves, what is the coefficient on an arbitrary monomial $x^iy^j$? In other words, how many ways are there to choose an $i$ number of $x$ terms and a $j$ number of $y$ terms from the $i+j$ total terms? There are $(i+j)!$ ways to order all $i+j$ terms, but we have $i$ identical $x$ terms and $j$ identical $y$ terms. Thus we must divide by $i!$ and $j!$ to account for the redundancies. Thus the coefficient on the $x^iy^j$ term is $\frac{(i+j)!}{i!j!}=\binom{i+j}{i}=\binom{i+j}{j}$. 
+  \end{example}
+  \begin{theorem}{Binomial Theorem}
+    For $n\in\N$, we have
+    \[
+      (a+b)^n = \sum_{k=0}^n \binom{n}{k} a^{n-k}b^k.
+    \]
+    The proof uses the same argument as the above.
+  \end{theorem}
+  \begin{example}{}
+    \[
+      2^n = (1+1)^2 = \sum_{k=0}^n \binom{n}{k}1^{n-k}1^k = \sum_{k=0}^n \binom{n}{k}
+    \]
+    Additionally, observe that $2^n$ is the total number of subsets of a set $X$ with cardinality $n$. Furthermore, the right hand side is the sum of the number of subsets with cardinality $k$ of $X$, for all $0\leq k\leq n$. Thus they are equal.
+  \end{example}
+  \begin{example}{}
+    \[
+      3^n = (2+1)^n = \sum_{k=0}^n\binom{n}{k} 2^k 1^{n-k}  = \sum_{k=0}^n \binom{n}{k}2^k 
+    \]
+    \textbf{Exercise.} Try to find a counting argument to prove this identity. Hint: If $\abs{X}=n$, there are $3^n$ pairs of subsets of $X$ of the form $(A, B)$ where $A\sse B$.
+  \end{example}
+  \subsection{Pascal's Triangle}
+  \begin{center}
+    1\\
+    1\quad 1\\
+    1\quad 2\quad 1\\
+    1\quad 3\quad 3\quad 1\\
+    1\quad 4\quad 6\quad 4\quad 1\\
+    1\quad 5\quad 10\quad 10\quad 5\quad 1
+  \end{center}
+  Each term is the sum of the two terms above it, and the outermost diagonals are all $1$'s.
+  \begin{note}{Pascal's Triangle Observations}
+    \begin{itemize}
+      \item It is symmetrical about the vertical axis
+      \item $\binom{n}{1}=\binom{n}{n-1}=n$
+      \item $\binom{n}{k}=\binom{n}{n-k}$
+      \item $\binom{n}{i} + \binom{n}{i-1} = \binom{n+1}{i}$
+      \item The sum of the $n$th row is $2^{n-1}$
+      \item $\sum_{i-k}^n \binom{i}{k} = \binom{n+1}{k+1}$
+    \end{itemize}
+  \end{note}
+  \textbf{Claim.} $\binom{n+1}{i}=\binom{n}{i}+\binom{n}{i-1}$.
+  \begin{proof}
+    Let $X$ be a set with $n+1$ elements. The left hand side counts the number of ways to choose an $i$-element subset from $X$. Observe that $\binom{n}{i}$ counts the number of $i$-element subsets that don't contain a particular element $x_1$ of $X$, while $\binom{n-1}{i}$ counts the number of $i$-element subsets that do contain $x_1$. Thus these two sets form a partition for the subsets of $X$ with $i$ elements, so $\binom{n+1}{i}=\binom{n}{i}+\binom{n}{i-1}$.
+  \end{proof}
+  \begin{note}{}
+    The above proof may be thought of more concretely by letting $X$ be the set $\set{0, 1, \dotsc, n}$, and choosing subsets of $X$ with and without $0$.
+  \end{note}
+\end{document}

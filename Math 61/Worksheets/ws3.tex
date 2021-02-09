@@ -1,0 +1,92 @@
+\documentclass{article}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Math 61 \\Worksheet 3}
+\rhead{Kyle Chui \\Page \thepage}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+
+\title{Worksheet 3}
+
+\begin{document}
+  \maketitle
+  \newpage
+  \pagenumbering{arabic}
+  \begin{problem}{1}
+    \begin{enumerate}[label=(\alph*)]
+      \item Put a relation $E$ on the integers by $xEy$ if $x+y$ is divisible by 2. Show that $E$ is reflexive, symmetric, and transitive. What are all the elements related to 0? What about all the elements related to 1?
+      \item Now consider the relation $T$ on the integers defined by $xTy$ if $x + y$ is divisible by 3. Is this relation reflexive? Symmetric? Transitive?
+    \end{enumerate}
+  \end{problem}
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    \begin{proof}
+      Observe that for any integer $x$, $x + x = 2x$ is divisible by 2. Thus $xEx$ and $E$ is reflexive. Suppose $xEy$ for some integers $x$ and $y$. Then for some integer $k$, we have $x+y = 2k = y+x$, so $yEx$ and $E$ is symmetric. Finally, suppose $xEy$ and $yEz$. Then for some integers $m$ and $n$, we have $x + y = 2m$ and $y + z = 2n$. Thus
+      \begin{align*}
+        (x+y) + (y+z) &= 2m + 2n \\
+        x + 2y + z &= 2m + 2n \\
+        x + z &= 2m + 2n - 2y \\
+        x + z &= 2(m + n - y).
+      \end{align*}
+      Therefore $xEz$ and $E$ is transitive. All of the elements related to $0$ are the even integers, and all of the elements related to $1$ are the odd integers.
+    \end{proof}
+    \item
+    \begin{proof}
+      The relation is not reflexive. Observe that $1 + 1 = 2$ is not divisible by $3$. The relation is symmetric. Suppose $xTy$, so that there exists some integer $k$ such that $x + y = 3k$. Then $y + x = 3k$, so $yEx$ and the relation is symmetric. The relation is not transitive. Observe that $1T2$ because $1 + 2 = 3$ is divisible by $3$, and $2T1$ because $2 + 1 = 3$ is divisible by $3$, but $1 + 1 = 2$ is not divisible by $3$. In other words, $1T2$ and $2T1$ does not imply $1T1$.
+    \end{proof}
+  \end{enumerate}
+  \newpage
+  \begin{problem}{2}
+    Suppose that $X$ is a set and that we have a function $f\colon X\to \R$. Consider the relation on $X$ defined by $aRb$ if $f(a) \geq f(b)$.
+    \begin{enumerate}[label=(\alph*)]
+      \item Show that this relation is reflexive and transitive.
+      \item What condition on $f$ is necessary for this relation to be antisymmetric?
+      \item Describe how by choosing $X$ and $f$ appropriately this relation can give relations on people such as ``$a$ is related to $b$ if $a$ is wealthier than $b$", or ``$c$ is related to $d$ if $c$ is older than $d$".
+    \end{enumerate}
+  \end{problem}
+  \begin{enumerate}[label=(\alph*)]
+    \item
+    \begin{proof}
+      Let $x, y, z\in X$. Observe that for all $x$ that $f(x) \geq f(x)$, so $xRx$ and $R$ is reflexive. Suppose $xRy$ and $yRz$. Then $f(x)\geq f(y)$ and $f(y)\geq f(z)$. Thus $f(x)\geq f(z)$, so $xRz$ and $R$ is transitive.
+    \end{proof}
+    \item We need $f$ to be injective.
+    \begin{proof}
+      Suppose $f$ is injective and let $x, y\in X$ such that $xRy$ and $yRx$. Then $f(x)\geq f(y)$ and $f(y)\geq f(x)$, so $f(x) = f(y)$. Because $f$ is injective, we have $x = y$ and thus $R$ is antisymmetric.\par
+      Suppose towards a contraposition that $f$ is not injective. Then there exists some $x, y\in X$ such that $f(x) = f(y)$ but $x\neq y$. Thus $xRy$ and $yRx$ and $x\neq y$, so $R$ is not antisymmetric.
+    \end{proof}
+    \item We may choose $X$ to be the set of people and $f$ to either give a person's wealth or their age to yield the two relations listed.
+  \end{enumerate}
+  \newpage
+  \begin{problem}{3}
+    Put a relation $Q$ on $\Z \times (\Z\sm \set{0})$ by $(a, b)Q(c, d)$ if $ad = bc$. Show that $Q$ is reflexive, symmetric, and transitive. What mathematical structure does this remind you of?
+  \end{problem}
+  \begin{proof}
+    Let $x, y, z\in \Z \times (\Z\sm \set{0})$ such that $x = (x_1, x_2)$, $y = (y_1, y_2)$, and $z = (z_1, z_2)$. Then $xQx$ because $x_1x_2 = x_2x_1$ implies $x_1x_2 = x_2x_1$, so $Q$ is reflexive. Now suppose $xQy$, so $x_1 y_2 = x_2 y_1$. Then $x_2 y_1 = x_1 y_2$, so $Q$ is symmetric. Finally, suppose $xQy$ and $yQz$, so $x_1 y_2 = x_2 y_1$ and $y_1 z_2 = y_2 z_1$. Multiplying the two equations, we get
+    \[
+      x_1 z_2 (y_1 y_2) = x_2 z_1 (y_1 y_2).
+    \]
+    If $y_1 \neq 0$, then we may divide both sides of the above equation to get $x_1 z_2 = x_2 z_1$. If $y_1 = 0$, then $x_1 y_2 = 0 = y_2 z_1$, so $x_1 = 0 = z_1$. Therefore $x_1 z_2 = 0 = x_2 z_1$. In either case, $Q$ is transitive.
+  \end{proof}
+  This equivalence relation is the same as the structure of the rational numbers.
+  \newpage
+  \begin{problem}{4}
+    The Fibonacci numbers are the sequence $\set{F_n}^\infty_{n=0}$ defined by $F_0 = 0$, $F_1 = 1$, and for $n > 1$ $F_n = F_{n-1} + F_{n-2}$. Compute the first 10 Fibonacci numbers. Show that $\sum_{i=0}^{k}F_i = F_{k+2}-1$.\par
+    Are the Fibonacci numbers increasing, decreasing, nonincreasing, nondecreasing, or none of these? What about the sequence defined by for $k\in\N$ by $s_k = \sum_{i=0}^{k}F_i$?
+  \end{problem}
+  \[\begin{array}{c|cccccccccc}
+    n & 0 & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\
+    \hline
+    F_n & 0 & 1 & 1 & 2 & 3 & 5 & 8 & 13 & 21 & 34
+  \end{array}\]
+  \begin{proof}
+    Observe that for $n = 0$, we have $\sum_{i=0}^{0}F_i = F_0 = 0 = F_2 - 1$. Furthermore, when $n = 1$, we have $\sum_{i=0}^{1}F_i = 0 + 1 = 2 = F_3 - 1$. Suppose that the statement holds for all non-negative integers $m$ between $0$ and $k$, inclusive. Then
+    \begin{align*}
+      \sum_{i=0}^{k+1}F_i &= \sum_{i=0}^{k}F_i + F_{k+1} \\
+      &= F_{k+2} - 1 + F_{k+1} \\
+      &= F_{k+3} - 1.
+    \end{align*}
+    Thus the statement holds for $n = k+1$, so the statement is true for all non-negative integers.
+  \end{proof}
+  Observe that $F_2 = F_1 > F_0$, and $F_n - F_{n-1} = F_{n-2}\geq 0$ for all $n \geq 2$. Thus $F_n$ is nondecreasing. As for $s_n$, observe that $s_2 > s_1 > s_0$, and $s_n - s_{n-1} = F_n > 0$ for all $n\geq 2$. Thus $s_n$ is increasing.
+\end{document}

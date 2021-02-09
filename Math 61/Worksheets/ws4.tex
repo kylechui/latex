@@ -1,0 +1,43 @@
+\documentclass{article}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\setlength{\headheight}{24pt}
+\lhead{Math 61 \\Worksheet 4}
+\rhead{Kyle Chui \\Page \thepage}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+
+\title{Worksheet 4}
+
+\begin{document}
+  \maketitle
+  \newpage
+  \pagenumbering{arabic}
+  \begin{problem}{1}
+    \begin{enumerate}[label=(\alph*)]
+      \item Show that $\binom{m+n}{r} = \sum_{k=0}^r \binom{m}{k}\binom{n}{r-k}$. You can get this result by using the binomial theorem on $(x+y)^{m+n}=(x+y)^m(x+y)^n$ or with a counting argument (think of choosing $r$ things from $m+n$ things where you keep track of what you choose from the first $m$ things and from the last $n$ things).
+      \item Show that $\sum_{k=0}^n \binom{n}{k}^2 = \binom{2n}{n}$.
+    \end{enumerate}
+  \end{problem}
+  \begin{enumerate}[label=(\alph*)]
+    \item 
+    \begin{proof}
+      Observe that choosing $r$ items from a set with $m+n$ items is the same as first choosing $k$ items from a set of $m$, and then choosing $r-k$ items from a set of $n$. We need a summation in order to capture all possible different pairs of subsets of size $k$ and $r-k$.
+    \end{proof}
+    \item 
+    \begin{proof}
+      Observe that the left hand side is the same as $\sum_{k=0}^n \binom{n}{k}\binom{n}{n-k}$ because $\binom{n}{k} = \binom{n}{n-k}$. The left hand side of this formula counts the number of ways to choose a $k$ element subset from a set of $n$ elements, and a $n-k$ element subset from another $n$ element subset. This is the same as choosing an $n$ element subset from a set of $2n$ elements, which is represented on the right hand side.
+    \end{proof}
+  \end{enumerate}
+  \newpage
+  \begin{problem}{2}
+    Show that $n 2^{n-1} = \sum_{i=1}^{n}i \binom{n}{i}$. See if you can do this by using the binomial theorem and also with a counting argument (count the number of teams with a captain from a set $n$ people).
+  \end{problem}
+  \begin{proof}
+    Observe that the left hand side is the number of ways to choose a team with a captain from $n$ people. We have $n$ choices for the captain, and then $2^{n-1}$ different subsets of the remaining $n-1$ people. The right hand side counts how many teams with a captain can be made with $1$ person, then $2$ people, then $3$ people, etc. There are $\binom{n}{i}$ sets of $i$ people from the total set of $n$. Then we choose any of those team members to be the captain, so we multiply by $i$. Thus they count the same thing and are equal.
+  \end{proof}
+  \begin{note}{Alternate Equation}
+    If you first chose the captain, and then the other $i-1$ team members, you would have $\sum_{i=1}^{n}n\cdot \binom{n-1}{i-1}$.
+  \end{note}
+\end{document}
