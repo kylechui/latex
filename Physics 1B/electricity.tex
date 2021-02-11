@@ -1,0 +1,142 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Electrostatics}
+  \subsection{Electric Charge and Electric Field}
+  Electric charge is a fundamental property of elementary particles. You can charge an object by adding or removing electrons/ions, and the total amount of charge is always conserved. \\[10pt]
+  Most static electricity is \emph{triboelectric}, or charging by friction. The further two materials are apart on the triboelectric series, the more charge they will exchange. Electrons are transferred from the electropositive to the electronegative material. \\[10pt]
+  You can measure how much charge something has by using an electroscope. Touch a charged object to the top of the electroscope (to transfer some of the charges to the electroscope). The further apart the middle piece of metal is from the vertical, the more charge the object has. The electroscope only tells you the \emph{magnitude}, not the sign of the charge. \\[10pt]
+  Conductors conduct electricity and heat well---they are usually metals. Insulators are poor conductors of electricity and heat. Semiconductors can be either conductors or insulators depending on if voltage is applied or light is shined on it. \\[10pt]
+  \textbf{Conductors}
+  \begin{itemize}
+    \item Can transport electric charge freely
+    \item Charges are distributed evenly on its surface so that they are as far apart as possible
+    \item Charges cannot ``fall off" the conductor
+    \item When two conductors touch, charge flows from highly charged areas to areas with lower charge
+  \end{itemize}
+  \textbf{Insulators}
+  \begin{itemize}
+    \item Cannot transport electric charge freely
+    \item Charge stays in place
+    \item Touching two insulators does not transfer much charge
+  \end{itemize}
+  \textbf{Metallic Bonding}
+  \begin{itemize}
+    \item Metallic bonds form in elements where the valence band and the conduction band overlap
+    \item Positive ions are fixed on a lattice structure
+    \item Some valence electrons are shared between all ions and move freely
+    \item Good electric conductors typically are ``shiny"
+  \end{itemize}
+  The conduction band is the set of energy levels needed for the electrons to freely move (energy needed for a material to conduct electricity), and the valence band is the set of all the energy levels that the electrons in a material are at. For metals, there is overlap, so electrons can ``move" and the material conducts. For semiconductors, there is a small gap between the bands, so a small initial energy is needed to conduct (voltage, light, etc.). For insulators, this \emph{band gap} is very large, so electrons rarely move between atoms.
+  \begin{note}{Neutral objects can be attracted to charged ones}
+    Conductors strongly attract by macroscopic induction (the charges move in the conductor). Insulators weakly attract by microscopic induction (the insulator can be locally polarized by aligning \emph{electric dipoles}).
+  \end{note}
+  An electron's charge is the smallest unit of charge---quarks have smaller charge (2/3e for up and -1/3e for down) but they cannot be separated. We denote a proton's charge as $e = 1.6\cdot 10^{-19} \mathrm{C}$, and an electrons charge as $-e = -1.6\cdot 10^{-19} \mathrm{C}$. 
+  \subsection{Electric Force}
+  To find the electric force between two point charges, we use \emph{Coulomb's Law}.
+  \[
+    F = \frac{1}{4\pi\eps_0}\frac{Q_1\cdot Q_2}{r^2},
+  \]
+  where $\eps_0 = 8.85\cdot 10^{-12}\frac{\mathrm{C}^2}{\mathrm{Nm}^2}$. The constant is called the ``permittivity of free space". For simplicity, we often rewrite this as 
+  \[
+    F = \frac{kQ_1Q_2}{r^2},
+  \]
+  where $k = 9\cdot 10^9 \frac{\mathrm{Nm}^2}{\mathrm{C}^2}$. The net electric force on a charge can be found by summing up the individual forces (superposition). \\[10pt]
+  The four fundamental forces, from weakest to strongest: gravity, weak nuclear force, electromagnetic force, strong nuclear force.
+  \subsection{Electric Field}
+  Electric and gravitational forces come from local interaction between an object and a field. A \emph{field} is a variable defined at each and every point in space. The electric field is given by $\vec{E} = \frac{\vec{F}}{q}$, measured in $\frac{\mathrm{N}}{\mathrm{C}}$. \\[10pt]
+  \emph{Electric field lines} indicate the direction of the force acting on a positive charge, which experiences acceleration along the tangent.
+  \begin{itemize}
+    \item Electric field lines start on $+$ and end on $-$ charges (or continue forever)
+    \item Electric field lines never cross
+    \item The closer the field lines are, the stronger the field
+  \end{itemize}
+  The gravitational field $g$ is analogous to the electric field $E$. Mass is analogous to charge, graviational field is to electric field, etc. Electric field lines radiate outwards from positive charges, and gravitate towards negative charges.
+  \subsection{Normal Neutral Matter}
+  Most matter is nearly neutral (many positives and negatives cancelling out). The field is strong when you are very close to (read: touching) the object, and non-existent otherwise. The electric forces between individual charges are what is responsible for all contact forces, including the normal force, friction, and fluid pressure.
+  \subsection{Parallel Plate Capacitor}
+  A parallel plate capacitor (two parallel sheets of metal that hold opposite charge) creates a homogeneous electric field. The magnitude of this field is given by 
+  \[
+    E = \frac{Q}{\eps_0A} = \frac{\sigma}{\eps_0},
+  \]
+  where $\sigma = \frac{Q}{A}$, the charge density in $\frac{\mathrm{C}}{\mathrm{m}^2}$.
+  \subsection{Field Around Cylindrical Charges}
+  We use the cylindrical coordinate system because it is more useful for wires. The radius is $\rho$, the angle is $\phi$, and the height is given by $z$. To convert between cylindrical and Cartesian coordinates, we use
+  \[
+    x = \rho\cos\phi, \quad y = \rho\sin\phi, \quad z = z, \quad \rho = \sqrt{x^2+y^2}, \quad \phi = \tan\inv \bigpar{\frac{y}{x}}.
+  \]
+  To visualize $\phi$, start in the $xy$-plane and go counterclockwise, as you would in $\R^2$. To find the volume and surface element in spherical coordinates, we use
+  \[
+    \mathrm{d}V = \rho\cdot \mathrm{d}\phi\cdot \mathrm{d}\rho\cdot \mathrm{d}z \quad \text{and}\quad \mathrm{d}A = \rho\cdot \mathrm{d}\phi\cdot \mathrm{d}z.
+  \]
+  \subsection{Electric Field of an Infinitely Long Line Charge}
+  The total charge is infinite, and the linear charge density is defined to be $\rho_L \ceq \lim\limits_{\Delta l\to 0}\frac{\Delta Q}{\Delta l} = \frac{\mathrm dQ}{\mathrm{d}l}$. \\[10pt]
+  Let $\vec{r}$ be the location of the point of interest, and $\vec{r'}$ the location of some point on the line charge. Then $\vec{r}-\vec{r'}$ denotes the vector between the point of interest and the point on the line charge. Assume the charge is composed of infinitesimal small chunks $\mathrm{d}Q$ of charge:
+  \[
+    \mathrm{d}\vec E = \frac{\mathrm{d}Q}{4\pi\eps_0}\frac{\vec r - \vec{r'}}{\abs{\vec r-\vec{r'}}^3} = \frac{\rho_L\cdot \mathrm{d}z'}{4\pi\eps_0}\frac{\vec r - \vec{r'}}{\abs{\vec r-\vec{r'}}^3}.
+  \]
+  Let $\vec{e}_\rho, \vec{e}_z$ denote the unit vectors in the $\rho$ and $z$ directions. For this particular point $P$, we have 
+  \begin{align*}
+    \vec{r} &= y\cdot \vec{e}_y = \rho\cdot \vec{e}_\rho \\
+    \vec{r'} &= z'\vec{e}_z \\
+    \intertext{We use this to find the vector and distance between the two points.}
+    \vec{r} - \vec{r'} &= \rho\cdot \vec{e}_\rho - z'\vec{e}_z \\
+    \abs{\vec{r}-\vec{r'}} &= \sqrt{\rho^2 + z'^2} \\
+    \intertext{Thus for a line charge, we have}
+    \mathrm{d}\vec{E} &= \frac{\rho_L \mathrm{d}z'}{4\pi\eps_0}\frac{\rho \vec{e}_\rho - z'\vec{e}_z}{\bigpar{\rho^2+z'^2}^{\frac{3}{2}}}.
+    \intertext{However, each point $\vec{r'}$ has a corresponding point $-\vec{r'}$ which cancels out the $z$-component of the field, so}
+    \mathrm{d}E_\rho &= \frac{\rho_L\rho \mathrm{d}z'}{4\pi\eps_0\bigpar{\rho^2+z'^2}^{\frac{3}{2}}}.
+    \intertext{Summing over all of the line charge elements, we have}
+    E_\rho &= \int_{-\infty}^{\infty}\frac{\rho_L\cdot \rho}{4\pi\eps_0\bigpar{\rho^2+z'^2}^{\frac{3}{2}}} \dx z'
+    \intertext{We use an integral table to evaluate this, yielding}
+    \Aboxed{E_\rho &= \frac{\rho_L}{2\pi\eps_0\rho}.}
+  \end{align*}
+  \begin{note}{}
+    The electric field around a line charge scales with $\frac{1}{\rho}$, which is slower than the field drop-off for a point charge.
+  \end{note}
+  \subsection{Electric Field for a Uniform Disk of Charge}
+  We denote the surface charge density by $\sigma = \frac{\mathrm{d}Q}{\mathrm{d}A}$, which has units of $\frac{\mathrm{C}}{\mathrm{m}^2}$. Then we have $\mathrm{d}Q = \sigma\cdot \mathrm{d}A$, where $\mathrm{d}A = 2\pi r\cdot \mathrm{d}r$. Let $r$ be the distance to some point on a disk, $R$ the radius of the disk, and $x$ the distance from the origin to some point of interest. Using rectangular coordinates, we have
+  \begin{align*}
+    \mathrm{d}E_x &= \frac{1}{4\pi\eps_0}\frac{2\pi\sigma rx \dx r}{\bigpar{x^2 + r^2}^{\frac{3}{2}}} \\
+    E_x &= \int_{0}^{R}\frac{1}{4\pi\eps_0}\frac{2\pi\sigma rx}{\bigpar{x^2 + r^2}^{\frac{3}{2}}}\dx r \\
+        &= \frac{\sigma x}{4\eps_0}\int_{0}^{R}\frac{2r}{\bigpar{x^2 + r^2}^{\frac{3}{2}}} \dx r \tag{$u$-substitution} \\
+        &= \frac{\sigma}{2\eps_0}\bigpar{1 - \frac{1}{\sqrt{\bigpar{\frac{R}{x}}^2+1}}}.
+  \end{align*}
+  If the disk is very large or close ($R >> x$) then the second term goes to zero. So for an infinite sheet of charge, we have
+  \[
+    \boxed{E = \frac{\sigma}{2\eps_0}.}
+  \]
+  \textbf{Electric field due to various charge distributions}
+  \begin{center}
+    \begin{tabular}{c|c|c}
+      Shape & Spatial variation & Source \\
+      \hline
+      Point charge & $E(r)\sim \frac{1}{r^2}$ & $Q$ \\[10pt]
+      Line charge & $E(\rho)\sim \frac{1}{\rho}$ & $\rho_L = \frac{\mathrm{d}Q}{\mathrm{d}l}$ \\[10pt]
+      Sheet of charge & $E$ is independent of $r$ & $\sigma = \frac{\mathrm{d}Q}{\mathrm{d}A}$
+    \end{tabular}
+  \end{center}
+  If you have two infinite charged sheets of opposite polarity (read: infinite capacitor), the electric field between the two sheets is doubled and the field outside of two sheets is zero (because of superposition).
+  \subsection{Turning Insulators Into Conductors}
+  Air is an insulator, but can be a conductor if a strong enough electric field is applied to it. A free electron in the field accelerates fast enough to hit air molecules and knock free more electrons, creating an ``avalanche" of electrons (read: lightning). The threshold field needed to start such a reaction is called the \emph{dielectric strength}.
+  \newpage
+  \subsection{Electric Field and Conductors}
+  \begin{itemize}
+    \item The electric field inside a conductor is zero (charges are at rest)
+    \item There is no ``net charge" inside a conductor
+    \item The voltage inside a conductor is constant
+    \item Any net charge distributes itself on a conductor's surface
+    \item The electric field is always normal to the surface of a conductor
+  \end{itemize}
+  \begin{note}{}
+    The last bullet is true because if it were not the case, the tangential component of the field would move the charges around on the surface of the conductor until it is normal.
+  \end{note}
+  If we place a conductor inside an electric field, the field inside the conductor gets reduced to nothing. If the conductor is hollow, the field inside is still zero, and this is called a \emph{Faraday cage}. However, the Faraday cage only shields from fields produced by outside charges, and does not shield the outside from charges inside the cage.
+\end{document}
+

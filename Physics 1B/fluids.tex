@@ -1,0 +1,38 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Fluids}
+  \subsection{Basic Definitions}
+  The density of a material is a constant and is given by $\rho = \frac{m}{V}$. \\[10pt]
+  Pressure is the average force per area and is given by $p=\frac{F}{A}$. The hydrostatic pressure due to the weight of fluid is $p=\rho gh$. The \emph{gauge pressure} is basically just relative pressure. Pressure is a scalar and has no direction. \\[10pt]
+  Pascal's Law states that a pressure change at any point in a confined incompressible fluid is transmitted throughout the fluid such that the same change occurs everywhere.
+  \subsection{Archimedes' Principle}
+  The buoyant force on an object immersed in a fluid is equal to the weight of the displaced fluid. It is given by the equation $F_{\text{buoyant}} = \rho V_{\text{disp}}g$.
+  \begin{note}{Special Cases}
+    If an object is floating at the surface of a fluid, not all of its volume is displacing fluid, so the buoyant force is less than you think it is. Moreover, if an object has sunken to the bottom of a fluid and is resting on the floor, don't forget to take into account the normal force on the object.
+  \end{note}
+  Archimedes' Principle can be explained from the existence of a pressure difference between the top and bottom of an object.
+  \subsection{Fluid Dynamics}
+  The continuity equation comes from the simple idea that ``what comes in must go out". In other words, the volume of fluid passing through a tube is constant, regardless of where in the tube you are. Thus we have $A_1v_1 = Q = A_2v_2$. \\[10pt]
+  Poiseuille's Law explains why there is flow in a pipe to begin with, and is given by 
+  \[
+    Q = \frac{\pi}{8\eta}r^4\frac{\Delta p}{L},
+  \]
+  where $\eta$ is the viscosity, $r$ is the radius of the pipe, $\Delta p$ is the pressure difference over the pipe, and $L$ is the length of the pipe. \\[10pt]
+  Bernoulli's Law is basically just energy conservation, and helps us find local pressure changes in moving fluids. It is given by:
+  \[
+    P_0+\frac{1}{2}\rho v_0^2 + \rho gh_0 =P_1 + \frac{1}{2}\rho v_1^2 + \rho gh_1
+  \]
+  A special case of this is Toricelli's law, which says that for an open tank, the speed of liquid coming out of the hole a distance $h$ below the surface is equal to that acquired by an object falling freely through the same distance $h$. By using conservation energy, we find $v=\sqrt{2gh}$.
+  \begin{note}{}
+    If the height of a fluid is constant, then by Bernoulli's Law, we have that faster fluids have less pressure.
+  \end{note}
+  \subsection{Laminar and Turbulent Flows}
+  A dimensionless parameter, called Reynold's number $N_r$ reveals whether a flow is laminar or turbulent. We calculate this by $N_r = \frac{2\rho vr}{\eta}$. If $N_r < 2000$, then the flow is laminar. If $N_r > 3000$, then the flow is turbulent. If it is anywhere in between, then it is unstable. Reynold's number is also the ratio of inertial forces to viscous forces (think: high ratio = more inertia, low ratio = high viscosity). A force $F$ is needed to keep a fluid moving at a constant velocity, given by $F = \eta \frac{vA}{L}$. 
+\end{document}

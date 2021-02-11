@@ -1,0 +1,80 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Periodic Motion and Oscillations}
+  \subsection{Simple Harmonic Oscillators}
+  The most basic oscillator that we study is the \emph{simple harmonic oscillator}, often abbreviated SHO. The equation for a SHO is
+  \[
+    x = A\cos \bigpar{\frac{2\pi}{T}t + \Phi},
+  \]
+  where $x$ is the displacement, $A$ is the amplitude, $\omega=\frac{2\pi}{T}$ is the angular frequency, and $\Phi$ is the phase. \\[10pt]
+  Ideal springs obey Hooke's law, where their restoring forces scale linearly with the displacement from equilibruim: $F_{\text{spring}} = -kx$.
+  \subsection{Derivation for SHO}
+  By Newton's second law, we have 
+  \[
+    F = ma = m\cdot \frac{\mathrm{d}^2x}{\mathrm{d}t^2}.
+  \]
+  We also know that the restoring force is $F=-kx$, so we get
+  \[
+    \frac{\mathrm{d}^2x}{\mathrm{d}t^2} + \frac{k}{m}x = 0.
+  \]
+  By Ansatz, the solution to this equation is $x = A\cdot\cos(\omega t + \phi)$, as desired.
+  \begin{note}{}
+    Observe that $v = \frac{\mathrm{d}x}{\mathrm{d}t} = -\omega A\sin (\omega t + \phi)$, so $v_{\text{max}} = \omega A$. Furthermore, we have that $a = \frac{\mathrm{d}^2x}{\mathrm{d}t^2} = -\omega^2A \cdot\cos(\omega t + \phi) = -\omega^2 x$, so $a_{\text{max}} = -\omega^2A$. Plugging these into the above differential equation, we have $\omega = \sqrt{\frac{k}{m}} = 2\pi f = \frac{2\pi}{T}$.
+  \end{note}
+  \subsection{Energy in an SHO}
+  The total energy in an SHO is the sum of its kinetic and elastic potential energies. As such, it follows that
+  \[
+    E_{\text{total}} = \frac{1}{2}mv^2+\frac{1}{2}kx^2 = \frac{1}{2}kA^2 = \frac{1}{2}mv_{\text{max}}^2 = \text{Some constant}.
+  \]
+  \subsection{The Pendulum}
+  The net force on a pendulum is $F=-mg\sin\theta = -mg\sin \bigpar{\frac{x}{L}}$. Using the small angle approximation, we have $F\approx-\frac{mg}{L}\cdot x$, so the pendulum is a kind of simple harmonic oscillator. To get the angular frequency, we use $\omega = \sqrt{\frac{k}{m}}$, which yields $\omega = \sqrt{\frac{g}{L}}$. \\[10pt]
+  For a physical pendulum, where mass is distributed along the rod, things get a bit more complicated. We have
+  \[
+    \omega = \sqrt{\frac{mgd}{I}},
+  \]
+  where $m$ is the mass, $g$ is the acceleration due to gravity, $d$ is the distance from the axis of rotation to the center of gravity, and $I$ is the moment of inertia. 
+  \begin{note}{}
+    Observe that the simple pendulum is just a special case of the physical pendulum. The inertia of the simple pendulum is just $I=mL^2$, and so we have $\omega=\sqrt{\frac{mgL}{mL^2}}=\sqrt{\frac{g}{L}}$.
+  \end{note}
+  \subsection{Damped Oscillations}
+  In real life, the amplitude $A$ will decrease with time because of friction. The damping force depends on the velocity of the mass, and the equation is given by $F_{\text{damping}} = -bv$, where $b$ is a ``damping constant" that depends on drag and friction. Taking this into account, we have a modified equation of motion:
+  \[
+    \frac{\mathrm{d}^2x}{\mathrm{d}t^2} + \frac{b}{m}\frac{\mathrm{d}x}{\mathrm{d}t} + \frac{k}{m}x = 0.
+  \]
+  The solution is now
+  \[
+    x(t) = A\cdot e^{-\frac{b}{2m}t}\cos(\omega't+\phi)
+  \]
+  \begin{note}{}
+    The amplitude of the motion is now time dependent, and we call this the envelope. The angular frequency is also different, with
+    \[
+      \omega' = \sqrt{\frac{k}{m}-\frac{b^2}{4m^2}}\tag{$\omega' < \omega$}.
+    \]
+  \end{note}
+  For simplicity, the multiplier in the exponent is often denoted $\alpha=\frac{b}{2m}$. The equations them become:
+  \begin{align*}
+    x(t) &= A\cdot e^{-\alpha t}\cos(\omega't + \phi) \\
+    \omega' &= \sqrt{\omega_0^2-\alpha^2},
+  \end{align*}
+  where $\omega_0$ is the original frequency of the SHO without damping. If $\omega'$ is imaginary, then the oscillator is \emph{overdamped}. If it is $0$, then it is \emph{critically damped}. If it is a positive number, then it is \emph{underdamped}.
+  \subsection{Driven Oscillations}
+  Each oscillator has an intrinsic frequency $\omega$. However, driven oscillators always oscillate at the \emph{drive frequency}, not the fundamental frequency. If the drive frequency and intrinsic frequency are the same, then the oscillations will reach very high amplitudes. Assuming the SHO is driven sinusoidally from the outside, we have $F_{\text{ext}} = F_0\cos(\omega t)$. Then we have
+  \[
+    \frac{\mathrm{d}^2x}{\mathrm{d}t^2}+ \frac{b}{m}\frac{\mathrm{d}x}{\mathrm{d}t}+\frac{k}{m}x = F_0\cos(\omega t),
+  \]
+  which has solution $x = A_0\sin(\omega t + \phi_0)$.
+  \begin{note}{}
+    The driven oscillator oscillates at the drive frequency, not the intrinsic frequency, but the amplitude and phase depend on the intrinsic frequency.
+    \[
+      A = \frac{F_0}{m \sqrt{(\omega_0^2-\omega^2)^2 + \bigpar{\frac{b\omega}{m}}^2}}
+    \]
+    Without any damping, $A$ becomes infinite when $\omega_0$ becomes $\omega$ (resonance).
+  \end{note}
+\end{document}

@@ -1,0 +1,140 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Waves}
+  Waves can be categorized into two different kinds: longitudinal and transverse. Solids are able to transmit both longitudinal and transverse waves, whereas fluids are only able to handle longitudinal waves.
+  \begin{note}{}
+    Ocean waves are surface waves and live at the interface between two different media. They are neither longitudinal nor transverse!
+  \end{note}
+  \subsection{Wave Velocity}
+  A wave is an oscillation in both space and time. At a fixed position, the wave experienced is the same as a simple harmonic oscillator. Waves are described by the following equation:
+  \[
+    y = A\sin \Big(\underbrace{\frac{2\pi}{\lam}}_{k}x-\underbrace{\frac{2\pi}{T}}_\omega t\Big),
+  \]
+  where $k$ is the wave number and $\omega$ is the angular velocity. Furthermore, just like with SHOs, the energy scales with the square of the frequency and amplitude: $E\sim f^2A^2$. The wave travels one wavelength each period, so $v = \frac{\lam}{T}=f\cdot\lam = \frac{\omega}{k}$.
+  \begin{note}{Two different velocities}
+    There are \emph{two different velocities} in a wave. It has a phase velocity (how it moves from left to right), given by $v = f\lam = \frac{\omega}{k}$, and a transverse velocity (the medium oscillating up and down), given by $v = \omega A\sin(\omega t)$ or $v_{\text{max}} = \omega A$.
+  \end{note}
+  For transverse waves passing through a string/rope, we have
+  \[
+    v = \sqrt{\frac{F_{\text{tension}}}{\mu}}.
+  \]
+  \begin{note}{}
+    When a wave travels from one medium to another, the frequency \emph{does not change}. The wavelength and velocity will change accordingly, but the frequency is determined by the source oscillator.
+  \end{note}
+  Assuming we have a wave $y(x, t) = A\cos(kx - \omega t)$, we can derive the following by taking partial derivatives and dividing.
+  \[
+    \frac{\partial^2y}{\partial x^2} = \frac{1}{v^2}\frac{\partial^2y}{\partial t^2}
+  \]
+  \subsection{Elasticity}
+  The bulk modulus of a material is the inverse of its compressibilty. If something is easy to compress, it has a low bulk modulus. The equation is
+  \[
+    \frac{\Delta V}{V_0} = -\frac{1}{B}\Delta p.
+  \]
+  \subsection{Wave Velocity in Fluids}
+  \begin{itemize}
+    \item Let $v$ be the speed of a longitudinal wave in a fluid, $B$ the bulk modulus of the fluid, and $\rho$ the density of the fluid. Then we have
+    \[
+      v = \sqrt{\frac{B}{\rho}}. 
+    \]
+    \item Let $v$ be the speed of a longitudinal wave in a solid rod, $Y$ be the Young's modulus of the material, and $\rho$ the density of the rod. Then we have
+    \[
+      v=\sqrt{\frac{Y}{\rho}}
+    \]
+  \end{itemize}
+  \begin{note}{}
+    Both the bulk modulus and Young's modulus depend on the temperature of the material. However, most of it is due to the density of the material.
+  \end{note}
+  \begin{itemize}
+    \item The speed of sound in gases is related to the average speed of particles in the gas:
+    \[
+      v_{\text{rms}} = \sqrt{\frac{3kT}{m}},
+    \]
+    where $k$ is the Boltzmann constant and $m$ is the molar mass of the gas.
+    \item For sound in air at sea-level, the velocity of sound is
+    \[
+      v_{\text{sound}} = 331 \sqrt{\frac{T}{273}},
+    \]
+    where $T$ is in units of Kelvin.
+  \end{itemize}
+  \subsection{Standing Waves}
+  A standing wave is created by two identical waves that are superimposed on one another, that are travelling in opposite directions. If the original wave is described by $y = A\sin (kx - \omega t)$, then the standing wave's equation is
+  \[
+    y = 2A\sin(kx)\cos(\omega t).
+  \]
+  \begin{note}{}
+    We usually denote the amplitude of the standing wave by $A$, because we don't care about the original travelling waves.
+  \end{note}
+  The \emph{order} of a standing wave tells you the shape of the wave and gives you nice equations to find the wavelength and frequency. The equations are:
+  \[
+    \lam = \frac{2L}{n} \quad \text{and}\quad f = \frac{v}{2L}n,
+  \]
+  where $n$ is the order. Furthermore, the energy of the standing wave scales with the square of the order. \\[10pt]
+  For a standing wave, the locations where the string remains at rest are called \emph{nodes}, and the locations where the string reaches the highest displacement are called \emph{antinodes}. \\[10pt]
+  The wavelength of a standing wave depends on $L$ only: $\lam=2L$(if both ends are closed), $\lam=4L$(if one end is open).\\[10pt]
+  Thus
+  \[
+    f=\frac{v}{\lam} \quad\text{where}\quad v=\sqrt{\frac{F_T}{\mu}},
+  \]
+  where $F_T$ is the tension in the string and $\mu$ is the density of the string.\\[10pt]
+  The pitch of \emph{wind} instruments depends on the temperature of the air: As temperature goes down, so do the velocity of the sound and the frequency of the sound. However, temperature does not affect string instruments.
+  \begin{note}{}
+    All instruments are based on standing waves. The overtones of an instrument determine the sound characteristics of it (why two instruments playing the same note sound so different).
+  \end{note}
+  \subsection{Sound Intensity}
+  Sound is emitted isotropically, that is to say, equally in all directions. Intensity is defined by 
+  \[
+    I = \frac{P}{A},
+  \]
+  and is measured in W/m\textsuperscript{2}. The power received by a sensor of area $A$ is $P_{\text{received}} = I\cdot A$. Additionally, we also have
+  \[
+    I = \frac{(p_{\text{max}})^2}{2\rho v_w},
+  \]
+  where $\Delta p$ is the pressure variation, $\rho$ is the density, and $v_w$ is the wave velocity. \\[10pt]
+  Furthermore, we also have that
+  \[
+    p_{\text{max}} = BkA,
+  \]
+  where $B$ is the bulk modulus of the medium, $k$ is the wave number, and A is the displacement amplitude.\\[10pt]
+  We use a logarithmic scale, called \emph{sound intensity level $\beta$} to quantify loudness, which is measured in Bell. 1dB = 1 decibel = 10 bel. To convert sound intensity level in dB to intensity in W/m\textsuperscript{2}, we have
+  \[
+    I = I_0\cdot 10^{\frac{\beta}{10}},
+  \]
+  where $I_0$ is the threshold for human hearing, about $10^{-12}$ W/m\textsuperscript{2}. The pain threshold for human hearing is 1W/m\textsuperscript{2}, or about 120dB.
+  \subsection{Doppler Effect}
+  The shift depends on the component of the source's velocity in your direction. \\[10pt]
+  We have the following four cases and equations for finding the frequency heard by the observer, using the Doppler effect:
+  \begin{enumerate}[label=(\alph*)]
+    \item The source is coming towards you
+    \[
+      f'=\frac{f}{1-\cfrac{v_{\text{source}}}{v_{\text{sound}}}}
+    \]
+    \item The source is moving away from you
+    \[
+      f' = \frac{f}{1+\cfrac{v_{\text{source}}}{v_{\text{sound}}}}
+    \]
+    \item The observer is moving towards the source
+    \[
+      f' = f \bigpar{1+\frac{v_{\text{observer}}}{v_{\text{sound}}}}
+    \]
+    \item The observer is moving away from the source
+    \[
+      f' = f \bigpar{1 - \frac{v_{\text{observer}}}{v_{\text{sound}}}}
+    \]
+  \end{enumerate}
+  When you have both objects moving, you calculate things sequentially by considering the frequency at a stationary point between the two objects.
+  \subsection{Beats}
+  Beats are created by the superposition of two waves of slightly different frequencies.\\[10pt]
+  The equation of a superposition of two sound waves is 
+  \[
+    y = 2A \cdot \sin \bigpar{2\pi \frac{f_A - f_B}{2}t}\cos \bigpar{2\pi \frac{f_A + f_B}{2}t}.
+  \]
+  The frequency of the beat is $f_{\text{beat}} = f_1 - f_2$, because your ear cannot distinguish between the crest and the trough, so you hear it twice as often as you normally would. The frequency of the envelope is $\frac{1}{2}(f_1+f_2)$. \\[10pt]
+  In a shock wave, the pressure and temperature go up, as the speed of the wave goes down.
+\end{document}
