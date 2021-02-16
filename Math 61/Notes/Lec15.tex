@@ -1,0 +1,58 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \begin{definition}{Linear Homogeneous Second Order Recurrence Relation}
+    A \emph{linear homogeneous second order recurrence relation} with constant coefficients is a recurrence relation of the form
+    \[
+      c_n = ac_{n-1} + bc_{n-2} \tag{$a, b\in \R$}.
+    \]
+  \end{definition}
+  \begin{example}{}
+    The Fibonacci sequence is an example of a linear homogeneous second order recurrence relation.
+  \end{example}
+  \begin{definition}{Characteristic Polynomial}
+    Given a LHSO recurrence relation
+    \[
+      c_n = ac_{n-1} + bc_{n-2} \tag{$a, b\in \R$},
+    \]
+    the \emph{characteristic polynomial} of the recurrence relation is $x^2 - ax - b$.
+  \end{definition}
+  \begin{note}{}
+    If $f_n, g_n$ satisfy the LHSO $c_n = ac_{n-1} + bc_{n-2}$, then $af_n + bg_n$ satisfies the recurrence relation.
+  \end{note}
+  \begin{theorem}{Solutions to LHSO}
+    If $c_n = ac_{n-1} + bc_{n-2}$ has characteristic polynomial with roots $r_1,r_2$, where $r_1\neq r_2$, then any solution is of the form
+    \[
+      c_n = er_1^n + fr_2^n. \tag{$e,f\in\R$}
+    \]
+    Everything of this form is a solution. If the characteristic polynomial has a repeated root $r$, then the solutions have the form
+    \[
+      c_n = er^n + fnr^n. \tag{$e,f\in\R$}
+    \]
+  \end{theorem}
+  \section{Graphs}
+  \begin{definition}{Undirected Graph}
+    An \emph{undirected graph} is a pair of sets ($V, E$) where $V$ is the set of vertices, $E$ is the set of edges, and each edge $e\in E$ is associated with an unordered pair of vertices.
+  \end{definition}
+  \begin{definition}{Some Graph Terminology}
+    The following terms are frequently used to describe basic graphs.
+    \begin{itemize}
+      \item loop---an edge connecting a vertex to itself
+      \item parallel edges---two different edges with the same vertices
+      \item \emph{simple graph}---graph with no loops nor parallel edges
+      \item \emph{adjacent vertices}---vertices connected by an edge
+      \item \emph{incident}---an edge $e$ is incident on a vertex $v$ if $e$ is connected to $v$
+      \item \emph{weighted graph}---a graph where edges are labeled by non-negative real numbers
+      \item directed graph---a graph where edges are associated with ordered pairs over vertices
+    \end{itemize}
+  \end{definition}
+  \begin{note}{}
+    A simple graph with vertex set $V$ is the same as a reflexive and symmetric relation on $V$.
+  \end{note}
+\end{document}

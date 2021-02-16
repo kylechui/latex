@@ -1,0 +1,34 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  There are more definitions to look up: path, cycle, simple path, subgraph, connected component.
+  \begin{example}{}
+    Some people shake hands at a meeting. We claim that an even number of people shook an odd number of people's hands. \\[10pt]
+    You can model this with a graph, where the vertices represent the people and edges between two people if they shook hands. Thus we can think of the claim as ``There is an even number of vertices have odd degree". Observe that every edge in the graph contributes to the degree of two vertices (or one vertex twice). In other words,
+    \[
+      \sum_{v\in V} \delta(v) = 2 \abs{E}.
+    \]
+    Thus the sum of the degrees for all of the vertices must be even. If the number of vertices with odd degree is odd, then the total sum of the degrees of the vertices will be odd, a contradiction.
+  \end{example}
+  \begin{example}{}
+    In Euleria there are $100$ cities, with $50$ roads going out of each city. From every city you can drive to every other city. One road is closed, show that you can still get to all the cities. \\[10pt]
+    We model this with a set of $100$ vertices, and $50$ edges coming out of each vertex. The claim is that after removing one edge from the connected graph $G$ will leave it connected.
+    \begin{proof}
+      If we remove one edge, then we will have $2$ vertices of odd degree. Suppose towards a contradiction that $G$ with one edge removed is not connected. Then the two odd degree vertices are not in the same component. However, each of those components can be treated as its own graph, and should have an even number of odd degree vertices. However, we only have one vertex with odd degree in each component, a contradiction. Thus the graph must still be connected.
+    \end{proof}
+  \end{example}
+  \begin{example}{Examples of Graphs}
+    \begin{itemize}
+      \item $K_n$ is a simple graph with $n$ vertices and all possible edges between the vertices.
+      \item A bipartite graph is a graph where the vertices are partitioned into two sets, with no two vertices in the same set adjacent.
+      \item $K_{n/m}$ is the set of complete bipartite graphs with $n+m$ vertices, with one set of size $n$, one of size $m$, it's simple with as many edges as possible. Observe that $K_{n/m}$ has $mn$ vertices because each vertex in the $m$ set has $n$ edges.
+      \item The hypercube is the set of binary strings of length $n$, where there is an edge between vertices if they differ in one digit. Hint: draw a cube and treat the strings as coordinates to see why this is the case
+    \end{itemize}
+  \end{example}
+\end{document}
