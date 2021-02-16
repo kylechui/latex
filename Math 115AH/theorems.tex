@@ -1,0 +1,138 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{\leftmark}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Vector Spaces}
+  \begin{theorem}{Subspace Theorem}
+    Let $V$ be a vector space over $F$, $\es\neq W\sse V$ a subset. Then the following are equivalent:
+    \begin{enumerate}[label=(\alph*)]
+      \item $W$ is a subspace of $V$
+      \item $W$ is closed under addition and scalar multiplication from $V$
+      \item For all $w_1,w_2\in W$, for all $\alpha\in F$, $\alpha w_1+w_2\in W$
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}{Toss In Theorem}
+    Let $V$ be a vector space over $F$, $\es\neq S\sse V$ a linearly independent subset. Suppose that $v\in V\sm \vspan(S)$. Then $S\cup \set{v}$ is linearly independent.
+  \end{theorem}
+  \begin{theorem}{Coordinate Theorem}
+    Let $V$ be a finite dimensional vector space over $F$ with basis $\mathcal{B} = \set{v_1,\dotsc,v_n}$ and $v\in V$. Then there exists unique $\alpha_1,\dotsc,\alpha_n\in F$ such that
+    \[
+      v = \alpha_1v_1 + \dotsb + \alpha_nv_n.
+    \]
+    We call $\alpha_1,\dotsc,\alpha_n$ the \emph{coordinates} of $v$ relative to the basis $\mathcal{B}$ and call $\alpha_i$ the $i$th coordinate relative to $\mathcal{B}$.
+  \end{theorem}
+  \begin{theorem}{Important Exercise (General Toss Out Theorem)}
+    Let $V$ be a vector space over $F$, with $v_1,\dotsc,v_n\in V$. Then
+    \[
+      \vspan(v_1,\dotsc,v_n) = \vspan(v_2,\dotsc,v_n)
+    \]
+    if and only if $v_1\in \vspan(v_2,\dotsc,v_n)$.
+  \end{theorem}
+  \begin{theorem}{Toss Out Theorem}
+    Let $V$ be a vector space over $F$. If $V$ can be spanned by finitely many vectors then $V$ is a finite dimensional vector space over $F$. More precisely, if 
+    \[
+      V = \vspan(v_1,\dotsc,v_n),
+    \]
+    then a subset of $\set{v_1,\dotsc,v_n}$ is a basis for $V$.
+  \end{theorem}
+  \begin{theorem}{Replacement Theorem}
+    Let $V$ be a vector space over $F$, with $\set{v_1,\dotsc,v_n}$ a basis for $V$. Suppose that $v\in V$ satisfies
+    \[
+      v = \alpha_1v_1 + \dotsb + \alpha_nv_n, \tag*{$\alpha_1,\dotsc,\alpha_n\in F, \alpha_i\neq 0$}
+    \]
+    Then
+    \[
+      \set{v_1,\dotsc,v_{i-1},v,v_{i+1},\dotsc,v_n}
+    \]
+    is also a basis for $V$.
+  \end{theorem}
+  \begin{theorem}{Main Theorem}
+    Suppose $V$ is a vector space over $F$ with $V = \vspan(v_1,\dotsc,v_n)$. Then any linearly independent subset of $V$ has at most $n$ elements.
+  \end{theorem}
+  \begin{theorem}{Extension Theorem}
+    Let $V$ be a finite dimensional vector space over $F$, $W\sse V$ a subspace. Then every linearly independent subset $S$ in $W$ is finite and part of a basis for $W$ which is a finite dimensional vector space over $F$.
+  \end{theorem}
+  \begin{theorem}{Counting Theorem}
+    Let $V$ be a vector space over $F$, with $W_1,W_2\sse V$ subspaces. Suppose that both $W_1$ and $W_2$ are finite dimensional vector spaces over $F$. Then
+    \begin{enumerate}[label=(\alph*)]
+      \item $W_1\cap W_2$ is a finite dimensional vector space over $F$.
+      \item $W_1 + W_2$ is a finite dimensional vector space over $F$.
+      \item $\dim(W_1) + \dim(W_2) = \dim(W_1 + W_2) + \dim(W_1\cap W_2)$.
+    \end{enumerate}
+  \end{theorem}
+  \section{Linear Transformations}
+  \begin{theorem}{Rank-Nullity (Dimension) Theorem}
+    Let $V$ and $W$ be vector spaces over a field $F$, and let $V$ be finite dimensional. Let $T\colon V\to W$ be a linear transformation. Then $\im(T)$ and $\ker(T)$ are finite dimensional vector spaces over $F$, and $\dim(V) = \dim(\ker(T)) + \dim(\im(T))$.
+  \end{theorem}
+  \begin{definition}{'Morphisms}
+    Let $V$ and $W$ be vector spaces over the field $F$. Let $T\colon V\to W$ be linear.
+    \begin{enumerate}[label=(\alph*)]
+      \item We say that $T$ is a monomorphism or nonsingular if $T$ is injective.
+      \item We say that $T$ is an epimorphism if $T$ is surjective.
+      \item We say that $T$ is an isomorphism if $T$ is bijective and $T\inv\colon W\to V$ is linear.
+      \begin{itemize}
+        \item We only need to show that $T$ is bijective because that implies that $T\inv$ is linear.
+      \end{itemize}
+    \end{enumerate}
+  \end{definition}
+  \begin{theorem}{Monomorphism Theorem}
+    Let $T\colon V\to W$ be a linear transformation. Then the following are equivalent.
+    \begin{enumerate}[label=(\alph*)]
+      \item $T$ is injective.
+      \item $T$ takes linearly independent sets in $V$ to linearly independent sets in $W$.
+      \item $\ker(T) = \set{0}$.
+      \item $\dim(\ker(T)) = 0$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}{Isomorphism Theorem}
+    Suppose that $V$ and $W$ are finite dimensional vector spaces over $F$ with $\dim(V) = \dim(W)$. Let $T\colon V\to W$ be a linear transformation. Then the following are equivalent.
+    \begin{enumerate}[label=(\alph*)]
+      \item $T$ is an isomorphism.
+      \item $T$ is a monomorphism.
+      \item $T$ is an epimorphism.
+      \item If $\mathcal{B} = \set{v_1, \dotsc, v_n}$ is a basis for $V$, then $\set{Tv_1, \dotsc,Tv_n}$ is a basis for $W$.
+      \item There exists a basis $\mathcal{B}$ of $V$ that maps to a basis of $W$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{theorem}{Universal Property of Vector Spaces}
+    Let $V$ be a finite dimensional vector space over $F$, and let $\mathcal{B} = \set{v_1, \dotsc,v_n}$ be a basis for $V$. Let $W$ be a vector space over $F$, and let $w_1,\dotsc,w_n\in W$ (not necessarily distinct). Then there exists a unique linear transformation $T$ with $T\colon v_i\mapsto w_i$.
+  \end{theorem}
+  \begin{theorem}{Classification of Finite Dimensional Vector Spaces}
+    Let $V$ and $W$ be finite dimensional vector spaces over the field $F$. Then $V\cong W$ if and only if $\dim(V) = \dim(W)$.
+  \end{theorem}
+  \section{Linear Transformations and Matrices}
+  \begin{theorem}{Matrix Theory Theorem (MTT)}
+    Let $V$ and $W$ be finite dimensional vector spaces of dimesnion $n$ and $m$ over $F$ respectively, and let $\mathcal{B}$ and $\mathcal{C}$ be ordered bases for $V$ and $W$. Then the map
+    \begin{align*}
+      \varphi\colon L(V, W)&\to F^{m\times n} \\
+      T &\mapsto [T]_{\mathcal{B},\mathcal{C}}
+    \end{align*}
+    is an isomorphism. In particular, $\dim(L(V,W)) = mn$.
+  \end{theorem}
+  \begin{theorem}{12.2}
+    Let $V$, $W$, $U$ be finite dimensional vector spaces over $F$ with ordered bases $\mathcal{B}$, $\mathcal{C}$, $\mathcal{D}$ respectively. If $T\colon V\to W$ and $S\colon W\to U$ are linear, then
+    \[
+      [S\circ T]_{\mathcal{B}, \mathcal{D}} = [S]_{\mathcal{C},\mathcal{D}}\cdot [T]_{\mathcal{B},\mathcal{C}}.
+    \]
+  \end{theorem}
+  \begin{theorem}{Change of Basis Theorem}
+    Let $V$ and $W$ be finite dimensional vector spaces over $F$ with ordered bases $\mathcal{B}, \mathcal{B}'$ for $V$ and $\mathcal{C}$, $\mathcal{C}'$ for $W$. Let $T\colon V\to W$ be linear. Then
+    \begin{align*}
+      [T]_{\mathcal{B},\mathcal{C}} &= [1_W]_{\mathcal{C}',\mathcal{C}}[T]_{\mathcal{B}',\mathcal{C}'}[1_V]_{\mathcal{B},\mathcal{B}'} \\
+      &= [1_W]_{\mathcal{C},\mathcal{C}'}\inv[T]_{\mathcal{B}',\mathcal{C}'}[1_V]_{\mathcal{B},\mathcal{B}'} \\
+      &= [1_W]_{\mathcal{C}',\mathcal{C}}[T]_{\mathcal{B}',\mathcal{C}'}[1_V]_{\mathcal{B}',\mathcal{B}}\inv
+    \end{align*}
+  \end{theorem}
+  \begin{theorem}{13.2}
+    Let $A, B\in \M_n(F)$. Then $A\sim B$ if and only if there exists a vector space $V$ over $F$ with $\dim(V) = n$ such that there is a linear transformation $T\colon V\to V$ with $A = [T]_{\mathcal{B}}$ and $B = [T]_{\mathcal{C}}$ for some ordered bases $\mathcal{B}$ and $\mathcal{C}$ for $V$.
+  \end{theorem}
+  \begin{theorem}{14.3}
+    Let $V$ be a finite dimensional vector space over $F$, and let $T\colon V\to V$ be linear. Then the eigenvalues of $T$ are precisely the roots of $f_T$.
+  \end{theorem}
+\end{document}
+

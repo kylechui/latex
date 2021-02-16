@@ -1,0 +1,169 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Dual Spaces}
+  \begin{definition}{Coordinate Function}
+    Let $f_{v_0}$ be the unique linear transformation (guaranteed by UPVS) such that
+    \begin{align*}
+      v_0 &\mapsto 1 \\
+      v &\mapsto 0 \tag{For all $v_0\neq v\in \mathcal{B}$}
+    \end{align*}
+  \end{definition}
+  We know that the image of $f_{v_0}$ is a subspace of $F$ and non-zero, so it must be all of $F$. Thus $f_{v_0}$ is an epimorphism. Furthermore, we know that
+  \begin{align*}
+    \ker(f_{v_0}) &= \set{w\in V\mid w \text{ has $v_0$-coordinate zero}} \\
+                  &= \vspan(\mathcal{B}\sm \set{v_0}).
+  \end{align*}
+  \begin{definition}{Kronecker Delta}
+    The Kronecker delta function is the linear transformation $\delta\colon V\to F$ that sends the basis of a vector space to either $0$ or $1$, given by
+    \[
+      \delta_{v\,v'} = \begin{cases}1 & \text{if }v=v',\\0 & \text{if }v\neq v', v\in \mathcal{B},\end{cases}
+    \]
+    where $v'\in \mathcal{B}$.
+  \end{definition}
+  \textbf{Motivation.} Instead of studying abstract vectors in $V$, we want to study the coordinates of vectors in $V$ relative to a basis $\mathcal{B}$.
+  \begin{definition}{Dual Space}
+    The vector space $V^*\ceq L(V, F)$ is called the \emph{dual space} of $V$.
+  \end{definition}
+  \begin{note}{}
+    The coordinate function will give you the coordinates of a vector $w\in V$, so instead of defining a bunch of alphas, we can just write
+    \[
+      w = \sum_{\mathcal{B}}f_v(w)v. \tag{$v\in\mathcal{B}$}
+    \]
+  \end{note}
+  Now by the UPVS, we have a unique linear transformation
+  \[
+    D_{\mathcal{B}}\colon V\to V^*\quad \text{defined by}\quad v\mapsto f_v.\tag{$v\in \mathcal{B}$}
+  \]
+  We claim that $D_{\mathcal{B}}$ is a monomorphism.
+  \begin{proof}
+    Suppose $w = \sum_{\mathcal{B}}\alpha_vf_v = 0$. Let $v_0\in \mathcal{B}$, then
+    \begin{align*}
+      0 &= \paren{\sum_{\mathcal{B}}\alpha_vf_v}(v_0) \\
+        &= \sum_{\mathcal{B}}\alpha_vf_v(v_0) \\
+        &= \sum_{\mathcal{B}}\alpha_v\delta_{v\,v_0} \\
+        &= \alpha_{v_0}. \tag{If $v\neq v_0$, $\alpha_v=0$}
+    \end{align*}
+    Thus we have $\sum \alpha_vf_v = 0$ implies $\alpha_v = 0$ for all $v\in \mathcal{B}$, so $w = 0$. Thus $D_{\mathcal{B}}$ is a monomorphism.
+  \end{proof}
+  By the Monomorphism Theorem, we know that $\mathcal{B}^*$ is linearly independent because $\mathcal{B}$ is a basis for $V$.
+  \begin{note}{}
+    If $V$ is not finite dimensional, then $D_{\mathcal{B}}$ is \emph{not} onto. This is because we have $\abs{V^*} = \abs{F}^{\abs{\mathcal{B}}}$ and $\abs{F} = \abs{V}$ if $F$ is infinite.
+  \end{note}
+  \begin{note}{}
+    The map $D_{\mathcal{B}}\colon V\to V^*$ is \emph{dependent} on your choice of basis $\mathcal{B}$.
+  \end{note}
+  \begin{definition}{Linear Functional}
+    If $V$ is a vector space over $F$, then elements in $V^* = L(V, F)$ are called \emph{linear functionals}.
+  \end{definition}
+  \textbf{Fact.} (We assume this) If $S$ is a linearly independent set in a vector space over $F$ (even infinite), then $S$ is part of a basis for $V$, i.e. the Extension Theorem holds (needs the Axiom of Choice). This works out nicely for us because every non-zero vector $v\in V$ can be extended into a basis for $V$.
+  \begin{note}{}
+    There exists a monomorphism $L\colon V\to V^{* *}$ that is \emph{independent} of your choice of bases.
+  \end{note}
+  \begin{proof}
+    For each $v\in V$ define the following linear functional on $V^*$:
+    \[
+      L_v\colon V^*\to F \quad \text{by}\quad L_v(f)\ceq f(v) \tag{Evaluation at $v$}
+    \]
+    We now show that $L_v\colon V^*\to F$ is linear, i.e. $L_v\in V^{* *} = (V^*)^*$. Let $f, g\in V^*$, and $\alpha\in F$. Observe that
+    \begin{align*}
+      L_v(\alpha f + g) &= (\alpha f + g)(v) \\
+                        &= \alpha f(v) + g(v) \\
+                        &= \alpha L_v(f) + L_v(g).
+    \end{align*}
+    Thus $L_v$ is linear. We now define a map $L\colon V\to V^{* *}$ by $v\mapsto L_v$ (note that $L_v\in V^{* *}$, $L_v = Lv$). We claim that $L$ is linear. For all $f\in V^*$, $v,v'\in V$, $\alpha\in F$, we have
+    \begin{align*}
+      L(\alpha v + v')(f) &= L_{\alpha v + v'}(f) \\
+                          &= f(\alpha v + v') \\
+                          &= \alpha f(v) + f(v') \\
+                          &= \alpha L_v(f) + L_{v'}(f) \\
+                          &= \alpha L(v)(f) + L(v')(f) \\
+                          &= (\alpha Lv + Lv')(f).
+    \end{align*}
+    We now claim that $L\colon V\to V^{* *}$ is monic. Suppose $v\neq 0$. It suffices to show that there exists some $f\in V^*$ such that $L_v(f) = f(v) \neq 0$. We know from earlier that there exists a $f\in V^*$ such that $L_v(f) = f(v) \neq 0$. Because $L$ is linear, $L$ is a monomorphism. We call $L\colon V\to V^{* *}$ is a \emph{natural} or \emph{canonical} monomorphism---no basis is needed to define it.
+  \end{proof}
+  \begin{note}{}
+    The canonical monomorphism is not an isomorphism in the infinite dimensional case, so we mainly deal with the finite dimensional case.
+  \end{note}
+  We now assume that $V$ is a finite dimensional vector space over $F$. Let $\mathcal{B} = \set{v_1,\dotsc,v_n}$ be a basis for $V$, and $\mathcal{B}^* = \set{f_1,\dotsc,f_n}\sse V^*$ defined by $f_i(v_j) = \delta_{ij}$ for all $i, j$ ($f_i$ means $f_{v_i}$ in this case). Then, as before, we have a monomorphism
+  \[
+    D_{\mathcal{B}}\colon V\to V^* \quad \text{determined by}\quad v_i\mapsto f_i.
+  \]
+  But we also have
+  \[
+    \dim(V^*) = \dim(L(V, F)) = \dim(V)\dim(F) = \dim(V).
+  \]
+  Thus $D_{\mathcal{B}}$ is an isomorphism by the Isomorphism Theorem, with $\mathcal{B}^*$ a basis for $V^*$ called the \emph{dual basis} of $\mathcal{B}$. We also have $V\cong V^*\cong V^{* *}$, so $V\cong V^{* *}$. Furthermore, $\mathcal{B}^{* *} = \set{Lv_1,\dotsc,Lv_n}$, where $L_{v_i}\ceq L_{f_i}$, $f_i\in B^*$. Then
+  \[
+    L_{f_i}(f_j) = L_{v_i}(f_j) = f_j(v_i) = \delta_{ij}.
+  \]
+  So $\mathcal{B}^{* *}$ is the \emph{dual basis} of $\mathcal{B}^*$. We also know that $L\colon V\to V^{* *}$ is now a \emph{natural isomorphism} by the Isomorphism Theorem. \par
+  When $V$ is a finite dimensional vector space over $F$, we can \emph{identify} $L_v$ and $v$ for all $v\in V$ (just like how we can see integers as rational numbers by mapping $n\mapsto \frac{n}{1}$). \par
+  So for a finite dimensional vector space $V$ over $F$, we have
+  \begin{center}\begin{tabular}{c|c}
+    $\mathcal{B} = \set{v_1,\dotsc,v_n}$ & A basis for $V$ \\
+    \hline
+    $\mathcal{B}^* = \set{f_1,\dotsc,f_n} = \set{f_{v_1},\dotsc,f_{v_n}}$ & The dual basis for $\mathcal{B}$ \\
+    \hline
+    $\mathcal{B}^{* *} = \set{L_{f_{v_1}},\dotsc,L_{f_{v_n}}} = \set{L_{v_1},\dotsc,L_{v_n}}$ & The dual basis for $\mathcal{B}^*$
+  \end{tabular}\end{center}
+  In other words, $f_i = f_{v_i}$ and $L_{f_{v_i}} = L_{v_i}$ and these satisfy
+  \[
+    f_j(v_i) = f_{v_j}(v_i) = \delta_{ij} = L_{f_{v_i}}(f_j) = L_{v_i}(f_j).
+  \]
+  If $v\in V$, then
+  \[
+    v = \alpha_1v_1 + \dotsb + \alpha_nv_n = \sum_{i=1}^{n}f_i(v)v_i. \tag{For unique $\alpha_1,\dotsc,\alpha_n\in F$}
+  \]
+  Similarly, if $f\in V^*$, then
+  \[
+    f = \beta_1f_1 + \dotsb + \beta_nf_n = \sum_{i=1}^{n}f(v_i)f_i.
+  \]
+  This is the same argument as before, just decomposing $f$ into the product of scalars and basis vectors.
+  \begin{note}{}
+    The $f$'s and the $v$'s determine each other.
+  \end{note}
+  \subsection{The Transpose}
+  Let $V,W$ be vector spaces over $F$, with $T\colon V\to W$ linear. If $g\in W^* = L(W, F)$, in other words $g\colon W\to F$ linear, then the composition
+  \[
+    V\xrightarrow{T}W\xrightarrow{g}F
+  \]
+  is a linear functional, i.e. $g\circ T\in V^*$.
+  \begin{definition}{Transpose}
+    Let $V, W$ be vector spaces over a field $F$, $T\colon V\to W$ linear. Define the \emph{transpose} of $T$ by
+    \[
+      T^t\colon W^*\to V^* \quad \text{where}\quad g\mapsto g\circ T. \tag{$T^tg\ceq g\circ T$ for all $g\in W^*$}
+    \]
+  \end{definition}
+  The following diagrams commute:
+  \[\begin{tikzcd}
+    V & W \\
+    {V^*} & {W^*}
+    \arrow["{T^t}", from=2-2, to=2-1]
+    \arrow["T", from=1-1, to=1-2]
+  \end{tikzcd}
+  \hspace{1in}
+  \begin{tikzcd}
+    V & W \\
+    & F
+    \arrow["g", from=1-2, to=2-2]
+    \arrow["T", from=1-1, to=1-2]
+    \arrow["{g\circ T}"', from=1-1, to=2-2]
+  \end{tikzcd}\tag{$T^tg = g\circ T$}\]
+  \textbf{Claim.} $T^t\colon W^*\to V^*$ is linear.
+  \begin{proof}
+    If $g, g'\in W^*$, $\alpha\in F$, then
+    \begin{align*}
+      T^t(\alpha g + g') &= (\alpha g + g')\circ T \\
+                         &= \alpha gT + g'T \\
+                         &= \alpha T^tg + T^tg'.
+    \end{align*}
+  \end{proof}
+  We call $T^t$ the transpose because of the following:
+\end{document}
