@@ -1,0 +1,141 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Gauss's Law}
+  Recall that electric field changes with the inverse square of distance for point charges, inverse of distance for line charge, and does not change for sheet charges. The idea behind Gauss's Law is to take advantage of symmetry in objects to calculate things in a more efficient way. To get an idea for the field strength we can count how many field lines go through a particular area.
+  \subsection{Electric Flux}
+  We define \emph{flux} to be the number of field lines crossing a certain area. It is given by
+  \[
+    \frac{\mathrm{d}V}{\mathrm{d}t} = vA\cos\phi = A_\perp v = \vec{v}\cdot\vec{A}.
+  \]
+  Notice that when $\phi = 0$ we have the maximum flux, which makes sense because $\phi$ is measured from the perpendicular to the field. For a uniform electric field, we have
+  \[
+    \Phi_E = \vec{E}\cdot \vec{A} = E\cdot A\cdot \cos\phi.
+  \]
+  If the surface is not flat and/or the electric field is not homogeneous, the flux is the integral over the area:
+  \[
+    \Phi_E = \int \vec{E} \dx \vec{A} = \int E\cos\theta \dx A.
+  \]
+  \subsection{Spherical Coordinates}
+  Gauss's Law only really works well in a spherical coordinate system. In this system, $r$ is the radius, $\phi$ is the angle in the $xy$-plane measured counterclockwise from the positive $x$-axis, and $\theta$ is the angle measured vertically from the positive $z$-axis. Thus we have:
+  \begin{align*}
+    x &= r\sin\theta\cos\phi & r &= \sqrt{x^2 + y^2 + z^2} \\
+    y &= r\sin\theta\sin\phi & \theta &= \cos\inv \paren{\frac{z}{r}} \\
+    z &= r\cos\theta & \phi &= \tan\inv \paren{\frac{y}{x}}
+  \end{align*}
+  The volume and surface elements in spherical coordinates are given by:
+  \begin{center}\begin{tabular}{c|c}
+    Surface element & $\mathrm{d}A = r^2\sin\theta \dx\phi\dx\theta$\\
+                    & $\mathrm{d}\vec{A} = r^2\sin\theta \dx\phi\dx\theta\,\vec{a}_r$ \\
+    \hline
+    Volume element & $\mathrm{d}V = r^2\sin\theta \dx\phi\dx\theta\dx r$
+  \end{tabular}\end{center}
+  \begin{example}{Spherical Charge} \\
+    For a point charge, the electric field everywhere on a concentric sphere of radius $r$ is constant and perpendicular to the sphere, so the flux is given by
+    \[
+      \Phi_E = \int \vec{E} \dx \vec{A} = \int E \dx A = E\int \dx A = E\cdot A = \frac{q}{4\pi\eps_0 r^2}4\pi r^2 = \frac{q}{\eps_0}.
+    \]
+  \end{example}
+  \begin{note}{Flux is independent of radius}
+    As you go further away from the charge the field decreases, but the area increases at the same rate. Thus the flux through the sphere surrounding the charge is a measure of the charge itself.
+  \end{note}
+  \begin{theorem}{Gauss's Law}
+    The total electric flux through \emph{any} closed surface is proportional to the enclosed charge.
+    \[
+      \oint \vec{E} \dx \vec{A} = \frac{Q_{\text{enclosed}}}{\eps_0}\quad \text{and}\quad \vec{\nab}\vec{E} = \frac{\rho_V}{\eps_0}
+    \]
+    Note that the surface must be closed, and limits must be chosen properly.
+  \end{theorem}
+  Gauss's Law is true for any closed surface but only works well for symmetric closed surfaces (you will need to take into account angle to the normal of the surface).
+  \subsection{Using Gauss's Law to Calculate Fields}
+  \begin{example}{Conducting Sphere of Charge $Q$}\\
+    Just like for a point charge, we choose a concentric sphere to be our Gaussian surface. Then
+    \[
+      \oint \vec{E} \dx \vec{A} = E\cdot 4\pi r^2 = \frac{Q_{\text{enclosed}}}{\eps_0}.
+    \]
+    The interesting thing is evaluating $Q_{\text{enclosed}}$. Observe that
+    \[
+      Q_{\text{enclosed}} = \begin{cases}0 & \text{if }r < R,\\Q & \text{if $r$ is much greater than $R$}.\end{cases}
+    \]
+  \end{example}
+  \begin{example}{Insulating Sphere of Charge $Q$}\\
+    Suppose we have an insulating sphere of charge $Q$, with homogeneous charge density $\rho_V$. Just like for a point charge, we choose a concentric sphere to be our Gaussian surface. Then
+    \[
+      \oint \vec{E} \dx \vec{A} = E\cdot 4\pi r^2 = \frac{Q_{\text{enclosed}}}{\eps_0}.
+    \]
+    The interesting thing is evaluating $Q_{\text{enclosed}}$. Observe that
+    \[
+      Q_{\text{enclosed}} = \begin{cases}\int\rho_V\dx V & \text{if }r < R,\\Q & \text{if $r$ is much greater than $R$}.\end{cases}
+    \]
+    Evaluating the integral for a sphere with radius $r < R$, we have 
+    \[
+      Q_{\text{enclosed}} = \rho_V\cdot \frac{4}{3}\pi r^3 = \frac{Q}{\frac{4}{3}\pi R^3}\cdot \frac{4}{3}\pi r^3 = Q\frac{r^3}{R^3}.
+    \] 
+    Plugging this into Gauss's Law, we get 
+    \[
+      E\cdot 4\pi r^2 = \frac{Qr^3}{\eps_0R^3},
+    \]
+    so $E = \frac{Q}{4\pi\eps_0}\frac{1}{R^3}r$. So we have that $E\sim r$ when inside the homogeneous insulator.
+  \end{example}
+  \begin{example}{Infinitely Long Cylindrical Charge}\\
+    For a line charge, we choose a cylindrical surface to be our Gaussian surface. The way that we do this is split up the cylinder into its left surface, right surface, and side. Thus we have
+    \[
+      \oint \vec{E}\dx \vec{A} = \int_{\text{side}} \vec{E}\dx \vec{A} + \int_{\text{left}} \vec{E}\dx \vec{A} + \int_{\text{right}} \vec{E}\dx \vec{A}.
+    \]
+    Note that the $\dx \vec{A}$ is different for the side surface in comparison to the left and right surfaces. For the side surface, it is given by $\mathrm{d}\vec{A} = \rho\cdot \mathrm{d}\phi\cdot \mathrm{d}z\cdot \vec{a}_\rho$, whereas for the left and right surfaces, it is given by $\mathrm{d}\vec{A} = \rho\cdot \mathrm{d}\phi\cdot \mathrm{d}\rho\cdot \vec{a}_z$. However, the left and right surfaces' fields cancel out, so we are left with
+    \begin{align*}
+      \oint \vec{E}\dx \vec{A} &= \int_{\text{side}} \vec{E}\dx \vec{A} \\
+      \frac{Q_{\text{enclosed}}}{\eps_0} &= \int_{0}^{2\pi}\dx \phi \int_{0}^{L}\rho\cdot E \dx z \\
+      \frac{\rho_L\cdot L}{\eps_0} &= 2\pi\rho L\cdot E \\
+      E &= \frac{\rho_L}{2\pi\eps_0}\frac{1}{\rho}.
+    \end{align*}
+    We may also write this as $\vec{E} = \frac{\rho_L}{2\pi\eps_0}\frac{1}{\rho}\vec{a}_\rho$.
+  \end{example}
+  \begin{example}{Infinite Plane Sheet of Charge}\\
+    For an infinite sheet, we choose a box to be our Gaussian surface. Similar to the cylinder, we create the box by ``stitching together" the six different sides of the box. Thus we have the sum of six integrals, but the left, right, front, and back fields cancel out with each other, so we are left with
+    \[
+      \oint \vec{E}\dx \vec{A} = \int_{\text{bottom}}\vec{E}\dx \vec{A} + \int_{\text{top}}\vec{E}\dx \vec{A}.
+    \]
+    The electric field is constant on the top and bottom, so we have
+    \[
+      \frac{Q_{\text{enclosed}}}{\eps_0} = EA + EA = 2EA.
+    \]
+    Thus we have that
+    \[
+      E = \frac{Q_{\text{enclosed}}}{2A\eps_0} = \frac{\sigma}{2\eps_0}. \tag{$A\sigma = Q_{\text{enclosed}}$}
+    \]
+  \end{example}
+  \begin{example}{Asymmetrical Shapes}\\
+    For asymmetrical shapes and fields, we choose a Gaussian surface of a box and add the six sides. The opposing sides happen add together nicely, and we get
+    \begin{align*}
+      \oint_A \vec{E}\dx \vec{A} &= \paren{\frac{\partial E_x}{\partial x}+\frac{\partial E_y}{\partial y}+\frac{\partial E_z}{\partial z}}\cdot \Delta x\cdot \Delta y\cdot \Delta z \\
+      \frac{Q_{\text{enclosed}}}{\eps_0} &= \paren{\frac{\partial E_x}{\partial x}+\frac{\partial E_y}{\partial y}+\frac{\partial E_z}{\partial z}}\cdot \Delta V \\
+      \frac{Q_{\text{enclosed}}}{\eps_0\Delta V} &= \frac{\partial E_x}{\partial x}+\frac{\partial E_y}{\partial y}+\frac{\partial E_z}{\partial z} \\
+      \frac{\rho_V}{\eps_0} &= \frac{\partial E_x}{\partial x}+\frac{\partial E_y}{\partial y}+ \frac{\partial E_z}{\partial z} \\
+      \dive(\vec{E}) &= \lim_{\Delta V\to 0} \frac{\oint_A \vec{E}\dx \vec{A}}{\Delta V} \\
+      \dive(\vec{E}) &= \frac{\rho_V}{\eps_0}
+    \end{align*}
+    The divergence of a vector flux density is the outflow from a small closed surface per unit volume as the volume shrinks to zero.
+  \end{example}
+  The divergence of a vector can be expressed in many ways:
+  \begin{center}\begin{tabular}{c|c}
+    Rectangular & $\dive(\vec{E}) = \frac{\partial E_x}{\partial x}+\frac{\partial E_y}{\partial y}+ \frac{\partial E_z}{\partial z}$ \\
+    \hline
+    Cylindrical & $\dive(\vec{E}) = \frac{1}{\rho}\frac{\partial}{\partial\rho}(\rho\cdot E_\rho) + \frac{1}{\rho}\frac{\partial E_\phi}{\partial \phi} + \frac{\partial E_z}{\partial z}$ \\
+    \hline
+    Spherical & $\dive(\vec{E}) = \frac{1}{r^2}\frac{\partial}{\partial r}(r^2E_r) + \frac{1}{r\sin\theta}\frac{\partial}{\partial\theta}(\sin\theta E_\theta) + \frac{1}{r\sin\theta}\frac{\partial E_\phi}{\partial\phi}$
+  \end{tabular}\end{center}
+  The two forms of Gauss's Law are useful in different scenarios. The integral form is useful for finding the field when given the charge density, and the differential form is useful for finding the charge density when given the field.
+  \begin{theorem}{Divergence Theorem}
+    If we take one form of Gauss's Law and plug it into the other, we get
+    \[
+      \oint_A \vec{E}\dx \vec{A} = \int_{V} \vec{\nab}\vec{E} \dx V.
+    \]
+  \end{theorem}
+\end{document}

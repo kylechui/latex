@@ -11,7 +11,7 @@
   \subsection{Simple Harmonic Oscillators}
   The most basic oscillator that we study is the \emph{simple harmonic oscillator}, often abbreviated SHO. The equation for a SHO is
   \[
-    x = A\cos \bigpar{\frac{2\pi}{T}t + \Phi},
+    x = A\cos \paren{\frac{2\pi}{T}t + \Phi},
   \]
   where $x$ is the displacement, $A$ is the amplitude, $\omega=\frac{2\pi}{T}$ is the angular frequency, and $\Phi$ is the phase. \\[10pt]
   Ideal springs obey Hooke's law, where their restoring forces scale linearly with the displacement from equilibruim: $F_{\text{spring}} = -kx$.
@@ -34,7 +34,7 @@
     E_{\text{total}} = \frac{1}{2}mv^2+\frac{1}{2}kx^2 = \frac{1}{2}kA^2 = \frac{1}{2}mv_{\text{max}}^2 = \text{Some constant}.
   \]
   \subsection{The Pendulum}
-  The net force on a pendulum is $F=-mg\sin\theta = -mg\sin \bigpar{\frac{x}{L}}$. Using the small angle approximation, we have $F\approx-\frac{mg}{L}\cdot x$, so the pendulum is a kind of simple harmonic oscillator. To get the angular frequency, we use $\omega = \sqrt{\frac{k}{m}}$, which yields $\omega = \sqrt{\frac{g}{L}}$. \\[10pt]
+  The net force on a pendulum is $F=-mg\sin\theta = -mg\sin \paren{\frac{x}{L}}$. Using the small angle approximation, we have $F\approx-\frac{mg}{L}\cdot x$, so the pendulum is a kind of simple harmonic oscillator. To get the angular frequency, we use $\omega = \sqrt{\frac{k}{m}}$, which yields $\omega = \sqrt{\frac{g}{L}}$. \\[10pt]
   For a physical pendulum, where mass is distributed along the rod, things get a bit more complicated. We have
   \[
     \omega = \sqrt{\frac{mgd}{I}},
@@ -73,7 +73,7 @@
   \begin{note}{}
     The driven oscillator oscillates at the drive frequency, not the intrinsic frequency, but the amplitude and phase depend on the intrinsic frequency.
     \[
-      A = \frac{F_0}{m \sqrt{(\omega_0^2-\omega^2)^2 + \bigpar{\frac{b\omega}{m}}^2}}
+      A = \frac{F_0}{m \sqrt{(\omega_0^2-\omega^2)^2 + \paren{\frac{b\omega}{m}}^2}}
     \]
     Without any damping, $A$ becomes infinite when $\omega_0$ becomes $\omega$ (resonance).
   \end{note}

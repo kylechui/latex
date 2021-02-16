@@ -69,7 +69,7 @@
   \subsection{Field Around Cylindrical Charges}
   We use the cylindrical coordinate system because it is more useful for wires. The radius is $\rho$, the angle is $\phi$, and the height is given by $z$. To convert between cylindrical and Cartesian coordinates, we use
   \[
-    x = \rho\cos\phi, \quad y = \rho\sin\phi, \quad z = z, \quad \rho = \sqrt{x^2+y^2}, \quad \phi = \tan\inv \bigpar{\frac{y}{x}}.
+    x = \rho\cos\phi, \quad y = \rho\sin\phi, \quad z = z, \quad \rho = \sqrt{x^2+y^2}, \quad \phi = \tan\inv \paren{\frac{y}{x}}.
   \]
   To visualize $\phi$, start in the $xy$-plane and go counterclockwise, as you would in $\R^2$. To find the volume and surface element in spherical coordinates, we use
   \[
@@ -89,11 +89,11 @@
     \vec{r} - \vec{r'} &= \rho\cdot \vec{e}_\rho - z'\vec{e}_z \\
     \abs{\vec{r}-\vec{r'}} &= \sqrt{\rho^2 + z'^2} \\
     \intertext{Thus for a line charge, we have}
-    \mathrm{d}\vec{E} &= \frac{\rho_L \mathrm{d}z'}{4\pi\eps_0}\frac{\rho \vec{e}_\rho - z'\vec{e}_z}{\bigpar{\rho^2+z'^2}^{\frac{3}{2}}}.
+    \mathrm{d}\vec{E} &= \frac{\rho_L \mathrm{d}z'}{4\pi\eps_0}\frac{\rho \vec{e}_\rho - z'\vec{e}_z}{\paren{\rho^2+z'^2}^{\frac{3}{2}}}.
     \intertext{However, each point $\vec{r'}$ has a corresponding point $-\vec{r'}$ which cancels out the $z$-component of the field, so}
-    \mathrm{d}E_\rho &= \frac{\rho_L\rho \mathrm{d}z'}{4\pi\eps_0\bigpar{\rho^2+z'^2}^{\frac{3}{2}}}.
+    \mathrm{d}E_\rho &= \frac{\rho_L\rho \mathrm{d}z'}{4\pi\eps_0\paren{\rho^2+z'^2}^{\frac{3}{2}}}.
     \intertext{Summing over all of the line charge elements, we have}
-    E_\rho &= \int_{-\infty}^{\infty}\frac{\rho_L\cdot \rho}{4\pi\eps_0\bigpar{\rho^2+z'^2}^{\frac{3}{2}}} \dx z'
+    E_\rho &= \int_{-\infty}^{\infty}\frac{\rho_L\cdot \rho}{4\pi\eps_0\paren{\rho^2+z'^2}^{\frac{3}{2}}} \dx z'
     \intertext{We use an integral table to evaluate this, yielding}
     \Aboxed{E_\rho &= \frac{\rho_L}{2\pi\eps_0\rho}.}
   \end{align*}
@@ -103,10 +103,10 @@
   \subsection{Electric Field for a Uniform Disk of Charge}
   We denote the surface charge density by $\sigma = \frac{\mathrm{d}Q}{\mathrm{d}A}$, which has units of $\frac{\mathrm{C}}{\mathrm{m}^2}$. Then we have $\mathrm{d}Q = \sigma\cdot \mathrm{d}A$, where $\mathrm{d}A = 2\pi r\cdot \mathrm{d}r$. Let $r$ be the distance to some point on a disk, $R$ the radius of the disk, and $x$ the distance from the origin to some point of interest. Using rectangular coordinates, we have
   \begin{align*}
-    \mathrm{d}E_x &= \frac{1}{4\pi\eps_0}\frac{2\pi\sigma rx \dx r}{\bigpar{x^2 + r^2}^{\frac{3}{2}}} \\
-    E_x &= \int_{0}^{R}\frac{1}{4\pi\eps_0}\frac{2\pi\sigma rx}{\bigpar{x^2 + r^2}^{\frac{3}{2}}}\dx r \\
-        &= \frac{\sigma x}{4\eps_0}\int_{0}^{R}\frac{2r}{\bigpar{x^2 + r^2}^{\frac{3}{2}}} \dx r \tag{$u$-substitution} \\
-        &= \frac{\sigma}{2\eps_0}\bigpar{1 - \frac{1}{\sqrt{\bigpar{\frac{R}{x}}^2+1}}}.
+    \mathrm{d}E_x &= \frac{1}{4\pi\eps_0}\frac{2\pi\sigma rx \dx r}{\paren{x^2 + r^2}^{\frac{3}{2}}} \\
+    E_x &= \int_{0}^{R}\frac{1}{4\pi\eps_0}\frac{2\pi\sigma rx}{\paren{x^2 + r^2}^{\frac{3}{2}}}\dx r \\
+        &= \frac{\sigma x}{4\eps_0}\int_{0}^{R}\frac{2r}{\paren{x^2 + r^2}^{\frac{3}{2}}} \dx r \tag{$u$-substitution} \\
+        &= \frac{\sigma}{2\eps_0}\paren{1 - \frac{1}{\sqrt{\paren{\frac{R}{x}}^2+1}}}.
   \end{align*}
   If the disk is very large or close ($R >> x$) then the second term goes to zero. So for an infinite sheet of charge, we have
   \[
@@ -138,5 +138,11 @@
     The last bullet is true because if it were not the case, the tangential component of the field would move the charges around on the surface of the conductor until it is normal.
   \end{note}
   If we place a conductor inside an electric field, the field inside the conductor gets reduced to nothing. If the conductor is hollow, the field inside is still zero, and this is called a \emph{Faraday cage}. However, the Faraday cage only shields from fields produced by outside charges, and does not shield the outside from charges inside the cage.
+  \subsection{Dipoles and Insulators}
+  The \emph{electric dipole} has zero net charge, but still produces a field, which drops off rapidly ($E\sim \frac{1}{r^3}$). The \emph{dipole moment} $p = qd$ points from $-$ to $+$ (opposite of the field). Most insulators are composed of electric dipoles and are called \emph{dielectrics}. A dipole will keep moving/rotating in an electric field until its dipole moment aligns with the external electric field. When you apply an external electric field to an insulator, the charges can't flow throughout the insulator, but you will align the dipole moments inside it. The electric field created by the dipoles $E_{\text{dipole}}$ is always smaller than the external electric field $E_0$. The total field in the insulator decreases to
+  \[
+    E = \frac{E_0}{K},
+  \]
+  where $K$ is a unit-less constant called the ``dielectric constant" (always greater than $1$). Energy is now stored in the aligned dipoles.
 \end{document}
 
