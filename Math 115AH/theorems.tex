@@ -128,11 +128,55 @@
       &= [1_W]_{\mathcal{C}',\mathcal{C}}[T]_{\mathcal{B}',\mathcal{C}'}[1_V]_{\mathcal{B}',\mathcal{B}}\inv
     \end{align*}
   \end{theorem}
-  \begin{theorem}{13.2}
-    Let $A, B\in \M_n(F)$. Then $A\sim B$ if and only if there exists a vector space $V$ over $F$ with $\dim(V) = n$ such that there is a linear transformation $T\colon V\to V$ with $A = [T]_{\mathcal{B}}$ and $B = [T]_{\mathcal{C}}$ for some ordered bases $\mathcal{B}$ and $\mathcal{C}$ for $V$.
+  \begin{theorem}{Similar Matrices $\iff$ Same Transformation, Different Bases (self-named)}
+    Let $A, B\in \M_n(F)$. Then $A\sim B$ if and only if there exists a vector space over $F$, $\dim(V) = n$, $T\colon V\to V$ linear and ordered bases $\mathcal{B}$, $\mathcal{C}$ for $V$ such that
+    \[
+      A = [T]_{\mathcal{B}}\quad \text{and} \quad B = [T]_{\mathcal{C}}.
+    \]
+    In other words, $A\sim B$ if and only if they represent the same linear transformation relative to (possibly) different ordered bases.
   \end{theorem}
+  \begin{definition}{Eigenstuffs}
+    Let $0\neq V$ be a vector space over $F$, $T\colon V\to V$ a \emph{linear operator} (a linear transformation where the domain = target) and $\lam\in F$. Set
+    \[
+      S_\lam\ceq T - 1_V\colon V\to V
+    \]
+    a linear operator, so
+    \[
+      S_\lam(v) = Tv - \lam v \tag{For all $v\in V$}
+    \]
+    We say $\lam$ is an \emph{eigenvalue} of $T$ if $S_\lam$ is \emph{not} injective ($\ker(S_\lam)\neq 0$).
+    Let
+    \[
+      E_T(\lam)\ceq \ker(S_\lam) = \set{v\in V\mid Tv - \lam v = 0} = \set{v\in V\mid Tv = \lam v}.
+    \]
+    If $E_T(\lam)\neq 0$, we call $E_T(\lam)$ an \emph{eigenspace} of $V$ relative to $T$, $\lam$, and any vector $v\in E_T(\lam)$ is called an \emph{eigenvector} of $T$ relative to $\lam$. So if $T\colon V\to V$ is linear, $\lam\in F$ is an eigenvalue of $T$ if and only if there exists some non-zero vector $v\in V$ such that $Tv = \lam v$.
+  \end{definition}
+  \begin{note}{Eigenspaces are Subspaces}
+    Eigenspaces are just kernels, so they are subspaces.
+  \end{note}
+  \begin{definition}{Characteristic Polynomial}
+    Let $A\in \M_n(F)$. Define
+    \[
+      f_A = \det(tI - A)\in F[t],
+    \]
+    called the \emph{characteristic polynommial} of $A$.
+  \end{definition}
+  \textbf{Proposition.} If $A, B\in \M_n(F)$ are similar, then $f_A = f_B$.
+  \begin{proof}
+    If $A = C\inv BC$, where $C$ is invertible, then 
+    \begin{align*}
+      f_A &= \det(C\inv (tI - B)C) \\
+          &= \det(C\inv)\det(tI-B)\det(C) \\
+          &= \det(tI-B) \\
+          &= f_B.
+    \end{align*}
+  \end{proof}
   \begin{theorem}{14.3}
     Let $V$ be a finite dimensional vector space over $F$, and let $T\colon V\to V$ be linear. Then the eigenvalues of $T$ are precisely the roots of $f_T$.
+  \end{theorem}
+  \begin{theorem}{Cayley-Hamilton Theorem}
+    Let $A\in \M_n(F)$. Then $f_A(A) = 0$. In other words, you get $0$ when you plug $A$ into the expansion of the determinant $f_A$. \par
+    \textbf{WARNING!!!} You \emph{must} prove this in order to use this!!!
   \end{theorem}
 \end{document}
 

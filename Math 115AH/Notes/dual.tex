@@ -165,5 +165,107 @@
                          &= \alpha T^tg + T^tg'.
     \end{align*}
   \end{proof}
-  We call $T^t$ the transpose because of the following:
+  We call $T^t$ the transpose because of the following.
+  \begin{theorem}{Addendum to Matrix Theory Theorem}
+    Let $V, W$ be finite dimensional vector spaces over $F$, $\mathcal{B},\mathcal{C}$ ordered bases for $V, W$ respectively, $T\colon V\to W$ linear. Then
+    \[
+      [T]_{\mathcal{B},\mathcal{C}}^t = [T^t]_{\mathcal{C}^*,\mathcal{B}^*}
+    \]
+  \end{theorem}
+  \begin{proof}
+    Let
+    \[\begin{array}{cc}\mathcal{B} = \set{v_1,\dotsc,v_n}, & \mathcal{B}^* = \set{f_1,\dotsc,f_n},\\ \mathcal{C} = \set{w_1,\dotsc,w_m}, & \mathcal{C}^* = \set{g_1,\dotsc,g_n},\end{array}\]
+    where $\mathcal{B}^*,\mathcal{C^*}$ the ordered dual bases of ordered bases $\mathcal{B},\mathcal{C}$ of $V$ and $W$, respectively. This means that $f_i(v_j) = \delta_{ij}$ and $g_k(w_\ell) = \delta_{k\ell}$. Let
+    \[
+      [T]_{\mathcal{B},\mathcal{C}} = (\alpha_{ij}) \quad \text{and}\quad [T^t]_{\mathcal{C}^*,\mathcal{B}^*} = (\beta_{ij}).
+    \]
+    In other words, by definition, we have
+    \begin{align*}
+      Tv_k &= \sum_{i=1}^{m}\alpha_{ik}w_i \quad\text{in }W\tag{$k = 1,\dotsc,n$}. \\
+      T^tg_j &= \sum_{i=1}^{n}\beta_{ij}f_i \quad\text{in }V^* \tag{$j = 1,\dotsc,m$}.
+    \end{align*}
+    Then computation gives
+    \begin{align*}
+      (T^tg_j)(v_k) &= g_j(Tv_k) \tag{By definition}\\
+                    &= g_j \paren{\sum_{i=1}^{m}\alpha_{ik}w_i} \tag{From above}\\
+                    &= \sum_{i=1}^{m}\alpha_{ik}g_j(w_i) \\
+                    &= \sum_{i=1}^{m}\alpha_{ik}\delta_{ij} \tag{By definition}\\
+                    &= \alpha_{jk}.
+    \end{align*}
+    and
+    \begin{align*}
+      (T^tg_j)(v_k) &= \paren{\sum_{i=1}^{n}\beta_{ij}f_i}(v_k) \tag{From above}\\
+                    &= \sum_{i=1}^{n}\beta_{ij}f_i(v_k) \\
+                    &= \sum_{i=1}^{n}\beta_{ij}\delta_{ik} \\
+                    &= \beta_{kj}.
+    \end{align*}
+    Thus for all $j, k$, we have $\alpha_{jk} = \beta_{kj}$ as needed.
+  \end{proof}
+  \begin{definition}{Annihilator}
+    Let $V$ be a vector space over $F$, $\es\neq S\sse V$ a subset. Then the set
+    \[
+      S^0 \ceq \set{f\in V^*\mid f|_S = 0} = \set{f\in V^*\mid f(s) = 0, \forall s\in S}
+    \]
+    is called the \emph{annihilator} of $S$. In other words, the annihilator is the set of all linear functionals, which, when you restrict their domains to $S$, become the zero map.
+  \end{definition}
+  \textbf{Claim.} The annihilator $S^0\sse V^*$ is a subspace (even if $S$ is not).
+  \begin{proof}
+    Let $f, g\in S^0$, $\alpha\in F$. To show that $(\alpha f + g)|_S = 0$, we consider some $s\in S$. Then
+    \begin{align*}
+      (\alpha f + g)(s) &= \alpha f(s) + g(s) \\
+                        &= 0 + 0 \\
+                        &= 0,
+    \end{align*}
+    so $\alpha f + g\in S^0$.
+  \end{proof}
+  \textbf{Observation.} Let $T\colon V\to W$ be linear. Then $\ker(T^t) = (\im(T))^0$ (they both lie in $W^*$).
+  \begin{proof}
+    Let $g\in \ker(T^t)$. Then $T^tg = 0$, so $(T^tg)(v) = 0$ for all $v\in V$. Thus by definition of transpose, we have $g(Tv) = 0$ for all $v\in V$ so $g\in (\im(T)^0)$.
+  \end{proof}
+  \begin{theorem}{Annihilator Equation}
+    Let $V$ be a finite dimensional vector space over $F$, with $W\sse V$ a subspace. Then
+    \[
+      \dim(V) = \dim(W) + \dim(W^0).
+    \]
+  \end{theorem}
+  \begin{proof}
+    Let $\set{v_1,\dotsc,v_m}$ be a basis for $W$. We extend it to $\mathcal{B} = \set{v_1,\dotsc,v_n}$, a basis for $V$. Let $\mathcal{B}^* = \set{f_1,\dotsc,f_n)}$ be the dual basis of $\mathcal{B}$ so that $f_i(v_j) = \delta_{ij}$ for all $i, j$. \par
+    We claim that $\mathcal{C} = \set{f_{k+1},\dotsc,f_n}$ is a basis for $W^0$. Let $f\in W^0$. Then there exist $\beta_1,\dotsc,\beta_n\in F$ such that 
+    \[
+      f = \sum_{i=1}^{n}\beta_if_i = \sum_{i=1}^{n}f(v_i)f_i = \sum_{i=k+1}^{n}f(v_i)f_i \in \vspan(\mathcal{C}).
+    \]
+    Because $\mathcal{C}\sse \mathcal{B}^*$ and $\mathcal{B}^*$ is linearly independent, so is $\mathcal{C}$.
+  \end{proof}
+  \textbf{Corollary.} Let $V$ be a finite dimensional vector space over $F$, $W\sse V$ a subspace. Identifying $V$ and $V^{* *}$ via $v\leftrightarrow L_v$, we have $W = (W^0)^0 = W^{00}$.
+  \begin{proof}
+    We first that they have the same dimension. Using the Annihilator Equation, we have that
+    \begin{align*}
+      \dim(V) &= \dim(W) + \dim(W^0) \\
+      \dim(V^*) &= \dim(W^0) + \dim(W^{00}).
+    \end{align*}
+    Because we know that $\dim(V) = \dim(V^*)$, we can see that $\dim(W) = \dim(W^{00})$. It suffices to show that $W\sse W^{00}$ or $W^{00}\sse W$ to complete the proof. \par
+    Suppose $w\in W$. Then
+    \[
+      L_wf = f(w) = 0, \quad \text{for all }f\in W^0.
+    \]
+    So 
+    \[
+      w = L_w\in W^{00}, \quad\text{i.e. $W\sse W^{00}$ is a subspace.}
+    \]
+    Thus we have shown that $W\sse W^{00}$, so $W = W^{00}$.
+  \end{proof}
+  \begin{theorem}{Rank of Transpose}
+    Let $V, W$ be finite dimensional vector spaces over $F$, $T\colon V\to W$ linear. Then
+    \[
+      \dim(\im(T)) = \dim(\im(T^t)).
+    \]
+  \end{theorem}
+  \begin{proof}
+    We have
+    \begin{align*}
+      \dim(\im(W)) &= \dim(\im(T)) + \dim(\im(T)^0) \tag{Annihilator Equation} \\
+      \dim(W^*) &= \dim(\im(T^t)) + \dim(\ker(T^t)). \tag{Dimension Theorem}
+    \end{align*}
+    Using the observation from before, we have that $\dim(\im(T)^0) = \dim(\im(T))$. Therefore $\dim(\im(T)) = \dim(\im(T^t))$.
+  \end{proof}
 \end{document}
