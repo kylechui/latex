@@ -1,0 +1,68 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{/Users/kylec/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \subsection{Euler Cycles}
+  \begin{definition}{Euler Cycle}
+    An \emph{Euler cycle} in a graph $G$ is a cycle including each edge in the graph (without repeating edges). Also, we'll say that the trivial path $v$ in a graph with one vertex $v$ and no edges is an Euler cycle.
+  \end{definition}
+  \textbf{Proposition.} If a graph $G$ has an Euler cycle, all vertices of $G$ must have even degree. \par
+  \begin{proof}
+    Observe that to pass through a vertex you must have an edge ``entering" it, and an edge ``leaving it", so each path through a vertex contributes degree $2$ to the degree of the vertex. Thus they must be even.
+  \end{proof}
+  However, consider the graph with six vertices composed of two triangles. It does not have an Euler cycle because it is disconnected. Thus our proposition is a necessary but not sufficient condition for an Euler cycle.
+  \begin{theorem}{Euler Cycles}
+    Let $G$ be a connected graph, then $G$ has an Euler cycle if and only if all vertices of $G$ have even degree.
+  \end{theorem}
+  \begin{proof}
+    We have already shown that if $G$ has an Euler cycle, that all vertices have even degree. We must now show that if all vertices have even degree, then $G$ has an Euler cycle. We can check that this is true for any graph of $1$ or two vertices. If $G$ has three or more vertices, then somewhere in $G$, the following configuration exists.
+    \begin{center}\begin{tikzpicture}
+      \draw (0, 0) circle (10pt) node (v1) {$v_1$};
+      \draw (1.5in, -1in) circle (10pt) node (v2) {$v_2$};
+      \draw (2in, 0) circle (10pt) node (v3) {$v_3$};
+      \draw (v1) -- (v2) -- (v3);
+    \end{tikzpicture}\end{center}
+    Assuming the original graph has all vertices with even degree, we know that if we remove edges $v_1v_2$ and $v_2v_3$ and connect $v_1v_3$, all vertices still have even degree.
+    \begin{center}\begin{tikzpicture}
+      \draw (0, 0) circle (10pt) node (v1) {$v_1$};
+      \draw (1.5in, -1in) circle (10pt) node (v2) {$v_2$};
+      \draw (2in, 0) circle (10pt) node (v3) {$v_3$};
+      \draw[dashed] (v1) -- (v2) -- (v3);
+      \draw (v1) -- (v3);
+    \end{tikzpicture}\end{center}
+    Let's call $G'$ the graph with the new configuration. Because $G$ was connected, we know that $G'$ is either connected or has two comopnents. If $G'$ is connected, then we just take the Euler cycle of $G'$ until we get to $v_1$, and then visit $v_2$ instead of directly going to $v_3$. \par
+    We now consider the case where $G'$ is not connected. We have two components for $G'$, and we can construct an Euler cycle through all of them by taking the Euler cycles through the subcomponents and connecting them using the edges we removed earlier.
+  \end{proof}
+  \subsection{Shortest Paths}
+  \textbf{Question.} Given a weighted graph, how can we find the shortest path/the length of a shortest path between two vertices?
+  \begin{theorem}{Dijkstra's Algorithm}
+    Given a weighted graph $G$, a start vertex $A$ and an end vertex $B$, we use the following process:
+    \begin{enumerate}[label=\arabic*)]
+      \item Label vertex $A$ with zero, and all other vertices with $\infty$
+      \item While vertex $B$ is uncircled: \\
+      Circle the vertex with the smallest label, out of the uncircled vertices (call this vertex $v$) \\
+      Update the label of all uncircled vertices $w$ by
+      \[
+        w \text{'s new label} = \begin{cases}v \text{'s label + weight of edge from $v$ to $w$} \\ w \text{'s current label}\end{cases}
+      \]
+      We claim that at each step, the label of every circled vertex is the length of a shortest path from $A$ to that vertex.
+    \end{enumerate} 
+  \end{theorem}
+  \begin{proof}
+    We proceed by induction on the number of labels circled. For our base case, consider when only $A$ is circled. Suppose that the claim is true when $k$ vertices have been circled. \par 
+    Suppose towards a contradiction that vertex $v$ has the smallest label $\ell$ (so $v$ is about to get circled), but there is a path from $A$ to $v$ of length less than $\ell$. Suppose the path takes the form
+    \[
+      Ae_0v_1e_2\ldots v_me_mv.
+    \]
+    Consider the first vertex in this path that \emph{hasn't} been circled, and call it $x$ ($x$ could be equal to $v$). Let us denote the vertex before $x$ by $y$. The part of the path from $A$ to $y$ has length greater than or equal to $\ell(y)$. Note that $x$'s label is less than or equal to $\ell(y) + w(x, y)$, where $w(x, y)$ is the weight of the edge between $x$ and $y$. Thus we have what $\ell(y) + w(x, y) < \ell$, so 
+    \[
+      x \text{'s label}\leq \ell(y) + w(x, y) < \ell = v \text{'s label}.
+    \]
+    Therefore $x$'s label is less than $v$'s label, contradicting our assumption that $v$ has the smallest label.
+  \end{proof}
+\end{document}
