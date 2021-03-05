@@ -1,6 +1,5 @@
 \usepackage[margin=1in]{geometry}
 
-\usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{comment}
@@ -9,9 +8,8 @@
 \usepackage{hyperref}
 \usepackage{mathrsfs}
 \usepackage{mathtools}
-% \usepackage{quiver}
 \usepackage{standalone}
-\usepackage{tcolorbox}
+\usepackage[many]{tcolorbox}
 \usepackage{tikz}
 \usepackage{tikz-cd}
 \usepackage{xcolor}
@@ -34,6 +32,8 @@
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\dive}{div}
+\DeclareMathOperator{\row}{row}
+\DeclareMathOperator{\col}{col}
 
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
@@ -72,7 +72,8 @@
       boxrule=.5pt,
       titlerule=.5pt,
       sharp corners,
-      colback=problemBackground
+      colback=problemBackground,
+      breakable
     ]
     \ifx &#1& \textbf{Problem. }
     \else \textbf{Problem #1.} \fi
@@ -106,7 +107,8 @@
       titlerule=.5pt,
       sharp corners,
       colback=theoremBackground,
-      colframe=theoremAccent
+      colframe=theoremAccent,
+      breakable
     ]
       \color{theoremAccent}\textbf{Theorem --- }\emph{#1}\\\color{black}
   }
@@ -124,7 +126,8 @@
     frame hidden,
     sharp corners,
     colback=noteBackground,
-    borderline west={3pt}{-1.5pt}{noteAccent}
+    borderline west={3pt}{-1.5pt}{noteAccent},
+    breakable
     ]
     \ifx &#1& \color{noteAccent}\textbf{Note. }\color{black}
     \else \color{noteAccent}\textbf{Note (#1). }\color{black} \fi
@@ -143,7 +146,8 @@
     frame hidden,
     sharp corners,
     colback=lemmaBackground,
-    borderline west={3pt}{-1.5pt}{lemmaAccent}
+    borderline west={3pt}{-1.5pt}{lemmaAccent},
+    breakable
     ]
     \ifx &#1& \color{lemmaAccent}\textbf{Lemma. }\color{black}
     \else \color{lemmaAccent}\textbf{Lemma #1. }\color{black} \fi
@@ -161,7 +165,8 @@
       frame hidden,
       sharp corners,
       colback=definitionBackground,
-      borderline west={3pt}{-1.5pt}{black}
+      borderline west={3pt}{-1.5pt}{black},
+      breakable
     ]
     \textbf{Definition. }\emph{#1}\\
   }
