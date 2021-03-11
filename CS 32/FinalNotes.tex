@@ -9,4 +9,102 @@
 \begin{document}
   \tableofcontents
   \newpage
+  \section{Runtime Complexity}
+  \textbf{Main Idea.} We give algorithms a ``rating''(read: Big-O notation) based on how many instructions the algorithm takes as a function of the size of the input data. We always consider the \emph{worst case scenario}.
+  \begin{note}{}
+    Always give the Big-O notation in terms of the variables that you're given, i.e. if the size of the array is $k$, then your Big-O notation should be $O(k)$, \emph{not} $O(n)$.
+  \end{note}
+  \subsection{Single Input Algorithms}
+  To get the Big-O of an algorithm, we only consider the most commonly performed operations, and ignore the rest. In other words, take the term with the highest degree and remove its coefficient. \par
+  When you know $n$ is small, forget which Big-O is better and choose the algorithm that is \emph{easiest} to program, as it won't make that much of a difference anyways.
+  \subsection{Multi-input Algorithms}
+  If an algorithm operates on two (or more) \emph{independent} data sets, your Big-O must include \emph{all} variables in the final notation, i.e. $O(c^2 + e)$.
+  \subsection{STL Runtime Complexity}
+  \subsubsection{Vector} 
+  \textbf{Purpose:} A resizable array
+  \begin{itemize}
+    \item Inserting an item (top/middle): $O(n)$
+    \item Inserting an item (bottom): $O(1)$
+    \item Delete an item (top/middle): $O(n)$
+    \item Delete an item (bottom): $O(1)$
+    \item Access an item (anywhere): $O(1)$
+    \item Finding an item: $O(n)$
+  \end{itemize}
+  \subsubsection{List} 
+  \textbf{Purpose:} A linked list
+  \begin{itemize}
+    \item Inserting an item (top/middle*/bottom): $O(1)$
+    \item Deleting an item (top/middle*/bottom): $O(1)$
+    \item Access an item (top/bottom): $O(1)$
+    \item Access an item (middle): $O(n)$
+    \item Finding an item: $O(n)$
+  \end{itemize}
+  \begin{note}{*}
+    To get to the middle, you may have to first iterate through $X$ items, at cost $O(X)$.
+  \end{note}
+  \subsubsection{Set} 
+  \textbf{Purpose:} Maintains a set of unique items
+  \begin{itemize}
+    \item Inserting an item (anywhere): $O(\log_2n)$
+    \item Deleting an item (anywhere): $O(\log_2n)$
+    \item Finding an item: $O(\log_2n)$
+  \end{itemize}
+  \subsubsection{Map} 
+  \textbf{Purpose:} Maps one item to another
+  \begin{itemize}
+    \item Inserting an item (anywhere): $O(\log_2n)$
+    \item Deleting an item (anywhere): $O(\log_2n)$
+    \item Finding an item: $O(\log_2n)$
+  \end{itemize}
+  \subsubsection{Queue and Stack}
+  \textbf{Purpose:} Classic stack/queue
+  \begin{itemize}
+    \item Inserting an item (anywhere): $O(1)$
+    \item Popping an item (anywhere): $O(1)$
+    \item Examining the top: $O(1)$
+  \end{itemize}
+  \section{Sorting Algorithms I: Inefficient Sorts}
+  \begin{definition}{Stable/Unstable Sorting}
+    An \emph{unstable} sorting algorithm re-orders the items without taking into account their initial ordering, whereas a \emph{stable} sorting algorithm takes into account the initial ordering, maintaining the order of similarly-valued items.
+  \end{definition}
+  \subsection{Selection Sort}
+  \begin{itemize}
+    \item Look at all $N$ items, and find the ``smallest'' one
+    \item Swap that item with the first item (the smallest item is in the front)
+    \item Look at the remaining $N-1$ items
+    \item Swap that item with the second item
+    \item Repeat...
+  \end{itemize}
+  Because you need $N$ steps to find the ``smallest item'', and then $N-1$ steps to find the second ``smallest'' item, etc., in total this algorithm runs in $O(N^2)$ time. If the items are already mostly sorted, selection sort still takes just as many steps. Selection sort is also unstable.
+  \subsection{Insertion Sort}
+  \begin{itemize}
+    \item Look at the first two items, and swap them if they are out of order
+    \item Now look at the third item, and insert it into its proper spot, moving things around as necessary
+    \item Repeat until the entire shelf has been sorted
+  \end{itemize}
+  Because you need $1$ step to sort the first two books, then $2$ steps for the first three, etc., this algorithm runs in $O(N^2)$ time. However, if the books are already sorted, then insertion sort doesn't need to move anything around, so it runs in $O(N)$ time. The worst case scenario is when the items are perfectly mis-ordered. Insertion sort is also stable.
+  \subsection{Bubble Sort}
+  \begin{itemize}
+    \item Look at the first two items, and swap if they're out of order
+    \item Look at the next two items, and swap if they're out of order
+    \item Repeat until you hit the end of the array (now the largest element is at the end)
+    \begin{itemize}
+      \item If at least one swap was performed, start back at the top and repeat the process again
+    \end{itemize}
+  \end{itemize}
+  Because you need to pass through the list of $N$ elements $N$ times, this algorithm runs in $O(N^2)$ time. Just like insertion sort, this algorithm is really efficient on pre-sorted arrays and linked lists. Bubble sort is also stable.
+  \begin{note}{Characteristics of Sorts}
+    After one round of selection sort, the smallest item is at the front. After one round of bubble sort, the largest item is at the end. After one round of insertion sort, the first two items are in the correct order.
+  \end{note}
+  \section{Sorting Algorithms II: Electric Boogaloo}
+  \subsection{Quicksort}
+  \begin{itemize}
+    \item If the array has only zero or one element, return
+    \item Select an arbitrary element $P$ from the array (typically the first)
+    \item Move all elements that are less than or equal to $P$ to the left of $P$, and all elements greater than $P$ to the right of $P$ 
+    \item Recursively repeat this process on the left and right sub-arrays
+  \end{itemize}
+  \begin{note}{}
+    The ``pivot'' $P$ will be in the correct position after doing quicksort once, as all the items to its left are smaller than $P$, and all the items to its right are greater than $P$.
+  \end{note}
 \end{document}
