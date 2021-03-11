@@ -107,4 +107,64 @@
   \begin{note}{}
     The ``pivot'' $P$ will be in the correct position after doing quicksort once, as all the items to its left are smaller than $P$, and all the items to its right are greater than $P$.
   \end{note}
+  Because partitioning the array costs $N$ steps, and we do this $\log_2N$ times (as we cut the array in half each time), this algorithm runs in $O(N\log_2N)$ time. If the array is already (mostly) sorted, then the left sub-array is empty and the right sub-array contains $N-1$ items, and we need to repeat $N$ times, so the runtime complexity becomes $O(N^2)$. Quicksort is also unstable.
+  \subsection{Merge Sort}
+  \begin{itemize}
+    \item Sort the left and right sub-arrays
+    \item Compare the next items in the left and right sub-arrays, and copy over the smaller one
+    \item Repeat...
+    \begin{itemize}
+      \item If there are no more items left in one sub-array, copy over all of the remaining items in the other sub-array
+    \end{itemize}
+  \end{itemize}
+  Because merging takes $N$ steps to complete, and we are continuously dividing our pile in half each time, we need to run this process $\log_2N$ times. Thus the runtime complexity of this algorithm is $O(N\log_2N)$. Merge sort runs efficiently regardless of how the items are originally arranged, but takes up more space because it needs to store an auxiliary list. Merge sort is also stable.
+  \section{Trees}
+  \textbf{Main Idea.} Trees are a data structure that stores values in a hierarchical fashion. We often use linked lists to build trees (each vertex is a node with pointers), and trees can be used as an alternative to arrays and linked lists for storing data.
+  \begin{definition}{Binary Tree}
+    A \emph{binary tree} is a tree in which each node has \emph{at most} two children nodes: a left child and a right child.
+  \end{definition}
+  \subsection{Traversals}
+  \begin{itemize}
+    \item Pre-order Traversal: Process the current node, then traverse the left and right subtrees
+    \item In-order Traversal: Traverse the left subtree, process the current node, then traverse the right subtree
+    \item Post-order Traversal: Traverse the left and right subtrees, then process the current node
+    \item Level-order Traversal: Traverse the nodes level by level, starting from the root node and working your way down
+  \end{itemize}
+  An easy way to remember the order of the traversals is to start at the root node and draw a loop counter-clockwise around all of the nodes. Pre-order will process a node everytime you pass the \emph{left} side of it, In-order will process a node everytime you pass \emph{below} it, Post-order will process a node everytime you pass the \emph{right} side of it. Level-order traversal will go row by row.
+  \subsection{Binary Search Trees}
+  \begin{definition}{Binary Search Tree (BST)}
+    A \emph{binary search tree} is a binary tree such that for every node $X$ in the tree,
+    \begin{itemize}
+      \item All nodes in $X$'s left subtree must be less than $X$
+      \item All nodes in $X$'s right subtree must be greater than $X$
+    \end{itemize}
+  \end{definition}
+  To find an item in a binary search tree, we only need to take $\log_2N$ steps, because each step we take effectively removes half of the tree. In the worst case scenario, only left nodes or only right nodes are used, and it takes $N$ steps to find an item. The runtime complexity for printing out all the items in a tree or freeing all the nodes in a tree is $O(N)$, because the algorithm needs to visit all $N$ nodes in the tree. \par
+  To free all the items in a tree, we need to do a post-order traversal, to make sure that we delete all of the children before deleting the current node.
+  \subsubsection{BST Node Insertion}
+  \begin{itemize}
+    \item If the root is null, create a new node with the given value and make root point to it
+    \item Otherwise, compare the given value with the current node's value
+    \item If the given value is less than the current node's value, go to the left child (if it exists) and repeat. If it doesn't create a new node with the given value and make the current node's left child the new node.
+    \item If the given value is greater than the current node's value, go to the right child (if it exists) and repeat. If it doesn't create a new node with the given value and make the current node's right child the new node.
+  \end{itemize}
+  \subsubsection{BST Node Deletion}
+  There are three cases to handle when deleting a node from a binary tree:
+  \begin{enumerate}
+    \item If the node is a leaf, set the parent's pointer to the leaf to be null and then delete the target node.
+    \item If the node has one child, relink the parent node to the target node's only child, then delete the target node.
+    \item If the node has two children, replace the target node with either the largest node in the left subtree, or the smallest node in the right subtree.
+  \end{enumerate}
+  \subsection{Huffman Encoding}
+  Count the frequencies of every character in your text file, and save it into a list. Then to create a Huffman tree, we perform the following process:
+  \begin{itemize}
+    \item Take the two items with the lowest frequency off of the bottom of the list, and make them the children of a parent node (whose frequency is the sum of its children)
+    \item Add this back into the list
+    \item Repeat...
+  \end{itemize}
+  When you only have one item left in your list of frequencies, that becomes the root node of your Huffman tree. To get the bit representation of a character in the Huffman tree, just trace a path from the root node to that character in the tree. Start with an empty string, and everytime you go down the left branch, add a $0$ to your string, and everytime you go down the right branch, add a $1$ to your string. The end result is how you would encode that character using Huffman encoding.
+  \subsection{Balanced Search Trees}
+  The only thing you need to know is that balanced BSTs are always $O(\log_2N)$ for insertion and deletion. When encountering BSTs in job/internship interviews, ask if the BST is balanced.
+  \section{Hash Tables}
+  \textbf{Main Idea.} Hash tables are often \emph{the most efficient} way to search for data.
 \end{document}
