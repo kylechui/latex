@@ -166,5 +166,72 @@
   \subsection{Balanced Search Trees}
   The only thing you need to know is that balanced BSTs are always $O(\log_2N)$ for insertion and deletion. When encountering BSTs in job/internship interviews, ask if the BST is balanced.
   \section{Hash Tables}
-  \textbf{Main Idea.} Hash tables are often \emph{the most efficient} way to search for data.
+  \textbf{Main Idea.} Hash tables are often \emph{the most efficient} way to search for data. \\
+  The goal here is to have a more efficient way to find data than a BST (which is $\log_2N$). One way we could do this is to just have a massive boolean array and store a \texttt{true} in the index corresponding to the value we want, but this is very space inefficient. An alternative way to do this is to map our items to a smaller range of numbers using the modulus operator.
+  \subsection{Collision Avoidance}
+  \begin{definition}{Collision}
+    A \emph{collision} is a condition where two or more values both map to the same bucket in the array.
+  \end{definition}
+  There are two ways to get around collisions: linear probing insertion and the open hash table.
+  \subsection{Linear Probing}
+  To insert an item into the closed hash table, first check if the target bucket is empty. If it is, store the value into the bucket. If it isn't, just keep moving down the array until you find an empty slot. If you go past the end of the array, loop back up to the top of the array. \\[10pt]
+  To search our hash table, we use a similar approach. We first compute a target bucket number using our mapping function and then look in that bucket for our value. If we find it, great! Otherwise, probe linearly down the array until we either find our value or hit an empty bucket. If you run into an empty bucket, it means your value isn't in the array. \\[10pt]
+  Deleting an item in a closed hash table is garbage, so we want to use an ``open hash table''.
+  \subsection{Open Hash Table}
+  \textbf{Idea.} Instead of storing our values directly in the array, each array bucket points to a linked list of values. \\[10pt]
+  As before, compute a bucket number using your mapping function. Search the linked list at \texttt{array[bucket]} for your item. If you reach the end of the linked list, the item is not in the table. To delete an item from the hash table, just remove the item from the linked list.
+  \subsection{Hash Table Efficiency}
+  \textbf{Question.} How large must our hash table be so that it runs quickly?
+  \begin{definition}{Load Factor}
+    The \emph{load} of a hash table is the maximum number of values you intend to add divided by the number of buckets in the array.
+    \[
+      L = \frac{\text{Max number of values to insert}}{\text{Total number of buckets}}
+    \]
+    The load tells you what portion of your buckets are actually going to be utilized.
+  \end{definition}
+  \begin{note}{}
+    Open hash tables are almost \emph{always} more efficient than closed hash tables.
+  \end{note}
+  The average number of tries it'll take for you to insert/find an item in a hash table is
+  \begin{align*}
+    \underbrace{\frac{1}{2}\paren{1 + \frac{1}{1-L}} \text{ for }L < 1.0}_{\text{Closed Table}} && \underbrace{1 + \frac{L}{2}}_{\text{Open Table}}
+  \end{align*}
+  \begin{note}{}
+    When choosing the exact size of your hash table, always try to make it a prime number for more distribution and even fewer collisions.
+  \end{note}
+  \subsection{A Hash Function for Strings}
+  We could use our own hash function for mapping strings to integers, but we're lazy. Let's use the one provided by C++ by using \texttt{\#include <functional>}. \\[10pt]
+  We can create a string hashing object with \texttt{std::hash<std::string> str\_hash}, and then get a value out of it with \texttt{unsigned int hashValue = str\_hash(hashMe)} (between $0$ and $4$ billion). We can then apply our own modulo function and return a bucket number that fits into our hash table's array.
+  \subsection{Creating a Custom Hash Function}
+  If we are creating a hash function for our own data type, we want it to satisfy a few criteria:
+  \begin{enumerate}
+    \item The hash function must always give us the same output for a given input value
+    \item The hash function should disperse items throughout the hash array as randomly as possible
+    \item When coming up with a new hash function, always measure hw well it disperses items
+  \end{enumerate}
+  \subsection{Hash Tables versus Binary Search Trees}
+  \begin{center}\begin{tabular}{c|c|c}
+    & Hash Tables & Binary Search Trees \\
+    \hline
+    Speed & $O(1)$ regardless of the number of items & $O(\log_2N)$ \\
+    \hline
+    Simplicity & Easy to implement & More complex to implement \\
+    \hline
+    Max Size & Closed: Limited by array size & Unlimited size \\
+             & Open: Not limited, but high load & \\
+             & impacts performance & \\ 
+    \hline
+    Space efficiency & Wastes a lot of space if you have & Only uses as much memory as needed \\
+                     & a large hash table holding few items & (one node per item inserted) \\
+    \hline
+    Ordering & No ordering (random) & Alphabetical ordering
+  \end{tabular}\end{center}
+  \section{Tables}
+  \textbf{Main Idea.} Tables are the building block of databases---they are very useful for organizinig large amounts of data and making it quickly searchable.
+  \begin{definition}{Table Definitions}
+    A group of related data in a table is called a \emph{record}. Each record has a number of \emph{fields} that can be filled with values. A number of these records is what we call a \emph{table}.
+  \end{definition}
+  \subsection{Implementing Tables}
+  We can just use a struct or class to hold the values for each record, and then an array or vector to hold our records. \\[10pt]
+  To make this efficient
 \end{document}
