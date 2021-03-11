@@ -233,5 +233,102 @@
   \end{definition}
   \subsection{Implementing Tables}
   We can just use a struct or class to hold the values for each record, and then an array or vector to hold our records. \\[10pt]
-  To make this efficient
+  To make this efficient, we add a new data structure that lets us associate each person's field types with their slot number in the vector, i.e. name with position, ID number with position, phone number with position, etc. Each of these secondary data structures is called an \emph{index}, and helps us efficiently find a record based on a particular field.
+  \begin{note}{}
+    Remember that any time you delete or update a record's searchable fields, you also you to update your indexes.
+  \end{note}
+  While hash tables are more efficient than BSTs, BSTs can be more useful if you need to process elements in order, i.e. if you need to print out the names in order.
+  \section{Priority Queues}
+  \textbf{Main Idea.} Useful for prioritizing different types of data for processing based on their importance.
+  \begin{definition}{Priority Queue}
+    A \emph{priority queue} is a special type of queue that allows us to keep a prioritized list of items. In such a queue, each item you insert has a ``priority rating'' that indicates how important it is. In contrast to a regular queue, when you dequeue an item from a priority queue, it dequeues the item with the \emph{highest priority}, instead of the first item inserted.
+  \end{definition}
+  A priority queue has three operatons:
+  \begin{itemize}
+    \item Inserting a new item into the queue
+    \item Getting the value of the highest priority item
+    \item Removing the highest priority item from the queue
+  \end{itemize}
+  For a limited set of priorities, we can use $n$ linked lists, one for each priority level (i.e. high, medium, low). If we have a large number of priorities, we can use a \emph{heap} data structure, which is a special kind of binary tree.
+  \begin{note}{}
+    While a heap uses a binary tree to store its data, it is \emph{not} a binary search tree.
+  \end{note}
+  \begin{definition}{Complete Binary Tree}
+    A binary search tree is \emph{complete} if the top $n-1$ levels of the tree are completely fileld with nodes, and all nodes on the bottom-most level must be as far left as possible (with no empty slots between nodes).
+  \end{definition}
+  \subsection{Types of Heaps}
+  There are two kinds of heaps, \emph{minheaps} and \emph{maxheaps}:
+  \begin{itemize}
+    \item Maxheap:
+    \begin{itemize}
+      \item Quickly insert an item into the heap
+      \item Quickly retrieve the \emph{largest} item from the heap
+    \end{itemize}
+    \item Minheap:
+    \begin{itemize}
+      \item Quickly insert an item into the heap
+      \item Quickly retrieve the \emph{smallest} item from the heap
+    \end{itemize}
+  \end{itemize}
+  \subsection{The Maxheap}
+  A \emph{maxheap} is a binary search tree satisfying:
+  \begin{enumerate}
+    \item The value contained by a node is \emph{always greater than or equal to} the values of the node's children
+    \item The tree is a \emph{complete} binary tree
+  \end{enumerate}
+  Notice that by definiton, the largest (highest priority) item is always at the root of the tree.
+  \subsubsection{Extracting the Largest Item}
+  \begin{enumerate}
+    \item If the tree is empty, return error
+    \item Otherwise, the top item in the tree has the largest value (save it for later)
+    \item If the heap has only one node, delete it and return the saved value
+    \item Copy the value from the right-most node in the bottom-most row to the root node
+    \item Delete the right-most node in the bottom-most row
+    \item Repeatedly swap the just-moved value with the larger of its two children until the value is greater than or equal to both of its children (this is called \emph{sifting down})
+    \item Return the saved value to the user
+  \end{enumerate}
+  \subsubsection{Adding a Node}
+  \begin{enumerate}
+    \item If the tree is empty, create a new root node and return
+    \item Otherwise, insert the new node in the bottom-most, left-most position of the tree (so it's still a complete tree)
+    \item Compare the new value with its parent's value
+    \item If the new value is greater than its parent's value, then swap them
+    \item Repeat steps 3-4 until the new value rises to its proper place
+  \end{enumerate}
+  \begin{note}{}
+    This process is also known as \emph{reheapification}.
+  \end{note}
+  \subsection{How to Implement a Heap}
+  We use an array to store our tree, row by row. The root node goes in the first slot of the array, the next two nodes in the next two slots, etc. \\[10pt]
+  Some properties of our array-based tree are:
+  \begin{enumerate}
+    \item We can always find the root node in \texttt{heap[0]}
+    \item We can always find the bottom-most, right-most node in \texttt{heap[count - 1]}
+    \item We can always find the bottom-most, left-most node in \texttt{heap[count]}
+    \item We can add or remove a node by simply setting \texttt{heap[count] = value;} and/or updating our count
+  \end{enumerate}
+  To find the indices for the left and right children of a node, we have
+  \[
+    \mathrm{leftChild}(\text{parent}) = 2\cdot \text{parent} + 1 \quad \text{and}\quad \mathrm{rightChild}(\text{parent}) = 2\cdot \text{parent} + 2.
+  \]
+  To find the parent of a child node, we have
+  \[
+    \frac{\text{child} - 1}{2} = \text{parent}.
+  \]
+  \begin{note}{}
+    The above only works if you use integer division.
+  \end{note}
+  Because our tree is a complete binary tree, it will have a height of $\log_2N$. Inserting and extracting requirings ``bubbling'' the items up and down the tree, so they both run in $O(\log_2N)$ time.
+  \section{Heapsort}
+  A na\"ive way to do this is to first insert all of the items into a heap and then extract them all, but this runs in $O(N\log_2N)$ time.
+  \subsection{Efficient Heapsort}
+  Given an array of $N$ numbers that we want to sort:
+  \begin{enumerate}
+    \item Convert our input array into a maxheap
+    \item While there are numbers left in the heap:
+    \begin{enumerate}[label=(\alph*)]
+      \item Remove the biggest value from the heap
+      \item Place it in the last open slot of the array
+    \end{enumerate}
+  \end{enumerate}
 \end{document}
