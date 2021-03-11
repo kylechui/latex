@@ -1,0 +1,157 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{~/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{CS32 Midterm $2$ Notes}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \tableofcontents
+  \newpage
+  \section{Stacks}
+  \begin{definition}{Stacks}
+    A \emph{stack} is an abstract data type where the last item that you add is the first one to be removed. You add and remove items from the top of the stack. To use a stack, you need to include it from the STL by writing \texttt{\#include <stack>}.
+  \end{definition}
+  \subsection{Stack Operations}
+  \begin{itemize}
+    \item Put something on top of the stack (\texttt{stack.push(item)})
+    \item Remove the top item (\texttt{stack.pop()})
+    \item Look at the top item, without removing it (\texttt{stack.top()})
+    \item Check to see if the stack is empty (\texttt{stack.empty()})
+  \end{itemize}
+  \section{Queues}
+  \begin{definition}{Queue}
+    A \emph{queue} is an abstract data type where the first item that you add is the first one to be removed. Every queue has a \emph{front} and a \emph{rear}. You add items at the rear and remove them from the front. To use a queue, you need to include it from the STL by writing \texttt{\#include <queue>}.
+  \end{definition}
+  \subsection{Queue Operations}
+  \begin{itemize}
+    \item Insert an item at the rear of the queue (\texttt{queue.enqueue(item)})
+    \item Remove and return the top item from the front of the queue (\texttt{queue.dequeue()})
+    \item Determine if the queue is empty (\texttt{queue.empty()})
+    \item Determine the number of items in the queue (\texttt{queue.size()})
+    \item Get the value of the first item in the queue without removing it (\texttt{queue.getFront()})
+  \end{itemize}
+  \section{Inheritance}
+  \textbf{Main Idea.} Inheritance is a way to form new classes using classes that have already been defined.
+  \subsection{The Three uses of Inheritance}
+  \begin{enumerate}
+    \item \textbf{Reuse} \par
+    Reusing is when you write code \emph{once} in a base class and reuse the same code in your derived classes.
+    \item \textbf{Extension} \par
+    Extension is when you \emph{add new behaviors or data} to a derived class that were not present in a base class.
+    \item \textbf{Specialisation/Overriding} \par
+    Specialisation is when you \emph{redefine an existing behaviour} (from the base class) with a new behaviour (in your derived class).
+  \end{enumerate}
+  \subsection{The ``Virtual" Keyword}
+  To override existing functions, we put the keyword ``virtual" before the function \emph{declarations} in both the original and replacement functions. You only want to use the ``virtual" keyword for functions you intend to override in your subclasses. If a function is the same across all of the derived classes, then you don't want to make it a virtual function. \par
+  When you redefine a function in a derived class, the redefined version \emph{hides} the base version of the function (when using your derived class). In other words, the derived class will default to always using the \emph{most derived version (that it knows of)} a specialised method. You can still call a base class's version of a method that's been redefined by using \texttt{baseClass::method()}.
+  \subsection{Inheritance and Construction}
+  If you don't use an initializer list in your classes, C++ will add an implicit call to the member variable's constructor for you. In subclasses, C++ will always construct the base part first, and the derived part second.
+  \subsection{Inheritance and Destruction}
+  First, C++ runs the body of your outer object's destructor. Then, C++ destructs \emph{all} member objects. In subclasses, C++ will destruct the derived part first, then the base part second.
+  \begin{note}{Summary}
+    For construction, you can think of this as C++ needing the outer object to be made before it can make the derived object. For example, you can't make a \texttt{ShieldedRobot} without a \texttt{Robot}. For destruction, you can think of C++ needing to destroy the inner object first, lest it become ill-defined. For example, destroying the \texttt{Robot} class first could cause issues if \texttt{ShieldedRobot}'s destructor relies on some of \texttt{Robot}'s methods.
+  \end{note}
+  \subsection{Inheritance and Initializer Lists}
+  \textbf{Rule.} If a superclass requires parameters for construction, then you \emph{must} add an initializer list to the subclass constructor! Furthermore, the \emph{first item} in the initializer list must be the name of the base class, along with the parameters in parentheses.
+  \subsection{Inheritance and Assignment Operators}
+  Assigning one instance of a derived class to another is fine, \emph{only if there are no dynamically allocated member variables}. If this is the case, then you \emph{must} define assignment operators and copy constructors for the base and derived classes.
+  \section{Polymorphism}
+  \textbf{Main Idea.} The idea behind polymorphism is passing members of a derived class to a function that accepts parameters of the base class.
+  \begin{definition}{Polymorphism}
+    The usage of a base pointer or base reference to access a derived object is called \emph{polymorphism}.
+  \end{definition}
+  This works because the derived class can do everything that the base class can, if not more. The function only sees the ``base class parts" of the derived class, and has no idea that the parameter you passed in isn't actually an instance of the base class.
+  \begin{definition}{Chopping}
+    If you don't pass the derived object by reference or by pointer, \emph{chopping} occurs. Essentially, C++ will ``chop off" all of the data/methods fo the derived class and \emph{only} send the base parts of the variables to the function. The chopped variable will have no derived class parts.
+  \end{definition}
+  For polymorphism to work, we use virtual functions. When you call a virtual function, C++ will automatically figure out the correct version of the function to use.
+  \begin{note}{}
+    When you omit the \emph{virtual} keyword, C++ can't figure out the right version of the function to call, so it will default to calling the function defined in the base class.
+  \end{note}
+  \subsection{When Should You Use the Virtual Keyword?}
+  \begin{enumerate}
+    \item Use the virtual keyword in your base class \emph{any time} you expect to redefine a function in a derived class.
+    \item Use the virtual keyword in your base class \emph{any time} you redefine a function (for clarity, not required).
+    \item Always use the virtual keyword for the destructor in your base class (and in the derived classes, for clarity).
+    \item You \emph{cannot} have a virtual constructor.
+  \end{enumerate}
+  \subsection{Polymorphism and Pointers}
+  In general, you may point a superclass pointer at a subclassed variable. For example, you may point a \texttt{Person} pointer at a \texttt{Politician} variable. The reverse of this is \emph{not} allowed. \par
+  Remember that C++ always calls the \emph{most-derived} version of a function associated with a variable, as long as it's marked virtual!
+  \subsection{Polymorphism and Virtual Destructors}
+  You should \emph{always} make sure that you use virtual destructors when you use inheritance/polymorphism. If you don't do this, the destructor for the base class will be called first, and the derived class's destructor will never be called (because C++ doesn't know it exists).
+  \subsection{Pure Virtual Functions}
+  You define \emph{pure virtual functions} when you need a function in the base class for polymorphism, but never call it there. Your derived classes will need to redefine all pure virtual functions to actually do something. If a class has a pure virtual function, you can't even define a regular variable with this class. 
+  \subsection{Abstract Base Classes}
+  \begin{definition}{Abstract Base Class}
+    If you define \emph{at least one} pure virtual function in a base class, then the class is called an \emph{abstract base class}.
+  \end{definition}
+  The derived classes of an abstract base class must provide code for \emph{all} pure virtual functions, or the derived class will also become an abstract base class. Although you can't create a variable with an abstract base class type, you can still use them to implement polymorphism. This forces the programmer to implement certain functions and avoid bugs.
+  \section{Recursion}
+  \textbf{Main Idea.} Solve problems by making a function call itself to solve a smaller sub-problem.
+  \subsection{The Two Rules of Recursion}
+  \begin{enumerate}
+    \item Every recursive function must have a ``stopping condition" or ``base case". Your recursive function must be able to solve the simplest problem \emph{without recursion}.
+    \item Every recursive function must have a ``simplifying step". The function must pass a smaller sub-problem to itself to ensure that the algorithm will eventually reach the base case. You cannot pass the original problem back into the recursive function because it will just run forever.
+  \end{enumerate}
+  \begin{note}{}
+    Recursive functions should \emph{never} use global, static, or member variables. They should only ever use local variables and parameters.
+  \end{note}
+  Recursive functions should generally only access the current node/array cell passed into it.
+  \section{Generic Programming}
+  \textbf{Main Idea.} We want to write functions or classes in a manner so that it can process many different types of data.
+  \subsection{Allowing Generic Comparisons}
+  Comparison operators are basically the same thing as the assignment operator, except they compare things. You may either define them inside or outside a class. If the former, it should take a constant reference to another object of the class as a parameter. If the latter, it should take two constant references to objects of the class as parameters. In either case, the return type is a \texttt{bool}.
+  \subsection{Templates}
+  To turn any function into a ``generic function", do this:
+  \begin{enumerate}
+    \item Add \texttt{template <typename ItemType>} above your function
+    \item Everywhere you use the data type in the function, replace it with \texttt{ItemType}.
+  \end{enumerate}
+  \begin{note}{}
+    Always put your templated functions in a header file. You put the \emph{entire} template function body in the header file, not just the prototype.
+  \end{note}
+  \subsection{Function Template Details}
+  You \emph{must} use the template data type to define the type of at least one formal parameter, otherwise you'll get an error. If a function has two or more templated parameters with the same type, you must pass in the same type of variable for both. For example, if we have a function \texttt{Data max(Data x, Data y)}, then passing in an integer and a float for \texttt{x} and \texttt{y} would cause an error. \par
+  You can template a function with multiple types by using \texttt{template <typename Type1, typename type2>} before the function header.
+  \subsection{Templating Cheat Sheet}
+  \begin{center}\resizebox{16cm}{!}{\import{./Figures}{drawing.pdf_tex}}\end{center}
+  \section{The Standard Template Library (STL)}
+  \subsection{Vector}
+  A vector is basically the same as an array but you can change the size. You need to \texttt{\#include <vector>} at the top of your file to use it. \par
+  \textbf{Functionality of the Vector}
+  \begin{itemize}
+    \item To add a new item to the end of the vector, use \texttt{vec.push\_back(item)}
+    \item You can use brackets to read or change an item, just like an array (only existing items)
+    \item You can use \texttt{vec.front()} or \texttt{vec.back()} to read/write the first/last elements (if it's not empty) 
+    \item To remove an item from the back of a vector, use \texttt{vec.pop\_back()}
+    \item To get the number of elements in the vector, use \texttt{vec.size()}
+    \item To determine if the vector is empty, use \texttt{vec.empty()}
+  \end{itemize}
+  \subsection{List}
+  The list class works just like a linked list. You need to \texttt{\#include <list>} at the top of your file to use it. Like vector, the list class has \texttt{push\_back}, \texttt{pop\_back}, \texttt{front}, \texttt{back}, \texttt{size}, and \texttt{empty} methods. Furthermore, it has \texttt{push\_front} and \texttt{pop\_front} to add/remove items from the front of the list. Unlike vectors, you can't access list elements using brackets.\par 
+  \subsection{Iterators}
+  To access elements, we need to use an iterator. The iterator syntax is 
+  \begin{center}\texttt{Container<ItemType>::iterator it;}\end{center}
+  We use the \texttt{begin()} and \texttt{end()} methods to point at items in our STL classes.
+  \begin{note}{}
+    The \texttt{end()} method points at the item \emph{after} the last item in the container.
+  \end{note}
+  You can increment/decrement the iterator by using \texttt{it++} and \texttt{it--}, respectively. To iterate through a constant container, just use a constant iterator:
+  \begin{center}\texttt{Container<ItemType>::const\_iterator it;}\end{center}
+  \subsection{Map}
+  Maps (read: functions) allow us to associate two related values. You need to \texttt{\#include <map>} at the top of your file to use it. Because there are two types involved, the syntax is \texttt{map<type1, type2> mapName;}. \par
+  If you want to search in both directions, you need to use two maps. The map basically creates a struct that holds both of your variables in the \texttt{first} and \texttt{second} member variables. To search for an association, we can use the \texttt{find()} function. Maps are automatically ordered for you. 
+  \subsection{Set}
+  A set is a container that keeps track of \emph{unique} items. You need to \texttt{\#include <set>} at the top of your file to use it. You can \texttt{insert()} items into the set, and it will automatically ignore duplicate items. To erase an item of the set, use the \texttt{erase()} function. To get the number of elements in a set, use \texttt{size()}.
+  \subsection{Iterator Gotchas!}
+  If you add an item anywhere in a vector, you must assume that any iterators you had are invalidated. If you erase the item that the iterator is pointing to or any item that comes before it, the iterator is also invalidated. \par
+  For sets, lists, and maps, this doesn't happen---unless you delete the item that the iterator points to.
+  \subsection{STL Algorithms}
+  You will need to \texttt{\#include <algorithm>} to use these. This provides many useful functions like \texttt{find()}, \texttt{set\_intersection}, and \texttt{sort()}. \par
+  To use the \texttt{sort()} function, you pass in two iterators---one that points to the first item and one that points just past the last item you want to sort. This also works with arrays. \par
+  To use the \texttt{find()} function, you pass in two iterators and one item of the type you want to find---the iterators point to the first and just past the last item, and the last parameter is what you want to find. The function returns an iterator that points to the item it found (it will return the second iterator if the item is not found). \par
+  To use the \texttt{find\_if()} function, you pass in two iterators and a predicate (that returns a boolean). The iterators point to the first and just past the last item, and the predicate is used to evaluate whether the current item satisfies the predicate. The function returns an iterator pointing at the first item that satisfies the predicate function. Thus we can use the \texttt{find\_if()} function to locate items that meet specific requirements.
+\end{document}
