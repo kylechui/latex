@@ -318,7 +318,7 @@
   \begin{note}{}
     The above only works if you use integer division.
   \end{note}
-  Because our tree is a complete binary tree, it will have a height of $\log_2N$. Inserting and extracting requirings ``bubbling'' the items up and down the tree, so they both run in $O(\log_2N)$ time.
+  Because our tree is a complete binary tree, it will have a height of $\log_2N$. Inserting and extracting requires ``bubbling'' the items up and down the tree, so inserting/extracting all $N$ items takes $2N\log_2N$ steps, so the runtime complexity is $O(N\log_2N)$.
   \section{Heapsort}
   A na\"ive way to do this is to first insert all of the items into a heap and then extract them all, but this runs in $O(N\log_2N)$ time.
   \subsection{Efficient Heapsort}
@@ -331,4 +331,34 @@
       \item Place it in the last open slot of the array
     \end{enumerate}
   \end{enumerate}
+  To make this more efficient, start checking at the parent of the right-most node in the bottom-most row to avoid checking for all of the single-node subtrees. \\[10pt]
+  The runtime complexity of heapsort is $O(N\log_2N)$ because converting the array to a heap takes $N$ steps, and extracting the items takes $N\log_2N$ steps.
+  \section{Graphs}
+  \begin{definition}{Graph}
+    A \emph{graph} is an ADT that stores a set of entities and also keeps track of the relationships between all of them.
+  \end{definition}
+  There are two main kinds of graphs, \emph{directed} and \emph{undirected} graphs. Edges in directed graphs can only go on one direction, while edges in undirected graphs can go in either direction. \\[10pt]
+  The easiest way to represent a graph is with a double-dimensional array. The size of both dimensions of the array is equal to the number of vertices in the graph, and each element in the array indicates whether or not there exists an edge between vertex $i$ and vertex $j$. This is called an \emph{adjacency matrix}. Furthermore, if you raise the adjacency matrix to the $n$th power, you get which vertices are $n$ edges apart.
+  \subsection{Another Way to Represent a Graph}
+  We can also use an array of $n$ linked lists (an \emph{adjacency list}) to represent a graph. If we add a number $j$ to the $i$th list, this means there is an edge from vertex $i$ to vertex $j$.
+  \subsection{Which Representation to Use?}
+  Use an adjacency matrix if you have lots of edges between vertices but few vertices ($<10,000$ vertices). Use an adjacency list if you have few edges between vertices and lots of vertices ($>10,000$ vertices). A graph that has many edges is called a \emph{dense graph}, and one with few edges is called a \emph{sparse} graph.
+  \subsection{Graph Traversals}
+  There are two main types of graph traversals (both of which we've seen before): \emph{depth-first traversal} and \emph{breadth-first traversal}. The former employs a stack, and the latter a queue. 
+  \subsection{Weighted Graphs}
+  \begin{definition}{Weighted Graph Definitions}
+    A \emph{weighted graph} is a graph where each edge connected vertices $u$ and $v$ has a \emph{weight} or \emph{cost} associated with it. The \emph{weight} of a path from $u$ to $v$ is the sum of the weights of the edges between the two vertices. The \emph{shortest path} between two vertices is the path with the lowerst total cost of edges between the two vertices.
+  \end{definition}
+  \subsection{Finding a Shortest Path}
+  To find a shortest path, we use Dijkstra's Algorithm. It relies on the basic idea of \emph{settled vertices} (we know the minimal distance to the start) and \emph{unsettled vertices} (we don't know the minimal distance to the start). The algorithm proceeds as follows:
+  \begin{itemize}
+    \item Set all vertices to have a distance of $-\infty$
+    \item Let the start vertex $A$ have a value of $0$
+    \item Let all of $A$'s neighbors have a tentative value of the weight of the edge connecting $A$ and the vertex
+    \item Moving to the neighbor of $A$ with the smallest value, repeat this process (this vertex is now settled)
+    \begin{itemize}
+      \item If you find a path to a vertex that is less than the vertex's original value, update the table with the lower value
+    \end{itemize}
+  \end{itemize}
+  To actually implement this in code, we perform the same algorithm with two arrays---an integer array holding the lengths of the minimal paths from the start vertex to that vertex, and a boolean array that holds whether each vertex is ``settled'' or not.
 \end{document}
