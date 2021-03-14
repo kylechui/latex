@@ -1,0 +1,184 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{~/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Current, Resistance, and Electromotive Force}
+  We can have an electric field in a conductor for a split second, but the free electrons will quickly move to the end of the conductor and cancel it out. We bypass this by connecting the conductor to a battery in a circuit, which will keep the charges flowing in a steady ``current".
+  \begin{definition}{Current}
+    When we have moving charges, we have \emph{current}. It is caused by a potential difference. We define it to be the amount of charge $Q$ that passes in a time $t$. Thus $I = \frac{\mathrm{d}Q}{\mathrm{d}t}$, which is measured in Coulombs per second or Amperes. It flows from $+$ to $-$, which is the same way that positive charges would flow.
+  \end{definition}
+  The \emph{conventional current} is treated as a flow of positive charges, regardless of what's actually happening. \\[10pt]
+  In a conductor with length $L$, the electrons experience a constant acceleration due to the electric field. As they speed up, they randomly collide with fixed ions---on average, they travel at a constant velocity. This velocity, known as the electron drift velocity, is given by 
+  \[
+    v_{\text{drift}} = -\mu_e\cdot E,
+  \]
+  where $\mu_e$ is the mobility of an electron, which depends on the material. For a typical copper wire, this drift velocity is about $10^{-5}$ $\frac{\text{m}}{\text{s}}$. \\[10pt]
+  The total charge in a volume $V$ in a conductor is
+  \[
+    Q = -e \cdot n_e\cdot \underbrace{A\cdot L}_{\text{volume}},
+  \]
+  where $n_e$ is the electron density of the material (number of electrons per volume). Furthermore, the time it takes for this charge to move out of the volume $V$ is given by $t = \frac{L}{v_{\text{drift}}}$, so
+  \[
+    I = \frac{Q}{t} = \frac{-en_eAL}{\frac{L}{v_{\text{drift}}}} = -en_eA\cdot v_{\text{drift}} = e\cdot n_e\cdot A\cdot \mu_e\cdot E.
+  \]
+  In other words,
+  \[
+    I = \underbrace{en_e\mu_e}_{\mathclap{\text{material constant: conductivity $\sigma$}}}\cdot \frac{A}{L}\cdot V
+  \]
+  \begin{theorem}{Ohm's Law}
+    We have a relationship between voltage, current, and resistance given by:
+    \begin{align*}
+      I &= \frac{V}{R} \\
+      R &= \frac{V}{I} \\
+      V &= IR
+    \end{align*}
+  \end{theorem}
+  \subsection{Resistivity}
+  The resistance $R$ is measured in Volts per Ampere = Ohm = $\Omega$. To calculate the resistance $R$ of a wire, we have
+  \[
+    \boxed{R = \rho \frac{L}{A}.}
+  \]
+  The resistance $R$ depends on the material \emph{and} shape. Resistivity is a material constant, given by $\rho = \frac{1}{\sigma}$. \\[10pt]
+  The smaller the resistivity the less voltage you need to drive a certain current (if the geometry of the wire stays the same). The resistivity of a material also tells you if the material is a conductor or an insulator. If a material has a resistivity of less than $10^{-8}\,\Omega \mathrm{m}$, then it is a conductor. If it has a resistivity of more than $10^{16}\,\Omega \mathrm{m}$, then it is an insulator.
+  If electron flow depends on space or is not confined to a well defined wire it is more useful to define a vector current density.
+  \begin{definition}{Current Density}
+    The \emph{current density} measures the amount of current passing through a given area, and is given by
+    \[
+      J = \frac{I}{A} = en_e\cdot v_{\text{drift}},
+    \]
+    and has units of $\frac{\text{A}}{\text{m}^2}$.
+  \end{definition}
+  From before, we knew that
+  \begin{align*}
+    I &= \underbrace{e\cdot n_e\cdot \mu_e}_{\sigma}\cdot \frac{A}{L}\cdot V, \quad\text{so} \\ 
+    \frac{I}{A} &= \sigma \frac{V}{L} \\
+    J &= \sigma\cdot E \\
+    \vec{J} &= \sigma\cdot \vec{E}
+  \end{align*}
+  \begin{definition}{Ohmic and Nonohmic resistors}
+    An \emph{ohmic} resistor (e.g. a typical metal wire) is a resistor where the current is proportional to the voltage, at a given tempterature. For a \emph{nonohmic} resistor, the current scales nonlinearly with the voltage.
+  \end{definition}
+  The resistivity of a material depends on the temperature:
+  \[
+    \rho(T) = \rho_0 \paren{1 + \alpha(T - T_0)}.
+  \]
+  \begin{note}{}
+    It should make sense that resistivity goes up with temperature for conductors, because collisions slow electrons down.
+  \end{note}
+  \subsection{Electric Power}
+  Power is measured in Watts, and electric power is given by
+  \[
+    P = \frac{U}{t} = \frac{Q\cdot V}{t} = \frac{Q}{t}\cdot V = I\cdot V.
+  \]
+  Using Ohm's law, we also have
+  \[
+    P = I\cdot V = \frac{V^2}{R} = I^2R.
+  \]
+  \begin{note}{}
+    Unless otherwise stated, assume lightbulbs operate at $120$ Volts.
+  \end{note}
+  \begin{theorem}{Junction Rule for Parallel Circuits}
+    Since \emph{charge is conserved}, whatever current flows into a junction must also flow out on the other side, so
+    \[
+      I_{\text{total}} = I_1 + I_2 + I_3 + \dotsb
+    \]
+    In other words, $\sum I = 0$ (the sum of currents entering and leaving a junction).
+  \end{theorem}
+  \textbf{Resistors in Parallel}
+  \begin{itemize}
+    \item Each resistor gets the full voltage
+    \item The current is split amongst the resistors
+    \item The resistors are independent of each other---remove one and it will still function (although differently)
+    \item $\frac{1}{R_{\text{total}}} = \sum_{i=1}^{n} \frac{1}{R_i}$
+  \end{itemize}
+  \begin{note}{}
+    When we talk about which lightbulb is brighter, we say that the bulb with the higher power dissipation is brighter.
+  \end{note}
+  \textbf{Resistors in Series}
+  \begin{itemize}
+    \item Each resistor only sees a fraction of the total voltage
+    \item The bulbs are \emph{dependent} on each other---remove one and the circuit breaks
+    \item Each bulb receives the same current
+    \item $R_{\text{total}} = \sum_{i=1}^{n}R_i$
+  \end{itemize}
+  \begin{theorem}{Loop Rule for Series Circuits}
+    In any closed circuit loop the voltages must cancel out:
+    \[
+      V - V_1 - \dotsb - V_n = 0.
+    \]
+    A battery raises the potential by $V$, and a resistor decreases it by $V$ (in the direction of $I$). In other words, $\sum V = 0$.
+  \end{theorem}
+  \subsection{How to Analyze an Electric Circuit}
+  \begin{enumerate}
+    \item Redraw the circuit so you can clearly see series and parallel connections.
+    \item Find the equivalent resistance of the circuit.
+    \item Calculate the total current.
+    \item Find the voltage drop across series resistors.
+    \item Use the loop rule to find the voltage drop across any remaining resistors.
+    \item Find the current and power through each resistor as needed.
+  \end{enumerate}
+  \subsection{Internal Resistance of a Battery}
+  \begin{itemize}
+    \item Any battery has an internal resistance $r$.
+    \item The resistance $r$ depends on the chemistry, size, etc.
+    \item You could treat $r$ as any other external resistance (in series).
+    \item The smaller the $r$, the higher the currents a battery can drive.
+    \item Adding batteries in parallel reduces the internal resistance.
+  \end{itemize}
+  When measuring the current and voltage in a circuit, we don't want out instruments to affect the readings at all. Thus when we put an ammeter inline to measure current, it should have as little resistance as possible. When we measure voltage using a voltmeter, it should have near infinite resistance to prevent current from flowing through it. \\[10pt]
+  In an ammeter, the shunt is placed in the circuit, and we have
+  \[
+    I_{fs}\cdot R_c = (I - I_{fs})\cdot R_s.
+  \]
+  In a voltmeter, the coil resistance is very small, so we need a much larger ``shunt resistance'' in order to divert as little current as possible from the circuit. We can find the voltage drop in a circuit via
+  \[
+    V = I_{fs}(R_c + R_s),
+  \]
+  where $I_{\text{fs}}$ is the full scale current, $R_c$ is the coil resistance, and $R_s$ is the shunt resistance.
+  \subsection{RC Circuits}
+  \begin{definition}{RC Circuit}
+    An \emph{RC circuit} is a circuit that has both resistors and capacitors.
+  \end{definition}
+  Up until now, voltages and currents did not change with time. This is because resistors ``start resisting'' current flow instantaneously. Capacitors, on the other hand, take time to build up or drain off charges. This is the basis for time dependent signals.
+  \subsubsection{Capacitor Charging Circuit}
+  \begin{itemize}
+    \item When the switch is closed, charges begin to flow into the capacitor.
+    \item Eventually the voltage difference across the plates of the capacitor equals the potential across the battery.
+    \item After this, no further current flows through the resistor.
+  \end{itemize}
+  \subsubsection{Initial Stage: Switch Just Closed}
+  From the loop rule we know that the potential difference across the entire circuit has to be zero, and the potential across the capacitor is zero, so all of the potential must be lost across the resistor, i.e. $V = IR$. The capacitor is fully discharged (as we have only just connected the circuit).
+  \subsubsection{Final Stage: After An Infinite Period of Time}
+  If the switch has been closed for a long time, the capacitor is fully charged. Then there is no current flowing through the circuit (and so no voltage drop across the resistor) and the potential difference across the capacitor is the same as the potential of the battery.
+  \subsubsection{During the Charging Process}
+  From Kirchoff's Loop rule, we know that the potential difference in a loop is zero, so
+  \begin{align*}
+    V - I\cdot R - \frac{Q}{C} &= 0
+    \intertext{Solving for $I$, we have}
+    I = \frac{V}{R} - \frac{Q}{RC} &= \frac{\mathrm{d}Q}{\mathrm{d}t}
+    \intertext{Rearranging terms, we get}
+    \frac{\mathrm{d}Q}{Q - CV} &= -\frac{\mathrm{d}t}{RC}
+    \intertext{We integrate both sides to get}
+    \int_{0}^{Q}\frac{\mathrm{d}Q'}{Q' - CV} &= - \int_{0}^{t}\frac{\mathrm{d}t'}{RC} \\
+    \ln \paren{\frac{Q-CV}{-CV}} &= -\frac{t}{RC} \\
+    \frac{Q - CV}{-CV} &= e^{-\frac{1}{RC}t} \\
+    Q &= \underbrace{CV}_{\mathclap{Q_{\text{final}}}}\cdot \paren{1 - e^{-\frac{1}{RC}t}}
+  \end{align*}
+  \begin{note}{}
+    When $t = 0$, the exponential term reaches $1$, so we have that the charge on the capacitor is zero. Furthermore, when the time has approached $\infty$, we have that the exponential term reaches $0$, so we have $Q = CV$, as expected.
+  \end{note}
+  \begin{definition}{Time Constant}
+    We define $\tau = R\cdot C$ to be the \emph{time constant}, which tell us how long it takes for the capacitor to fully charge. It takes approximately $5\tau$ to fully charge the capacitor in an RC circuit.
+  \end{definition}
+  \subsubsection{Capacitor Discharging}
+  The charge and current decrease exponentially in time, given by
+  \begin{align*}
+    I &= \frac{V_0}{R}e^{-\frac{1}{RC}t} \\
+    Q &= C\cdot V_0e^{-\frac{1}{RC}t}
+  \end{align*}
+\end{document}

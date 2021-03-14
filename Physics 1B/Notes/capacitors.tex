@@ -1,0 +1,114 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{~/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Capacitors}
+  \begin{definition}{Capacitor}
+    Any two conductors separated by an insulator (or vacuum) for a \emph{capacitor}.
+  \end{definition}
+  Charges can be stored indefinitely on the conductors, and can be discharged quickly. This is in contrast to batteries, which provide a consistent, steady flow of charges.
+  \begin{definition}{Capacitance}
+    \emph{Capacitance} is a measure of how much charge a capacitor can store for a given voltage, and is given by the equation
+    \[
+      C = \frac{Q}{V}.
+    \]
+    \begin{itemize}
+      \item Capacitance is measured in Coulombs per Volt or Farads (F).
+      \item $1$ F is huge capacitance.
+      \item $Q$ (on the plates) causes $E$ (between the plates), which causes $V$. So $Q\sim E\sim V$.
+      \item The actual ratio of $\frac{Q}{V}$ depends only on the shape and material because $Q$ and $V$ are proportional to each other and cancel out. In other words, capacitance depends only on the shape/material of the capacitor.
+    \end{itemize}
+  \end{definition}
+  \subsection{Parallel Plate Capacitor}
+  The electric field for a parallel plate capacitor is $E = \frac{\sigma}{\eps_0} = \frac{Q}{\eps_0A}$. We know that
+  \[
+    V = E\cdot d = \frac{Qd}{\eps_0A},
+  \]
+  so 
+  \[
+    \boxed{C = \frac{Q}{V} = \frac{\eps_0A}{d}.}
+  \]
+  \subsection{Energy Stored in a Plane Capacitor}
+  We know that the charge $q$ placed in an electric potential $V$ stores energy: $U = q\cdot V$, so
+  \[
+    U_C = \int_{0}^{Q}V \dx q = \int_{0}^{Q}\frac{q}{C} \dx q = \frac{1}{C}\int_{0}^{Q}q \dx q = \frac{1}{2}\frac{Q^2}{C}
+  \]
+  Thus we have
+  \[
+    \boxed{U_C = \frac{1}{2}CV^2 = \frac{1}{2}QV = \frac{1}{2}\frac{Q^2}{C}.}
+  \]
+  \subsection{Spherical Capacitor}
+  Solving for the voltage difference between two points, we have
+  \[
+    \Delta V = kQ \paren{\frac{1}{r_a} - \frac{1}{r_b}} = kQ \paren{\frac{r_b - r_a}{r_ar_b}}.
+  \]
+  Thus the capacitance is
+  \[
+    C = \frac{Q}{V} = \frac{1}{k}\frac{r_ar_b}{r_b-r_a}
+  \]
+  \subsection{Cylindrical Capacitor}
+  From earlier, we found that the potential difference for a cylinder is
+  \[
+    \Delta V = 2k\lam\ln \paren{\frac{r_b}{r_a}}.
+  \]
+  Thus we have
+  \[
+    C = \frac{Q}{\Delta V} = \frac{\lam L}{2k\lam\ln \paren{\frac{r_b}{r_a}}} = \frac{2\pi \eps_0 L}{\ln \paren{\frac{r_b}{r_a}}}.
+  \]
+  In other words, we may write
+  \[
+    \frac{C}{L} = \frac{2\pi\eps_0}{\ln \paren{\frac{r_b}{r_a}}}.
+  \]
+  \subsection{Capacitors in Series or Parallel}
+  \begin{itemize}
+    \item Capacitors can be combined in ``series" or ``parallel".
+    \item All capacitors then act as one single capacitor with an ``effective capacitance".
+    \item Adding capacitors in parallel makes a larger capacitor.
+    \item Adding capacitors in series allows you to operate at much higher voltages.
+  \end{itemize}
+  \textbf{Series Capacitors.} In series, the voltages add up, and the charge is constant across the capacitors. We write $\frac{1}{C_{\text{eq}}} = \sum \frac{1}{C_i}$. Thus the equivalent capacitance is smaller than all of the capacitances of the components. Each capacitor only sees a fraction of the total voltage. Putting capacitors in series essentially increases $d$, while $A$ remains constant. \\[10pt]
+  \textbf{Parallel Capacitors.} When in parallel, the capacitance adds up linearly, and the voltage is constant across the capacitors. We write $C_{\text{eq}} = \sum C_i$. The equivalent capacitance is larger than all of the capacitances of the components. Each capacitor only sees a fraction of the total charge. Putting capacitors in parallel essentially increases $A$, while $d$ remains constant.
+  \subsection{Dielectrics}
+  Most real capacitors have an insulator (dielectric) between the plates, which stores additonal energy via electric dipole alignment. This increased breakdown threshold allows for higher voltages between the plates.
+  \begin{definition}{Dielectric Constant}
+    The \emph{dielectric constant} $K$ is the ratio of the capacitances before and after you put a dielectric in it. It is given by $K = \frac{C}{C_0}$, and is always greater than or equal to one.
+  \end{definition}
+  \begin{note}{}
+    When you align dipoles inside an electric field, they line up anti-parallel to the original field $E_0$ and create a new, weaker field $E$ that is in the opposite direction of the original. The magnitude of this field is $E = \frac{E_0}{K}$, where $K$ is the dielectric constant. More energy is now stored in the aligned dipoles. 
+  \end{note}
+  When you fill a capacitor with a dielectric, the opposing electric field decreases the overall electric field. Let the induced charge inside a capacitor be denoted by $\sigma_i$. Then we have that 
+  \[
+    \sigma_i = \sigma \paren{1 - \frac{1}{K}}.
+  \]
+  So if $K$ is very large, then $\sigma_i$ is almost as large as $\sigma$. Furthermore, 
+  \[
+    E = \frac{1}{\eps_0}(\sigma - \sigma_i) = \frac{1}{\eps_0}\paren{\sigma -\sigma + \frac{\sigma}{K}} = \frac{\sigma}{\eps_0K}.
+  \]
+  \begin{definition}{Permittivity}
+    The product $\eps = K\eps_0$ is called the \emph{permittivity} of the dielectric.
+  \end{definition}
+  Thus we can write that the field $E$ is given by $E = \frac{\sigma}{\eps}$.
+  \subsection{Summary}
+  For constant charge on a capacitor, adding a dielectric with constant $K$ between the plates will:
+  \begin{itemize}
+    \item Decrease the electric field by a factor of $K$.
+    \item Decrease the voltage between the plates because $V = Ed$.
+    \item Increase the capacitance by a factor of $K$ because $C = \frac{Q}{V}$.
+  \end{itemize}
+  Aligning dipoles in a dielectric increases the energy density:
+  \[
+    u = \frac{1}{2}K\eps_0 E^2 = \frac{1}{2}\eps E^2.
+  \]
+  \begin{theorem}{General Form of Gauss's Law}
+    If we have charges inside a dielectric, we modify Gauss's Law to be
+    \[
+      \oint \vec{E}\dx \vec{A} = \frac{Q_{\text{enclosed}-\text{free}}}{K\cdot \eps_0} = \frac{Q_{\text{enclosed}-\text{free}}}{\eps}.
+    \]
+    We ignore the induced dipole charges when evaluating the formula.
+  \end{theorem}
+\end{document}
