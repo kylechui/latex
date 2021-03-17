@@ -1,0 +1,339 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{~/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \begin{theorem}{Cauchy-Schwarz Inequality}
+    Let $V$ be an inner product space over $F$. Then for all $v_1, v_2\in V$, we have
+    \[
+      \abs{\tup{v_1, v_2}} \leq \norm{v_1}\norm{v_2}.
+    \]
+  \end{theorem}
+  \begin{proof}
+    If either $v_1 = 0$ or $v_2 = 0$, then the result is immediate, so we may assume that $v_1\leq 0$, $v_2\neq 0$. \par
+    We define $v$ such that
+    \[
+      v = v_2 - \frac{\tup{v_2, v_1}}{\norm{v_1}^2}v_1, \tag{Projection onto $v_1$}
+    \]
+    and claim that $\tup{v, \alpha v_1} = 0$ for all $\alpha\in F$. Observe that
+    \begin{align*}
+      \tup{v, \alpha v_1} &= \tup{v_2 - \frac{\tup{v_2, v_1}}{\norm{v_1}^2}v_1, \alpha v_1} \\
+                          &= \tup{v_2, \alpha v_1} - \tup{\frac{\tup{v_2, v_1}}{\norm{v_1}^2}v_1, \alpha v_1} \\
+                          &= \tup{v_2, \alpha v_1} - \frac{\tup{v_2, v_1}}{\norm{v_1}^2}\tup{v_1, \alpha v_1} \\
+                          &= \bar{\alpha}\tup{v_2, v_1} - \frac{\tup{v_2, v_1}}{\norm{v_1}^2}\bar{\alpha}\tup{v_1, v_1} \\
+                          &= \bar{\alpha}\tup{v_2, v_1} - \bar{\alpha}\tup{v_2, v_1} \\
+                          &= 0.
+    \end{align*}
+    Thus the claim has been shown. We now prove the rest of the theorem. We know that inner products of vectors with themselves are always non-negative, so
+    \begin{align*}
+      0 &\leq \tup{v, v} \\
+        &= \tup{v, v_2 - \frac{\tup{v_2, v_1}}{\norm{v_1}^2}v_1} \\
+        &= \tup{v, v_2} + \tup{v, -\frac{\tup{v_2, v_1}}{\norm{v_1}^2}v_1} \\
+        &= \tup{v, v_2} \\
+        &= \tup{v_2 - \frac{\tup{v_2, v_1}}{\norm{v_1}^2}v_1, v_2} \\
+        &= \tup{v_2, v_2} + \tup{-\frac{\tup{v_2, v_1}}{\norm{v_1}^2}v_1, v_2} \\
+        &= \tup{v_2, v_2} - \frac{\tup{v_2, v_1}}{\norm{v_1}^2}\tup{v_1, v_2} \\
+        &= \norm{v_2}^2 - \frac{\overline{\tup{v_1, v_2}}\tup{v_1, v_2}}{\norm{v_1}^2} \\
+        &= \norm{v_2}^2 - \frac{\abs{\tup{v_1, v_2}}^2}{\norm{v_1}^2}\\
+      0 &\leq \norm{v_1}^2\norm{v_2}^2 - \abs{\tup{v_1, v_2}}^2 \\
+      \abs{\tup{v_1, v_2}}^2 &\leq \norm{v_1}^2\norm{v_2}^2 \\
+      \abs{\tup{v_1, v_2}} &\leq \norm{v_1}\norm{v_2}
+    \end{align*}
+  \end{proof}
+  \newpage
+  \begin{theorem}{Minkowski Inequality}
+    Let $V$ be an inner product space over $F$. Then for all $v_1, v_2\in V$, we have
+    \[
+      \norm{v_1 + v_2}\leq \norm{v_1} + \norm{v_2}.
+    \]
+  \end{theorem}
+  \begin{proof}
+    Observe that
+    \begin{align*}
+      \norm{v_1 + v_2}^2 &= \tup{v_1 + v_2, v_1 + v_2} \\
+                         &= \tup{v_1, v_1} + \tup{v_2, v_1} + \tup{v_1, v_2} + \tup{v_2, v_2} \\ 
+                         &= \tup{v_1, v_1} + \tup{v_2, v_1} + \overline{\tup{v_1, v_2}} + \tup{v_2, v_2} 
+      \intertext{Suppose $\tup{v_1, v_2} = \alpha + \beta \sqrt{-1}$, so then $\tup{v_1, v_2} + \overline{\tup{v_1, v_2}} = \alpha + \beta \sqrt{-1} + \alpha - \beta \sqrt{-1} = 2\alpha$.}
+                         &= \norm{v_1}^2 + 2\alpha + \norm{v_2}^2 \\
+                         &\leq \norm{v_1}^2 + 2\sqrt{\alpha^2+\beta^2} + \norm{v_2}^2 \\
+                         &= \norm{v_1}^2 + 2\abs{\tup{v_1, v_2}} + \norm{v_2}^2 \\ 
+                         &\leq \norm{v_1}^2 + 2\norm{v_1}\norm{v_2} + \norm{v_2}^2 \tag{Cauchy-Schwarz} \\
+                         &= \paren{\norm{v_1} + \norm{v_2}}^2.
+    \end{align*}
+    Thus we have shown that $\norm{v_1+v_2}^2 \leq \paren{\norm{v_1} + \norm{v_2}}^2$, so we have $\norm{v_1+v_2}\leq \norm{v_1}+\norm{v_2}$.
+  \end{proof}
+  \newpage
+  \begin{theorem}{Gram-Schmidt Theorem}
+    Let $V$ be an inner product space over $F$ and $\es\neq S_n = \set{v_1,\dotsc,v_n}\sse V$ a linearly independent set. Then there exist $y_1,\dotsc,y_n\in V$ such that
+    \begin{enumerate}[label=(\roman*)]
+      \item $y_1 = v_1$
+      \item $T_n = \set{y_1,\dotsc,y_n}$ is an orthogonal set and linearly independent
+      \item $\vspan(T_n) = \vspan(S_n)$
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    We construct $T_n$ from $S_n$ using the Gram-Schmidt Process, and proceed by induction. When $n = 1$, we set $y_1 = v_1$, and the statements above clearly hold. Suppose the statement is true for some $n = k$, so 
+    \begin{enumerate}[label=(\roman*)]
+      \item $y_1 = v_1$,
+      \item $T_k = \set{y_1,\dotsc,y_k}$ is an orthogonal set and linearly independent,
+      \item $\vspan(T_k) = \vspan(S_k)$.
+    \end{enumerate}
+    We define
+    \[
+      y_{k+1} = v_{k+1} - \sum_{i=1}^{k}\frac{\tup{v_{k+1},y_i}}{\norm{y_i}^2}y_i. \tag{*}
+    \]
+    We know that $y_{k+1}\neq 0$, because otherwise $v_{k+1}\in \vspan(T_k) = \vspan(S_k)$ and $\set{v_1,\dotsc,v_{k+1}}$ would not be linearly independent, a contradiction. \\[10pt]
+    We claim that $\tup{y_{k+1}, y_j} = 0$ for all $j = 1,\dotsc,k$. We can see that
+    \begin{align*}
+      \tup{y_{k+1}, y_j} &= \tup{v_{k+1} - \sum_{i=1}^{k}\frac{\tup{v_{k+1},y_i}}{\norm{y_i}^2}y_i, y_j} \\
+                         &= \tup{v_{k+1}, y_j} - \sum_{i=1}^{k}\frac{\tup{v_{k+1},y_i}}{\norm{y_i}^2}\tup{y_i,y_j} \\
+                         &= \tup{v_{k+1}, y_j} - \frac{\tup{v_{k+1},y_j}}{\norm{y_j}^2}\tup{y_j, y_j} \tag{$\tup{y_i, y_j} = \delta_{ij}$}\\
+                         &= \tup{v_{k+1}, y_j} - \tup{v_{k+1}, y_j} \\
+                         &= 0.
+    \end{align*}
+    Since $0\notin T_{k+1} = \set{y_1,\dotsc,y_{k+1}}$ and $T_{k+1}$ is an orthogonal set, it must be linearly independent. Furthermore, we know by rearranging (*) that $v_{k+1}\in \vspan(y_1,\dotsc,y_{k+1})$ and has a non-zero component for $y_{k+1}$, and so by the Replacement Theorem
+    \[
+      \vspan(T_{k+1}) = \vspan(y_1,\dotsc,y_{k+1}) = \vspan(y_1,\dotsc,y_k,v_{k+1}) = \vspan(v_1,\dotsc,v_{k+1}) = S_{k+1}.
+    \]
+  \end{proof}
+  \newpage
+  \begin{theorem}{Orthogonal Theorem}
+    Let $V$ be a finite-dimensional inner product space over $F$. Then $V$ has an orthogonal basis. If $F = \R$ or $\C$, then $V$ has an orthonormal basis.
+  \end{theorem}
+  \begin{proof}
+    Let $\mathcal{B} = \set{v_1,\dotsc,v_n}$ be a basis for $V$. By the Gram-Schmidt Theorem, we know that there exists a linearly independent and orthogonal set $\mathcal{C} = \set{w_1,\dotsc,w_n}$ such that $\vspan(\mathcal{C}) = \vspan(\mathcal{B}) = V$. Because $\mathcal{C}$ is both linearly independent and spans $V$, it must be a basis for $V$, and so is an orthogonal basis for $V$. \par
+    If $F = \R$, then $\set{\frac{w}{\norm{w}}\mid w\in \mathcal{C}}$ is an orthonomal basis for $V$ as $\norm{w}\in \R$ for all $w\in \mathcal{C}$. The same reasoning applies for $F = \C$.
+  \end{proof}
+  \newpage
+  \begin{theorem}{Orthogonal Decomposition Theorem}
+    Let $V$ be an inner product space over $F$ (not necessarily finite-dimensional), with $S\sse V$ a finite-dimensional subspace, and $v\in V$. Then there exist unique $s\in S$ and $s^\perp\in S^\perp$ such that $v = s + s^\perp$. In particular, $V = S + S^\perp$ and $S\cap S^\perp = 0$, so $V = S\perp S^\perp$. Moreover, if 
+    \[
+      v = s + s^\perp, s\in S, s^\perp\in S^\perp,
+    \]
+    then
+    \[
+      \norm{v}^2 = \norm{s}^2 + \norm{s^\perp}^2. \tag{Pythagorean Theorem}
+    \]
+    If, in addition, $V$ is a finite-dimensional inner product space over $F$, then
+    \[
+      \dim(V) = \dim(S) + \dim(S^\perp).
+    \]
+  \end{theorem}
+  \begin{proof}
+    By the Orthogonal Theorem, we know that there exists an orthogonal basis $\mathcal{B} = \set{v_1,\dotsc,v_n}$ for $S$, the finite-dimensional inner product space over $F$. We will first show existence. Let $v\in V$. We define $s\in S = \vspan(\mathcal{B})$ by
+    \[
+      s = \sum_{i=1}^{n}\frac{\tup{v, v_i}}{\norm{v_i}^2}v_i,
+    \]
+    and $s^\perp = v - s$. Then $v = s + s^\perp$ and $S\cap S^\perp = 0$, i.e. $V = S\oplus S^\perp$. We first show that $s^\perp\perp v_j$ for $j = 1,\dotsc,n$. Observe that
+    \begin{align*}
+      \tup{s^\perp, v_j} &= \tup{v-s, v_j} \\
+                         &= \tup{v, v_j} - \tup{s, v_j} \\
+                         &= \tup{v, v_j} - \tup{\sum_{i=1}^{n}\frac{\tup{v, v_i}}{\norm{v_i}^2}v_i, v_j} \\
+                         &= \tup{v, v_j} - \sum_{i=1}^{n}\frac{\tup{v, v_i}}{\norm{v_i}^2}\tup{v_i, v_j} \\
+                         &= \tup{v, v_j} - \frac{\tup{v, v_j}}{\norm{v_j}^2}\tup{v_j, v_j} \tag{$\tup{v_i, v_j} = \delta_{ij}$} \\
+                         &= \tup{v, v_j} - \tup{v, v_j} \\
+                         &= 0.
+    \end{align*}
+    Since $s = \sum_{i=1}^{n}\alpha_iv_i\in S$, we have
+    \begin{align*}
+      \tup{s, s^\perp} &= \tup{\sum_{i=1}^{n}\alpha_iv_i, s^\perp} \\
+                       &= \sum_{i=1}^{n}\alpha_i \tup{v_i, s^\perp} \\
+                       &= 0.
+    \end{align*}
+    Thus we have shown that $s^\perp\perp s$ for all $s\in S$, so $s^\perp\in S^\perp$, as needed. We must now show uniqueness. Suppose
+    \[
+      s + s^\perp = v = r + r^\perp.
+    \]
+    Then $s-r = r^\perp - s^\perp$. However, because $S\cap S^\perp = 0$, we have $s - r = 0 = r^\perp - s^\perp$, so $s = r$ and $s^\perp = r^\perp$. Therefore the decomposition of $v$ is unique. \\[10pt]
+    To show the Pythagorean Theorem, we have
+    \[
+      \norm{v}^2 = \norm{s + s^\perp}^2 = \tup{s + s^\perp, s + s^\perp} = \tup{s, s} + \tup{s, s^\perp} + \tup{s^\perp, s} + \tup{s^\perp, s^\perp} = \norm{s}^2 + \norm{s^\perp}^2.
+    \]
+    If $V$ is finite-dimensional, by the Counting Theorem, we have that
+    \[
+      \dim(V) = \dim(S + S^\perp) = \dim(S) + \dim(S^\perp) - \dim(S\cap S^\perp) = \dim(S) + \dim(S^\perp).
+    \]
+  \end{proof}
+  \newpage
+  \begin{theorem}{Approximation Theorem}
+    Let $V$ be an inner product space over $F$, $S\sse V$ a finite-dimensional subspace, and $v\in V$. Then $v_S$ is \emph{closer} to $v$ than any other vector in $S$, i.e.,
+    \[
+      d(v, v_S) = \norm{v - v_S} \leq \norm{v - r} = d(v, r)
+    \]
+    in $\R$ for all $r\in S$. Equivalently, we may write
+    \[
+      d(v, S) = d(v, v_S).
+    \]
+    Moreover, if $r\in S$, then
+    \[
+      \norm{v - v_S} = \norm{v - r}\text{ in $\R$ if and only if }r = v_S.
+    \]
+    We say $v_S$ gives the \emph{best approximation} to $v$ in $S$.
+  \end{theorem}
+  \begin{proof}
+    Let $v = s + s^\perp$ with $s = v_S$, $s^\perp = v - s = v - v_S$ and $s^\perp\in S^\perp$. Let $r\in S$. Then
+    \[
+      v - r = (v - v_S) + (v_S - r) = s^\perp + (v_S - r).
+    \]
+    Because $v_S - r\in S$, we have $\norm{v - r}^2 = \norm{v - v_S}^2 + \norm{v_S - r}^2\geq \norm{v - v_S}^2$ with equality if and only if $\norm{v_S - r}^2 = 0$, or $v_S = r$.
+  \end{proof}
+  \newpage
+  \begin{theorem}{Hermitian Corollary}
+    Let $V$ be an inner product space over $F$, $T\colon V\to V$ linear. Suppose that $T$ is hermitian. Then any eigenvalue of $T$ (if any) is real, i.e. lies in $F\cap \R$.
+  \end{theorem}
+  \begin{proof}
+    Because $T$ is hermitian, we have $\tup{Tv, v} = \tup{v, Tv}$ for all $v\in V$. If $\lam$ is an eigenvalue of $T$, then
+    \[
+      \lam = \frac{\lam \tup{v, v}}{\norm{v}^2} = \frac{\tup{Tv, v}}{\norm{v}^2} = \frac{\tup{v, Tv}}{\norm{v}^2} = \frac{\bar{\lam}\tup{v, v}}{\norm{v}^2} = \bar{\lam},
+    \]
+    so $\lam = \bar{\lam}$ and $\lam$ must be real.
+  \end{proof}
+  \newpage
+  \begin{theorem}{Key Lemma (for Hermitian Operators)}
+    Let $V$ be an inner product space over $F$, $T\colon V\to V$ hermitian, $S\sse V$ a $T$-invariant subspace. Then
+    \begin{enumerate}[label=(\roman*)]
+      \item $S^\perp$ is $T$-invariant, i.e. $T(S^\perp)\sse S^\perp$
+      \item $T|_{S^\perp}\colon S^\perp\to S^\perp$ is hermitian
+    \end{enumerate}
+  \end{theorem}
+  \begin{proof}
+    (i) Let $s^\perp\in S^\perp$. Then it suffices to show that $Ts^\perp\in S^\perp$. Observe that for all $s\in S$, we have
+    \begin{align*}
+      \tup{s, Ts^\perp} &= \tup{Ts, s^\perp} \tag{$T$ is hermitian} \\
+                        &= 0. \tag{$S$ is a $T$-invariant subspace}
+    \end{align*}
+    Therefore $Ts^\perp\in S^\perp$ so $S^\perp$ is $T$-invariant. \\[10pt]
+    (ii) By (i) we know that $T|_{S^\perp}$ is linear, and since $T$ is hermitian in $V$, it must be hermitian in $S^\perp$. In other words, because $\tup{Tv, w} = \tup{v, Tw}$ for all $v, w\in V$, it must also hold for all $v, w\in S^\perp$.
+  \end{proof}
+  \newpage
+  \begin{theorem}{Spectral Theorem (for Hermitian Operators) (Refined Version)}
+    Let $F = \R$ or $\C$, $V$ a finite-dimensional inner product space over $F$, $T\colon V\to V$ hermitian. Then there exists an ordered orthonormal basis $\mathcal{C}$ of eigenvectors for $V$ of $T$ and every eigenvalue of $T$ is real. Moreover, if $\mathcal{B}$ is any ordered orthonormal basis for $V$, then
+    \[
+      [T]_{\mathcal{C}} = C[T]_{\mathcal{B}}C^*
+    \]
+    for some invertible matrix $C\in \M_nF$, i.e. $C = [1_V]_{\mathcal{B},\mathcal{C}}$.
+  \end{theorem}
+  \begin{proof}
+    
+  \end{proof}
+  \newpage
+  % \begin{theorem}{Spectral Theorem (for Hermitian Operators) (Refined Version)}
+  %   Let $F = \R$ or $\C$, $V$ a finite-dimensional inner product space over $F$, $T\colon V\to V$ hermitian. Then there exists an orthonormal basis $\mathcal{B} = \set{v_1,\dotsc,v_n}$ for $V$ with each $v_i$, $i=1,\dotsc,n$ an eigenvector for some eigenvalue $\lam_i\in \R$, $i=1,\dotsc,n$ (not necessarily distinct). In particular, $T$ is diagonalizable.
+  % \end{theorem}
+  % \begin{proof}
+  %   We prove $\mathcal{B}$ exists by induction on $\dim(V) = n$. \par
+  %   Observe that for the $n = 1$ case, we have that $V= \vspan(v)$, for any non-zero $v\in V$. As $Tv\in \vspan(v)$, there exists an $\alpha\in F$ such that $Tv = \alpha v$, so $v\in E_T(\alpha)$. As $T$ is hermitian, $\alpha\in \R$ by the Hermitian Corollary, even if $F = \C$. Thus $\mathcal{B} = \set{\frac{v}{\norm{v}}}$ is a valid orthonormal basis for $V$. \par
+  %   Suppose the statement holds for some $n$, that is if $W$ is a finite-dimensional inner product space over $F$, $\dim(W) = n-1$, $T_0\colon W\to W$ hermitian, then there exists an orthonormal basis for $W$ of eigenvectors of $T_0$ and every eigenvalue of $T_0$ is real. Let $\mathcal{C}$ be an ordered orthonormal basis for $n$-dimensional $V$, which exists as $F = \R$ or $\C$. Let $A = [T]_{\mathcal{C}}\in \M_nF\sse \M_n\C$. Then for all $x, y\in \C^{n\times 1}$, we have that $Ax\cdot y = x\cdot Ay$ (because $T$ is hermitian). In other words, $A\colon \C^{n\times 1}\to \C^{n\times 1}$ is hermitian, where $\C^{n\times 1}$ is an inner product space over $\C$ via the dot product. By the Fundamental Theorem of Algebra, $f_A$ has a root $\lam\in \C$, hence $\lam$ is an eigenvalue of $A\colon \C^{n\times 1}\to \C^{n\times 1}$, which is hermitian. Thus by the Hermitian Corollary, we know that $\lam\in \R$. But
+  %   \[
+  %     f_T = f_{[T]_{\mathcal{C}}} = f_A,
+  %   \]
+  %   so $f_T$ has a real root $\lam\in \R$, if $F = \R$ or $\C$. Thus there exists a non-zero vector $v\in E_T(\lam)\sse V$ that is an eigenvector of $T$. Let $Fv = \vspan(v)\sse E_T(\lam)$. Then $Fv$ is $T$-invariant. By the Orthogonal Decomposition Theorem
+  %   \[
+  %     v = Fv \perp (Fv)^\perp
+  %   \]
+  %   and
+  %   \[
+  %     \dim(V) = \dim(Fv) + \dim(Fv)^\perp = 1 + \dim(Fv)^\perp.
+  %   \]
+  %   Hence $\dim(Fv)^\perp = n - 1$. By the Key Lemma, since $Fv$ is $T$-invariant and $T\colon V\to V$ is hermitian, $(Fv)^\perp$ is $T$-invariant. 
+  % \end{proof}
+  \begin{theorem}{New Key Lemma}
+    Let $V$ be a finite-dimensional inner product space over $F$, $T\colon V\to V$ linear. Suppose that $V$ has an orthonormal basis and $W\sse V$ is a $T$-invariant subspace. Then $W^\perp\sse V$ is $T$-invariant. In particular,
+    \[
+      T^*|_{W^\perp}\colon W^\perp\to W^\perp
+    \]
+    is linear.
+  \end{theorem}
+  \begin{proof}
+    Let $w^\perp\in W^\perp$ and $x\in W$ be arbitrary. Then
+    \[
+      \tup{x, T^*w^\perp} = \tup{Tx, w^\perp} = 0,
+    \]
+    as $Tx\in W$ (because $W$ is $T$-invariant). Thus $T^*w^\perp\in W^\perp$, and so $W^\perp$ is also $T$-invariant.
+  \end{proof}
+  \newpage
+  \begin{theorem}{Schur's Theorem}
+    Let $V$ be a finite-dimensional inner product space over $\C$, $T\colon V\to V$ linear. Then $T$ is triangularizable. Moreover, there exists an ordered orthonormal basis $\mathcal{B}$ for $T$ such that $[T]_{\mathcal{B}}$ is upper triangular.
+  \end{theorem}
+  \begin{proof}
+    We induct on $n = \dim(V)$. Let $n = 1$. Then for some non-zero $v\in V$, we have that $\mathcal{B} = \set{\frac{v}{\norm{v}}}$ is a valid orthonormal basis. Let $n > 1$. By the Fundamental Theorem of Algebra, the characteristic polynomial $f_{T^*}$ for $T^*$ has a root $\lam\in \C$, hence $\lam$ is an eigenvalue of $T^*$. Let $0\neq v\in E_{T^*}(\lam)$. By the Orthogonal Decomposition Theorem, 
+    \[
+      V = (\C v) + \paren{\C v}^\perp
+    \]
+    and
+    \begin{align*}
+      n &= \dim(V) \\
+        &= \dim(\C v) + \dim(\C v)^\perp \\
+        &= 1 + \dim(\C v)^\perp,
+    \end{align*}
+    so $\dim(\C v)^\perp = n - 1$. We know that $(\C v)$ is $T^*$-invariant as $v\in E_{T^*}(\lam)$, so $(\C v)^\perp$ is $(T^*)^* = T$-invariant by the New Key Lemma. So we may view
+    \[
+      T|_{(\C v)^\perp}\colon (\C v)^\perp\to (\C v)^\perp \text{ as linear.}
+    \]
+    By induction, there exists an ordered orthonormal basis $\mathcal{B}_0 = \set{v_1,\dotsc,v_{n-1}}$ for $(\C v)^\perp$ such that $[T|_{(\C v)^\perp}]_{\mathcal{B}_0}$ is upper triangular. Let $\mathcal{B} = \set{v_1,\dotsc,v_{n-1}, \frac{v}{\norm{v}}}$, an ordered orthonormal basis for $V$. Then by (*), we have
+    \[
+      \begin{bmatrix}
+        [T|_{(\C v)^\perp}]_{\mathcal{B}_0} & \cdots & * \\
+        \vdots & \ddots & * \\
+        0 & \cdots & *
+      \end{bmatrix} \in \M_n\C,
+    \]
+    where the last column (denoted by asterisks) is $\left[T \paren{\dfrac{v}{\norm{v}}}\right]_{\mathcal{B}}$.
+  \end{proof}
+  \newpage
+  \begin{theorem}{Spectral Theorem (for Normal Operators)}
+    Let $V$ be a finite-dimensional inner product space over $\C$, $T\colon V\to V$ normal. Then there exists an ordered orthonormal basis $\mathcal{C}$ for $V$ consisting of eigenvectors of $T$. In particular, $T$ is diagonalizable. Moreover, if $\mathcal{B}$ is an ordered orthonormal basis for $V$, then
+    \[
+      T_{\mathcal{C}} = [1_V]_{\mathcal{B},\mathcal{C}}[T]_{\mathcal{B}}[1_V]_{\mathcal{B},\mathcal{C}}^*.
+    \]
+  \end{theorem}
+  \begin{proof}
+    We induct on $n = \dim(V)$. When $n = 1$, the statement is immediate. Let $n > 1$. By the Fundamental Theorem of Algebra, there exists $\bar{\lam}\in \C$ a root of $f_{T^*}\in \C[t]$, and thus is an eigenvalue of $T^*$. Let $0\neq v\in E_{T^*}\paren{\bar{\lam}}$. By the lemma, $v\in E_T(\lam)$. Thus $(\C v)$ is both $T$-invariant and $T^*$-invariant. Hence by the New Key Lemma we know that $(\C v)^\perp$ is also both $T$-invariant and $T^*$-invariant. In particular, for all $x, y\in (\C v)^\perp$, we have
+    \[
+      \tup{x, T^*y} = \tup{Tx, y}
+    \]
+    and $\paren{T|_{(\C v)^\perp}}^*$ is the unique linear map 
+    \[
+      \paren{T|_{(\C v)^\perp}}^*\colon (\C v)^\perp\to (\C v)^\perp
+    \]
+    such that for all $x, y\in (\C v)^\perp$,
+    \begin{align*}
+      \tup{x, \paren{T|_{(\C v)^\perp}}^*y}_{(\C v)^\perp} &= \tup{T|_{(\C v)^\perp}x, y}_{(\C v)^\perp} \\
+                                                                 &= \tup{Tx, y}_V \\
+                                                                 &= \tup{x, T^*y}_V \\
+                                                                 &= \tup{x, T^*|_{(\C v)^\perp}y}_{(\C v)^\perp}.
+    \end{align*}
+    It follows by the uniqueness of the adjoint that $T^*|_{(\C v)^\perp} = \paren{T|_{(\C v)^\perp}}^*$. Hence we have
+    \[
+      T|_{(\C v)^\perp}\colon (\C v)^\perp\to (\C v)^\perp \text{ is also normal.}
+    \]
+    Since
+    \[
+      \dim(V) = \dim(\C v) + \dim((\C v)^\perp) = 1 + \dim((\C v)^\perp),
+    \]
+    by the Orthogonal Decomposition Theorem, by induction there exists an orthonormal basis $\mathcal{C}_0 = \set{v_2,\dotsc,v_n}$ for $(\C v)^\perp$ of eigenvectors of $T|_{(\C v)^\perp}$ hence of eigenvectors of $T$. It follows that
+    \[
+      \mathcal{C} = \set{\frac{v}{\norm{v}}, v_2,\dotsc,v_n}
+    \]
+    is an orthonormal basis for $V$ consisting of eigenvectors of $T$. If $\mathcal{B}$ is an orthonormal basis for $V$, then $[1_V]_{\mathcal{B},\mathcal{C}}* = [1_V]_{\mathcal{B},\mathcal{C}}\inv$, so
+    \[
+      T_{\mathcal{C}} = [1_V]_{\mathcal{B},\mathcal{C}}[T]_{\mathcal{B}}[1_V]_{\mathcal{B},\mathcal{C}}^*
+    \]
+    by the Change of Basis Theorem.
+  \end{proof}
+  \newpage
+  \begin{theorem}{Singular Value Theorem}
+    Let $F = \R$ or $\C$, $A\in F^{m\times n}$. Then there exists $U\in U_n(F)\ceq \set{B\in \M_nF\mid BB^* = I}$, $X\in U_mF$ such that
+    \[
+      X^*AU = D\ceq \begin{bmatrix}u_1 & \cdots & 0 \\\vdots & \ddots & \vdots\\ 0 & \cdots & 0\end{bmatrix}\in F^{m\times n}
+    \]
+    is ``diagonal'' (i.e., $D_{ij} = 0$ for all $i\neq j$) with $D_{ii} = 0$ for all $i > r$, $D_{ii} = \mu_i, i\leq r$ with
+    \[
+      u_1\geq \dotsb \geq u_r > 0 \quad \text{and}\quad r = \rank(A).
+    \]
+  \end{theorem}
+\end{document}
