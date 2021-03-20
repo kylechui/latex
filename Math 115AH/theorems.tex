@@ -213,6 +213,21 @@
     \end{align*}
     is an isomorphism. In particular, $\dim(L(V,W)) = mn$.
   \end{theorem}
+  \begin{proof}
+    Note that because the zero map is linear, it is in $L(V,W)$ and thus $L(V,W)$ is non-empty. We claim that $\varphi$ is linear. Let $\mathcal{B}=(v_1,\dotsc,v_n)$ and $\mathcal{C}=(w_1,\dotsc,w_m)$ be ordered bases for $V$ and $W$, respectively. Let $T_1, T_2$ be linear maps from $V$ to $W$, and $\alpha\in F$. Let the element in the $i$th row and $j$th column of $\varphi(\alpha T_1 + T_2)$ be $\lam_{i,j}$, the element in the $i$th row and $j$th column of $\varphi(T_1)$ be $\eta_{i,j}$, and the element in the $i$th row and $j$th column of $\varphi(T_2)$ be $\eps_{i,j}$. Then 
+    \begin{align*}
+      (\alpha T_1 + T_2)v_j &= \lam_{1,j}w_1 + \dotsb + \lam_{m,j}w_m \\
+      T_1v_j &= \eta_{1,j}w_1 + \dotsb + \eta_{m,j}w_m \\
+      T_2v_j &= \eps_{1,j}w_1 + \dotsb + \eps_{m,j}w_m. \\
+      \intertext{From these three equations, we have}
+      \lam_{1,j}w_1 + \dotsb + \lam_{m,j}w_m &= (\alpha T_1 + T_2)v_j \\
+      &= \alpha T_1v_j + T_2v_j \\
+      &= \alpha (\eta_{1,j}w_1 + \dotsb + \eta_{m,j}w_m) + \eps_{1,j}w_1 + \dotsb + \eps_{m,j}w_m \\
+      &= (\alpha \eta_{1, j} + \eps_{1, j})w_1 + \dotsb + (\alpha \eta_{m, j} + \eps_{m, j})w_m.
+    \end{align*}
+    Because $(w_1,\dotsc,w_m)$ is an ordered basis for $W$, and every vector has a unique representation according to any given basis, we have that $\lam_{i,j} = \alpha\eta_{i,j} + \eps_{i,j}$ for all $1\leq i\leq m$ and $1\leq j\leq n$. Thus $\varphi(\alpha T_1 + T_2) = \alpha \varphi(T_1) + \varphi(T_2)$ and $\varphi$ is linear. \par
+    We will now show that $\varphi$ is a bijection, first showing that it is injective. Suppose $\varphi(T) = 0$. Then $T(v_i) = 0$ for all $v_i\in \mathcal{B}$, so $Tv = 0$ for all $v\in V$. Thus $T$ is the zero transformation and $\ker(\varphi) = 0$. Therefore $\varphi$ is injective. We will now show that $\varphi$ is surjective. For every matrix in $F^{m\times n}$, consider mapping $v_i\in \mathcal{B}$ to the $i$th column of the matrix. Thus for ever matrix in $F^{m\times n}$, we have a linear transformation that maps to it, so $\varphi$ is surjective. Therefore $\varphi$ is a bijection and so an isomorphism.
+  \end{proof}
   \begin{theorem}{12.2}
     Let $V$, $W$, $U$ be finite-dimensional vector spaces over $F$ with ordered bases $\mathcal{B}$, $\mathcal{C}$, $\mathcal{D}$ respectively. If $T\colon V\to W$ and $S\colon W\to U$ are linear, then
     \[

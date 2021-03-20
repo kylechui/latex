@@ -217,30 +217,27 @@
     \]
     for some invertible matrix $C\in \M_nF$, i.e. $C = [1_V]_{\mathcal{B},\mathcal{C}}$.
   \end{theorem}
+  \begin{theorem}{Spectral Theorem (for Hermitian Operators) (Refined Version)}
+    Let $F = \R$ or $\C$, $V$ a finite-dimensional inner product space over $F$, $T\colon V\to V$ hermitian. Then there exists an orthonormal basis $\mathcal{B} = \set{v_1,\dotsc,v_n}$ for $V$ with each $v_i$, $i=1,\dotsc,n$ an eigenvector for some eigenvalue $\lam_i\in \R$, $i=1,\dotsc,n$ (not necessarily distinct). In particular, $T$ is diagonalizable.
+  \end{theorem}
   \begin{proof}
-    
+    We prove $\mathcal{B}$ exists by induction on $\dim(V) = n$. \par
+    Observe that for the $n = 1$ case, we have that $V= \vspan(v)$, for any non-zero $v\in V$. As $Tv\in \vspan(v)$, there exists an $\alpha\in F$ such that $Tv = \alpha v$, so $v\in E_T(\alpha)$. As $T$ is hermitian, $\alpha\in \R$ by the Hermitian Corollary, even if $F = \C$. Thus $\mathcal{B} = \set{\frac{v}{\norm{v}}}$ is a valid orthonormal basis for $V$. \par
+    Suppose the statement holds for some $n$, that is if $W$ is a finite-dimensional inner product space over $F$, $\dim(W) = n-1$, $T_0\colon W\to W$ hermitian, then there exists an orthonormal basis for $W$ of eigenvectors of $T_0$ and every eigenvalue of $T_0$ is real. Let $\mathcal{C}$ be an ordered orthonormal basis for $n$-dimensional $V$, which exists as $F = \R$ or $\C$. Let $A = [T]_{\mathcal{C}}\in \M_nF\sse \M_n\C$. Then for all $x, y\in \C^{n\times 1}$, we have that $Ax\cdot y = x\cdot Ay$ (because $T$ is hermitian). In other words, $A\colon \C^{n\times 1}\to \C^{n\times 1}$ is hermitian, where $\C^{n\times 1}$ is an inner product space over $\C$ via the dot product. By the Fundamental Theorem of Algebra, $f_A$ has a root $\lam\in \C$, hence $\lam$ is an eigenvalue of $A\colon \C^{n\times 1}\to \C^{n\times 1}$, which is hermitian. Thus by the Hermitian Corollary, we know that $\lam\in \R$. But
+    \[
+      f_T = f_{[T]_{\mathcal{C}}} = f_A,
+    \]
+    so $f_T$ has a real root $\lam\in \R$, if $F = \R$ or $\C$. Thus there exists a non-zero vector $v\in E_T(\lam)\sse V$ that is an eigenvector of $T$. Let $Fv = \vspan(v)\sse E_T(\lam)$. Then $Fv$ is $T$-invariant. By the Orthogonal Decomposition Theorem
+    \[
+      v = Fv \perp (Fv)^\perp
+    \]
+    and
+    \[
+      \dim(V) = \dim(Fv) + \dim(Fv)^\perp = 1 + \dim(Fv)^\perp.
+    \]
+    Hence $\dim(Fv)^\perp = n - 1$. By the Key Lemma, since $Fv$ is $T$-invariant and $T\colon V\to V$ is hermitian, $(Fv)^\perp$ is $T$-invariant. 
   \end{proof}
   \newpage
-  % \begin{theorem}{Spectral Theorem (for Hermitian Operators) (Refined Version)}
-  %   Let $F = \R$ or $\C$, $V$ a finite-dimensional inner product space over $F$, $T\colon V\to V$ hermitian. Then there exists an orthonormal basis $\mathcal{B} = \set{v_1,\dotsc,v_n}$ for $V$ with each $v_i$, $i=1,\dotsc,n$ an eigenvector for some eigenvalue $\lam_i\in \R$, $i=1,\dotsc,n$ (not necessarily distinct). In particular, $T$ is diagonalizable.
-  % \end{theorem}
-  % \begin{proof}
-  %   We prove $\mathcal{B}$ exists by induction on $\dim(V) = n$. \par
-  %   Observe that for the $n = 1$ case, we have that $V= \vspan(v)$, for any non-zero $v\in V$. As $Tv\in \vspan(v)$, there exists an $\alpha\in F$ such that $Tv = \alpha v$, so $v\in E_T(\alpha)$. As $T$ is hermitian, $\alpha\in \R$ by the Hermitian Corollary, even if $F = \C$. Thus $\mathcal{B} = \set{\frac{v}{\norm{v}}}$ is a valid orthonormal basis for $V$. \par
-  %   Suppose the statement holds for some $n$, that is if $W$ is a finite-dimensional inner product space over $F$, $\dim(W) = n-1$, $T_0\colon W\to W$ hermitian, then there exists an orthonormal basis for $W$ of eigenvectors of $T_0$ and every eigenvalue of $T_0$ is real. Let $\mathcal{C}$ be an ordered orthonormal basis for $n$-dimensional $V$, which exists as $F = \R$ or $\C$. Let $A = [T]_{\mathcal{C}}\in \M_nF\sse \M_n\C$. Then for all $x, y\in \C^{n\times 1}$, we have that $Ax\cdot y = x\cdot Ay$ (because $T$ is hermitian). In other words, $A\colon \C^{n\times 1}\to \C^{n\times 1}$ is hermitian, where $\C^{n\times 1}$ is an inner product space over $\C$ via the dot product. By the Fundamental Theorem of Algebra, $f_A$ has a root $\lam\in \C$, hence $\lam$ is an eigenvalue of $A\colon \C^{n\times 1}\to \C^{n\times 1}$, which is hermitian. Thus by the Hermitian Corollary, we know that $\lam\in \R$. But
-  %   \[
-  %     f_T = f_{[T]_{\mathcal{C}}} = f_A,
-  %   \]
-  %   so $f_T$ has a real root $\lam\in \R$, if $F = \R$ or $\C$. Thus there exists a non-zero vector $v\in E_T(\lam)\sse V$ that is an eigenvector of $T$. Let $Fv = \vspan(v)\sse E_T(\lam)$. Then $Fv$ is $T$-invariant. By the Orthogonal Decomposition Theorem
-  %   \[
-  %     v = Fv \perp (Fv)^\perp
-  %   \]
-  %   and
-  %   \[
-  %     \dim(V) = \dim(Fv) + \dim(Fv)^\perp = 1 + \dim(Fv)^\perp.
-  %   \]
-  %   Hence $\dim(Fv)^\perp = n - 1$. By the Key Lemma, since $Fv$ is $T$-invariant and $T\colon V\to V$ is hermitian, $(Fv)^\perp$ is $T$-invariant. 
-  % \end{proof}
   \begin{theorem}{New Key Lemma}
     Let $V$ be a finite-dimensional inner product space over $F$, $T\colon V\to V$ linear. Suppose that $V$ has an orthonormal basis and $W\sse V$ is a $T$-invariant subspace. Then $W^\perp\sse V$ is $T$-invariant. In particular,
     \[
