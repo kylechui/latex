@@ -1,3 +1,4 @@
+% Import packages
 \usepackage[margin=1in]{geometry}
 
 \usepackage{amssymb}
@@ -8,6 +9,7 @@
 \usepackage{hyperref}
 \usepackage{mathrsfs}
 \usepackage{mathtools}
+\usepackage{minted}
 \usepackage{standalone}
 \usepackage[many]{tcolorbox}
 \usepackage{tikz}
@@ -19,7 +21,7 @@
 
 \usetikzlibrary{decorations.pathreplacing}
 \tcbuselibrary{skins}
-
+% Declare math operators
 \DeclareMathOperator{\lcm}{lcm}
 \DeclareMathOperator{\proj}{proj}
 \DeclareMathOperator{\vspan}{span}
@@ -34,7 +36,7 @@
 \DeclareMathOperator{\dive}{div}
 \DeclareMathOperator{\row}{row}
 \DeclareMathOperator{\col}{col}
-
+% Macros for letters/variables
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
 \newcommand{\Q}{\ensuremath{\mathbb{Q}}}
@@ -46,7 +48,13 @@
 \newcommand{\nab}{\ensuremath{\nabla}}
 \newcommand{\eps}{\ensuremath{\varepsilon}}
 \newcommand{\es}{\ensuremath{\varnothing}}
-
+% Macros for math symbols
+\newcommand{\dx}[1]{\,\mathrm{d}#1}
+\newcommand{\inv}{\ensuremath{^{-1}}}
+\newcommand{\sm}{\setminus}
+\newcommand{\sse}{\subseteq}
+\newcommand{\ceq}{\coloneqq}
+% Macros for pairs of math symbols
 \newcommand{\abs}[1]{\ensuremath{\left\lvert #1 \right\rvert}}
 \newcommand{\paren}[1]{\ensuremath{\left( #1 \right)}}
 \newcommand{\norm}[1]{\ensuremath{\left\lVert #1\right\rVert}}
@@ -58,12 +66,6 @@
 
 \newcommand{\chapternum}{}
 \newcommand{\ex}[1]{\noindent\textbf{Exercise \chapternum.{#1}.}}
-
-\newcommand{\dx}[1]{\,\mathrm{d}#1}
-\newcommand{\inv}{\ensuremath{^{-1}}}
-\newcommand{\sm}{\setminus}
-\newcommand{\sse}{\subseteq}
-\newcommand{\ceq}{\coloneqq}
 
 \newcommand{\tsub}[1]{\textsubscript{#1}}
 \newcommand{\tsup}[1]{\textsuperscript{#1}}
@@ -185,5 +187,6 @@
       \end{array}
     \right]
   }
+
 \date{\the\year-\the\month-\the\day}
 \author{Kyle Chui}
