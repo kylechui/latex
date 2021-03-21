@@ -7,9 +7,9 @@
 \usepackage{enumitem}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
+\usepackage{listings}
 \usepackage{mathrsfs}
 \usepackage{mathtools}
-\usepackage{minted}
 \usepackage{standalone}
 \usepackage[many]{tcolorbox}
 \usepackage{tikz}
@@ -86,7 +86,6 @@
   {
     \end{tcolorbox}
   }
-
 \definecolor{exampleBackground}{RGB}{255,249,248}
 \definecolor{exampleAccent}{RGB}{158,60,14}
 \newenvironment{example}[1]
@@ -102,7 +101,6 @@
   {
     \end{tcolorbox}
   }
-
 \definecolor{theoremBackground}{RGB}{234,243,251}
 \definecolor{theoremAccent}{RGB}{0,116,183}
 \newenvironment{theorem}[1]
@@ -120,7 +118,6 @@
   {
     \end{tcolorbox}
   }
-
 \definecolor{noteBackground}{RGB}{244,249,244}
 \definecolor{noteAccent}{RGB}{34,139,34}
 \newenvironment{note}[1]
@@ -140,7 +137,6 @@
     {
   \end{tcolorbox}
   }
-
 \definecolor{lemmaBackground}{RGB}{255,247,234}
 \definecolor{lemmaAccent}{RGB}{255,153,0}
 \newenvironment{lemma}[1]
@@ -160,7 +156,6 @@
     {
   \end{tcolorbox}
   }
-
 \definecolor{definitionBackground}{RGB}{246,246,246}
 \newenvironment{definition}[1]
   {
@@ -187,6 +182,27 @@
       \end{array}
     \right]
   }
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\definecolor{codeBackground}{RGB}{253,246,225}
+\lstset{
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  backgroundcolor=\color{codeBackground},
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2
+}
 
 \date{\the\year-\the\month-\the\day}
 \author{Kyle Chui}
