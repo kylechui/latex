@@ -1,0 +1,188 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{~/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{CS32 Midterm $1$ Notes}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \tableofcontents
+  \newpage
+  \section{Algorithms and Data Structures}
+  \begin{definition}{Algorithms}
+    An \emph{algorithm} is a set of instructions/steps that solves a particular problem.
+  \end{definition}
+  Each algorithm operates on input data, and produces an output result. Algorithms can be classified by how long they take to run on particular input, and by the quality of their results. 
+  \begin{definition}{Data Structures}
+    A \emph{data structure} is the set of variable(s) that an algorithm uses to solve a problem.
+  \end{definition}
+  To solve a problem, you have $o$ design both the algorithms and the data structures together. You then need to provide a set of simple ``interface'' functions to let any programmer use them easily. We call this an ADT, or abstract data type.
+  \subsection{Abstract Data Types}
+  \begin{definition}{ADT}
+    An \emph{ADT} or \emph{abstract data type} is a coordinated group of data structures, algorithms, and interface functions that is used to solve a particular problem.
+  \end{definition}
+  In an ADT, the data structures and algorithms are kept secret, while the interface is public to enable the rest of the program to use the ADT. Typically, a program is built from a collection of ADTs, each of which solves a different sub-problem.
+  \subsubsection{ADTs in C++}
+  In C++, we use classes to define ADTs in our programs. Each C++ class can hold algorithms, data, and interface functions.
+  \begin{itemize}
+    \item Once the class has been defined, the rest of our program can treat the functions as a ``black box'', i.e. not knowing how exactly how the functions work.
+    \item All our program needs to do is call the functions in our class' public interface.
+    \item All of the underlying data structures and algorithms are hidden from the user.
+    \item The rest of the program can ignore the details of how things work and just use its features.
+  \end{itemize}
+  \begin{note}{}
+    The benefit of this is that you can change the implementation of the class as much as you want, and as long as the interface functions do what they're supposed to, nothing will break outside of the class. This reduces complexity by breaking down large, complex problems into smaller, self-contained chunks.
+  \end{note}
+  \newpage
+  \subsection{Defining a Class in C++}
+  We first write the outer shell of the class and give it a name, then give the class public and private variables/functions.
+  \begin{lstlisting}
+    // Nerd.h
+    class Nerd
+    {
+    public:
+      Nerd(int stink, int IQ) {
+        myStinkiness = stink;
+        myIQ = IQ;
+      }
+      void study (int hours) {
+        myStinkiness += 3*hours;
+        myIQ *= 1.01;
+      }
+      int getStinkyLevel() {
+        int total_stink = myIQ * 10 + myStinkiness;
+        return total_stink;
+      }
+    private:
+      int myStinkiness, myIQ;
+    };
+  \end{lstlisting}
+  \begin{note}{}
+    Don't forget the semicolon at the end of the class!
+  \end{note}
+  \subsection{Using a New Class}
+  Once we define a new class, we can use it to define variables like any traditional data type.
+  \begin{itemize}
+    \item The class defines a new data type like int, float, or string.
+    \item You typically define each class in its own \texttt{.h} file (``header file'') and put the file in the same folder as your \texttt{.cpp} files. For example, in a file titled \texttt{ucla.cpp}, we could have
+    \begin{lstlisting}
+      // ucla.cpp
+      #include "Nerd.h"
+      int main()
+      {
+        int num_nerds = 1;
+        Nerd david(30, 150);
+
+        david.study(10);
+      }
+    \end{lstlisting}
+    \item A header file is similar to a \texttt{.cpp} file except you typically only put class declarations and constants in it (you typically put the actual function bodies in your \texttt{.cpp} file).
+    \item To import the contents of a header file, just put \texttt{\#include "filename.h"} at the beginning of the file.
+    \item Once an instance of the class is defined, you can call its member functions, i.e. \texttt{study}.
+    \begin{note}{}
+      A class' primitive types start out with random values and not zero, so remember to initialise them with the constructor.
+    \end{note}
+    \item You typically only use member variables to store permanent attributes of a class, i.e. \texttt{myStinkiness} and \texttt{myIQ}.
+    \item All functions in the \texttt{public} section of your class can be seen/called by all parts of your program.
+    \item All functions and data defined in the \texttt{private} section of your class are hidden from the rest of your program.
+    \begin{definition}{Encapsulation}
+      Hiding the internal implementation details of a class (from the rest of your program) is called \emph{encapsulation}.
+    \end{definition}
+  \end{itemize}
+  \section{Constructors and Destructors}
+  \textbf{Main Idea.} A constructor is used to reset an object's member variables when the object is first created; otherwise they'd be random. An object will often reserve memory slots from the operating system while it runs, so we need a destructor function to free that memory when we delete the object.
+  \subsection{Constructor Basics}
+  We create a constructor just like any other function, but it doesn't have a return type (not even \texttt{void}).
+  \begin{lstlisting}
+    // Gassy
+    class Gassy
+    {
+    public:
+      // The constructor
+      Gassy(int age, bool ateBeans)
+      {
+        m_age = age;
+        m_ateBeans = ateBeans;
+      }
+
+      int getFartsPerHr()
+      {
+        if (m_ateBeans == true)
+          return(100);
+        return(3 * m_age);
+      }
+    private:
+      // Member variables
+      int m_age;
+      bool m_ateBeans;
+    };
+  \end{lstlisting}
+  \lstset{backgroundcolor=\color{noteBackground}}
+  \begin{lstlisting}
+    int main()
+    {
+      Gassy betty(18, true); // Requires two arguments!
+
+      Gassy alan; // error!
+    }
+  \end{lstlisting}
+  A class can have many different constructors, as long as they have different parameters and/or types. 
+  \begin{definition}{Constructor Overloading}
+    When we have multiple constructors in a class, we call this \emph{constructor overloading}.
+  \end{definition}
+  \begin{note}{}
+    If you have a constructor that doesn't take any parameters, you may omit the parentheses when creating an instance of the class.
+  \end{note}
+  \subsection{When Constructors are Called}
+  \begin{itemize}
+    \item When you create a new variable of a class.
+    \item A constructor is called $N$ times when you create an array of size $N$ (that holds the object type).
+    \item A constructor is called when you use \texttt{new} to dynamically allocate a new variable.
+    \item If a variable is declared in a loop, it is newly constructed during \emph{every} iteration.
+    \item A constructor is \emph{not called} when you just define a pointer variable.
+  \end{itemize}
+  \subsection{Destructors}
+  Just as every class has a constructor, every class also has a destructor function (it may have \emph{exactly one} destructor). It does not have any parameters. To define a constructor function, place a tilde $n$ front of the name of the class, i.e.
+  \lstset{backgroundcolor=\color{codeBackground}}
+  \begin{lstlisting}
+    class Gassy
+    {
+    public:
+      ~Gassy()
+      {
+        // Destructor code goes here
+      }
+    private:
+      ...
+    }
+  \end{lstlisting}
+  \subsubsection{Why Do We Need Destructors?}
+  If we did not have a destructor, everytime we create a new instance of the class we would take up more and more memory, eventually running out of memory on our system. We need to use destructors to free up memory taken up by deleted objects.
+  \begin{definition}{Memory leak}
+    A \emph{memory leak} occurs when you delete an object without first clearing all of the reserved space for that object, effectively ``leaking'' memory.
+  \end{definition}
+  \subsection{When Must You Have a Destructor?}
+  \begin{center}
+    \begin{tabular}{cc}
+      Any time a class allocates & Your class must have \\
+      a system resource\ldots & a destructor that\ldots \\[10pt]
+      Reserves memory using  & Frees the allocated memory \\
+      the \texttt{new} command & with the \texttt{delete} command \\[10pt]
+      Opens a disk file & Closes the disk file \\[10pt]
+      Connects to another computer  & Disconnects from the \\
+      over the network & other computer 
+    \end{tabular}
+  \end{center}
+  \newpage
+  \section{Class Composition}
+  \textbf{Main Idea.} Classes inside classes. Need I say more?
+  \subsection{Construction Order}
+  \begin{itemize}
+    \item C++ always constructs member variables first, in the order that they're defined in the class.
+    \item Then, C++ constructs the outer class after the member variables have been initialised/constructed.
+  \end{itemize}
+  \begin{note}{}
+    This makes sense. Since the outer class constructor might need the member variables for construction, they must be constructed before the outer variable.
+  \end{note}
+\end{document}
