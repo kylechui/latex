@@ -1,1 +1,1 @@
-These are my personal notes from my CS 32 class at UCLA, and are based on [Carey Nachenberg's lecture slides](http://careynachenberg.weebly.com/cs-slides.html). These are mainly meant for review purposes, and not to actually learn the content.
+These are my personal notes from my CS 32 class at UCLA, and are based on [Carey Nachenberg's lecture slides](http://careynachenberg.weebly.com/cs-slides.html). These are mainly meant for review purposes, and should probably not be used to actually *learn* the content.
