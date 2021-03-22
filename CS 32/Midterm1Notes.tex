@@ -185,4 +185,86 @@
   \begin{note}{}
     This makes sense. Since the outer class constructor might need the member variables for construction, they must be constructed before the outer variable.
   \end{note}
+  \subsection{Destruction Order}
+  \begin{itemize}
+    \item C++ always runs the main/outer object's destructor first. Its member variables are still valid when the outer destructor runs, so the outer destructor can run properly.
+    \item After the outer class's destructor runs, then C++ runs the destructors of the member variables in the \emph{reverse order} they were constructed.
+  \end{itemize}
+  \begin{note}{Auto-generated Constructors/Destructors}
+    If we leave out a constructor and/or destructor, C++ auto-generates an empty constructor and/or destructor for your class. Be careful, because the default constructor will not initialise your primitive member variables. If your class has any primitives you should define your own constructor and initialise them.
+  \end{note}
+  \subsection{Initialiser Lists}
+  Any time you have a member variable that requires \emph{one or more} parameters for construction, you \emph{must} add an initaliser list to \emph{all} of your outer class's constructor. The syntax is as follows:
+  \begin{lstlisting}
+    class HungryNerd
+    {
+    public:
+      HungryNerd() :
+        myBelly(10), myBrain(150), myAge(19) // Runs the corresponding constructors
+                                                 // with the given values
+      {
+        myBelly.eat();
+      }
+    private:
+      Belly myBelly;
+      Brain myBrain;
+      int myAge;
+    };
+  \end{lstlisting}
+  \newpage
+  \section{Miscellaneous Topics}
+  \subsection{Include Etiquette}
+  \begin{enumerate}[label=(\alph*)]
+    \item \emph{Never} include a \texttt{.cpp} file in another \texttt{.cpp} or \texttt{.h} file.
+    \item \emph{Never} put a \texttt{using namespace} command in a header file. This is called ``namespace pollution'' and is bad because it forces \texttt{.cpp} files that include the header file to use its namespace. Instead, put all of the \texttt{using} commands into your C++ files.
+    \item \emph{Never} assume that a header file will include some other header file for you. If whoever manages the header file decides to change its implementation, then that will break your code.
+  \end{enumerate}
+  \subsection{Preprocessor Directives (Include Guards)}
+  \textbf{Problem.} If our header file that we are including already includes another dependency that we are already including in our \texttt{.cpp} file, then we will have included that dependency twice! This causes issues like defining methods multiple times, etc.
+  \begin{enumerate}[label=(\alph*)]
+    \item First, we use \texttt{\#define} to define new constants, i.e. \texttt{\#define FOOBAR\_H}
+    \item We then use the commands \texttt{\#ifdef} and/or \texttt{\#ifndef} to check if a variable has been defined (or not). To close the if statement, we use the \texttt{\#endif} command.
+  \end{enumerate}
+  Putting both of the above steps, we have something like this:
+  \begin{lstlisting}
+    #ifndef FOOBAR_H // Only run the following if FOOBAR_H isn't defined
+    #define FOOBAR_H // Define FOOBAR_H
+    // Notice that this only runs if it has not been run before
+    class FooBar
+    {
+    public:
+      some stuff...
+    private:
+      some other stuff...
+    };
+    #endif // End the if statement
+  \end{lstlisting}
+  We call this an ``include guard'', because it ``guards'' the class and prevents it from being included multiple times.
+  \subsection{When to Include .h Files}
+  You must include the header file (containing the full definition of the class) when:
+  \begin{itemize}
+    \item You define a regular variable of that class' type.
+    \item You use the variable in any way (call a method on it, return it, etc).
+  \end{itemize}
+  You must do this because C++ needs to know the class's details in order to actually do anything with instances of that class. \\[10pt]
+  You must give a class declaration (just \texttt{class ClassName;}) when:
+  \begin{itemize}
+    \item You use the class to define a parameter to a function.
+    \item You use the class as the return type for a function.
+    \item You use the class to define a pointer or reference variable.
+  \end{itemize}
+  Since you aren't actually using any of the methods of the class nor creating any instances of the class, you don't need to include the full class definition.
+  \begin{note}{}
+    The reason why we don't always include the full class definition is because the header file might be large (i.e. thousands of lines) or two classes refer to each other (causing a loop).
+  \end{note}
+  \subsection{Default Arguments}
+  You can specify a default number of arguments for a function by defining it in the function header, i.e.
+  \begin{lstlisting}
+    void doSomething(int varOne = 0, string varTwo = "some value")
+    {
+      do something with the parameters...
+    }
+  \end{lstlisting}
+  You can leave out the default parameter if you want and C++ will automatically pass in the default value, i.e. \texttt{doSomething(5);} or \texttt{doSomething();}. However, you can only pass the first $k$ elements as defaults, and may not skip defaults, i.e. \texttt{doSomething(,"some string")} is invalid. \\[10pt]
+  One final quirk about default arguments is that if the $j$th parameter has a default value, then all of the subsequent parameters ($j+1$ to $n$) \emph{must} also have default values.
 \end{document}
