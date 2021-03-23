@@ -36,7 +36,7 @@
   \end{note}
   \newpage
   \subsection{Defining a Class in C++}
-  We first write the outer shell of the class and give it a name, then give the class public and private variables/functions.
+  We first write the outer shell of the class and give it a name, then give the class public and private variables/functions. An example of a \texttt{Nerd} class header file is given below:
   \begin{lstlisting}
     // Nerd.h
     class Nerd
@@ -267,4 +267,166 @@
   \end{lstlisting}
   You can leave out the default parameter if you want and C++ will automatically pass in the default value, i.e. \texttt{doSomething(5);} or \texttt{doSomething();}. However, you can only pass the first $k$ elements as defaults, and may not skip defaults, i.e. \texttt{doSomething(,"some string")} is invalid. \\[10pt]
   One final quirk about default arguments is that if the $j$th parameter has a default value, then all of the subsequent parameters ($j+1$ to $n$) \emph{must} also have default values.
+  \section{Addresses and Pointers}
+  \textbf{Main Idea.} We use pointers to access/modify variables defined in other parts of our program. Just like every house has a street address, every variable has a memory address. A pointer is just a variable that holds another variable's address.
+  \subsection{Every Variable Has an Address}
+  Every time you define a variable in your program, the compiler finds an unused address in memory and reserves one or more bytes there to store your variable.
+  \begin{note}{}
+    The address of a variable is defined to be the \emph{lowest} address in memory where the variable is stored. For instance, if a variable takes up bytes \texttt{1006} to \texttt{1009}, then its address is \texttt{1006}.
+  \end{note}
+  \subsection{Getting the Address of a Variable}
+  We can get the address of a variable by using C++'s \texttt{\&} operator. If you place an \texttt{\&} before a variable name in a program statement, it means ``give me the numerical address of the variable''. 
+  \subsection{Pointers vs. Regular Variables}
+  Instead of holding a regular value, a pointer variable holds \emph{another variable's address}.
+  \begin{itemize}
+    \item The way you define a pointer variable is by putting an asterisk \texttt{*} in front of the variable ame when you define it, i.e. \texttt{int* p} or \texttt{string* s}.
+    \begin{note}{}
+      You may also see the asterisk right next to the variable like \texttt{int *p}---there's no difference. I prefer to put it next to the type because I like to pretend that \texttt{int*} is its own type, i.e. a pointer to an integer.
+    \end{note}
+    \item The way you understand pointers is by reading from right to left, i.e. \texttt{string* s} reads ``\texttt{s} is a pointer to a string variable''.
+    \item If a pointer \texttt{p} points to the address of some variable \texttt{myVar}, we may just say ``\texttt{p} points to \texttt{myVar}'' or ``\texttt{p} holds a value of [whatever \texttt{myVar}'s address is]''.
+  \end{itemize}
+  \subsection{Reading and Writing with Pointers}
+  We can use the pointer and the star operator (also an asterisk) to read/write the other variable. If you have a pointer \texttt{p}, then \texttt{*p} (notice how the operator is on the left) is the variable that \texttt{p} points to. For example, consider the following code:
+  \begin{lstlisting}
+    int main()
+    {
+      int m_var = 42;
+
+      int *p;
+      p = &m_var; // #1
+
+      cout << *p; // #2
+      *p = 5; // #3
+    }
+  \end{lstlisting}
+  In line \#1, we make \texttt{p} point to \texttt{m\_var}. That way, when we print \texttt{*p} on line \#2, we are really just printing out \texttt{m\_var}'s value, $42$. Finally on line \#3, we change the value of the variable that \texttt{p} points to (\texttt{m\_var}) to $5$. \\[10pt]
+  One use case of this is using pointers to modify variables inside other functions. Without pointers, the variables that are inside a function get destroyed when the function ends, and won't affect anything outside the function.
+  \begin{note}{}
+    Passing by reference is actually just the same thing as passing a pointer, but with simpler notation. Internally, C++ actually uses a pointer to handle this.
+  \end{note}
+  Always initialise your pointers to \texttt{nullptr} to avoid issues with dereferencing. If you dereference a pointer without first giving it a value, C++ will just go to a random location in memory and do your operation there, instead of where you wanted (and won't throw an error). To avoid this, always initialise pointers to be null so that if you do accidentally dereference without giving it a value, you'll immediately get an error.
+  \subsection{Arrays and Pointers}
+  \begin{itemize}
+    \item Just like any other variable, every array has an address in memory.
+    \item However, you don't need to use the \texttt{\&} operator to get an array's address.
+    \item Instead, you may just write the array's name (without the square brackets) to get its address.
+  \end{itemize}
+  In C++, a pointer to an array can be used just as if it were an array itself. For example, if \texttt{ptr} is a pointer to an array, then \texttt{ptr[j]} and \texttt{*(ptr + j)} are identical, meaning ``get the $j$th element from the array''. The reason that the latter works is because incrementing a pointer moves it $n$ bytes forwards, not just one (where $n$ is the size of the type that the pointer is pointing to). For example, incrementing a pointer to an array of \texttt{int}s would move the pointer forwards by $4$ bytes, whereas incrementing a pointer to an array of \texttt{double}s would move the pointer forwards by $8$ bytes.
+  \subsection{Pointers with Classes/Structures}
+  We can also use pointers to access classes/structures. We can first use \texttt{*} to get the object, and then the dot operator (\texttt{.}) to access member variables/functions. Alternatively, you can use C++'s \texttt{->} operator to access fields. For example, \texttt{(*ptr).function()} and \texttt{ptr->function()} are the same. \\[10pt]
+  When you create a class, C++ implicitly creates a \texttt{this} pointer that points to the object that you are working in. \\[10pt]
+  Just like you can have pointers to variables, you can also have pointers to functions, using this funky syntax:
+  \[
+    \underbrace{\texttt{void}}_{\mathclap{\text{return type}}}\texttt{(*f)}\overbrace{\texttt{(int)}}^{\mathclap{\text{parameter type}}}\texttt{;}
+  \]
+  You can then use the pointer the same way that you would use the function. When initialising the pointer, you may choose to include or omit the \texttt{\&} operator, i.e. \texttt{f = \&squared;} or \texttt{f = cubed;}.
+  \section{Dynamic Memory Allocation}
+  \textbf{Main Idea.} Often a program won't know how much memory it needs to solve a problem until it's actually running. In these cases, C++ allows you to reserve a chunk of memory on-demand, and gives you a pointer to it. You can use the pointer to access the memory, and then unreserve it afterwards (\texttt{delete} it).
+  \subsection{The New and Delete Commands (For Arrays)}
+  The \texttt{new} command can be used to allocate an arbitrary amount of memory for an array.
+  \begin{enumerate}
+    \item First, define a new pointer variable.
+    \item Then determine the size of the array you need.
+    \item Then use the \texttt{new} command to reserve the memory. Your pointer gets the address of the memory.
+    \item Free the memory when you're done.
+  \end{enumerate}
+  You can see the steps above in the following code:
+  \begin{lstlisting}
+    int main()
+    {
+      int* arr; // Step 1
+      int size;
+
+      cin >> size; // Step 2
+
+      arr = new int[size]; // Step 3
+
+      arr[0] = 10;
+      arr[2] = 75;
+
+      delete [] arr; // Step 4
+    }
+  \end{lstlisting}
+  \begin{note}{}
+    Don't forget the square brackets when you're deleting an array!
+  \end{note}
+  The \texttt{new} command requires two pieces of information:
+  \begin{enumerate}
+    \item What type of array you want to allocate.
+    \item How many slots you want in your array.
+  \end{enumerate}
+  \begin{note}{}
+    Make sure that the pointer's type is the same as the type of array that you are creating!
+  \end{note}
+  You can also dynamically allocate memory for non-array objects, i.e. \texttt{int* ptr = new int;}. When you delete such a pointer, you don't need the square brackets, and can just do \texttt{delete ptr;}.
+  \section{Copy Construction}
+  \textbf{Main Idea.} Copy construction is when we create (or construct) a new object by copying the value of an existing object.
+  \subsection{Implementing a Copy Constructor}
+  Just like we can define a constructor that initialises our object with certain values, we can also define a constructor that takes in a parameter of \emph{an existing object}. For example, the copy constructor of a \texttt{Circ} class might look like:
+  \begin{lstlisting}
+    Circ(const Circ& old)
+    {
+      // Copy over the values from the other Circ
+      m_x = old.m_x;
+      m_y = old.m_y;
+      m_rad = old.m_rad;
+    }
+  \end{lstlisting}
+  We can then use this constructor by writing \texttt{Circ c2(c1);}.
+  \begin{note}{}
+    There's no issue with accessing another \texttt{Circ}'s private member variables, because both objects are of the type \texttt{Circ}.
+  \end{note}
+  \begin{note}{}
+    The parameter to your copy constructor should \emph{always} be \texttt{const}! This forces the coder to not modify the original object. Furthermore, the parameter to your copy constructor \emph{must} be a reference to the class type.
+  \end{note}
+  C++ allows you to use an alternative syntax to \texttt{Circ b(a);}---you may also write \texttt{Circ b = a;} to mean the same thing. \\[10pt]
+  If you don't define your own copy constructor, C++ will provide one for you that just copies all of the member variables from the old instance to the new instance. However, this is just a byte-for-byte copy of the data, otherwise known as a ``shallow copy''.
+  \begin{note}{}
+    If your object contains any member variables that require dynamically allocated memory, you must write your own copy constructor, otherwise your two objects will both have pointers that point to the same member variable. If you decide to change the variable's value in one object, it will change for the other object.
+  \end{note}
+  \newpage
+  \section{Assignment Operators}
+  \textbf{Main Idea.} Just as we need a copy constructor to create a new class variable froman existing one, we often need to create a special assignment funcion to correctly change an existing variable's value to another existing variable. It will automatically be called when we use \texttt{=}.
+  \subsection{Implementing an Assignment Operator}
+  Just like the copy constructor, we need a special syntax for our assignment operator, as follows:
+  \begin{lstlisting}
+    Circ &operator=(const Circ& src)
+    {
+      if (this == &src) // #1
+        return *this;
+      // Copy over the member variables
+      m_x = src.m_x;
+      m_y = src.m_y;
+      m_rad = src.m_rad;
+      return *this; // Don't forget this line!
+    }
+  \end{lstlisting}
+  In line \#1, we need to do an \emph{alias check}---we are essentially checking to see if we are setting a variable equal to itself. If we don't do this, then things will break when we have dynamically allocated member variables (in particular, when deleting the old contents of the object).
+  \section{Linked Lists}
+  \textbf{Main Idea.} A linked list reserves a new memory block for each item as it's added, and links blocks together with pointers. This allows a linked list to hold a variable number of items, unlike an array.
+  \subsection{Why Arrays Suck}
+  \begin{itemize}
+    \item You can't increase their size.
+    \item Inserting/removing an item from the middle of an array is horrible.
+  \end{itemize}
+  \subsection{Implementing a Linked List}
+  We implement linked lists like a scavenger hunt---each item in the list contains a value and a pointer to the next item in the list (contained in a structure, maybe a \texttt{Node}).
+  \begin{note}{}
+    The \texttt{delete} keyword will delete what a pointer \emph{points to}, not the pointer itself.
+  \end{note}
+  \subsection{Downsides of Linked Lists}
+  \begin{itemize}
+    \item Linked lists are \emph{much more} complex than arrays.
+    \item To access the $k$th item, you must first traverse through the first $k-1$ items (no instant access).
+    \item To add an item at the end of the list, you must first traverse through all $n$ existing nodes.
+  \end{itemize}
+  \subsection{Doubly Linked Lists}
+  To speed up operations performed near the end of a linked list, we can add a pointer to each node that points to the \emph{previous} item, in addition to the pointer that points to the next item. We can then add a tail pointer to allow us to quickly access elements near the end of a linked list. However, this not only makes the code more complicated, but also takes up more space.
+  \subsubsection{Linked Lists with a Dummy Node}
+  \begin{itemize}
+    \item Get rid of the head pointer.
+    \item Add a node member variable to your class, called \texttt{dummy}.
+    \item Update the member functions to use the dummy node instead of the head pointer (this will simplify your code by removing edge cases).
+  \end{itemize}
 \end{document}
