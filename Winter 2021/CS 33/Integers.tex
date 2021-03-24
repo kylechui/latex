@@ -1,0 +1,193 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{~/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Integers}
+  \subsection{Encoding Integers}
+  \subsubsection{Bits to Integers}
+  For unsigned integers, we can just use a summation of powers of two to express integers, given by
+  \[
+    B2U(x) = \sum_{i=0}^{w-1}x_i\cdot 2^i.
+  \]
+  For signed integers, we use the \emph{Two's complement} form, where we treat the first bit as negative (otherwise known as the ``sign bit''), and take the complement of the non-negative bit representation of our integer. It is given by the equation
+  \[
+    B2T(x) = -x_{w-1}\cdot 2^{w-1} + \sum_{i=0}^{w-2}x_i\cdot 2^i.
+  \]
+  \subsubsection{Numeric Ranges}
+  There's a limited range of numbers that we can represent using our bit representations, because we only use a finite number of bits. For unsigned values, this ranges from 
+  \[
+    \underbrace{000\ldots 0}_{0} \quad \text{to}\quad \underbrace{111\ldots 1}_{2^w - 1}.
+  \]
+  For Two's complement values, this ranges from
+  \[
+    \underbrace{100\ldots 0}_{-2^{w-1}} \quad \text{to}\quad \underbrace{011\ldots 1}_{2^{w-1}-1}.
+  \]
+  Another interesting number to remember is that $111\ldots 1$ represents $-1$ in Two's complement form.
+  \subsubsection{Values for Different Word Sizes}
+  We have that $\abs{T_{\text{min}}} = T_{\text{max}}+1$ and $U_{\text{max}} = 2\cdot T_{\text{max}}+1$. \\[10pt]
+  In C, the header file \texttt{limits.h} declares constant such as:
+  \begin{itemize}
+    \item \texttt{ULONG\_MAX}
+    \item \texttt{LONG\_MAX}
+    \item \texttt{LONG\_MIN}
+  \end{itemize}
+  \begin{note}{}
+    The values provided by this header file are platform specific.
+  \end{note}
+  \subsubsection{Unsigned and Signed Numeric Values}
+  \begin{itemize}
+    \item For non-negative values, unsigned and signed values have the same bit representations.
+    \item Every bit pattern represents a unique integer value, and every representable integer has a unique bit encoding.
+    \item These mappings are invertible, which is to say that $U2B(x) = B2U\inv(x)$ and $T2B(x) = B2T\inv(x)$.
+  \end{itemize}
+  \subsection{Converting and Casting Integers}
+  \subsubsection{Mapping Between Signed and Unsigned}
+  To convert between signed and unsigned values, we first convert to the bit representation of the value and then to the other form. In other words,
+  \[
+    T2U = B2U\circ T2B \quad \text{and}\quad U2T = B2T\circ U2B.
+  \]
+  We are maintaining the same \emph{bit pattern} when we are doing our mappings.
+  \begin{note}{}
+    This does not necessarily preserve the value of the bit pattern, as the same bit pattern does not always mean the same value in Two's complement and unsigned forms.
+  \end{note}
+  \subsubsection{Relation Between Signed and Unsigned}
+  The main difference when going from unsigned to signed is that the most significant bit goes from being a large positive weight to a large negative weight. Thus the value difference between unsigned and Two's complement is $2^{w-1} + 2^{w-1} = 2^w$ when the most significant digit is a one.
+  \subsubsection{Signed vs. Unsigned in C}
+  \begin{itemize}
+    \item Constants are by default considered to be signed integers, and are only unsigned if explicitly written that way (using a ``U'' as a suffix, i.e. \texttt{4294967259U}).
+    \item Casting
+    \begin{itemize}
+      \item Explicit casting between signed and unsigned values is the same as our previously defined functions $U2T$ and $T2U$.
+      \begin{lstlisting}
+  int tx, ty;
+  unsigned ux, uy;
+  tx = (int) ux;
+  uy = (unsigned) ty;
+      \end{lstlisting}
+      \item Implicit casting also occurs via assignments and procedure calls.
+      \begin{lstlisting}
+  tx = ux;
+  uy = ty;
+      \end{lstlisting}
+    \end{itemize}
+  \end{itemize}
+  \subsubsection{Casting Surprises}
+  \begin{itemize}
+    \item Expression evaluation
+    \begin{itemize}
+      \item If there is a mix of unsigned an signed values in a single expression, \emph{signed values will be implicitly cast to unsigned values}.
+      \item This includes the comparison operators: \texttt{<}, \texttt{>}, \texttt{==}, \texttt{<=}, \texttt{>=}
+    \end{itemize}
+  \end{itemize}
+  \subsubsection{Summary}
+  \begin{itemize}
+    \item When converting, the bit pattern is maintained, but reinterpreted.
+    \item This can have unexpected effects, such as being off by $2^w$.
+  \end{itemize}
+  \begin{note}{}
+    In an expression containing signed and unsigned integers, \texttt{int} is cast to \texttt{unsigned}.
+  \end{note}
+  \subsection{Expanding and Truncating Integers}
+  \subsubsection{Sign Extension}
+  Given a $w$-bit signed integer $x$, we want to convert it to a $w+k$-bit integer with the same value. To do this, we make $k$ copies of the sign bit:
+  \[
+    X' = \underbrace{x_{w-1}\ldots x_{w-1}}_{\mathclap{\text{$k$ copies of the most significant bit}}}x_{w-1}x_{w-2}\ldots x_0
+  \]
+  When converting from a smaller to larger integer data type, C will automatically perform the sign extension.
+  \subsubsection{Truncation}
+  In truncation, bits are removed and the result is reinterpreted. For unsigned integers, this is the same as just performing the modulo operator on the value, and for signed integers it is \emph{similar} to the modulo operator. For small numbers this yields the expected behaviour.
+  \subsection{Adding, Negating, Multiplying, and Shifting}
+  \subsubsection{Unsigned Addition}
+  If both of the operands have $w$ bits, then the ``true sum'' would have to contain $w+1$ bits. The discard carry, denoted as $\mathrm{UAdd}_w(u, v)$, contains $w$ bits (by tossing out the most significant bit). \\[10pt]
+  The standard addition function ignores the carry output, and this is the same as performing modular arithmetic:
+  \[
+    \mathrm{UAdd}_w(u, v) = u + v \pmod{2^w}
+  \]
+  \subsubsection{Two's Complement Addition}
+  If the sum gets to be too positive or too negative, the sum will overflow in both directions. In other words, if a number gets to be too negative, it will overflow and become a large positive integer. If a number gets to be too positive, it will overflow and become a large (in magnitude) negative integer.
+  \subsubsection{Multiplication}
+  We want to compute the product of two $w$-bit numbers $x$ and $y$ (which can either be signed or unsigned). However, exact results can be larger than $w$ bits:
+  \begin{itemize}
+    \item Unsigned multiplication can yield results of up to $2w$ bits, where
+    \[
+      0\leq x\cdot y\leq \paren{2^w - 1}^2 = 2^{2w} - 2^{w+1} + 1.
+    \]
+    \item The minimum for Two's complement multiplication can have up to $2w - 1$ bits, where
+    \[
+      x\cdot y\geq \paren{-2^{w-1}}\cdot \paren{2^{w-1}-1} = -2^{2w - 2} + 2^{w-1}.
+    \]
+    \item The maximum for Two's complement multiplication can have up to $2w$ bits, where
+    \[
+      x\cdot y\leq \paren{-2^{w-1}}^2 = 2^{2w - 2}.
+    \]
+  \end{itemize}
+  Thus to maintain exact results, we would need to keep expanding the string size everytime we take a product. This can be done in software using ``arbitrary precision'' packages.
+  \subsubsection{Unsigned Multiplication in C}
+  As mentioned before, the true product of two $w$-bit strings will (potentially) have $2w$ bits, so C discards the first $w$ bits. We denote this as $\mathrm{UMult_w(u, v)}$. Again this is modular arithmetic, so
+  \[
+    \mathrm{UMult_w(u, v)} = u\cdot v\pmod{2^w}.
+  \]
+  \subsubsection{Signed Multiplicaton in C}
+  We still ignore the first $w$ bits, but we could have overflowed in either the postive or negative directions. The lower bits are the same. 
+  \subsubsection{Power-of-2 Multiplication Using Shifts}
+  Notice that left shifting an bit vector $k$ times yields the same result as if you had multiplied it by $2^k$. In other words, $u\ll k = u\cdot 2^k$.
+  \begin{note}{}
+    This only works if there is no overflow in the multiplication process.
+  \end{note}
+  \begin{example}{Shifting to Multiply}
+    \begin{itemize}
+      \item \texttt{u\phantom{ }$\ll$ 3 == u * 8}
+      \item \texttt{(u\phantom{ }$\ll$ 5) - (u\phantom{ }$\ll$ 3) == u * 24}
+    \end{itemize}
+  \end{example}
+  Most machines shift and add faster than they can multiply, and the compiler generates this code automatically.
+  \subsubsection{Unsigned Power-of-2 Division Using Shifts}
+  This is done by performing a logical right shift on a vector (replace empty slots with zeroes). We have $u\gg k = \floor{\frac{u}{2^k}}$.
+  \subsubsection{When To Use Unsigned}
+  \begin{itemize}
+    \item Use it when performing modular arithmetic.
+    \item Use it when using bits to represent sets.
+  \end{itemize}
+  \begin{note}{}
+    Don't use it without fully understanding the consequences, otherwise you can (read: will) have unintended behaviour.
+  \end{note}
+  \section{Representations in Memory, Pointers, and Strings}
+  Remember that the way that memory is organised in a computer is byte-oriented. \\[10pt]
+  Programs refer to data by address:
+  \begin{itemize}
+    \item Conceptually, envision memory as a very large array of bytes (not actually true).
+    \item An address is like an index into that array, and a pointer variable stores an address.
+  \end{itemize}
+  \begin{note}{}
+    The system provides private address spaces to each ``process''. Thus a program can interact with its own data, but not that of other programs.
+  \end{note}
+  \subsection{Machine Words}
+  Any given computer has a given ``word size'', which is the nomial size of integer-valued data. Up until recently, most machines used $32$ bits as their word size (limits addresses to 4GB), but nowadays machines have $64$-bit word size (up to $18$ exabytes of addressable memory). Machines still support multiple data formats, using fractions or multiples of their word size to keep the number of bytes an integer.
+  \subsection{Byte Ordering}
+  There are two main conventions: Big Endian and Little Endian. In the former, the least significant byte has the highest address (more intuitive), and in the latter, the least significant byte has the lowest address.
+  \begin{note}{}
+    Big Endian---most to least significant. Little Endian---least to most significant.
+  \end{note}
+  \subsection{Examining Data Representations}
+  Here is some code that will print out the hexadecimal value at a given pointer location:
+  \begin{lstlisting}
+  typedef unsigned char *pointer;
+  void show_bytes(pointer start, size_t len) {
+    size_t i;
+    for (i = 0; i < len; i++)
+      printf("%p\t0x%.2x\n", start+i, start[i]);
+    printf("\n");
+  }
+  \end{lstlisting}
+  In the above code, \texttt{\%p} prints a pointer and \texttt{\%x} prints a hexadecimal. 
+  \begin{note}{}
+    Different compilers and machines assign different locations to objects. You might even get different results each time the program is run.
+  \end{note}
+  \subsection{Representing Strings}
+  In C, each string is represented by an array of characters, which are encoded using the ASCII format. In ASCII, the first $7$ bits encode the character, while the last bit is $0$, which denotes the end of the character. Byte ordering is also not an issue for strings, as endian ordering only matters for individual values, not the array as a whole.
+\end{document}
