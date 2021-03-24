@@ -1,0 +1,107 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{~/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Bits and Bytes}
+  \subsection{Representing Data in Bits and Bytes}
+  \subsubsection{Everything is Bits}
+  \begin{itemize}
+    \item Every bit is either a $0$ or a $1$.
+    \item We can use sets of bits to not only tell the computer what to do (give it instructions), but also represent data.
+    \item We use bits because they are easy to store, and reliably transmitted on noisy/inaccurate wires.
+  \end{itemize}
+  \begin{example}{Counting in Binary} \\
+    We can use bits to represent numbers in base $2$, or the binary number system. Thus we can use a set of bits to encode any number we want.
+  \end{example}
+  \subsubsection{Encoding Byte Values}
+  \begin{definition}{Byte}
+    A \emph{byte} is $8$ bits, and can be thought of as a string of 0's and 1's of length eight.
+  \end{definition}
+  \begin{itemize}
+    \item In binary, a byte can range from $00000000_2$ to $11111111_2$.
+    \item In decimal, a byte can range from $0_{10}$ to $255_{10}$.
+    \item In hexadecimal (base 16), a byte can range from $00_{16}$ to FF\tsub{16}.
+    \begin{note}{}
+      In hexadecimal, once you finish using the digits $1$ through $9$, you use the letters A through F to represent values of $10_{10}$ through $15_{10}$. In C, we append ``0x'' before a string to indicate that it is a hexadecimal number (which may either be uppercase or lowercase). For example, FA1D37B\tsub{16} would be written as ``0xFA1D37B'' or ``0xfa1d37b''.
+    \end{note}
+  \end{itemize}
+  All data is just a long string of bits, so any value that we get out of it depends on the \emph{context} of what we are reading in (a \texttt{double}, \texttt{char}, \texttt{int}, etc).
+  \subsection{Bit Manipulation}
+  \subsubsection{Boolean Algebra}
+  Developed by George Boole in the 19th century, \emph{Boolean Algebra} is an algebraic representation of logic, where 1's denote a ``true'' value and 0's denote a ``false'' value. Some common logical operations are described in the tables below:
+  \[\begin{array}{cccc}
+    \underbrace{\begin{tabular}{c|cc}
+        \& & 0 & 1 \\
+        \hline
+        0 & 0 & 0 \\
+        1 & 0 & 1
+    \end{tabular}}_{\text{``and'' operator}} &\qquad
+    \underbrace{\begin{tabular}{c|cc}
+        $\vert$ & 0 & 1 \\
+        \hline
+        0 & 0 & 1 \\
+        1 & 1 & 1
+    \end{tabular}}_{\text{``or'' operator}} &\qquad
+    \underbrace{\begin{tabular}{c|c}
+        \texttildelow & \\
+        \hline
+        0 & 1 \\
+        1 & 0
+    \end{tabular}}_{\text{``not'' operator}} &\qquad
+    \underbrace{\begin{tabular}{c|cc}
+        \^{} & 0 & 1 \\
+        \hline
+        0 & 0 & 1 \\
+        1 & 1 & 1
+    \end{tabular}}_{\text{``xor'' operator}}
+  \end{array}\]
+  \begin{note}{}
+    The ``xor'' operator stands for ``exclusive-or'', meaning ``either one or the other, but not both''.
+  \end{note}
+  All of these operations are applied ``bitwise'' on bit vectors---the $j$th bit of the result is obtained by applying the operation on the $j$th bit of the input(s).
+  \begin{example}{Representing an Manipulating Sets} \\[10pt]
+    Representation
+    \begin{itemize}
+      \item A width $w$ bit vector can represent a subset of $\set{0,\dotsc,w-1}$.
+      \item We do this by letting $a_j = 1$ if $j$ is in our set.
+      \item For example, the bit vector $01101001$ would represent the set $\set{0, 3, 5, 6}$. We read from right to left, and we see that the 0th, 3rd, 5th, and 6th entries contain 1's.
+    \end{itemize}
+    Operations
+    \begin{itemize}
+      \item There are nice parallels between operations on bit vectors and operations on sets, i.e.
+      \begin{itemize}
+        \item \& on bit vectors is the same as set intersection.
+        \item $\vert$ on bit vectors is the same as set union.
+        \item \^{} on bit vectors is the same as the symmetric difference.
+        \item \texttildelow\phantom{ }on bit vectors is the same as taking the complement of a set.
+      \end{itemize}
+    \end{itemize}
+  \end{example}
+  \subsubsection{Bit-Level Operations in C}
+  The four boolean operations covered thus far are available in C, and can apply to any ``integral data type''(long, int, char, etc). The operators view the arguments as bit vectors and are applied bit-wise.
+  \subsubsection{Logic Operations in C}
+  \begin{note}{}
+    These are different than the bit-level operations, so don't get them confused.
+  \end{note}
+  There are also the logical operators in C, namely \texttt{\&\&}, \texttt{||}, \texttt{!}.
+  \begin{itemize}
+    \item These view $0$ as ``false'', and anything non-zero as ``true''.
+    \item They always return $0$ or $1$, and can terminate early.
+  \end{itemize}
+  \subsubsection{Shift Operations}
+  The shift operator allows you to ``move'' the bits in a bit vector to give them higher or lower significance.
+  \begin{itemize}
+    \item The left shift($x\ll y$) shifts the bit vector $x$ to the left by $y$ positions (extra bits on the left are tossed out and empty slots are filled with 0's).
+    \item The right shift($x\gg y$) shifts the bit vector $x$ to the right by $y$ positions (extra bits on the right are tossed out).
+    \begin{itemize}
+      \item In a logical shift, the empty slots are filled with 0's.
+      \item In an arithmetic shift, the empty slots are filled with duplicates of the most significant bit on the left.
+    \end{itemize}
+    \item It is undefined behaviour if the shift amount is negative or greater than or equal to the string size.
+  \end{itemize}
+\end{document}
