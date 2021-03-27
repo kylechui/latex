@@ -126,14 +126,14 @@
       x\cdot y\leq \paren{-2^{w-1}}^2 = 2^{2w - 2}.
     \]
   \end{itemize}
-  Thus to maintain exact results, we would need to keep expanding the string size everytime we take a product. This can be done in software using ``arbitrary precision'' packages.
+  Thus to maintain exact results, we would need to keep expanding the string size every time we take a product. This can be done in software using ``arbitrary precision'' packages.
   \subsubsection{Unsigned Multiplication in C}
   As mentioned before, the true product of two $w$-bit strings will (potentially) have $2w$ bits, so C discards the first $w$ bits. We denote this as $\mathrm{UMult_w(u, v)}$. Again this is modular arithmetic, so
   \[
     \mathrm{UMult_w(u, v)} = u\cdot v\pmod{2^w}.
   \]
-  \subsubsection{Signed Multiplicaton in C}
-  We still ignore the first $w$ bits, but we could have overflowed in either the postive or negative directions. The lower bits are the same. 
+  \subsubsection{Signed Multiplication in C}
+  We still ignore the first $w$ bits, but we could have overflowed in either the positive or negative directions. The lower bits are the same. 
   \subsubsection{Power-of-2 Multiplication Using Shifts}
   Notice that left shifting an bit vector $k$ times yields the same result as if you had multiplied it by $2^k$. In other words, $u\ll k = u\cdot 2^k$.
   \begin{note}{}
@@ -167,7 +167,7 @@
     The system provides private address spaces to each ``process''. Thus a program can interact with its own data, but not that of other programs.
   \end{note}
   \subsection{Machine Words}
-  Any given computer has a given ``word size'', which is the nomial size of integer-valued data. Up until recently, most machines used $32$ bits as their word size (limits addresses to 4GB), but nowadays machines have $64$-bit word size (up to $18$ exabytes of addressable memory). Machines still support multiple data formats, using fractions or multiples of their word size to keep the number of bytes an integer.
+  Any given computer has a given ``word size'', which is the nominal size of integer-valued data. Up until recently, most machines used $32$ bits as their word size (limits addresses to 4GB), but nowadays machines have $64$-bit word size (up to $18$ exabytes of addressable memory). Machines still support multiple data formats, using fractions or multiples of their word size to keep the number of bytes an integer.
   \subsection{Byte Ordering}
   There are two main conventions: Big Endian and Little Endian. In the former, the least significant byte has the highest address (more intuitive), and in the latter, the least significant byte has the lowest address.
   \begin{note}{}
