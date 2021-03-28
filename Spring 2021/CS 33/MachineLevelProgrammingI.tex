@@ -1,0 +1,88 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{~/github/latex/Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Machine-Level Programming I: Basics}
+  \subsection{History of Intel processors and architectures}
+  \begin{itemize}
+    \item Dominate laptop/desktop/server market
+    \item Evolutionary design
+    \begin{itemize}
+      \item Backwards compatible (up until $8086$, introduced in 1978).
+      \item More features were added as time went on.
+    \end{itemize}
+    \item Complex instruction set computer (CISC)
+    \begin{itemize}
+      \item Many different instructions with many different formats.
+      \item Hard to match the performance of Reduced Instruction Set Computers (RISC).
+      \item Intel has performance, but not great at power efficiency.
+    \end{itemize}
+  \end{itemize}
+  \subsection{C, assembly, machine code}
+  \begin{definition}{Instruction Set Architecture (ISA)}
+    An \emph{Instruction Set Architecture} is the parts of a processor design that one needs to understand or write assembly/machine code, i.e. instruction set specification, registers.
+  \end{definition}
+  \begin{definition}{Microarchitecture}
+    The \emph{microarchitecture} is the implementation of the architecture, i.e. cache sizes and core frequency.
+  \end{definition}
+  \begin{definition}{Code Forms}
+    There are two code forms---\emph{machine code}, which are the byte-level programs that a processor executes, and \emph{assembly code}, which is a text representation of machine code.
+  \end{definition}
+  Some examples of ISAs include x86, IA32, x86-64, and ARM.
+  \subsubsection{Assembly/Machine Code View}
+  CPU:
+  \begin{itemize}
+    \item PC: Program Counter
+    \begin{itemize}
+      \item Keeps track of which instruction will be run next, and is called the ``RIP'' for x86-64 architectures.
+    \end{itemize}
+    \item The Register file is used for heavily used program data (because it is very fast).
+    \item Condition codes are special registers that store status information about the most recent arithmetic or logical operation, and are used for conditional branching.
+  \end{itemize}
+  Memory:
+  \begin{itemize}
+    \item We think of memory as a large array where each element is a byte.
+    \item It holds code and user data, and uses a stack to support procedure calls.
+  \end{itemize}
+  \begin{center}\resizebox{9cm}{!}{\import{./Figures}{AssemblyMachineCodeView.pdf_tex}}\end{center}
+  \subsubsection{Turning C into Object Code}
+  We first code in human-readable files, such as \texttt{.c} files, and then compile them into an executable program (which is a binary and not human-readable).
+  \begin{enumerate}
+    \item We start with a C program, which is written in text.
+    \item The code gets compiled into an Asm program, which is still in text.
+    \item The Asm program goes through an assembler, which turns it into an object program (a binary).
+    \item The object program finally goes through a linker, which turns it into an executable program (also a binary).
+  \end{enumerate}
+  \subsubsection{Assembly Characteristics: Data Types}
+  \begin{itemize}
+    \item ``Integer'' data of $1$, $2$, $4$, or $8$ bytes (includes data values and addresses).
+    \item Floating point data of $4$, $8$, or $10$ bytes.
+    \item Code: Byte sequences encoding series of instructions.
+    \item No aggregate types such as arrays or structures (just contiguously allocated bytes in memory).
+  \end{itemize}
+  \subsubsection{Assembly Characteristics: Operations}
+  \begin{itemize}
+    \item Perform arithmetic functions on register or memory data.
+    \item Transfer data between memory and register.
+    \item Transfer control (changing the instruction pointer of the program counter).
+  \end{itemize}
+  \subsubsection{Object Code}
+  Assembler:
+  \begin{itemize}
+    \item Translates \texttt{.s} into \texttt{.o}.
+    \item Binary encoding of each instruction.
+    \item Nearly-complete image of executable code.
+    \item Missing linkages between code in different files.
+  \end{itemize}
+  Linker:
+  \begin{itemize}
+    \item Resolves references between files.
+    \item Combines with static run-time libraries (e.g. code for \texttt{malloc}, \texttt{printf}).
+    \item Some libraries are \emph{dynamically linked} (but linking occurs when program begins execution).
+  \end{itemize}
+\end{document}
