@@ -1,6 +1,7 @@
 % Import packages
 \usepackage[margin=1in]{geometry}
 
+\usepackage[many]{tcolorbox}
 \usepackage{amssymb, amsthm}
 \usepackage{comment}
 \usepackage{enumitem}
@@ -9,9 +10,8 @@
 \usepackage{listings}
 \usepackage{mathrsfs, mathtools}
 \usepackage{standalone}
-\usepackage[many]{tcolorbox}
-\usepackage{tikz}
 \usepackage{tikz-cd}
+\usepackage{tikz}
 \usepackage{xcolor}
 
 \usepackage{import}
@@ -35,7 +35,7 @@
 \DeclareMathOperator{\row}{row}
 \DeclareMathOperator{\col}{col}
 % Macros for letters/variables
-\renewcommand{\tilde}{\raisebox{0.6ex}{\texttildelow}}
+\renewcommand{\tilde}{\raisebox{0.4ex}{\resizebox{2ex}{!}{\texttildelow}}}
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
 \newcommand{\Z}{\ensuremath{\mathbb{Z}}}
 \newcommand{\Q}{\ensuremath{\mathbb{Q}}}

@@ -1,5 +1,5 @@
 \documentclass[class=article, crop=false]{standalone}
-\input{~/github/latex/Preamble}
+\input{../../Preamble}
 
 \fancyhf{}
 \lhead{Kyle Chui}
@@ -110,6 +110,13 @@
   \]
   \subsubsection{Two's Complement Addition}
   If the sum gets to be too positive or too negative, the sum will overflow in both directions. In other words, if a number gets to be too negative, it will overflow and become a large positive integer. If a number gets to be too positive, it will overflow and become a large (in magnitude) negative integer.
+  \begin{note}{}
+    To negate a number in Two's complement form, first take it's bit complement and add one. This is because we know that
+    \[
+      x + \tilde x = 11\ldots 1_2 = -1,
+    \]
+    so $-x = \tilde x + 1$.
+  \end{note}
   \subsubsection{Multiplication}
   We want to compute the product of two $w$-bit numbers $x$ and $y$ (which can either be signed or unsigned). However, exact results can be larger than $w$ bits:
   \begin{itemize}

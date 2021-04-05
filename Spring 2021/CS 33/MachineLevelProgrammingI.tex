@@ -1,5 +1,5 @@
 \documentclass[class=article, crop=false]{standalone}
-\input{~/github/latex/Preamble}
+\input{../../Preamble}
 
 \fancyhf{}
 \lhead{Kyle Chui}
@@ -85,4 +85,122 @@
     \item Combines with static run-time libraries (e.g. code for \texttt{malloc}, \texttt{printf}).
     \item Some libraries are \emph{dynamically linked} (but linking occurs when program begins execution).
   \end{itemize}
+  \subsection{Analysing Object Code}
+  In the following examples, we are analysing the function \texttt{sumstore}.
+  \subsubsection{Using the Disassembler}
+  The command here would be \texttt{objdump -d sumstore}.
+  \begin{itemize}
+    \item It analyses the bit pattern for the series of instructions, and then products an approximate rendition of the assembly code. 
+    \item Can be run on either a \texttt{.out} (complete executable) or \texttt{.o} file. 
+  \end{itemize}
+  \subsubsection{Alternate Disassembly Using gdb}
+  The commands here would be:
+  \begin{verbatim}
+    gdb sum
+    disassemble sumstore
+  \end{verbatim}
+  This will produce a list of locations and actions done (in assembly code), but not the actual bits inside each address. To see the first $14$ bytes of \texttt{sumstore}, you can call \texttt{x/14xb sumstore}.
+  \begin{note}{}
+    Anything that can be interpreted as executable code can be disassembled, but reverse-engineering for many programs is illegal.
+  \end{note}
+  \subsection{x86-64 Integer Registers}
+  Of the $16$ registers listed below for a 64-bit system, the first eight share space with older 32-bit registers. You can reference the first four bytes of the first eight 64-bit registers by replacing the ``r'' with an ``e'' (i.e. \texttt{\%rax} $\to$ \texttt{\%eax}). For the other eight 64-bit registers, you append a \texttt{d} at the end (i.e. \texttt{\%r13} $\to$ \texttt{\%r13d}).
+  \begin{center}\begin{tabular}{cccccccc}
+    \texttt{\%rax} & \texttt{\%rbx} & \texttt{\%rcx} & \texttt{\%rdx} & \texttt{\%rsi} & \texttt{\%rdi} & \texttt{\%rsp} & \texttt{\%rbp} \\
+    \texttt{\%r8} & \texttt{\%r9} & \texttt{\%r10} & \texttt{\%r11} & \texttt{\%r12} & \texttt{\%r13} & \texttt{\%r14} & \texttt{\%r15}
+  \end{tabular}\end{center}
+  \begin{note}{}
+    The \texttt{\%rsp} register is the stack pointer register, and thus is the only one (for the purposes of this class) that cannot be used as a general purpose register.
+  \end{note}
+  \subsection{Some History: IA32 Registers}
+  In older IA32 machines, the \texttt{\%ebp} register was also reserved to point at the top of the stack, in addition to the \texttt{\%esp} register being reserved as the stack pointer register. Furthermore the 32-bit registers could be decomposed even further by removing the \texttt{e} from the beginning of the register name (i.e. \texttt{\%edi} $\to$ \texttt{\%di}). Finally, the first four 16-bit registers (\texttt{\%ax}, \texttt{\%cx}, \texttt{\%dx}, \texttt{\%bx}) could all be split into ``high'' and ``low'' registers, i.e. \texttt{\%cx} could be split into \texttt{\%ch} and \texttt{\%cl}.
+  \subsection{Moving Data}
+  To move data with assembly code, we have the \texttt{movq source, dest} command.
+  \begin{note}{}
+    The \texttt{q} in \texttt{movq} stands for ``quad word'', or a 64-bit quantity. There is also \texttt{movl} for ``long word'', or a 32-bit quantity, etc.
+  \end{note}
+  \subsubsection{Operand Types}
+  The \texttt{movq} command takes two parameters for its source and destination, which can either be registers, immediates, or memory locations.
+  \begin{itemize}
+    \item Immediates are constant integer data, just like constants in C, although they are prefixed with a \texttt{\$}, like \texttt{\$0x400}.
+    \begin{itemize}
+      \item They are encoded with $1$, $2$, or $4$ bytes.
+    \end{itemize}
+    \item Registers are one of the $16$ integer registers mentioned earlier.
+    \begin{itemize}
+      \item We already know that \texttt{\%rsp} is reserved for special use, but some of the other registers also have special use cases for particular instructions.
+    \end{itemize}
+    \item Memory is $8$ consecutive bytes of memory at the address given by the register, i.e. \texttt{(\%rax)}. There are also various other ``address modes''.
+  \end{itemize}
+  \subsection{\texttt{movq} Operand Combinations}
+  In the following diagram, the first column indicates the source, the second the destination, the third an example of assembly code, and the final an example of C code.
+  \[
+    \texttt{movq} \begin{cases}
+      \text{Immediate} & \begin{cases}\begin{aligned}
+        \text{Register}&&& \texttt{movq \$0x4, \%rax} && \texttt{temp = 0x4;} \\
+        \text{Memory} &&& \texttt{movq \$-147, (\%rax)} && \texttt{*p = -147;}
+      \end{aligned}\end{cases} \\[15pt]
+        \text{Register} & \begin{cases}\begin{aligned}
+          \text{Register}&&& \texttt{movq \%rax, \%rdx} && \texttt{temp2 = temp1;} \\
+          \text{Memory}&&& \texttt{movq \%rax, (\%rdx)} && \texttt{*p = temp;}
+        \end{aligned}\end{cases} \\[15pt]
+        \text{Memory} & \begin{aligned} 
+          \hphantom{\begin{cases}\end{cases}}\text{Register} &&& \texttt{movq (\%rax), \%rdx} && \texttt{temp = *p;}
+        \end{aligned}
+    \end{cases}
+  \]
+  \begin{note}{}
+    You \emph{cannot} do memory-memory transfer with a single instruction.
+  \end{note}
+  \subsection{Memory Addressing Modes}
+  The first two methods below are simple, and the final the most general form of memory addressing.
+  \begin{itemize}
+    \item Normal: The register \texttt{R} specifies the memory address, and \texttt{(R) = Mem[Reg[R]]} dereferences the pointer. \\
+    For example, we have \texttt{movq (\%rcx), \%rax}.
+    \item Displacement: The register \texttt{R} specifies the start of the memory region, and the constant displacement \texttt{D} specifies the offset. The syntax is \texttt{D(R) = Mem[Reg[R] + D]}. \\
+    For example, we have \texttt{movq 8(\%rbp), \%rdx}.
+    \item Most General Form: \texttt{D(Rb, Ri, S)} which translates to \texttt{Mem[Reg[Rb] + S*Reg[Ri] + D]}.
+    \begin{itemize}
+      \item \texttt{D} is a constant ``displacement'' of $1$, $2$, or $4$ bytes.
+      \item \texttt{Rb} is the base register (any of the $16$ integer registers).
+      \item \texttt{Ri} is the index register, which can be any register \emph{but} \texttt{\%rsp}.
+      \item \texttt{S} is the scale, which is $1$, $2$, $4$, or $8$.
+    \end{itemize}
+  \end{itemize}
+  \section{Arithmetic and Logical Operations}
+  \subsection{Address Computation Instruction}
+  The \texttt{leaq src, dst} command takes in two parameters:
+  \begin{itemize}
+    \item \texttt{src} is an address mode expression that we just covered.
+    \item \texttt{dst} is the address denoted by that expression.
+  \end{itemize}
+  \begin{note}{}
+    You are essentially computing the address referred to by \texttt{src}, and then setting \texttt{dst} equal to that address. You are \emph{not} dereferencing anything when using \texttt{leaq}.
+  \end{note}
+  This has several use cases, such as computing addresses without a memory reference (i.e. translation of \texttt{p = \&x[i];}) or computing arithmetic expressions of the form \texttt{x + k*y}, where \texttt{k} is $1$, $2$, $4$, or $8$.
+  \subsection{Some Arithmetic Operations}
+  \begin{itemize}
+    \item Two Operand Instructions
+    \begin{center}\begin{tabular}{lll}
+      \texttt{addq} & Dest = Dest + Src \\
+      \texttt{subq} & Dest = Dest - Src \\
+      \texttt{imulq} & Dest = Dest * Src \\
+      \texttt{salq} & Dest = Dest $\ll$ Src & Also called \texttt{shlq}\\
+      \texttt{sarq} & Dest = Dest $\gg$ Src & Arithmetic Shift\\
+      \texttt{shrq} & Dest = Dest $\gg$ Src & Logical Shift\\
+      \texttt{xorq} & Dest = Dest \^{} Src \\
+      \texttt{andq} & Dest = Dest \& Src \\
+      \texttt{orq} & Dest = Dest $\vert$ Src
+    \end{tabular}\end{center}
+    \item One Operand Instructions
+    \begin{center}\begin{tabular}{ll}
+      \texttt{incq} & Dest = Dest + 1 \\
+      \texttt{decq} & Dest = Dest $-$ 1 \\
+      \texttt{negq} & Dest = $-$Dest \\
+      \texttt{notq} & Dest = \tilde Dest
+    \end{tabular}\end{center}
+  \end{itemize}
+  \begin{note}{}
+    There is no distinction between signed and unsigned int because these are all bit-level manipulations.
+  \end{note}
 \end{document}

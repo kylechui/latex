@@ -1,0 +1,69 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Machine-Level Programming II: Control}
+  \subsection{Control: Condition Codes}
+  \subsubsection{Processor State (x86-64, Partial)}
+  The information about the currently executing program is stored in the $16$ integer registers.
+  \begin{itemize}
+    \item Temporary data can be stored in most of the registers.
+    \item The location of the runtime stack is stored in \texttt{\%rsp}.
+    \item The location of the current code control point (what command is currently being executed) is stored inside the \texttt{\%rip} register.
+    \item The status of the recent tests (condition codes)
+    \begin{itemize}
+      \item CF---Carry Flag
+      \item ZF---Zero Flag
+      \item SF---Sign Flag
+      \item OF---Overflow Flag
+    \end{itemize}
+    These four condition codes allow us to create and make more complex comparison operators.
+  \end{itemize}
+  \subsection{Implicit Setting of Condition Codes}
+  Condition codes can be implicitly set by arithmetic operations (you can think of this as a side effect of the operations).
+  \begin{itemize}
+    \item CF is set if there is a carry out from the most significant bit (unsigned overflow).
+    \item ZF is set if the result of the operation is zero.
+    \item SF is set if the result is less than zero (as a signed integer).
+    \item OF is set if there is signed overflow in the MSB.
+  \end{itemize}
+  The condition codes are not set by the \texttt{leaq} instruction.
+  \subsection{Explicit Setting of Condition Codes}
+  \begin{itemize}
+    \item Explicit setting by compare instruction
+    \item Explicit setting by test instruction
+  \end{itemize}
+  Neither of the above write to a destination. The zero flag is set when \texttt{a\&b == 0}, and the signed flag is set when \texttt{a\&b < 0}.
+  \newpage
+  \subsection{Reading Condition Codes}
+  The \texttt{setX} sets the lowest-order byte of the destination to a zero $r$ one based on combinations of the other condition codes, and does not change the other $7$ bytes. 
+  \begin{center}\begin{tabular}{c|c|c}
+    SetX & Condition & Description \\
+    \hline
+    \texttt{sete} & \texttt{ZF} & Equal/Zero \\
+    \texttt{setne} & \texttt{\tilde ZF} & Not Equal/Not Zero \\
+    \texttt{sets} & \texttt{SF} & Negative \\
+    \texttt{setns} & \texttt{\tilde SF} & Non-negative \\
+    \texttt{setg} & \texttt{\tilde (SF\^{}OF)\&\tilde ZF} & Greater (Signed) \\
+    \texttt{setge} & \texttt{\tilde (SF\^{}OF)} & Greater or Equal (Signed) \\
+    \texttt{setl} & \texttt{(SF\^{}OF)} & Less (Signed) \\
+    \texttt{setle} & \texttt{(SF\^{}OF) | ZF} & Less or Equal (Signed) \\
+    \texttt{seta} & \texttt{\tilde CF\&\tilde ZF} & Above (unsigned) \\
+    \texttt{setb} & \texttt{CF} & Below (unsigned) \\
+  \end{tabular}\end{center}
+  \begin{note}{}
+    There are different \texttt{setX} commands for comparing signed vs unsigned integers.
+  \end{note}
+  You can access to lowest-order byte in an x86-64 register:
+  \begin{itemize}
+    \item For the first four registers, remove the \texttt{r} and the \texttt{x}, and append an \texttt{l}, i.e. \texttt{\%rax} $\to$ \texttt{\%al}.
+    \item For the next four registers, remove the \texttt{r} and append an \texttt{l}, i.e. \texttt{\%rsp} $\to$ \texttt{\%spl}.
+    \item For the final eight registers, just append a \texttt{b}, i.e. \texttt{\%r14} $\to$ \texttt{\%r14b}.
+  \end{itemize}
+  Because the \texttt{setX} commands only ever modify the lowest-order bit, these commands usually need to be combined with other commands. For instance, the \texttt{movzbl} command will move from one register to another, but if the first is smaller, pad the remaining bits with zeroes. For instance, \texttt{movzbl \%al, \%eax} will pad the other bits of \texttt{\%rax} with zeroes.
+\end{document}
