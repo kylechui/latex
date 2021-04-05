@@ -1,0 +1,55 @@
+\documentclass{article}
+\input{~/github/latex/Preamble}
+
+\fancyhf{}
+\setlength{\headheight}{24pt}
+\lhead{Discussion 1C \\Page \thepage}
+\rhead{Kyle Chui \\UID: 605538785}
+\pagestyle{fancy}
+\pagenumbering{gobble}
+
+\title{Week $1$ Discussion}
+
+\begin{document}
+  \maketitle
+  \newpage
+  \pagenumbering{arabic}
+  \begin{problem}{1}
+    What is the direction of the magnetic force on a positive charge that moves as shown in the figure below?
+  \end{problem}
+  The direction of the magnetic force is to the left. The field is pointing out of the page and the positively-charged particle is moving down the page, so by the right-hand rule the force must be pointing to the left.
+  \newpage
+  \begin{problem}{2}
+    What is the direction of the velocity of a negative charge that experiences the magnetic force shown in the figure below, assuming it moves perpendicular to $\vec{B}$?
+  \end{problem}
+  The particle is negatively charged, so we must use left-hand rule (or modified right-hand rule). The field is coming out of the page, and the net force is pointing up, so the velocity of the particle must be to the right.
+  \newpage
+  \begin{problem}{3}
+    An alpha-particle ($m = 6.64\cdot 10^{-27}$ kg, $q = 3.2\cdot 10^{-19}$ C) travels in a circular path of radius $35.2$ cm in a uniform magnetic field of magnitude $1.01$ T. What is the speed of the particle?
+  \end{problem}
+  We know that the magnetic force is acting as a centripetal force on the particle, so 
+  \begin{align*}
+    F_C &= F_B \\
+    \frac{mv^2}{r} &= qvB \\
+    v &= \frac{rqB}{m} \\
+    v &= \frac{0.352\cdot 3.2\cdot 10^{-19}\cdot 1.01}{6.64\cdot 10^{-27}} \\
+    \Aboxed{v &= 1.71\cdot 10^7 \,\frac{\mathrm{m}}{\mathrm{s}}.}
+  \end{align*}
+  \newpage
+  \begin{problem}{4}
+    An electron moving with a velocity $\vec{v} = (4\hat{\imath}+3\hat{\jmath}+2\hat{k})\cdot 10^6$ m/s enters a region where there is a uniform electric field and a uniform magnetic field. The magnetic field is given by $\vec{B} = (1.0\hat{\imath}-2.0\hat{\jmath}+4\hat{k})\cdot 10^{-2}$ T. If the electron travels through the region at a constant velocity, what is the electric field?
+  \end{problem}
+  Since the electron is travelling through the region at a constant velocity, we know that the magnitude of the net force on the particle is equal to zero. Furthermore, the only two forces acting on the particle are the electric and magnetic forces, so we know that they must be equal in magnitude and opposing each other. Thus we have
+  \begin{align*}
+    \vec{F}_E &= -\vec{F}_B \\
+    q\vec{E} &= -q\vec{v}\times \vec{B} \\
+    \vec{E} &= -\vec{v}\times \vec{B} \\
+    \vec{E} &= -\begin{vmatrix}
+      \hat{\imath} & \hat{\jmath} & \hat{k} \\
+      4\cdot 10^6 & 3\cdot 10^6 & 2\cdot 10^6 \\
+      1\cdot 10^{-2} & -2\cdot 10^{-2} & 4\cdot 10^{-2}
+    \end{vmatrix} \\
+    \vec{E} &= -\paren{\paren{12\cdot 10^4 + 4\cdot 10^4}\hat{\imath} - \paren{16\cdot 10^4 - 2\cdot 10^4}\hat{\jmath} + \paren{-8\cdot 10^4 - 3\cdot 10^4}\hat{k}} \\
+    \Aboxed{\vec{E} &= (-1.6\hat{\imath} + 1.4\hat{\jmath} + 1.1\hat{k})\cdot 10^5 \,\frac{\mathrm{N}}{\mathrm{C}}.}
+  \end{align*}
+\end{document}

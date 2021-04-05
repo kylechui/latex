@@ -1,0 +1,28 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 4}
+  \subsection{Current Loops in Magnetic fields: Force and Torque}
+  \subsubsection{Uniform Magnetic Field Perpendicular to the Loop}
+  Consider a fictional square loop of wire with side $L$, where the current flowing through the loop is $I$. We denote $\odot$ to be out of the page, and $\otimes$ to be into the page. We will use the equations $\vec{F} = I\vec{L}\times \vec{B}$ and $\vec{\tau}=\vec{r}\times \vec{F}$, and assume that we have a constant, uniform $\vec{B}$ field.
+  \begin{center}\resizebox{10cm}{!}{\import{./Figures}{Lecture4D1.pdf_tex}}\end{center}
+  \begin{center}\begin{tabular}{c|c|c|c|c|c|c}
+    $\vec{B}$ & $\vec{F}_\text{left}$ & $\vec{F}_\text{top}$ & $\vec{F}_\text{right}$ & $\vec{F}_\text{bottom}$ & $\vec{F}_\text{net}$ & $\vec{\tau}_\text{net}$ \\
+    \hline
+    $\otimes$ & $\leftarrow$ & $\uparrow$ & $\rightarrow$ & $\downarrow$ & $0$ & $0$ \\
+    $\uparrow$ & $0$ & $\odot$ & $0$ & $\otimes$ & $0$ & $\hat{\imath}\paren{\frac{L}{2}BIL\cdot 2} = (BIL^2)\hat{\imath}$
+  \end{tabular}\end{center}
+  The magnetic moment $\mu$ is given by $\mu = IA$, where $A$ is the area of the loop (in this case, $L = A^2$). We use this $\mu$ to find the torque, and we have $\tau = \mu B$ or $\vec{\tau} = \vec{\mu}\times \vec{B}$. The magnetic moment is defined as perpendicular to the surface of the loop. \par
+  For the example above, the magnetic moment must be \emph{into the page}. We can find this by using the right hand rule, where you point your thumb in the direction of the current and curl your fingers around to find the direction of the moment.
+  \subsubsection{Generalisation to a Loop of Any Shape}
+  We can approximate an irregularly shaped loop of wire by breaking it into smaller, rectangular loops of wire. 
+  \begin{note}{}
+    If the currents of the rectangular loops are all travelling in the same direction, the currents inside of the outer loop will cancel, leaving only the current around the perimeter of the outside loop.
+  \end{note}
+\end{document}

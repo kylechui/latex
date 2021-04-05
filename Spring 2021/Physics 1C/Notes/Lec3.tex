@@ -1,0 +1,75 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 3}
+  \subsection{Gauss' Law for Magnetic Fields}
+  In Physics 1B, we learned Gauss' Law for electric fields:
+  \[
+    \oint \vec{E}\cdot \mathrm{d}\vec{A} = \frac{q_{\text{enclosed}}}{\eps_0}.
+  \]
+  We have a similar equation for magnetic fields:
+  \[
+    \oint \vec{B}\cdot \mathrm{d}\vec{A} = 0.
+  \]
+  The reason why this is zero is because there are ``no magnetic monopoles'', i.e. every magnet has two poles. 
+  \begin{note}{}
+    This can also be interpreted to mean that for a given surface, the number of magnetic field lines coming out must equal the number of magnetic field lines going in.
+  \end{note}
+  \subsection{The Motion of Charged Particles in a Magnetic Field}
+  There are [some] cases:
+  \begin{enumerate}[label=\roman*)]
+    \item When the particle is at rest, we have
+    \[
+      \vec{F} = q\vec{v}\times \vec{B} = 0.
+    \]
+    \item For a particle in 2D motion with a constant magnetic field, we have
+    \[
+      \vec{F} = q\vec{v}\times \vec{B},
+    \]
+    which is perpendicular to both $\vec{v}$ and $\vec{B}$ (by the properties of the cross product). We use the right hand rule to get the actual direction of the force (when the charge is positive).
+    \begin{note}{}
+      Since the magnetic force is perpendicular to the motion of the particle, we have uniform circular motion.
+    \end{note}
+    To get the radius of the motion, we solve:
+    \begin{align*}
+      F_C &= F_B \\
+      \frac{mv^2}{r} &= qvB \\
+      r &= \frac{mv^2}{qvB} \\
+      \Aboxed{r &= \frac{mv}{qB} = \frac{p}{qB}.}
+    \end{align*}
+    \item For a particle in 3D motion with a constant magnetic field, $\vec{v}_0$ is not necessarily perpendicular to $\vec{B}$. Thus we first decompose $\vec{v}_0$ into $\vec{v}_0 = \vec{v}_{0_\Vert} + \vec{v}_{0_\perp}$. Then we have
+    \begin{align*}
+      \vec{F} &= q\paren{\vec{v}_{0_\Vert} + \vec{v}_{0_\perp}}\times \vec{B} \\
+              &= qv_{0_\Vert}\times B + \vec{v}_{0_\perp}\times \vec{B} \\
+              &= \vec{v}_{0_\perp}\times \vec{B}.
+    \end{align*}
+    \begin{note}{}
+      The movement of the particle is circular relative to the perpendicular plane to the magnetic field, but the velocity of the particle parallel to the magnetic field is constant. Thus the particle moves in a helix (or spiral) pattern.
+    \end{note}
+  \end{enumerate}
+  \subsection{Force Equation for a Current-Carrying Wire}
+  We define $\vec{\ell}$ to be the length of the wire in the direction of $\vec{v}$. From earlier, we know that
+  \[
+    \vec{F} = N\cdot q\vec{v}\times \vec{B}.
+  \]
+  Furthermore, we have
+  \[
+    I = \frac{Q}{t} = \frac{Nq}{t} = \frac{Nq}{\frac{\ell}{v}} = \frac{Nqv}{\ell}.
+  \]
+  Thus we have
+  \begin{align*}
+    \vec{F} &= N\cdot q\vec{v}\times \vec{B} \\
+            &= N\cdot qv\cdot \frac{\vec{\ell}}{\ell}\times \vec{B} \\
+            &= I\vec{\ell}\times \vec{B}.
+  \end{align*}
+  Alternatively, if things are always changing, then
+  \[
+    \vec{F} = \int_{\text{wire}} I \dx\vec{\ell}\times \vec{B}.
+  \]
+\end{document}
