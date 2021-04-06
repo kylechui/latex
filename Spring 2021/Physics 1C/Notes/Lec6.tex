@@ -1,0 +1,97 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 6}
+  The force between long parallel wires defines the ampere. As a reminder, last class we found the formula
+  \[
+    B = \frac{\mu_0I}{2\pi r}.
+  \]
+  Consider two parallel, infinitely-long wires that are carrying current. If the currents are going in the same direction, then we use the right-hand rule to find that the wires have an attractive force between them. We find that the force acting on wire $2$ is
+  \begin{align*}
+    \vec{F} &= I_2\vec{L}\times \vec{B}_1 \\
+            &= I_2L \frac{\mu_0I_1}{2\pi r} \text{ to the left},
+  \end{align*}
+  so we have
+  \[
+    F_2 = \frac{\mu_0}{2\pi}\cdot \frac{I_1I_2L}{r}.
+  \]
+  Rearranging some more, we get
+  \[
+    \frac{F_2}{L} = \paren{2\cdot 10^{-7}} \frac{I_1I_2}{r} \text{ Newtons}.
+  \]
+  What happens when we ave $I_1 = I_2$? Well, we get that
+  \[
+    \frac{F}{L}= \paren{2\cdot 10^{-7}} \frac{I^2}{r},
+  \]
+  which we can rearrange to get
+  \[
+    I = \underbrace{\paren{r\cdot \frac{F}{L}\cdot \frac{1}{2\cdot 10^{-7}}}^{\frac{1}{2}}}_{\text{defines the Ampere}}.
+  \]
+  \subsection{Ampere's Law}
+  Just like Coulomb's Law leads to Gauss' Law (which is an integral), the Biot-Savart Law leads to Ampere's Law (also an integral). Remember the Biot-Savart Law from before:
+  \[
+    \mathrm{d}\vec{B} = \frac{\mu_0}{4\pi} \frac{I\,\mathrm{d}\vec{\ell}\times \hat{r}}{r^2}.
+  \]
+  \begin{theorem}{Ampere's Law}
+    The amount of magnetic field in a loop can give you the current, given by
+    \[
+      \oint_\text{loop}\vec{B}\cdot \mathrm{d}\vec{\ell} = \mu_0I_\text{enc}.
+    \]
+  \end{theorem}
+  The analogue to the Gaussian surface is what we call an \emph{Amperium loop}. There is no radial component to $\vec{B}$ because there are no monopoles. Thus we have that $\vec{B}\parallel \mathrm{d}\vec{\ell}$, and $\vec{B}\cdot \mathrm{d}\vec{\ell} = B\,\mathrm{d}\ell$. Then
+  \begin{align*}
+    \oint B\dx\ell &= B\oint \mathrm{d}\ell \\
+                   &= B\cdot 2\pi r \\
+                   &= \mu_0I,
+  \end{align*}
+  so
+  \[
+    B = \frac{\mu_0I}{2\pi r}.
+  \]
+  The differential form of Ampere's Law is given by:
+  \[
+    \vec{\nabla}\times \vec{B} = \mu_0\vec{J},
+  \]
+  where $\vec{J}$ is the current density.
+  \subsubsection{Ampere's Law Example---Long Wire, Thin but Finite Thickness}
+  Consider a wire with radius $R$ that has uniform current density $J$. We define current density to be the current per unit area, in other words
+  \[
+    J = \frac{I}{\pi R^2}, \text{ a constant}.
+  \]
+  We have a few cases here:
+  \begin{enumerate}[label=(\alph*)]
+    \item Outside the wire, i.e. $r > R$.
+    \begin{align*}
+      \oint \vec{B}\cdot \mathrm{d}\vec{\ell} &= \mu_0I_\text{encl} \\
+      2\pi rB &= \mu_0I \\
+      \Aboxed{B &= \frac{\mu_0I}{2\pi r}.}
+    \end{align*}
+    \item Inside the wire, i.e. $r < R$.
+    \begin{align*}
+      \oint \vec{B}\cdot \mathrm{d}\vec{\ell} &= \mu_0I_\text{encl} \\
+      2\pi rB &= \mu_0I\cdot \frac{\pi r^2}{\pi R^2} \\
+      2\pi rB &= \mu_0I\cdot \frac{r^2}{R^2} \\
+      \Aboxed{B &= \frac{\mu_0Ir}{2\pi R^2}.}
+    \end{align*}
+  \end{enumerate}
+  Pictorially, we can draw a graph for the magnetic field as a function of the distance to the centre of the wire as follows:
+  \begin{center}\resizebox{8cm}{!}{\import{./Figures}{Lecture6D1.pdf_tex}}\end{center}
+  \subsubsection{Ampere's Law Example---Plane of Current}
+  If we have two parallel wires next to each other with the currents moving in the same direction, by superposition of field lines we generate a space with zero field between the wires. Extending this idea to more than just two wires (read: an infinite number, creating a plane of current), we create a planar magnetic field. 
+  \begin{center}\resizebox{8cm}{!}{\import{./Figures}{Lecture6D2.pdf_tex}}\end{center}
+  Applying Ampere's Law, we have
+  \begin{align*}
+    \oint \vec{B}\cdot \mathrm{d}\vec{\ell} &= \mu_0I_\text{encl} \\
+    \int_1 + \int_2 + \int_3 + \int_4 &= \mu_0NI\\
+    2\int_4 \vec{B}\cdot \mathrm{d}\vec{\ell} &= \mu_0NI\\
+    2B\ell &= \mu_0NI \\
+    B &= \frac{\mu_0nI}{2}.
+  \end{align*}
+  We define the winding density $n$ to be the number of wires per unit length, or $n = \frac{N}{\ell}$.
+\end{document}
