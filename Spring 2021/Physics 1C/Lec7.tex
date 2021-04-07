@@ -1,0 +1,40 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 7}
+  \subsection{Magnetic Field from a Solenoid}
+  \begin{definition}{Solenoid}
+    A \emph{solenoid} is the winding of wire in a helix shape.
+  \end{definition}
+  If you take a 2D cross-section of the solenoid, you can see how the inside of the solenoid has parallel magnetic field lines due to the superposition of the field lines. This is analogous to the parallel electric field lines found between parallel, charged plates. In the infinite case, the magnetic field can be calculated with the equation
+  \[
+    B = \mu_0\cdot \frac{nI}{2}.
+  \]
+  \begin{center}\resizebox{8cm}{!}{\import{./Figures}{Lecture7D1.pdf_tex}}\end{center}
+  Using Ampere's Law, with a box around all of the currents shown, we have
+  \begin{align*}
+    \oint_\text{loop} \vec{B}\cdot \mathrm{d}\vec{\ell} &= \mu_0I_\text{encl} \\
+                                                        &= \int_1 + \int_3 \\
+                                                        &= 0. \tag{The currents cancel}
+  \end{align*}
+  From our diagram we see that the magnetic field outside of the solenoid is in one direction, regardless where you are, so $\int_1 = \int_3 = 0$. Restricting our attention to only the top half of the currents, we have
+  \begin{align*}
+    \oint_\text{loop}\vec{B}\cdot \mathrm{d}\vec{\ell} &= \mu_0NI \\
+    B\cdot L &= \mu_0nLI \\
+    B &= \mu_0nI.
+  \end{align*}
+  The magnetic field lines outside the solenoid cancel out.
+  \subsection{Magnetic Field from a Toroid}
+  To get a toroid, you basically bend a solenoid into a loop. Consider a toroid with inner radius $a$ and outer radius $b$. Then applying Ampere's Law, we get
+  \begin{align*}
+    \oint_\text{loop}\vec{B}\cdot \mathrm{d}\vec{\ell} &= 2\pi rB \\
+                                                       &= \mu_0NI,
+  \end{align*}
+  so $B = \frac{\mu_0NI}{2\pi r}$ (here we have $n = \frac{N}{2\pi a}$ when $a < r < b$). Outside of the toroid, the enclosed current is zero.
+\end{document}
