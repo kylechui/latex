@@ -134,6 +134,9 @@
   \end{itemize}
   \subsection{\texttt{movq} Operand Combinations}
   In the following diagram, the first column indicates the source, the second the destination, the third an example of assembly code, and the final an example of C code.
+  \begin{note}{}
+    Where there are no parentheses around a register, i.e. \texttt{\%rax}, we are referring to writing \emph{directly} to the register. Where there are parentheses around the register, we dereference it and write to where the register points in memory. The only exception to this is the \texttt{leaq} command, which does address computation arithmetic when there are parentheses present.
+  \end{note}
   \[
     \texttt{movq} \begin{cases}
       \text{Immediate} & \begin{cases}\begin{aligned}
@@ -177,7 +180,18 @@
   \begin{note}{}
     You are essentially computing the address referred to by \texttt{src}, and then setting \texttt{dst} equal to that address. You are \emph{not} dereferencing anything when using \texttt{leaq}.
   \end{note}
-  This has several use cases, such as computing addresses without a memory reference (i.e. translation of \texttt{p = \&x[i];}) or computing arithmetic expressions of the form \texttt{x + k*y}, where \texttt{k} is $1$, $2$, $4$, or $8$.
+  This has several use cases, such as computing addresses without a memory reference (i.e. translation of \texttt{p = \&x[i];}) or computing arithmetic expressions of the form \texttt{x + k*y}, where \texttt{k} is a $1$, $2$, $4$, or $8$ byte value.
+  \begin{note}{}
+    If the command does not specify the size, i.e. just a \texttt{mov} command, you can always look at the registers that it is operating on.
+  \end{note}
+  \begin{center}\begin{tabular}{c|c|c|c|c}
+    Register & \texttt{\%al} & \texttt{\%ax} & \texttt{\%eax} & \texttt{\%rax} \\
+    \hline
+    Syntax Example & \texttt{movb} & \texttt{movw} & \texttt{movl} & \texttt{movq} \\
+    \hline
+    Space & $8$ bits & $16$ bits & $32$ bits & $64$ bits
+  \end{tabular}\end{center}
+  You can actually have multiple extensions after a command, i.e. \texttt{movzbl}. The first letter after the \texttt{mov} is either a \texttt{z} or a \texttt{s}, indicating whether we are zero extending or sign extending. The other two letters indicate what size we are moving from and to. For instance, \texttt{movzbl} means we are moving from a $8$ bit register to a $32$ bit quantity, and filling in the gaps with zeroes. Sign extension will duplicate the MSB instead of padding the data with zeroes.
   \subsection{Some Arithmetic Operations}
   \begin{itemize}
     \item Two Operand Instructions
