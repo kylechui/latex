@@ -1,0 +1,82 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 4}
+  \subsection{Describing Motion}
+  \begin{definition}{Kinematics}
+    We define \emph{speed} to be the rate at which an object moves, given by
+    \[
+      \text{speed} = \frac{\text{distance}}{\text{time}}.
+    \]
+    \emph{Velocity} is similar to speed, but also has a direction. \emph{Acceleration} is \emph{any} change in velocity (magnitude or direction). Both velocity and acceleration have magnitude and direction, so they are \emph{vectors}.
+  \end{definition}
+  \subsection{Acceleration Due to Gravity}
+  All falling objects near the Earth's surface accelerate at the \emph{same} rate, independent of the mass of each object. On Earth, this has the value $9.8$ m/s\tsup{2}.
+  \subsection{Momentum and Force}
+  Linear momentum is given by the mass of an object times the velocity of that object, or
+  \[
+    p = m\cdot v.
+  \]
+  Newton found that a net force changes momentum. The difference between mass and weight is that mass is the amount of matter in an object, whereas weight is the force that acts upon an object.
+  \subsection{Newton's Laws of Motion}
+  Newton realised that the same physical laws that operate on Earth also operate in outer space.
+  \begin{enumerate}
+    \item An object moves at a constant velocity unless a net force acts to change its speed or direction.
+    \item Force is mass times acceleration, or $F = ma$. In other words, force is the rate of change of momentum: $F = \frac{\mathrm{d}p}{\mathrm{d}t}$.
+    \item Every force has an equal and opposite reaction force.
+    \begin{note}{}
+      Reaction forces act upon different objects.
+    \end{note}
+  \end{enumerate}
+  \subsection{The Gravitational Force}
+  \begin{enumerate}
+    \item Every mass attracts every other mass.
+    \item Attraction is \emph{directly} proportional to the product of their masses.
+    \item Attraction is \emph{inversely} proportional to the square of the distance between their centres.
+  \end{enumerate}
+  This is given by the equation
+  \[
+    F_g = G \frac{M_1M_2}{d^2},
+  \]
+  where $G$ is a constant.
+  \subsection{``Conservation'' Laws}
+  There are three important conservation laws:
+  \begin{itemize}
+    \item Conservation of linear momentum ($mv$)
+    \item Conservation of angular momentum ($mvr$)
+    \item Conservation of energy
+  \end{itemize}
+  The conservation of angular momentum is the reason why planets move slowly the further away they are from the Sun, and faster when they are closer. It is also the reason why clouds of gas (large $r$) eventually contract into spinning disks (smaller $r$).
+  \subsubsection{Energy}
+  \begin{itemize}
+    \item Energy makes matter move.
+    \item Energy is conserved, but it can transfer from one object to another and change in form.
+    \item All energy can be traced back to the Big Bang.
+  \end{itemize}
+  \subsubsection{Types of Energy}
+  \begin{itemize}
+    \item Kinetic Energy (motion) is given by the equation: $K.E. = \frac{1}{2}mv^2$.
+    \item Radiative (light).
+    \item Potential (or stored).
+  \end{itemize}
+  Energy is measured in Joules, and power is measured in Joules per second, or Watts.
+  \subsubsection{Thermal Energy}
+  Thermal energy is a sub-type of kinetic energy---the collective \emph{kinetic energy} of many particles. It is related to temperature, but \emph{not} the same. Temperature is the \emph{average} kinetic energy of the many particles in a substance, not the sum.
+  \begin{note}{}
+    Absolute zero is the temperature when particles stop moving.
+  \end{note}
+  \subsubsection{Gravitational Potential Energy}
+  On Earth, it depends on the mass of an object ($m$), the strength of gravity ($g$), and the distance an object could potentially fall ($h$). Thus the gravitational potential energy is given by $U_g = mgh$.
+  \subsection{Mass-Energy}
+  Mass itself is a form of energy, given by $E = mc^2$, where $c$ is the speed of light.
+  \begin{itemize}
+    \item A small amount of mass can release a lot of energy.
+    \item Concentrated energy can spontaneously turn into particles, for example particle accelerators.
+  \end{itemize}
+\end{document}
