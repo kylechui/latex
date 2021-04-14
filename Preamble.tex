@@ -1,22 +1,19 @@
 % Import packages
 \usepackage[margin=1in]{geometry}
 
-% \usepackage{tikz-cd}
-% \usepackage{tikz}
 \usepackage[many]{tcolorbox}
 \usepackage{amssymb, amsthm}
 \usepackage{comment}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
+\usepackage{import}
 \usepackage{listings}
 \usepackage{mathrsfs, mathtools}
-% \usepackage{minted}
-\usepackage{standalone}
-\usepackage{xcolor}
-
-\usepackage{import}
 \usepackage{pdfpages}
+\usepackage{standalone}
+\usepackage{transparent}
+\usepackage{xcolor}
 
 \usetikzlibrary{decorations.pathreplacing}
 \tcbuselibrary{skins}
@@ -69,6 +66,12 @@
 
 \newcommand{\tsub}[1]{\textsubscript{#1}}
 \newcommand{\tsup}[1]{\textsuperscript{#1}}
+
+% Include figures
+\newcommand{\incfig}[2][1]{%
+    \def\svgwidth{#1\columnwidth}
+    \import{./figures/}{#2.pdf_tex}
+}
 
 \definecolor{problemBackground}{RGB}{212,232,246}
 \newenvironment{problem}[1]

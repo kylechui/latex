@@ -1,0 +1,97 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 9}
+  \subsection{A New Fundamental Law of Nature---Faraday's Law}
+  A changing magnetic field produces \emph{loops} in the electric field. Recall for voltage:
+  \begin{figure}[ht]
+    \centering
+    \incfig[0.6]{lecture9d1}
+  \end{figure}
+  \[
+    \Delta V_{ab} = - \int_{a}^{b}\vec{E} \dx \vec{\ell}\quad \text{and}\quad \oint_\text{loop}\vec{E}\cdot \mathrm{d}\vec{\ell} = 0.
+  \]
+  \begin{theorem}{Faraday's Law}
+    If $\Phi_m$ is the magnetic flux, given by
+    \[
+      \Phi_m = \oint_\text{surface} \vec{B}\cdot \mathrm{d}\vec{A},
+    \]
+    then we have
+    \[
+      \oint \vec{E}\cdot \mathrm{d}\vec{\ell} = - \frac{\mathrm{d}}{\mathrm{d}t}\Phi_m = - \frac{\mathrm{d}\Phi_m}{\mathrm{d}t}.
+    \]
+    Alternatively, we have the differential form of Faraday's Law, given by
+    \[
+      \vec{\nabla}\times \vec{E} = - \frac{\mathrm{d}\vec{B}}{\mathrm{d}t}.
+    \]
+  \end{theorem}
+  \begin{figure}[ht]
+      \centering
+      \incfig[0.6]{lecture9d2}
+  \end{figure}
+  \begin{note}{}
+    Note that for Gauss' Law, we needed a potential difference in order to be able to generate an electric field, but for Faraday's Law we just need a changing magnetic flux.
+  \end{note}
+  \subsection{Moving a Magnet Into Coil: EMF}
+  When we move the north pole of a magnet into a coil of wire, we are increasing the magnetic field through the same area, so the magnetic flux is increasing.
+  \begin{figure}[ht]
+    \centering
+    \incfig[0.7]{lecture9d3}
+  \end{figure} \\
+  Applying Faraday's Law, we have
+  \[
+    \oint \vec{E}\cdot \mathrm{d}\vec{\ell} < - \frac{\mathrm{d}}{\mathrm{d}t}\Phi_m < 0.
+  \]
+  From this, we know that $\vec{E}$ is clockwise, and the current is also in the clockwise direction.
+  \subsection{Rotating Coil in a Magnetic Field}
+  Suppose we were to rotate a square coil in a magnetic field, as follows:
+  \begin{figure}[ht]
+    \centering
+    \incfig{lecture9d4}
+    \caption{Top view of the loops of wire}
+  \end{figure} \\[30pt]
+  \begin{figure}[ht]
+    \centering
+    \incfig{lecture9d5}
+    \caption{Side view of the loops of wire}
+  \end{figure}
+  Suppose that there are $N = 169$ loops of wire, so there is one loop of wire per volt needed. We can find the angular velocity from the frequency, given by $\omega = 2\pi f = 377$ rad/s. We see from our diagram that
+  \[
+    \Phi_m = BA\cdot \cos\theta = BA\cos(\omega t),
+  \]
+  so
+  \[
+    \frac{\mathrm{d}\Phi_m}{\mathrm{d}t} = -BA\omega\sin (\omega t).
+  \]
+  The electromotive force $\eps = BA\omega$ should be equal to $1$ volt (because each of the $169$ loops contributes $1$ volt to the net potential). Thus we can solve for the area:
+  \[
+    A = \frac{\eps}{B\omega} \approx 26.5\text{ cm}^2.
+  \]
+  \newpage
+  \subsection{Motional EMF}
+  Consider a wire laying on rails, with magnetic field between the rails, as shown: \par
+  \begin{figure}[ht]
+    \centering
+    \incfig[0.7]{lecture9d6}
+  \end{figure}
+  If the width of the Faraday loop is $x$, then the area is
+  \[
+    A = xL, \text{ and }\Phi_m = B\cdot A = B\times L.
+  \]
+  Furthermore, we have
+  \[
+    \eps = - \frac{\mathrm{d}\Phi_m}{\mathrm{d}t} = -BL\cdot \frac{\mathrm{d}x}{\mathrm{d}t} = -BLv
+  \]
+  across the end of the slider. From another point of view, we see \par
+  \begin{figure}[ht]
+    \centering
+    \incfig[0.7]{lecture9d7}
+  \end{figure}
+  The magnetic force on the charges inside the rod move the positive charges upwards, and the negative charges downwards. This creates an electric field in the rod from top to bottom, which counteracts the magnetic force. From either perspective, we reach the same conclusion that there is a potential difference across the rod.
+\end{document}

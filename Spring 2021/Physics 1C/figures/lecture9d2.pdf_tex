@@ -1,6 +1,6 @@
-%% Creator: Inkscape 1.0.1 (3bc2e813f5, 2020-09-07), www.inkscape.org
+%% Creator: Inkscape 1.0.2 (1.0.2+r75+1), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'Lecture5D2.pdf' (pdf, eps, ps)
+%% Accompanies image file 'lecture9d2.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{255.74999712bp}%
+    \setlength{\unitlength}{680.31496063bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,9 +50,9 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,1.19061581)%
+  \begin{picture}(1,0.5)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{Lecture5D2.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{lecture9d2.pdf}}%
   \end{picture}%
 \endgroup%

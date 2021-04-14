@@ -1,6 +1,6 @@
-%% Creator: Inkscape 1.0.1 (3bc2e813f5, 2020-09-07), www.inkscape.org
+%% Creator: Inkscape 1.0.2 (1.0.2+r75+1), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'Lecture6D1.pdf' (pdf, eps, ps)
+%% Accompanies image file 'lecture9d1.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{405.52714475bp}%
+    \setlength{\unitlength}{680.31496063bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,14 +50,9 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.61530655)%
+  \begin{picture}(1,0.5)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{Lecture6D1.pdf}}%
-    \put(-0.00614071,0.55910095){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B(r)$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{Lecture6D1.pdf}}%
-    \put(0.38488474,0.01087268){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$R$\\\end{tabular}}}}%
-    \put(0.88159257,0.04389852){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$r$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{Lecture6D1.pdf}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{lecture9d1.pdf}}%
   \end{picture}%
 \endgroup%

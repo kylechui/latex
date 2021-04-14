@@ -1,6 +1,6 @@
-%% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
+%% Creator: Inkscape 1.0.2 (1.0.2+r75+1), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'Lecture8D1.pdf' (pdf, eps, ps)
+%% Accompanies image file 'lecture9d6.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{430.85555413bp}%
+    \setlength{\unitlength}{680.31496063bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,21 +50,11 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.580274)%
+  \begin{picture}(1,0.5)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{Lecture8D1.pdf}}%
-    \put(0.66618339,0.20508391){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B_0$ \end{tabular}}}}%
-    \put(0.34016488,0.52737236){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{Lecture8D1.pdf}}%
-    \put(0.6429479,0.51297809){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Saturation\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=3]{Lecture8D1.pdf}}%
-    \put(0.52411751,0.20705563){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$10^{-3}$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=4]{Lecture8D1.pdf}}%
-    \put(0.10247961,0.25024419){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$-10^{-3}$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=5]{Lecture8D1.pdf}}%
-    \put(0.22145375,0.4481756){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Permanent\\Magnet\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=6]{Lecture8D1.pdf}}%
-    \put(0.36124622,0.44956507){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$1$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{lecture9d6.pdf}}%
+    \put(0.27457142,0.07997055){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Faraday Loop\end{tabular}}}}%
+    \put(0.27488054,0.03670209){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$\Phi_m$ increasing ($B$ is constant but area increasing)\end{tabular}}}}%
   \end{picture}%
 \endgroup%

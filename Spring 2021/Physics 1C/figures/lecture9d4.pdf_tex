@@ -1,6 +1,6 @@
-%% Creator: Inkscape 1.0.1 (3bc2e813f5, 2020-09-07), www.inkscape.org
+%% Creator: Inkscape 1.0.2 (1.0.2+r75+1), www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'Lecture4D1.pdf' (pdf, eps, ps)
+%% Accompanies image file 'lecture9d4.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -38,7 +38,7 @@
   \newcommand*\fsize{\dimexpr\f@size pt\relax}%
   \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{469.66046326bp}%
+    \setlength{\unitlength}{680.31496063bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -50,14 +50,13 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.42378105)%
+  \begin{picture}(1,0.5)%
     \lineheight{1}%
     \setlength\tabcolsep{0pt}%
-    \put(0,0){\includegraphics[width=\unitlength,page=1]{Lecture4D1.pdf}}%
-    \put(0.43293724,0.2151083){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$I$\end{tabular}}}}%
-    \put(0,0){\includegraphics[width=\unitlength,page=2]{Lecture4D1.pdf}}%
-    \put(0.65393336,0.32318676){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$y$\\\end{tabular}}}}%
-    \put(0.88622136,0.10219061){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$x$\end{tabular}}}}%
-    \put(0.61521876,0.07638078){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$z$\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{lecture9d4.pdf}}%
+    \put(0.50965942,0.373574){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Square coil\end{tabular}}}}%
+    \put(0.51034129,0.32531573){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}AC generator $120$ $V$ (penks $\cdot \sqrt{2} = 169$ V)\end{tabular}}}}%
+    \put(0.50931854,0.25984097){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$B = 1.5$ T\end{tabular}}}}%
+    \put(0.50931854,0.1994372){\color[rgb]{0,0,0}\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}$60$ Hz, $5000$ W\end{tabular}}}}%
   \end{picture}%
 \endgroup%
