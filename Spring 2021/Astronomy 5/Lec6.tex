@@ -1,0 +1,86 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 6}
+  \subsection{Light}
+  \begin{itemize}
+    \item Is both a particle and a wave.
+    \item Massless.
+    \item Has energy.
+    \item $\text{Photon energy} = h (\text{frequency}) = \frac{hc}{\lam} = h\nu$, where $h$ is Planck's constant.
+    \item Is oscillations of electric and magnetic waves.
+    \item Light is produced when an electron is accelerated or oscillates.
+    \item Electrons can absorb light, increasing their energy.
+  \end{itemize}
+  We can use the electron-volt (eV) to describe the energy of light. The electromagnetic spectrum, from highest to lowest energy: gamma, x-rays, ultraviolet, visible, infrared, microwaves, radio waves.
+  \subsubsection{Composition of Matter}
+  Electrons orbit the nucleus of an atom in an \emph{electron cloud}. It is impossible to know exactly where an electron is and know its velocity. Electrons can only have set energy levels (quantized states).
+  \subsubsection{Light and Matter}
+  \begin{itemize}
+    \item Emission---Photons are produced.
+    \item Absorption---Photons are consumed.
+    \item Transmission---Photons pass through freely.
+    \item Reflection or Scattering---Photons are redirected all in the same direction (reflection), or in random directions (scattering).
+  \end{itemize}
+  \subsubsection{Three Types of Spectra}
+  A \emph{spectrum} is a plot of the intensity of light as a function of wavelength or energy. The laws of quantum physics tell us that energies in atoms are discrete, hence those lines. Distinct energy levels in atoms lead to distinct emission or absorption lines---photons are absorbed or emitted, moving electrons up or down an energy state.
+  \paragraph{Chemical Fingerprints}
+  \begin{itemize}
+    \item Ever atom, ion, and molecule has a unique spectral ``fingerprint'' because of the unique set of electron energy level.
+    \item This gives off a nique pattern of emitted or absorbed wavelengths of light.
+    \item We can identify the chemicals in a gas cloud by looking at the absorption lines.
+  \end{itemize}
+  \subsection{Thermal Radiation}
+  \begin{itemize}
+    \item Nearly all large or dense objects emit thermal radiation.
+    \item An object's thermal radiation spectrum depends on only one property---temperature.
+    \item Electromagnetic radiation produced this way has a continuous spectrum of energy with a peak at one wavelength.
+  \end{itemize}
+  At low temperatures the emitted radiation is infrared, which our eyes cannot see. As heat increases, things turn blue-white.
+  \subsubsection{Two Properties of Thermal Radiation}
+  \begin{itemize}
+    \item Hotter objects emit more light at all frequencies \emph{per unit area} (higher intensity). \\
+    Stefan-Boltzmann Law: Luminosity per square metre = constant $\cdot\ T^4$.
+    \item Hotter objects emit photons with a higher average energy. \\
+    Wien's Law: $T(K) = \frac{3000000}{\lam}$, where $\lam$ is the wavelength in nanometres.
+  \end{itemize}
+  \paragraph{Things to Know}
+  \begin{itemize}
+    \item All objects emit a thermal spectrum.
+    \item The shape of the spectrum is the same, but shifts to shorter wavelengths for hotter objects.
+    \item The shape is \emph{independent of the composition}.
+    \item All stars can be considered to emit a thermal spectrum at a temperature $T$.
+  \end{itemize}
+  We can use light to tell us the \emph{speed} of a distant object, using the Doppler Effect. The frequency changes when the source object is moving.
+  \begin{note}{}
+    The Doppler Effect only tells us about the component of motion in our direction. If an object is moving perpendicular to the displacement vector to us, we detect no speed.
+  \end{note}
+  \begin{itemize}
+    \item Blueshift (shorter wavelength): motion towards you
+    \item Redshift (longer wavelength): motion away from you
+    \item Greater shift means greater speed
+  \end{itemize}
+  The luminosity (energy per second) passing through a given angular area is the same, regardless of how far away you are. Knowing this, and that the surface area of a sphere is $4\pi r^2$, we can see that the luminosity of an object is inversely proportional to square of the distance to the object.
+  \begin{example}{Light on Mars} \\
+    Since Mars orbits around $1$.5 AU away from the Sun, it gets around
+    \[
+      \paren{\frac{1}{1.5}}^2 \approx 0.44
+    \]
+    the amount of light that the Earth gets.
+  \end{example}
+  \subsection{Telescopes}
+  \begin{itemize}
+    \item Telescopes collect more light than our eyes because they are bigger---more area to collect light.
+    \item They can see more detail than our eyes because they provide magnification: angular resolution. \\
+    The smallest detail you can see scales linearly with $\frac{\lam}{D}$.
+    \item A larger lens or shorter wavelength would allow for higher resolution.
+  \end{itemize}
+  The way that most telescopes work is either through refracting lenses or reflecting mirrors. Most research telescopes today use the latter. We put telescopes in space because that bypasses the absorption/distortion of light by Earth's atmosphere, and light pollution. \\
+  Interferometry allows two or more telescopes spread out over a large area to work together to obtain the angular resolution of a larger telescope (works well for radio astronomy).
+\end{document}
