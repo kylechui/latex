@@ -1,0 +1,51 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 13}
+  \subsection{R-L Circuits}
+  These are circuits with both a resistor ($R$) and an inductor ($L$). This is going to be a time dependent circuit with a switch. The switch, resistor, inductor, and battery are all in series. At time $t = 0$, the switch is closed. Let the voltage across the battery be $V$. We want to find the current $i$ through the circuit as a function of time $t$. If there was no inductor, the current would be $i(t) = \frac{V}{R}$. \par
+  In the inductor, we have an induced voltage $\eps = -L\cdot \frac{\mathrm{d}i}{\mathrm{d}t}$. Furthermore, we know that the current $i = 0$ when $t = 0$. By Kirchoff's Loop Rule, we know that the sum of the voltages in the loop must be zero, in other words
+  \begin{align*}
+    V - iR - \eps &= 0 \\
+    V - iR - L\cdot \frac{\mathrm{d}i}{\mathrm{d}t} &= 0 \\
+    \frac{\mathrm{d}i}{\mathrm{d}t} &= \frac{V - iR}{L}. \\
+    \frac{\mathrm{d}i}{V - iR} &= \frac{1}{L}\,\mathrm{d}t \\
+    -\frac{1}{R}\ln (V - iR) &= \frac{1}{L}t + C_1 \\
+    \ln (V - iR) &= -\frac{R}{L}t + C_2 \\
+    V - iR &= C_3 e^{-\frac{R}{L}t} \\
+    iR &= V - C_3e^{-\frac{R}{L}t} \\
+    i &= \frac{V}{R} - C_4e^{-\frac{R}{L}t}.
+    \intertext{We also know that $i(0) = 0$, so}
+    \Aboxed{i(t) &= \frac{V}{R} - \frac{V}{R}e^{-\frac{R}{L}t}\quad\text{or}\quad \frac{V}{R}\paren{1 - e^{-\frac{R}{L}t}}.}
+  \end{align*}
+  If we define a new time constant $\tau = \frac{L}{R}$, then we have
+  \[
+    i(t) = \frac{V}{R}\paren{1 - e^{-\frac{t}{\tau}}}.
+  \]
+  \begin{note}{}
+    This is analogous to the RC time constant for capacitors.
+  \end{note}
+  If we were to instead connect a charged inductor to a resistor, closing the switch would \emph{discharge} the inductor. In this case, we would have
+  \[
+    i(t) = \frac{V}{R}e^{-\frac{t}{\tau}}.
+  \]
+  \subsection{L-C Circuits}
+  These are circuits with both an inductor ($L$) and a capacitor ($C$). We know that the voltage drop across the circuit is zero, just like before, so
+  \[
+    -L\cdot \frac{\mathrm{d}i}{\mathrm{d}t} - \frac{q}{C} = 0.
+  \]
+  I'm too lazy to solve this differential equation, so just know that
+  \[
+    q(t) = A\cos (\omega t + \phi),
+  \]
+  where $\omega = \frac{1}{\sqrt{LC}}$. We may also write $q(t) = q_\text{max}\cos (\omega t)$. The current is then
+  \[
+    i(t) = \frac{\mathrm{d}q}{\mathrm{d}t} = -q_\text{max}\cdot \omega\sin (\omega t).
+  \]
+\end{document}
