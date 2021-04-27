@@ -1,0 +1,39 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 15}
+  \subsection{Why Would We Want an RLC Circuit?}
+  \begin{enumerate}
+    \item RLC Circuits are useful when you want to generate a specific frequency \emph{or} you want to select a specific frequency.
+    \begin{note}{}
+      Used in cell phones, internet, TV, radio, etc. for receiving and transmitting.
+    \end{note}
+    \item There is always some resistance in a circuit.
+    \item Electrical Engineering: All circuits also have capacitance and inductance.
+    \item Damped oscillation
+  \end{enumerate}
+  \subsection{RLC Circuits---Damped Oscillation}
+  Suppose that at time $t = 0$, we close the circuit such that the charged capacitor, resistor, and inductor are in series. When the RLC circuit is underdamped, we get
+  \[
+    - \frac{q}{c} - iR - L\cdot \frac{\mathrm{d}i}{\mathrm{d}t} = 0.
+  \]
+  Substituting $i = \frac{\mathrm{d}q}{\mathrm{d}t}$, we have
+  \[
+    L\cdot \frac{\mathrm{d}^2q}{\mathrm{d}t^2} + \underbrace{R\cdot \frac{\mathrm{d}q}{\mathrm{d}t}}_{\mathclap{\text{damping term}}} + \frac{1}{c}\cdot q = 0.
+  \]
+  The general solution to this differential equation is given by
+  \[
+    q(t) = q_0e^{-\frac{t}{2L/R}}\cos (\omega t + \phi),
+  \]
+  where $\omega = \sqrt{\frac{1}{LC} - \paren{\frac{R}{2L}}^2}$.
+  \begin{note}{}
+    You have two parameters in the above equation, namely $q_0$ and $\phi$.
+  \end{note}
+  \subsection{RLC Circuits---Forced Oscillation}
+\end{document}

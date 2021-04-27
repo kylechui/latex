@@ -1,0 +1,61 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 16}
+  \subsection{AC Circuits---Motivation and History}
+  There is power loss in normal circuits when the voltage is low, so we use transformers with ``high-voltage lines'' in order to reduce the power loss (not possible with DC power) when getting electricity from the source to destination. We have the equation
+  \[
+    \frac{P_\text{loss}}{P} = \frac{PR}{\eps^2}.
+  \]
+  \begin{note}{}
+    The power loss decreases with the square of the voltage, so high-voltage lines are used.
+  \end{note}
+  \subsection{RMS Voltages and Currents}
+  \begin{note}{}
+    RMS stands for ``root mean square''.
+  \end{note}
+  Alternating currents follow a sinusoidal path, in other words
+  \[
+    I = I_0\sin (\omega t+\phi),
+  \]
+  where $f = \frac{\omega}{2\pi}$, which is $60$ Hz for Americans or $50$ Hz for Europeans. If we square the current, we have
+  \begin{align*}
+    I^2 &= I_0^2\sin^2(\omega t + \phi) \\
+        &= \frac{I_0^2}{2}\paren{1 - \cos(2\omega t + 2\phi)},
+  \end{align*}
+  which is also sinusoidal (but stays positive). Furthermore, we know that the power in a resistor is $P = I^2R$. The average power is thus
+  \[
+    P_\text{avg} = (I^2)_\text{avg}R = \frac{I_0^2}{2}\cdot R = I_\text{RMS}^2R. \tag{$I_\text{RMS} \ceq \frac{I_0}{\sqrt{2}}$}
+  \]
+  Similarly, we define $V_\text{RMS}$ by $V_\text{RMS} \ceq \frac{V_0}{\sqrt{2}}$. \par
+  For $V_\text{RMS} = 120$ V, we have $V_0 = V_\text{RMS}\sqrt{2}\approx 170$ V (the voltage fluctuates between $-170$ and $170$ volts).
+  \subsection{The \emph{Driven} RLC Circuit}
+  We take a typical RLC circuit and add a time-varying EMF to it. There are two solutions to this:
+  \begin{enumerate}
+    \item Transitory (sinusoidal but amplitude approaching zero)
+    \item Steady-state (oscillates sinusoidally forever)
+  \end{enumerate}
+  To make things simple for ourselves, we choose a phase such that $q = A\sin (\omega t)$. Then we know the voltage across the capacitor,
+  \[
+    V_C = \frac{q}{C} = \frac{A}{C}\sin (\omega t).
+  \]
+  The current can then be found by differentiating:
+  \[
+    I = \frac{\mathrm{d}q}{\mathrm{d}t} = A\omega \cos(\omega t) = A\omega\sin \paren{\omega t + \frac{\pi}{2}}.
+  \]
+  And so the voltage across the resistor is given by
+  \[
+    V_R = RI = RA\omega\sin \left(\omega t + \frac{\pi}{2}\right).
+  \]
+  Finally, we find the voltage across the inductor:
+  \[
+    V_L = L\cdot \frac{\mathrm{d}I}{\mathrm{d}t} = -LA\omega^2\sin(\omega t) = LA\omega^2\sin(\omega t + \pi).
+  \]
+  We use the mnemonic ``ELI the ICE man''. For ``ELI'', we see that in an inductor (L) the EMF precedes the current. And for ``ICE'', we see that in a capacitor (C) the current precedes the EMF.
+\end{document}

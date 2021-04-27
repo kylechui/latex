@@ -1,0 +1,67 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 17}
+  \subsection{Reactance in the Driven RLC Circuit}
+  Using the equations from last class, notice that
+  \[
+    \frac{V_C (\text{max})}{I(\text{max})} = \frac{A/C}{A\omega} = \frac{1}{\omega C} = \frac{V_C(\text{RMS})}{I(\text{RMS})}.
+  \]
+  \begin{definition}{Capacitive Reactance}
+    We define the \emph{capacitive reactance} by the equation:
+    \[
+      X_C\ceq \frac{1}{\omega C}.
+    \]
+  \end{definition}
+  Similarly for an inductor, we have
+  \[
+    \frac{V_L (\text{max})}{I (\text{max})} = \frac{LA\omega^2}{A\omega} = \omega L.
+  \]
+  \begin{definition}{Inductive Reactance}
+    We define the \emph{inductive reactance} by the equation:
+    \[
+      X_L\ceq \omega L.
+    \]
+  \end{definition}
+  By Kirchoff's Loop Rule, we have
+  \begin{align*}
+    \eps &= V_C + V_R + V_L \\
+         &= X_CI_\text{max}\sin(\omega t) + I_\text{max}R\sin\paren{\omega t + \frac{\pi}{2}} + X_LI_\text{max}\sin(\omega t + \pi) \\
+         &= I_\text{max}\paren{X_C\sin(\omega t) + R\sin\paren{\omega t + \frac{\pi}{2}} + X_L\sin(\omega t + \pi)}.
+   \intertext{Dividing both sides by $I_\text{max}$, we get}
+   \frac{\eps}{I_\text{max}} &= X_C\sin(\omega t) + R\sin\paren{\omega t + \frac{\pi}{2}} + X_L\sin(\omega t + \pi).
+  \end{align*}
+  \subsection{Phasors in the Driven RLC Circuit}
+  If we graphed out all of these values as vectors and added them up, we would see that
+  \[
+    \frac{\eps_\text{max}}{I_\text{max}} = \sqrt{R^2 + (X_C - X_L)^2}.
+  \]
+  \begin{note}{}
+    This is because if you pay attention to the angles in the original equation for $\frac{\eps}{I_\text{max}}$, you see that the middle term is perpendicular to the $X_C$ and $X_L$ terms, which are acting in opposition. Thus we may use the Pythagorean Theorem to get the above.
+  \end{note}
+  \newpage
+  \subsection{Impedance Z in the Driven RLC Circuit}
+  \begin{definition}{Impedance}
+    We define the \emph{impedance} (units given in $\Omega$) to be
+    \[
+      Z\ceq \sqrt{R^2 + (X_C - X_L)^2}.
+    \]
+  \end{definition}
+  Furthermore, for the initial phase, we have
+  \[
+    \tan\phi = \frac{X_L-X_C}{R}.
+  \]
+  The power consumed by this circuit is given by
+  \[
+    P_\text{avg} = I_\text{RMS}V_\text{RMS}\cdot \underbrace{\cos\phi}_{\mathclap{\text{``Power factor''}}}.
+  \]
+  \begin{note}{}
+    To maximise the power of the motor, we want $\cos\phi$ to be as close to $0$ as possible. Thus we should add just the right amount of capacitance.
+  \end{note}
+\end{document}

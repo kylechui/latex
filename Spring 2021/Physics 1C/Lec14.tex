@@ -1,0 +1,35 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 14}
+  \subsection{Transformers: Mutual Inductance}
+  Consider a toroid with two different sections with loops of wire. Let the first section have $N_1$ turns and current $i_1$, and the second section have $N_2$ turns and current $i_2$. Since the toroid is made of iron, there is a magnetic field $\vec{B}$ flowing through it (it is ``captured'' in the iron because $\frac{\mu}{\mu_0} \approx 1000$). \par
+  For our ideal transformer, we assume that all of the magnetic field $\vec{B}$ goes around the toroid. The magnetic field is constant in the toroid, so $\Phi_m$ is the same for every loop. We have
+  \begin{align*}
+    \eps_2 &= N_2\cdot \frac{\mathrm{d}\Phi_m}{\mathrm{d}t} \\
+    \eps_1 &= N_1\cdot \frac{\mathrm{d}\Phi_m}{\mathrm{d}t} \\
+    \frac{\eps_2}{\eps_1} &= \frac{N_2}{N_1}.
+  \end{align*}
+  \begin{note}{}
+    This only works if the magnetic flux is time-varying (AC).
+  \end{note}
+  If we look at the power transfer, we get
+  \[
+    P_\text{in} = VI = \eps_1i_1 = P_\text{out} = \eps_2i_2.
+  \]
+  To find the current, we can manipulate the above equation to get
+  \[
+    \frac{i_2}{i_1} = \frac{\eps_1}{\eps_2} = \frac{N_1}{N_2}.
+  \]
+  For mutual inductance, we have
+  \[
+    N_2\Phi_{B 2} \equiv M_{21}i_1 \quad\text{and}\quad N_1\Phi_{B 1} \equiv M_{12}i_2.
+  \]
+  We won't prove this in this class, but $M_{12} = M_{21} = M$, which we call the mutual inductance.
+\end{document}
