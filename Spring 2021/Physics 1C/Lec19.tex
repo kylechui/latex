@@ -1,0 +1,75 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 19}
+  \subsection{Displacement Current}
+  Recall Ampere's Law:
+  \[
+    \oint_\text{loop}\vec{B}\cdot \mathrm{d}\vec{\ell} = \mu_0I_\text{encl}.
+  \]
+  When we say $I_\text{encl}$ to mean enclosed current, we mean that the current goes through the surface. The main thing to take note of is that the surface doesn't need to be planar---it can be any surface. \par
+  Consider a current flowing into a capacitor, with an amperium loop that goes around half of the capacitor. There is seemingly no current flowing across the capacitor, a contradiction. What Maxwell notices is that charges build up on the plates of the capacitor---maybe a changing $\vec{E}$ field could produce a current. He modified Ampere's Law to get
+  \[
+    \oint_\text{loop}\vec{B}\cdot \mathrm{d}\vec{\ell} = \mu_0(I_\text{encl} + I_\text{disp}).
+  \]
+  His idea was that $I_\text{disp}$ should be proportional to $\frac{\mathrm{d}E}{\mathrm{d}t}$ and proportional to the area $A$ of the parallel plates. \par
+  Remember that for capacitors, $E = \frac{V}{d}$ and $C = \eps_0\cdot \frac{A}{d}$. Thus
+  \begin{align*}
+    A\cdot \frac{\mathrm{d}E}{\mathrm{d}t} &= \paren{\frac{Cd}{\eps_0}}\cdot \frac{1}{d}\cdot \frac{\mathrm{d}V}{\mathrm{d}t} \\
+                                           &= \frac{1}{\eps_0}C\cdot \frac{\mathrm{d}Q}{\mathrm{d}t}\cdot \frac{1}{C} \\
+                                           &= \frac{1}{\eps_0}\cdot \frac{\mathrm{d}Q}{\mathrm{d}t}.
+  \end{align*}
+  Rearranging the above, we get
+  \[
+    \frac{\mathrm{d}Q}{\mathrm{d}t} = I_\text{disp} = \eps_0\cdot A\cdot \frac{\mathrm{d}E}{\mathrm{d}t}.
+  \]
+  Thus Maxwell's modification of Ampere's Law takes the form
+  \[
+    \oint_\text{loop}\vec{B}\cdot \mathrm{d}\vec{\ell} = \mu_0\paren{I_\text{encl} + \eps_0A\cdot \frac{\mathrm{d}E}{\mathrm{d}t}}.
+  \]
+  \begin{note}{}
+    We can substitute $A\cdot \frac{\mathrm{d}E}{\mathrm{d}t}$ for $\frac{\mathrm{d}\Phi_E}{\mathrm{d}t}$.
+  \end{note}
+  This forms a parallel with Faraday's Law, which states that a changing $\Phi_B$ generates $\vec{E}$, whereas this says that a changing $\Phi_E$ generates $\vec{B}$.
+  \begin{note}{}
+    A magnetic field (although possibly not large) is generated when charging up a capacitor, parallel to the plates of the capacitor.
+  \end{note}
+  \begin{note}{}
+    This exhibits \emph{exactly} the same behaviour as the wire of radius $R$ from Lecture $6$.
+  \end{note}
+  \subsection{Maxwell's Equations}
+  \begin{enumerate}
+    \item Gauss' Law for $\vec{E}$:
+    \[
+      \oint \vec{E}\cdot \mathrm{d}\vec{A} = \frac{Q_\text{encl}}{\eps_0}
+    \]
+    \item Gauss' Law for $\vec{B}$:
+    \[
+      \oint \vec{B}\cdot \mathrm{d}\vec{A} = 0
+    \]
+    \item Faraday's Law for a stationary integration path:
+    \[
+      \oint \vec{E}\cdot \mathrm{d}\vec{\ell} = -\frac{\mathrm{d}\Phi_B}{\mathrm{d}t}
+    \]
+    \item Ampere's law for a stationary integration path:
+    \[
+      \oint \vec{B}\cdot \mathrm{d}\vec{\ell} = \mu_0\paren{i_C + \eps_0 \frac{\mathrm{d}\Phi_E}{\mathrm{d}t}}_\text{encl}
+    \]
+  \end{enumerate}
+  \begin{note}{}
+    In empty space (with no charges nor currents), Maxwell's equations are highly symmetric.
+  \end{note}
+  \subsection{Plane Electromagnetic Waves (in Vacuum)}
+  \subsubsection{Recap on Waves}
+  Given a ``wave number'' $k$, we have the equation
+  \[
+    f(x) = A\sin (kx).
+  \]
+  We know that the wavelength must satisfy $k\lam = 2\pi$, so $\lam = \frac{2\pi}{k}$. If we take $f(x - vt)$, the wave is moving to the \emph{right}. If the function is $f(x + vt)$, then the function is moving to the \emph{left}.
+\end{document}

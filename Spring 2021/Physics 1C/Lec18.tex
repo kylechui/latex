@@ -1,0 +1,23 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 18}
+  \begin{note}{}
+    Impedance is a generalisation of resistance for AC circuits.
+  \end{note}
+  From last lecture, we learned that
+  \[
+    I_\text{max} = \frac{\eps_\text{max}}{Z} = \frac{\eps_\text{max}}{\sqrt{R^2 + \paren{\frac{1}{\omega C} - \omega L}^2}}.
+  \]
+  If $\omega$ can vary, the maximum value of $I_\text{max}$ occurs when $\frac{1}{\omega C} = \omega L$ (and so $I_\text{max} = \frac{\eps_\text{max}}{R}$). Note that solving for $\omega$ yields
+  \[
+    \omega = \frac{1}{\sqrt{LC}}, \quad\text{or}\quad f = \frac{1}{2\pi\sqrt{LC}}.
+  \]
+  When $R$ is small and $\omega = \frac{1}{\sqrt{LC}}$, $I_\text{max}$ approaches infinity. Furthermore, when the frequency is high the inductor dominates, and when it is low the capacitor dominates.
+\end{document}
