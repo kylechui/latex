@@ -1,0 +1,47 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 20}
+  \subsection{Describing a Wave in an Arbitrary Direction}
+  We have the equation for a sine wave moving in the +x direction:
+  \begin{align*}
+    f(x, t) &= A\sin(k(x - vt)) \\
+            &= A\sin(kx - kvt) \\
+            &= A\sin(kx - \omega t) \tag{$\omega\ceq kv$}.
+  \end{align*}
+  Solving for $v$, we find that $v = \frac{\omega}{k}$. \par
+  To generalise this to a sine wave in an arbitrary direction, we replace $kx$ with $\vec{k}\cdot \vec{x} = \lvert\vec{k}\rvert\abs{\vec{x}}\cdot \cos\theta$. Here we now have $\vec{k}$, which is a \emph{wave vector}, instead of just a wave number. We now have
+  \[
+    f(\vec{x},t) = A\sin\paren{\vec{k}\cdot \vec{x} - \omega t}. \tag{$v = \frac{\omega}{\lvert\vec{k}\rvert}$}
+  \]
+  This forms a series of wave fronts that are all perpendicular to $\vec{k}$ by virtue of the dot product.
+  \subsection{Plane Electromagnetic Waves---What Are They Like?}
+  You have oscillating electric and magnetic waves, perpendicular to each other, and also perpendicular to the direction in which they are travelling.
+  \begin{note}{}
+    Because integration is a linear operation, the superposition of waves that satisfy the Maxwell equations also satisfies the Maxwell equations. In other words, the sums of solutions are solutions.
+  \end{note}
+  \subsection{Intensity of Electromagnetic Waves, Poynting Vector}
+  \begin{definition}{Intensity}
+    The amount of power over a given area. Its units are usually given in W/m\tsup{2}.
+  \end{definition}
+  The Poynting vector is given by
+  \[
+    \vec{S} = \frac{1}{\mu_0}\vec{E}\times \vec{B}.
+  \]
+  The intensity, which is also the average of the magnitude of the Poynting vector, is then
+  \begin{align*}
+    I &= S_\text{avg} \\
+      &= \frac{B_\text{max}E_\text{max}}{2\mu_0}.
+  \end{align*}
+  Furthermore, we have that
+  \[
+    E_\text{max} = cB_\text{max},
+  \]
+  where $c$ is the speed of light.
+\end{document}
