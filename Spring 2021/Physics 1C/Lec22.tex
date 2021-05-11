@@ -1,0 +1,66 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 22}
+  Consider a square wave front moving at the speed of light in the positive $x$ direction. Suppose that $\vec{E}$ is parallel to $\hat{\jmath}$ and $\vec{B}$ is parallel to $\hat{k}$, and that $\vec{E} = \vec{B} = 0$ when $x > ct$ (you are ahead of the wave front). \par
+  These wave fronts are consistent with Maxwell's equations, and any linear combination of wave fronts is also a valid wave front, so you can model any wave front using these square pulses.
+  \begin{theorem}{Wave Equation}
+    For electromagnetic waves, we have
+    \[
+      \frac{\partial^2\mathbf{B}}{\partial t^2} - c^2\nab^2\mathbf{B} = 0.
+    \]
+  \end{theorem}
+  \begin{note}{}
+    If you plug in $\vec{B} = B(\vec{x} - \vec{v}t)$ into the above equation, you see that it works out when $\abs{\vec{v}} = c$.
+  \end{note}
+  \subsection{Energy and Momentum in Electromagnetic Waves}
+  Suppose we have the sine waves:
+  \begin{align*}
+    \vec{E} &= E_\text{max}\sin(kx - \omega t)\hat{\jmath} \\
+    \vec{B} &= B_\text{max}\sin(kx - \omega t)\hat{k}
+  \end{align*}
+  Let $E_\text{max} = 100$ V/m. Then
+  \[
+    B_\text{max} = \frac{E_\text{max}}{c} = \frac{100}{3\cdot 10^8}\ \mathrm{T} = 3.33\cdot 10^{-7}\ \mathrm{T}.
+  \]
+  Then the Energy in an $\vec{E}$-field is given by
+  \[
+    \frac{U_E}{\text{vol}} = \frac{\text{energy}}{\text{volume}} = \frac{\eps_0}{2}E^2 = \frac{8.85\cdot 10^{-12}}{2}(100)^2 = 4.4\cdot 10^{-8}\ \frac{\mathrm{J}}{\mathrm{m}^3}.
+  \]
+  Similarly, the energy in the $\vec{B}$-field is given by
+  \[
+    \frac{U_B}{\text{vol}} = \frac{B^2}{2\mu_0} = \frac{\paren{\frac{E}{c}}}{2\mu_0} = \frac{E^2}{2\mu_0\cdot \frac{1}{\mu_0\eps_0}} = \frac{\eps_0}{2}E^2.
+  \]
+  Thus we see that the energy stored in both waves is the same. If we add up the waves and average them, we get
+  \begin{align*}
+    \paren{\frac{U_{EM}}{\text{vol}}}_\text{avg} &= \frac{U_E+U_B}{\text{vol}} \\
+                                                 &= \frac{1}{2} \paren{\frac{\eps_0}{2}E_\text{max}^2 + \frac{\eps_0}{2}E_\text{max}^2} \\
+                                                 &= \frac{\eps_0}{2}E_\text{max}^2 \\
+                                                 &= 4.4\cdot 10^{-8}\ \frac{\mathrm{J}}{\mathrm{m}^3}.
+  \end{align*}
+  To find the intensity (or power per unit area), we have
+  \begin{align*}
+    \frac{P}{A} &= \frac{U}{A\cdot t} \\
+                &= \frac{U_{EM}\cdot V}{A\cdot t} \\
+                &= \frac{U_{EM}\cdot A\cdot ct}{A\cdot t} \\
+                &= U_{EM}\cdot c.
+  \end{align*}
+  \subsection{Electromagnetic Waves in Matter}
+  When we have a medium, then we use $\eps$ and $\mu$ instead of $\eps_0$ and $\mu_0$, respectively (to take into account the constants). We have
+  \[
+    v = \frac{1}{\sqrt{\mu\eps}} = \frac{1}{\sqrt{K_m\mu_0K_e\eps_0}} = \frac{c}{\sqrt{K_mK_e}}.
+  \]
+  \begin{definition}{Refractive Index}
+    We define the refractive index by
+    \[
+      n = \sqrt{K_mK_e},
+    \]
+    which is always greater than $1$.
+  \end{definition}
+\end{document}

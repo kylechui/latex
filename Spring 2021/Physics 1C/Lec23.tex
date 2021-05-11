@@ -1,0 +1,41 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 23}
+  \subsection{The Types of Light}
+  There are many types of light: Gamma rays, X-rays, ultraviolet light, visible light, infrared light, microwaves, and radio waves. Other descriptors include:
+  \begin{itemize}
+    \item Linearly, circularly, elliptically polarised, as well as unpolarised
+    \item Coherent (like lasers) and incoherent (like sunlight)
+    \item Incandescent, LED, fluorescent, neon, laser
+  \end{itemize}
+  \begin{note}{}
+    What we as humans perceive doesn't necessarily line up with real-world physics, because we are more sensitive to certain wavelengths (``blue'', ``green'', and ``red'').
+  \end{note}
+  \subsection{Wave Fronts, Rays, and Beams}
+  Consider a point emitting electromagnetic waves in concentric circles. As you get further and further away, the circles' curvature keeps on decreasing until it basically becomes a plane wave.
+  \subsection{Reflection and Refraction of Light}
+  Reflection is exactly what you think it is. We call the angle measured from the normal of the reflective surface to the light ray the ``angle of incidence'' and the angle from the normal of the reflective surface to the reflected ray the ``angle of reflection''. For perfect reflections, we have $\theta_i = \theta_r$.
+  \begin{note}{}
+    This is why some mirrors are curved---they reflect light towards a common point and concentrate it. The light comes in as virtually parallel rays (because it is so far away).
+  \end{note}
+  Refraction is when a light ray passes from one transparent medium to another, ``bending'' in the process. Usually a part of the light ray is reflected when it passes through the media boundary. 
+  \begin{theorem}{Snell's Law}
+    Let the angle of incidence be denoted $\theta_1$ and the angle of refraction $\theta_2$. Then
+    \[
+      n_1\sin\theta_1 = n_2\sin\theta_2,
+    \]
+    where $n_1$ and $n_2$ are the indices of refraction for the two materials, respectively.
+  \end{theorem}
+  \begin{note}{}
+    This is actually why prisms are able to separate colours, because the index of refraction for certain kinds of glass is a function of the wavelength of the light passing through it.
+  \end{note}
+  \subsection{Huygen's Principle}
+  In short, Huygen's principle states that we can think of each point on a wave front as sources of spherical waves. If you do this for an infinite number of points, you see that the waves overlap to form the next wave front.
+\end{document}
