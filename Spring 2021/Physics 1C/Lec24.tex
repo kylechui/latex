@@ -1,0 +1,23 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 24}
+  \subsection{Snell's Law for Refraction}
+  By Snell's Law, we know that $n_1\sin\theta_1 = n_2\sin\theta_2$. Solving for $\sin\theta_2$, we have
+  \[
+    \sin\theta_2 = \frac{n_1\sin\theta_1}{n_2}.
+  \]
+  If $n_1 < n_2$, then $\sin\theta_2 = \frac{n_1}{n_2}\cdot \sin\theta_1 < 1$ and we can find $\theta_2$. If $n_1 > n_2$, then $\sin\theta_2 = \frac{n_1}{n_2}\cdot \sin\theta_1$ which an either be greater than $1$ (no solution) or less than $1$ (bends away from the normal).
+  \begin{note}{}
+    Total reflection is used in fibre optic cables to transmit data over thousands of kilometres.
+  \end{note}
+  \begin{definition}{Polarised Light}
+    Light where the electric field is oscillating in only one direction.
+  \end{definition}
+\end{document}
