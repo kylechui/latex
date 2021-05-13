@@ -9,13 +9,25 @@
 \begin{document}
   \section{Lecture 25}
   \subsection{Polarisation: Malus' Law}
-  We first consider the ``front view of polarisation'', where we can see the direction of travel of the light. We then put a vertical polariser in the way of the light, which filters out all non-vertical light. We then put another polariser, this time oriented at an angle $\phi$ relative to the vertical. We know that at any given time, the electric field is given by
+  We first consider the ``front view of polarisation'', where we can see the direction of travel of the light. We then put a vertical polariser in the way of the light, which filters out all non-vertical light. We then put another polariser, this time oriented at an angle $\phi$ relative to the vertical. We know that at any given time, the electric field that's coming from the source is given by
   \[
     \vec{E}_0 = E_0\cos \theta(t)\cdot \hat{\imath} + E_0\sin \theta(t)\cdot \hat{\jmath},
   \]
-  where $\theta$ is a function of $t$. Let's define
+  where $\theta$ is a function of $t$. Similarly, because the first polariser filters out all non-vertical light, we have
   \[
-    \vec{E}_1 = E_0\cos \theta(t).
+    \vec{E}_1 = E_0\cos\theta(t)\cdot \hat{\imath}.
+  \]
+  The second polariser only accepts electric fields that are parallel to its axis of polarisation, so we project onto the axis and get
+  \[
+    \frac{\abs{\vec{E}_2}}{\abs{\vec{E}_1}} = \cos\phi.
+  \]
+  Since $I\propto E^2$, we have
+  \[
+    \frac{I_2}{I_1} = \cos^2\phi.
   \]
   \subsection{Dispersion}
+  \begin{note}{}
+    Simply put, dispersion is the idea that objects don't have constant indices of refraction and so refract different wavelengths of light in different directions.
+  \end{note}
+  For example, the index of refraction could be defined by $n = n_0\lam$ for some constant $n_0$.
 \end{document}
