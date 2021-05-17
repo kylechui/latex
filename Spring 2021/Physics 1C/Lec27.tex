@@ -1,0 +1,37 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 27}
+  \subsection{Focal Length Equation}
+  \begin{theorem}{Focal Length Equation}
+    If the distance from the mirror/lens to the object is given by $s$, and the distance to the image is denoted $s'$, then
+    \[
+      \frac{1}{f} = \frac{1}{s} + \frac{1}{s'},
+    \]
+    where $f$ is the focal length.
+  \end{theorem}
+  \subsection{Ray Diagrams}
+  For a converging lens, we draw three rays to find the image of an object. The rays all start from the tip of the object, and are as follows:
+  \begin{enumerate}
+    \item Parallel to the axis, then to the far focus
+    \item Through the centre of the lens
+    \item To the near focus, then parallel
+  \end{enumerate}
+  We define magnification by 
+  \[
+    m = \frac{h'}{h} = -\frac{s'}{s}.
+  \]
+  The negative takes into account the fact that the image is inverted.
+  \subsection{Optics Sign Rules}
+  \begin{enumerate}
+    \item When the object is on the same side of the reflecting/refracting surface as the incoming light, the object distance $s$ is positive, otherwise negative
+    \item When the image is on the same side of the reflecting/refracting surface as the outgoing light, the image distance $s'$ is positive, otherwise negative
+    \item When the centre of curvature $C$ is on the same side as the outgoing light, the radius of curvature is positive, otherwise negative
+  \end{enumerate}
+\end{document}
