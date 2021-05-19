@@ -1,0 +1,37 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 28}
+  \subsection{Lens-Maker's Equation}
+  The Lens-maker's equation is given by
+  \[
+    \frac{1}{f} = (n-1) \paren{\frac{1}{R_1} + \frac{1}{R_2}},
+  \]
+  assuming that your lens is in air. We call $\frac{1}{f}$ the ``bending power'', whose units are metres\tsup{-1}, or diopters.
+  \subsection{Cameras}
+  The focal length of the camera lens should approximately be equal to the distance from the lens to the screen, to be able to focus images onto the screen.
+  \begin{note}{}
+    In reality the focal distance should be slightly less because the object is not always at infinity, and should be adjustable.
+  \end{note}
+  Pinhole cameras don't need to be focused, but you need a very small hole to produce a sharp image, but this reduces the amount of light that the camera can get.
+  \begin{definition}{F-stop}
+    The F-stop is defined by the distance to the back of the box over the diameter of the lens, or
+    \[
+      \text{f-stop} \ceq \frac{d}{d_\text{lens}}.
+    \]
+  \end{definition}
+  \begin{note}{}
+    A smaller f-stop is generally better because it implies a larger lens, but the small-angle approximation become worse and worse. Real cameras use multiple lenses to get a better image.
+  \end{note}
+  \subsection{Magnifying Lenses}
+  The goal of a magnifying lens is not to make the image larger, but rather allow you to focus on something that is closer. The book derives that
+  \[
+    M \ceq \frac{\theta'}{\theta} = \frac{25\ \mathrm{cm}}{f}. \tag{object at $\infty$}
+  \]
+\end{document}
