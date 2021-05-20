@@ -1,0 +1,92 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 14}
+  \subsection{Death of the Sun}
+  \begin{itemize}
+    \item Fusion within the Sun will slow, making the Sun turn into a red giant
+    \item The Sun will eventually become a white dwarf
+  \end{itemize}
+  \subsection{Global Warming}
+  \begin{itemize}
+    \item Earth's CO\tsub{2} cycle is sensitive to subtle changes in CO\tsub{2}, and human activity is increasing the greenhouse effect
+    \item While evidence is most reliable over the last $50$ years, the last $140$ years of evidence show a $0.85^\circ$ C increase in average global temperatures
+    \item Careful measurements show that natural sources of CO\tsub{2} contribute only a small amount of CO\tsub{2}
+    \item The geological record correlates high levels of CO\tsub{2} with high average global temperatures
+  \end{itemize}
+  \subsection{Evolution of Venus, Earth, and Mars}
+  \begin{itemize}
+    \item Venus was in the habitable zone of the early Sun, but a thick atmosphere, lack of plate tectonics and rotation, and brightening Sun all contributed to the runaway greenhouse effect
+    \item Venus could have been habitable for 1--3 billion years
+    \item Earth has been in the habitable zone for its entire history and has $500$ million years--1 billion years of habitability left
+    \item Mars would have been in the habitable zone today if it were a more massive planet, but as it stands, does not have internal heat, magnetic field, nor atmosphere
+  \end{itemize}
+  \subsection{Other Planetary Systems}
+  \subsubsection{Discovery of Brown Dwarfs and Exoplanets}
+  \begin{itemize}
+    \item Astronomers discovered the first ``failed star'' or brown dwarf object in 1995
+    \item The same year, astronomers discovered the first planet orbiting another Sun-like star
+  \end{itemize}
+  \begin{definition}{Exoplanet}
+    The term \emph{exoplanet} means a planet that orbits another star. It is a contraction of the term extrasolar planets.
+  \end{definition}
+  Exoplanets are very very hard to detect because their stars are usually about $1$ billion times brighter than its planets, and are very close to their stars, relative to the distance from us to the star.
+  \subsubsection{Methods for Detecting Exoplanets}
+  \begin{itemize}
+    \item Direct: Pictures or spectra of the planets themselves (isolated from the parent star)
+    \item Indirect: Precise measurements of a star's properties may indirectly reveal orbiting planets
+    \begin{itemize}
+      \item Initial successes all used indirect methods
+    \end{itemize}
+  \end{itemize}
+  \subsubsection{Gravitational Tugs}
+  \begin{itemize}
+    \item Two \emph{indirect} methods are the Astrometric and Doppler techniques
+    \item Both rely on observing the gravitational tugs from orbiting planets
+    \item The Sun and Jupiter both orbit the centre of mass of the solar system
+  \end{itemize}
+  \begin{note}{}
+    For the solar system, the centre of mass is just outside the surface of the Sun. This means that the Sun's position \emph{wobbles} in space because of our planetary system.
+  \end{note}
+  \subsubsection{The Doppler Technique}
+  \begin{itemize}
+    \item An easier way to use the \emph{gravitational tug} of a planet is through the Doppler Effect
+    \item The star moves alternately slightly towards and away from us as a part of its tiny orbital motion
+    \item This results in the star's spectral lines shifting
+    \begin{note}{}
+      Current techniques can measure movements as small as $1$ m/s.
+    \end{note}
+  \end{itemize}
+  \subsubsection{Deriving the Mass of an Extrasolar Planet}
+  Simply by using conservation of momentum, we have
+  \[
+    m_\text{planet} = \frac{m_\text{star}v_\text{star}}{v_\text{planet}}.
+  \]
+  We know the star's mass from its spectral type, and the Doppler effect measures the star's velocity. The periodic nature of the star's velocity variations gives us the orbital period of the planet, which we can then use to give us $v_\text{planet} = 2\pi \frac{a_\text{planet}}{T_\text{planet}}$. Thus we have
+  \[
+    m_\text{planet} = \frac{m_\text{star}v_\text{star}T_\text{planet}}{2\pi a_\text{planet}}.
+  \]
+  From the Doppler effect, we get the period and semi-major axis of a planet's orbit. We also get the eccentricity of the orbit. Faster oscillations on top of slower variations means multiple planets in different orbits. The planet mass deduced via the Doppler effect is a lower limit.
+  \subsubsection{Transits and Eclipses}
+  \begin{itemize}
+    \item A \emph{transit} is when a planet crosses in front of a star
+    \item The planet reduces the star's apparent brightness, which tells us the planet's radius
+    \item Sometimes an eclipse---where the planet passes behind the star, can also be detected using infrared cameras
+    \item The change in infrared brightness determines the planet's temperature
+  \end{itemize}
+  Approximately $11$ billion planets in the Milky Way are orbiting in the habitable zones of Sun-like stars. \par
+  Using mass determined by the Doppler technique, and size determined via transit observations, density can be calculated
+  \subsubsection{Direct Methods}
+  \begin{itemize}
+    \item It's hard to ``see'' the planets because of a lack of contrast and a lack of angular resolution
+    \item Jupiter is $1$ billion times fainter than the Sun
+    \item Atmospheric turbulence blurs images, and this is especially bad considering how far away these objects are
+    \item The giant Keck telescope in infrared can see things on the scale of $2$ AU as opposed to $100$ AU
+  \end{itemize}
+\end{document}
