@@ -1,0 +1,33 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 29}
+  \subsection{Microscopes}
+  In a microscope, the first lens magnifies the real object, and the second lens magnifies the image produced by lens 1. We know that the magnification of the first lens is going to be
+  \[
+    M_1 = -\frac{s'}{s} \approx \frac{s'}{f_1},
+  \]
+  so make $s$ small and $s'$ large. We know from before that the second lens acts as a magnifying glass, looking at the image from lens $1$ as input. Thus we have
+  \[
+    M_2 = \frac{25\ \mathrm{cm}}{f_2},
+  \]
+  and so the total magnification due to both lenses is
+  \[
+    M = M_1M_2 = \frac{s'}{f_1}\cdot \frac{25\ \mathrm{cm}}{f_2}.
+  \]
+  \subsection{Telescopes}
+  For the first lens for a telescope, we know that $s' = f$ (because $s = \infty$). Furthermore, we know
+  \[
+    \theta'\approx \tan\theta' = \frac{h}{f_2} \quad\text{and}\quad \theta\approx \tan\theta = \frac{h}{f_1}.
+  \]
+  Thus
+  \[
+    M\ceq \frac{\theta'}{\theta} = \frac{f_1}{f_2}.
+  \]
+\end{document}
