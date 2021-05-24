@@ -1,0 +1,26 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 30}
+  \subsection{Double-slit Interference---Maxima and Minima}
+  Suppose we have a barrier with two slits in it, to allow for diffraction. If $\vec{E}_1$ denotes the electric field from the first slit, and $\vec{E}_2$ the electric field from the second slit, then at a point $P$ away from the slits we have
+  \[
+    \vec{E} = \vec{E}_1 + \vec{E}_2.
+  \]
+  If $\vec{E}_1 = E_0\sin(\omega t)\hat{k}$, at point $P$, then $\vec{E}_2 = E_0\sin(\omega t + \phi)\hat{k}$, where
+  \[
+    \phi = \frac{2\pi}{\lam}(r_2-r_1).
+  \]
+  When $\phi  = 2k\pi, k\in \N$, then we have \emph{constructive interference}. When $\phi = (2k + 1)\pi, k\in\N$, then we have \emph{destructive interference}. However,
+  \[
+    \phi = \frac{2\pi}{\lam}(r_2-r_1),
+  \]
+  so we have constructive interference when $\Delta r = 2\pi\phi\lam = m\lam$. We have destructive interference when $\Delta r = \paren{m + \frac{1}{2}}\lam$.
+  \subsection{Double-slit Interference---Intensity}
+\end{document}
