@@ -1,0 +1,42 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 31}
+  \subsection{Maxima and Minima (Continued)}
+  Using the same situation as last lecture, we want to find $\Delta r$ as a function of $y$. Via some trigonometry nonsense, we have $\Delta r = d\sin\theta$. Thus for constructive interference, we have the equation
+  \[
+    d\sin\theta = m\lam,
+  \]
+  and for destructive interference we have
+  \[
+    d\sin\theta = \paren{m+\frac{1}{2}}\lam.
+  \]
+  \begin{example}{}
+    Suppose we have a He/Ne laser with wavelength $\lam = 632.8$ nm, which passes through two slits spaced $0.5$ mm apart. Furthermore, let $R$ be the distance from the slits to the screen. Then we know that $\sin\theta$ is an integral multiple of $\frac{\lam}{d}$, which is
+    \[
+      \frac{\lam}{d} = \frac{632.8\cdot 10^{-9}\ \mathrm{m}}{5\cdot 10^{-4}\ \mathrm{m}} = 1.26\cdot 10^{-3}\ \mathrm{m}.
+    \]
+    If $R = 1$ meter, then the separation between maxima is
+    \begin{align*}
+      \Delta y &= R(\tan\theta_{m+1} - \tan\theta_m) \\
+               &\approx R(\theta_{m+1}-\theta_m) \tag{Small angle} \\
+               &= R\cdot 1.26\cdot 10^{-3} \\
+               &= 1.26\ \mathrm{mm}.
+    \end{align*}
+  \end{example}
+  \subsection{Double-slit Intensity}
+  For an arbitrary point $P$,
+  \[
+    E_P = 2\cdot \cos\paren{\frac{\phi}{2}} = 2E_0\cos\paren{\frac{\pi}{\lam}(r_2-r_1)}.
+  \]
+  Since intensity scales with the square of the electric field,
+  \[
+    \frac{I_2}{I_1} = \frac{4E_0^2\cos^2(\frac{\phi}{2})}{E_0^2} = 4\cos^2\paren{\frac{\phi}{2}}.
+  \]
+\end{document}
