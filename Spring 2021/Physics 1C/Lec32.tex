@@ -1,0 +1,32 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 32}
+  \subsection{Triple-slit Phasors}
+  If each vector has magnitude $E_0$ and is an angle $\phi$ relative to the previous vector, then we have a few special cases:
+  \begin{itemize}
+    \item $\phi = 0$ \\
+    The vectors are all in the same direction, so
+    \[
+      E_p = 3E_0. \tag{maximum}
+    \]
+    \item $\phi = \frac{2\pi}{3}$ \\
+    The vectors rotate to form an equilateral triangle, so
+    \[
+      E_p = 0.
+    \]
+    \item $\phi = \pi$ \\
+    The first two vectors cancel, leaving the last one, so
+    \[
+      E_p = E_0. \tag{2\tsup{nd} maximum}
+    \]
+  \end{itemize}
+  \subsection{Diffraction Gratings}
+  As a function of $\phi$, you have constructive interference where $\phi = \pm m\cdot 2\pi$, and destructive interference where $\phi = \frac{2\pi}{N}$. If you only have a single slit, you can still have destructive interference when $d\sin\theta = \frac{\lam}{2}$ (which can be shown using a picture).
+\end{document}
