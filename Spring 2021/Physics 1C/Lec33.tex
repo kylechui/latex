@@ -1,0 +1,45 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 33}
+  \subsection{Galilean Relativity}
+  Inertial frames are frames in which if $\vec{F} = m\vec{a} = 0$, then $\vec{a} = 0$. Consider two different coordinate systems, one called $S$ which is the ``stationary'' coordinate system, and another that is shifted over from $S$ labelled $S'$, which is a ``moving'' coordinate system that is moving to the right at speed $v$. Then we have
+  \begin{align*}
+    x' &= x - vt \\
+    y' &= y \\
+    z' &= z
+  \end{align*}
+  Differentiating with respect to $t$, we have
+  \begin{align*}
+    v_x &= v_{x'} + v \\
+    v_y &= v_{y'} \\
+    v_z &= v_{z'}
+  \end{align*}
+  Assuming $v$ is constant, then the accelerations for any object is the same in either coordinate system.
+  \subsection{Einstein Relativity}
+  We know that the speed of light is
+  \[
+    c = \frac{1}{\sqrt{\mu_0\eps_0}} \approx 3\cdot 10^8\ \frac{\mathrm{m}}{\mathrm{s}}.
+  \]
+  What is the inertial frame in which this applies?
+  \subsubsection{Michelson--Morley Experiment}
+  The Michelson--Morley experiment measured the speed of light from a distant star from two different points in Earth's orbit (6 months apart), and measured the same speed of light. \par
+  Einstein proposed that there is no ``preferred'' inertial frame, i.e. that Galilean relativity is wrong. Let's assume that electromagnetism laws are correct, and that the speed of light is constant.
+  \subsubsection{The ``Light Clock''}
+  Consider a container that holds a light emitter, a detector, and a mirror, where the emitter emits a beam of light that reflects off of the mirror and into the detector. If the distance from the emitter/detector to the mirror is $D$, then the time is takes for the light to be detected is $\Delta \tau = \frac{2D}{c}$. \par
+  Now consider the situation in which the container is moving to the right extremely quickly at a speed $v$. The light beam must be angled forwards in order to reflect back and hit the detector. Denoting the total distance travelled by the light by $s$, we have
+  \begin{align*}
+    s^2 &= D^2 + \paren{\frac{v\Delta t}{2}}^2 \\
+    \paren{c\cdot \frac{\Delta t}{2}}^2 &= \paren{\frac{c\Delta\tau}{2}}^2 + \paren{\frac{v\Delta t}{2}}^2 \\
+    c^2(\Delta t)^2 &= c^2(\Delta\tau)^2 + v^2(\Delta t)^2 \\
+    (\Delta\tau)^2 &= \frac{c^2-v^2}{c^2}\cdot (\Delta t)^2 \\
+    \Delta t &= \frac{c}{\sqrt{c^2-v^2}}\cdot \Delta\tau.
+  \end{align*}
+  From this we can see that assuming that the speed of light is constant, that faster objects experience time slower than slower or stationary objects.
+\end{document}
