@@ -29,4 +29,17 @@
   \end{itemize}
   \subsection{Diffraction Gratings}
   As a function of $\phi$, you have constructive interference where $\phi = \pm m\cdot 2\pi$, and destructive interference where $\phi = \frac{2\pi}{N}$. If you only have a single slit, you can still have destructive interference when $d\sin\theta = \frac{\lam}{2}$ (which can be shown using a picture).
+  \subsection{Thin-Film Interference}
+  For a thin film, the waves that are reflected at material boundaries may be phase-shifted. The rules are as follows:
+  \begin{itemize}
+    \item If $n_a > n_b$, then the reflected wave is not phase shifted at all relative to the incident wave
+    \item If $n_a = n_b$, then there is effectively no interface, so there is no reflected wave
+    \item If $n_a < n_b$, then the reflected wave is phase shifted by $\pi$, and is out of phase with the incident wave
+  \end{itemize}
+  This is particularly useful for computing for constructive or destructive interference. After taking into account these phase shifts, we have
+  \begin{align*}
+    2t &= m\lam_n \tag{Constructive} \\
+    2t &= \paren{m+\frac{1}{2}}\lam_n \tag{Destructive}
+  \end{align*}
+  where $t$ is the thickness of the medium and $\lam_n$ is the wavelength of the light inside the medium, given by $\lam_n = \frac{\lam_0}{n}$. The reason why $t$ is doubled here is because the wave that passes through the medium and makes it to the other side must then travel through the medium yet again after being reflected.
 \end{document}
