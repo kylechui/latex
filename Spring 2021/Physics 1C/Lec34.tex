@@ -1,0 +1,53 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 34}
+  \subsection{Light Clock Time Dilation}
+  From last lecture, we found that the time passage for a moving object can be given by
+  \[
+    \Delta t = \frac{c}{\sqrt{c^2 - v^2}}\cdot \Delta\tau.
+  \]
+  Letting $\beta\ceq \frac{v}{c}$, we can simplify the above to
+  \[
+    \Delta t = \frac{1}{\sqrt{1 - \beta^2}}\cdot \Delta\tau.
+  \]
+  \subsubsection{The Gamma Factor}
+  Let us also define Lorentz factor $\gamma$, by $\gamma \ceq \frac{1}{\sqrt{1 - \beta^2}}$ so $\Delta t = \gamma\cdot \Delta \tau$. We may write
+  \[
+    \gamma = \frac{1}{\sqrt{1 - \beta^2}} = \frac{1}{\sqrt{1 - \paren{\frac{v}{c}}^2}}.
+  \]
+  Notice that $\gamma\geq 1$, and is only equal to one when $v = 0$.
+  \begin{example}{}
+    Consider a train moving at $100$ m/s. Then the Lorentz factor is
+    \begin{align*}
+      \gamma &= \paren{1 - \paren{\frac{v}{c}}^2}^{-\frac{1}{2}} \\
+             &= \paren{1 - \paren{\frac{100}{3\cdot 10^8}}^2}^{-\frac{1}{2}} \\
+             &\approx 1 - \paren{-\frac{1}{2}}\paren{\frac{10^2}{3\cdot 10^8}}^2 \\
+             &= 1 + 5.6\cdot 10^{-14}.
+    \end{align*}
+    Note that above we used the approximation that $(1 - \eps)^\alpha\approx 1 - \alpha\eps$.
+  \end{example}
+  \subsection{Length Contraction}
+  Let the distance from the Earth to the Neptune be $L_0$. Suppose there is also a spaceship travelling from Earth to Neptune at speed $v$, so from an observer's perspective on Earth it takes time $t = \frac{L_0}{v}$ to get there. However, from the perspective of someone in the spaceship, we have $L = v\tau$, where $t = \gamma\tau$. Thus we have
+  \[
+    L = v\cdot \frac{t}{\gamma} = \frac{L_0}{\gamma} < L_0.
+  \]
+  We see that from the mover's perspective, they are travelling a shorter distance. Furthermore, the spaceship's length is contracted by a factor of $\gamma$ along the direction of motion.
+  \subsection{Lorentz Transformation Introduction}
+  Using the same notation as we did for Galilean relativity, the Lorentz transform is as follows:
+  \begin{align*}
+    x' &= \gamma(x - vt) & x &= \gamma(x' + vt') \\
+    y' &= y & y &= y' \\
+    z' &= z & z &= z' \\
+    t' &= \gamma\paren{t - \frac{vx}{c^2}} & t &= \gamma\paren{t' + \frac{vx'}{c^2}}
+  \end{align*}
+  \begin{note}{}
+    There is no change to the variables perpendicular to the direction of motion.
+  \end{note}
+\end{document}
