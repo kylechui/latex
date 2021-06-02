@@ -1,0 +1,49 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 35}
+  \subsection{Time Dilation, Length Contraction, Simultaneity}
+  \subsubsection{Time Dilation}
+  Consider a set-up where a clock is stationary in $s'$, and ticks at $t_1'$ and $t_2'$ (in the moving frame), so $\Delta t = t_2' - t_1'$. What is $\Delta t = t_2 - t_1$? \par
+  We have
+  \begin{align*}
+    t_1 &= \gamma \paren{t_1' + \frac{vx_1'}{c^2}} \\
+    t_2 &= \gamma \paren{t_2' + \frac{vx_1'}{c^2}} \\
+    \Delta t &= \gamma(t_2' - t_1')
+  \end{align*}
+  \begin{note}{}
+    Notice that $\Delta t$ is longer than in the moving frame.
+  \end{note}
+  \subsubsection{Length Contraction}
+  Consider an object in the moving frame $s'$ that has endpoints $x_1'$ and $x_2'$, and length $L' = x_2' - x_1'$. What is $L = x_2 - x_1$? \par
+  At a given time $t$, we have
+  \begin{align*}
+    x_1' &= \gamma(x_1 - vt_1) \\
+    x_2' &= \gamma(x_2 - vt_1) \\
+    L' &= \gamma L
+  \end{align*}
+  \subsubsection{Simultaneity}
+  Two spatially separated ``events'' happen in $s'$ at the same time $t'$. What is $\Delta t = t(t', x_2') - t(t',x_1')$? \par
+  \begin{align*}
+    t_2 &= \gamma\paren{t' + \frac{vx_2'}{c^2}} \\
+    t_1 &= \gamma\paren{t' + \frac{vx_1'}{c^2}} \\
+    \Delta t &= \gamma\cdot \frac{v}{c^2}(x_2' - x_1')
+  \end{align*}
+  \begin{note}{}
+    In general an observer in $s$ will not perceive the ``events'' to occur simultaneously.
+  \end{note}
+  \subsection{Velocity Addition}
+  Suppose we're at rest, observing a rocket that is moving at a speed $v'$ relative to another rocket moving at speed $v$. What is the speed of the first rocket in our frame? \par
+  \begin{align*}
+    u &= \frac{\mathrm{d}x}{\mathrm{d}t} \\
+      &= \frac{\gamma (\mathrm{d}x' + v\,\mathrm{d}t')}{\gamma(\mathrm{d}t' + v \frac{\mathrm{d}x'}{c^2})} \\
+      &= \frac{\frac{\mathrm{d}x'}{\mathrm{d}t'} + v}{1 + \frac{v}{c^2}\cdot \frac{\mathrm{d}x'}{\mathrm{d}t'}} \\
+      &= \frac{u + v}{1 + \frac{uv}{c^2}}.
+  \end{align*}
+\end{document}
