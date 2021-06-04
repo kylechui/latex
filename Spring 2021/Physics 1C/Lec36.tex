@@ -1,0 +1,42 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 36}
+  \subsection{Relativistic Momentum}
+  When $u'$ is parallel to $v$, generally arbitrary, then $\vec{u}' = \tup{u_x', u_y', u_z'}$. Thus 
+  \[
+    u_x = \frac{u_x' + v}{1 + \frac{vu_x'}{c^2}}.
+  \]
+  Momentum is not conserved with $\vec{p}\ceq m\vec{v}$.
+  \begin{example}{}
+    Consider two equal mass particles that bounds off of each other at $90$ degrees in the centre of mass. We have $v_{x_1} = v$, $v_{x_2} = -v$, and after the collision $v_{y_1} = v$ and $v_{y_2} = -v$. If we transform to the resting frame of mass $2$, then the initial total momentum is
+    \begin{align*}
+      p_x(\text{total}) &= p_{x_1} \\
+                        &= mv_{x_1} \\
+                        &= m\paren{\frac{u + u}{1 + \frac{u^2}{c^2}}} \\
+                        &= \frac{2mu}{1 + \frac{u^2}{c^2}}.
+    \end{align*}
+    The final total momentum is
+    \begin{align*}
+      u_x &= \paren{\frac{u + 0}{1 + \frac{u\cdot 0}{c^2}}} = u. \\
+      p_x(\text{total}) &= 2mu_x \\
+                        &= 2mu.
+    \end{align*}
+    The total momentum before and after the collision are not the same.
+  \end{example}
+  We need to redefine momentum---we now let $\vec{p} = \gamma m\vec{v}$.
+  \subsection{Relativistic Kinetic and Rest Energies}
+  For non-relativistic speeds, we have the normal $K = \frac{1}{2}mv^2$. However, for relativistic speeds, $K\ceq (\gamma - 1)mc^2$.
+  \begin{note}{}
+    If you do a polynomial approximation for low values of $v$, you get $K = \frac{1}{2}mv^2$.
+  \end{note}
+  We write the above as $K = \gamma mc^2 - mc^2 = E - E_0$.
+  \subsection{Particle and Nuclear Physics}
+  There is a particle $\pi^0$ that has a mass $\frac{1}{7}m_{proton}$, is unstable, and $t = 10^{-20}$ second decay rate (into two photons). From the rest frame of the $\pi^0$ particle, the total energy is $E_0 = m_{\pi^0}\cdot c^2$ (before the decay). Half of the total energy gets put into each photon.
+\end{document}
