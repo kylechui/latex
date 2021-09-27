@@ -1,0 +1,68 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 1}
+  \subsection{Goals of This Class}
+  The end goal of this class is to go over the Fundamental Theorem of Calculus, and to do that we must first cover:
+  \begin{itemize}
+    \item What is a real number and what makes them special?
+    \item How do we define the convergence of a sequence of real numbers?
+    \item What is a limit?
+    \item What is continuity?
+    \item What is a derivative?
+    \item What is an integral?
+  \end{itemize}
+  \subsection{Mathematical Arguments and Logic}
+  We have the following components to reasoning about solutions to a mathematical problem:
+  \begin{itemize}
+    \item Assumptions
+    \item Logical steps
+    \item Conclusions
+  \end{itemize}
+  \subsection{Logical Connections}
+  We usually use the letters $P$ and $Q$ to denote logical statements (either true or false). We can also use conjunctions to connect logical statements to one another.
+  \begin{enumerate}
+    \item Conjunctions: ``$P$ and $Q$'', $P\land Q$
+    \item Disjunctions: ``$P$ or $Q$'', $P\lor Q$
+    \item Implications: ``If $P$, then $Q$'', $P\implies Q$
+    \begin{enumerate}
+      \item If the proposition is false (i.e. if $P$ is false) then the whole statement is true.
+      \begin{definition}{}
+        We say that the statement is \emph{vacuously true}.
+      \end{definition}
+    \end{enumerate}
+    \item Negations: ``Not $P$'', $\neg P$
+  \end{enumerate}
+  \subsubsection{Truth Tables}
+  \begin{center}\begin{tabular}{c|c|c}
+    $P$ & $Q$ & $P\implies Q$ \\
+    \hline
+    $T$ & $T$ & $T$ \\
+    $T$ & $F$ & $F$ \\
+    $F$ & $T$ & $T$ \\
+    $F$ & $F$ & $T$
+  \end{tabular}\end{center}
+  \begin{example}{}
+    Prove that if $n$ is an integer, then $n(n + 1)$ is even.
+    \begin{proof}
+      Suppose that $n$ is an integer. Then we have two cases, where either $n$ is even or $n$ is odd. Let $n$ be an even integer such that $n = 2k$ where $k\in \Z$. Then we have
+      \begin{align*}
+        n(n + 1) &= 2k(2k + 1) \\
+                 &= 2(2k^2 + k).
+      \end{align*}
+      Thus we see that $n(n + 1)$ is even when $n$ is even. Now let $n$ be odd such that $n = 2m + 1$ where $m\in \Z$. Then we have
+      \begin{align*}
+        n(n + 1) &= (2m + 1)(2m + 1 + 1) \\
+                 &= (2m + 1)(2m + 2) \\
+                 &= 2(m + 1)(2m + 1).
+      \end{align*}
+      Thus $n(n + 1)$ is also even when $n$ is odd, and so is even for all integers $n$.
+    \end{proof}
+  \end{example}
+\end{document}

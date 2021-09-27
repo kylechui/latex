@@ -1,0 +1,101 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 2}
+  \subsection{Continuation of Logic}
+  \subsubsection{De Morgan's Laws}
+  \begin{align*}
+    \neg(P\lor Q) &= \neg P \land \neg Q \\
+    \neg(P\land Q) &= \neg P \lor \neg Q
+  \end{align*}
+  \begin{note}{}
+    Negations turn ``and'' into ``or'' and vice versa.
+  \end{note}
+  \begin{example}{}
+    Suppose we have the following statement:
+    \begin{center}
+      $P$: $x$ is even and $x > 0$.
+    \end{center}
+    Then the negation of $P$ would be:
+    \begin{center}
+      $\neg P$: $x$ is odd or $x\leq 0$.
+    \end{center}
+  \end{example}
+  \subsubsection{Converse}
+  \begin{definition}{Converse}
+    The \emph{converse} of a statement $P\implies Q$ is the statement $Q\implies P$. In general, the converse of a statement says nothing about the original statement.
+  \end{definition}
+  \begin{example}{}
+    Consider the statement
+    \begin{center}
+      If $x > 0$, then $x^3\neq 0$.
+    \end{center}
+    The converse is then
+    \begin{center}
+      If $x^3 \neq 0$, then $x > 0$.
+    \end{center}
+    Note that the converse is false even though the original statement is true.
+  \end{example}
+  If we know both the original statement and the converse are true, then we may write $P\iff Q$ instead of $(P\implies Q)\land (Q\implies P)$. In this case, we call $P$ and $Q$ \emph{logically equivalent}. In writing, we say ``$P$ if and only if $Q$''.
+  \subsubsection{Proof by Contrapositive}
+  We can show that
+  \[
+    (\neg Q)\implies (\neg P) \iff P\implies Q.
+  \]
+  This gives us another way of proving the original statement, since the contrapositive has the same truth values.
+  \begin{lemma}{1}
+    Let $a$ be an integer. If $a^2$ is even, then $a$ is even.
+    \begin{proof}
+      Suppose $a$ is odd, so $a = 2k + 1$ for some integer $k$. Then
+      \begin{align*}
+        a^2 &= (2k + 1)^2 \\
+            &= 2(2k^2 + 2k) + 1.
+      \end{align*}
+      Thus $a^2$ is odd and this completes the proof.
+    \end{proof}
+  \end{lemma}
+  \subsubsection{Variables and Quantifiers}
+  We have a value $x$ that varies over some values, so we use $P(x)$ to denote a statement that depends on the value of $x$.
+  \begin{example}{}
+    Consider the statement
+    \[
+      P(x): x + 2 = 3.
+    \]
+    The statement is true if and only if $x = 1$.
+  \end{example}
+  We have two quantifiers---$\forall =$ ``for all'', and $\exists =$ ``there exists''.
+  \begin{itemize}
+    \item 
+      $\forall x : P(x)$ is true if $P(x)$ is true for all $x$.
+    \item 
+      $\exists x : P(x)$ is true if there exists at least one $x$ such that $P(x)$ is true.
+  \end{itemize}
+  We can also have nested quantifiers,
+  \[
+    \forall m\in\N, \exists n\in\N : m < n.
+  \]
+  \begin{note}{}
+    The order of quantifiers matters. In the above example, the quantifiers tell us that our choice of $n$ depends on $m$.
+  \end{note}
+  \subsubsection{Proof by Counterexample}
+  After ``simplifying'' the statement $\neg(\forall x : P(x))$, we get $\exists x : \neg P(x)$. We simply need to find a single counterexample to show that a statement is false for all $x$.
+  \begin{example}{}
+    Consider the statement $\forall x\in \R : x + 2 = 3$. All we need to do is show that there exists some $x\in \R$ such that $x + 2\neq 3$. This occurs when $x = 0$, so the statement is false.
+  \end{example}
+  \subsubsection{Proof by Contradiction}
+  \textbf{Key Idea.} We want to show that $P\implies Q$ indirectly.
+  \begin{lemma}{2}
+    We can show that
+    \[
+      P\implies Q = (\neg P)\lor Q.
+    \]
+    Then $P\implies Q$ is true if and only if $\neg(P\implies Q)$ is false, and so by Lemma $2$  and De Morgan's Laws, $P\land \neg Q$ is false.
+  \end{lemma}
+  For proof by contradiction, we assume $P$ is true and $\neg Q$ is true, and try to show that $P\land \neg Q$ is false (a contradiction).
+\end{document}
