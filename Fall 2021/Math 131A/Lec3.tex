@@ -1,0 +1,83 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 3}
+  \subsection{More Logic}
+  \subsubsection{Proof by Contradiction}
+  To do a proof by contradiction for a statement $P\implies Q$, we assume $P\land \neg Q$. We aim to show that $P\land \neg Q$ is false (a contradiction).
+  \begin{theorem}{Irrationality of $\sqrt{2}$}
+    There is no rational number $x$ such that $x^2 = 2$. In other words, if $x\in \Q$, then $x^2\neq 2$.
+    \begin{proof}
+      Suppose towards a contradiction that there exists some $x\in \Q$ such that $x^2 = 2$. Since $x$ is rational, there exist integers $p, q$ such that $q\neq 0$, $\frac{p}{q} = x$, and $p$ and $q$ have no common divisors (other than 1). Then
+      \begin{align*}
+        x^2 &= 2 \\
+        \frac{p^2}{q^2} &= 2 \\
+        p^2 &= 2q^2.
+        \intertext{Since $p^2$ is even, there exists some integer $k$ such that $p = 2k$. Thus}
+        (2k)^2 &= 2q^2 \\
+        4k^2 &= 2q^2 \\
+        2k^2 &= q^2.
+      \end{align*}
+      By the same logic as before, we know that $q$ must also be even (they share a common factor of $2$). However, this contradicts our original assumption that $p$ and $q$ share no common factors, and this completes the proof.
+    \end{proof}
+  \end{theorem}
+  \subsection{Set Theory}
+  We write $x\in A$ when we want to say that ``$x$ is an element of $A$'', and $x\notin A$ when we want to say that ``$x$ is not an element of $A$''.
+  \subsubsection{Set Combinations}
+  \begin{itemize}
+    \item Union: $A\cup B = \set{x\mid x\in A\lor x\in B}$.
+    \item Intersection: $A\cap B = \set{x\mid x\in A\land x\in B}$.
+    \item Difference: $A\sm B = \set{x\mid x\in A\land x\notin B}$.
+    \item Subset (Inclusion): $A\sse B$ if and only if $x\in A\implies x\in B$.
+    \begin{definition}{Proper Subset}
+      A set $A$ is a \emph{proper subset} of a set $B$ if $A\sse B$ and there exists some $x\in B$ such that $x\notin A$. We denote this as $A\subset B$.
+    \end{definition}
+    \item Equality: $A = B$ if and only if $A\sse B$ and $B\sse A$.
+    \begin{note}{Showing Equality of Sets}
+      If you want to show $A = B$, you need to show both $A\sse B$ and $B\sse A$. In other words, you must show that for all $x\in A$, we have $x\in B$, and vice versa.
+    \end{note}
+  \end{itemize}
+  \begin{example}{}
+    We have $\N = \set{1, 2, 3, \dotsc}$.
+    \begin{itemize}
+      \item Let $E$ be the set of even natural numbers. Note that $E\sse \N$.
+      \item Let $S = \set{p\in \Q\mid p^2 < 2}\sse \Q$.
+    \end{itemize}
+    Then we have:
+    \begin{itemize}
+      \item $\N\cup E = \N$.
+      \item $\N\cap E = E$.
+      \item $\N\cap S = \set{n\in \N\mid n^2 < 2} = \set{1}$.
+      \item $E\cap S = \es$.
+      \begin{definition}{Disjoint Sets}
+        If $A\cap B = \es$, we call $A$ and $B$ \emph{disjoint} sets.
+      \end{definition}
+      \begin{proof}
+        Suppose towards a contradiction that there exists some $x\in E\cap S$, which is to say $x\in E$ and $x\in S$. Since $x\in E$, we know that $x$ is even, and so there exists some integer $k$ such that $x = 2k$. Then
+        \[
+          x^2 = (2k)^2 = 4k^2,
+        \]
+        so $4\mid x^2$. Therefore $x\geq 4$, which contradicts the condition for $x\in S$, namely $x^2 < 2$.
+      \end{proof}
+      \item Given some $n\in \N$, we define $A_n = \N\sm \set{1,\dotsc,n - 1}$.
+      \begin{itemize}
+        \item $\bigcup_{n\in \N} A_n = \N$.
+        \item $\bigcap_{n\in \N} A_n = \es$.
+      \end{itemize}
+    \end{itemize}
+  \end{example}
+  \begin{definition}{Set Complement}
+    If $A\sse B$, then we define the \emph{complement} of $A$ in $B$ to be $A^c = B\sm A$.
+  \end{definition}
+  \subsubsection{De Morgan's Laws}
+  If $I$ is an index set and $\set{A_j}_{j\in I}$ are subsets of $B$, then
+  \[
+    \paren{\bigcup_{j\in I}A_j}^c = \bigcap_{j\in I}A_j^c, \quad\text{and}\quad \paren{\bigcap_{j\in I}A_j}^c = \bigcup_{j\in I}A_j^c
+  \]
+\end{document}
