@@ -1,0 +1,75 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 4}
+  \subsection{Cartesian Product}
+  If I have two sets $A$ and $B$, then we may form their \emph{Cartesian Product}, which is
+  \[
+    A\times B = \set{(x, y)\mid x_0in ?a\land y\in B}.
+  \]
+  \begin{definition}{Binary Relation}
+    A \emph{binary relation} is a subset $R\sse A\times B$. We say $x\in A$ is in relation to $y\in B$ if $(x, y)\in R$. We denote this by
+    \[
+      xRy\iff (x,y)\in R.
+    \]
+  \end{definition}
+  \begin{example}{}
+    Consider the relation 
+    \[
+      \R\times \R\supseteq R = \set{(x, y)\in \R\times \R\mid x \leq y}.
+    \]
+    Then the relation is \emph{reflexive}, because $xRx$. It is also antisymmetric, because $xRy\land yRx\implies x = y$. Finally, this relation is transitive, because $xRy\land yRz\implies xRz$.
+  \end{example}
+  These properties only make sense if $A = B$, i.e. $R\sse A\times A$, and we say that ``$R$ is a relation on $A$''.
+  \begin{definition}{Partial Order}
+    If a relation is reflexive, antisymmetric, and transitive on $A$, then it is a \emph{partial order} on $A$.
+  \end{definition}
+  The notion of ``less than or equal to'' is a partial order for $\N$, $\Z$, $\Q$, and $\R$, but there exists no partial order for $\C$.
+  \begin{definition}{Power Set}
+    For a set $A$, we may define its \emph{power set} by
+    \[
+      \mathscr{P}(A) = \set{C\mid C\sse A}.
+    \]
+    Note that set inclusion is a partial order on $\mathscr{P}(A)$.
+  \end{definition}
+  \begin{definition}{Equivalence Relation}
+    An \emph{equivalence relation} $R$ over $A$ is a relation that is reflexive, symmetric, and transitive.
+  \end{definition}
+  \begin{note}{}
+    Just like a partial order behaves much like $\leq$, an equivalence relation behaves much like $=$.
+  \end{note}
+  \begin{definition}{Equivalence Class}
+    Given an equivalence relation on $A$.0, we define a new set
+    \[
+      [x] \ceq \set{y\in A\mid x\sim y}.
+    \]
+    We call $[x]$ the \emph{equivalence class} of $x$. Any $z\in [x]$ is called a \emph{representative} of the equivalence class $[x]$. In particular, $x$ is a representative of its own equivalence class.
+  \end{definition}
+  Let $A$ be a set with equivalence relation $\sim$. Then for any $x, y\in A$,
+  \[
+    [x] = [y] \quad\text{or}\quad [x] \cap [y] = \es.
+  \]
+  \begin{proof}
+    Let $x, y\in A$. We know that $x$ is either equivalent to $y$ or it is not. Suppose the former is true and let $z\in [x]$. Thus we know that $z\sim x$ and $x\sim y$, and by transitivity we have $z\sim y$. Thus $z\in [y]$ and $[x]\sse[y]$. The reverse argument is the same. \par
+    If $x$ is not equivalent to $y$, then suppose towards a contradiction that $[x] \cap [y] \neq \es$. Let $x\in [x] \cap [y]$. Then $z\sim x$ and $z\sim y$. By symmetry we know that $x\sim z$ and by transitivity we have $x\sim y$. We have arrived at the contradiction that $x$ is both equivalent and not equivalent to $y$.
+  \end{proof}
+  \begin{definition}{Function}
+    A relation $R\sse A\times B$ is a \emph{function} if for all $x\in A$ and all $y, z\in B$, we have the following:
+    \begin{itemize}
+      \item $xRy\land xRz\implies y = z$.
+    \end{itemize}
+    In other words, every input $x$ has only one output.
+  \end{definition}
+  \begin{definition}{Injective Functions}
+    A function $f$ is \emph{injective} if $f(x_1) = f(x_2)\implies x_1 = x_2$.
+  \end{definition}
+  \begin{definition}{Surjective Functions}
+    A function $f$ is \emph{surjective} if for every $y\in B$, there exists some $x\in A$ such that $f(x) = y$.
+  \end{definition}
+\end{document}
