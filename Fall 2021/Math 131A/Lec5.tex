@@ -1,0 +1,108 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 5}
+  \subsection{The Natural Numbers}
+  We know that the natural numbers are defined via:
+  \[
+    \N = \set{1, 2, 3, 4, \dotsc}.
+  \]
+  \subsubsection{Properties of the Natural Numbers}
+  \begin{enumerate}[label=(P\arabic*)]
+    \item $1\in\N$
+    \item If $n\in \N$, then it has a \emph{successor}, $n + 1\in\N$
+    \item $1$ is \emph{not} the successor of any element of $\N$
+    \item If $m, n$ have the same successor, then $m = n$
+    \begin{note}{}
+      The properties above can be abstracted to become:
+      \begin{enumerate}[label=(P\arabic*)]
+        \item $1\in \N$
+        \item There exists some $S\colon \N\to \N$ where $S(n)$ is the successor $n$
+        \item $1\notin \range S$
+        \item $S$ is injective
+        \item Suppose $A\sse \N$ with the properties:
+        \begin{enumerate}[label=(\roman*)]
+          \item $1\in A$
+          \item If $n\in A$, then $S(n)\in A$
+        \end{enumerate}
+        Then $A = \N$.
+      \end{enumerate}
+    \end{note}
+  \end{enumerate}
+  \begin{theorem}{1.1 (Induction)}
+    Let $\set{P(n)\mid n\in\N}$ be a set of logical propositions. Suppose that
+    \begin{enumerate}[label=(\roman*)]
+      \item $P(1)$ is true.
+      \item If $P(n)$ is true, then $P(n + 1)$ is true.
+    \end{enumerate}
+    Then $P(n)$ is true for all $n\in\N$.
+    \begin{proof}
+      Let $A = \set{n\mid P(n) \text{ is true}}\sse\N$. By our first assumption, $1\in A$. By (ii), if $n\in A$, then $n + 1\in A$. So by (P5) of the natural numbers, we know that $A = \N$.
+    \end{proof}
+  \end{theorem}
+  \begin{definition}{1.2 (Peano Axioms)}
+    A triplet $(\N, 1, S)$ is said to be a \emph{system of the naturals} if it satisfies:
+    \begin{enumerate}[label=\arabic*)]
+      \item $\N$ is a set and $1\in\N$
+      \item $S\colon \N\to \N$ is a function
+      \item $1\notin \range S$
+      \item $S$ is injective
+      \item $\forall A\sse N$ such that $1\in A$ and $S(A)\sse A$, then $A = \N$
+    \end{enumerate}
+  \end{definition}
+  \begin{definition}{Addition}
+    We define the binary relation $+$ over $\N$:
+    \begin{enumerate}[label=(\roman*)]
+      \item $\forall n\in\N$, $n + 1\ceq S(n)$
+      \item $\forall m, n\in \N$, we have $m + S(n) = S(m + n)$
+    \end{enumerate}
+  \end{definition}
+  The following properties can be proven from the above definition of addition:
+  \begin{enumerate}[label=(\alph*)]
+    \item Associativity: $\forall x,y,z\in \N$, we have $(x + y) + z = x + (y + z)$
+    \item Commutativity: $\forall x,y\in \N$, we have $x + y = y + x$
+    \item Cancellative Law: $\forall x, y, z\in \N$, we have $x + y = y + z\implies x = z$
+  \end{enumerate}
+  \begin{theorem}{1.3 (Existence of the Naturals)}
+    There exists a unique system of the naturals. In other words, there is a bijection between different systems of the naturals and so we may write:
+    \[
+      (\N, 1, S) \iff (\N', 1', S').
+    \]
+  \end{theorem}
+
+
+  \subsection{Fields}
+  \begin{definition}{Field}
+    A \emph{field} is a set with two binary operations,
+    \begin{itemize}
+      \item $+$, or `addition'
+      \item $\cdot$, or `multiplication'
+    \end{itemize}
+  \end{definition}
+  \subsubsection{Axioms for Addition}
+  \begin{enumerate}[label=(A\arabic*)]
+    \item $x\in \F\land y\in \F\implies x + y\in\F$
+    \item $\forall x,y\in\F$, we have $x + y = y + x$
+    \item $\forall x,y,z\in \F$, we have $(x + y) + z = x + (y + z)$
+    \item There exists some $0\in\F$ such that $0 + x = x$ for all $x\in\F$
+    \item $\forall x\in\F$, there exists $-x\in\F$ such that $x + (-x) = 0$
+  \end{enumerate}
+  \subsubsection{Axioms for Multiplication}
+  \begin{enumerate}[label=(M\arabic*)]
+    \item $x\in\F\land y\in\F\implies x\cdot y\in\F$
+    \item $\forall x,y\in\F$, we have $x\cdot y = y\cdot x$
+    \item $\forall x, y, z\in\F$, we have $(x\cdot y)\cdot z = x\cdot (y\cdot z)$
+    \item There exists some $1\in\F$ such that $1\neq 0$ and $1\cdot x = x$ for all $x\in\F$
+    \item $\forall x\in\F$, there exists some $\frac{1}{x}\in\F$ such that $x\cdot \frac{1}{x} = 1$
+  \end{enumerate}
+  \subsubsection{Distributive Law}
+  \begin{enumerate}[label=(D\arabic*)]
+    \item $\forall x, y, z\in\F$, we have $x\cdot (y + z) = x\cdot y + x\cdot z$
+  \end{enumerate}
+\end{document}
