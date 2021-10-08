@@ -1,0 +1,112 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 7}
+  \begin{definition}{2.11---Upper and Lower Bounds}
+    Let $E$ be an ordered set and $A\subset E$.
+    \begin{enumerate}[label=(\alph*)]
+      \item If there exists $x\in E$ such that for all $a\in A$, $a\leq x$, we say $A$ is \emph{bounded above} by $x$ and call $x$ an \emph{upper bound} for $A$.
+      \item Suppose $A\subset E$ is non-empty and bounded above and there exists some $x^*\in E$ such that
+      \begin{enumerate}[label=\roman*)]
+        \item $x^*$ is an upper bound for $A$
+        \item If $y$ is any upper bound for $A^*$, then $x^*\leq y$
+      \end{enumerate}
+    \end{enumerate}
+    Then we call $x^*$ the \emph{least upper bound for $A$}, and we write
+    \[
+      x^* = \sup A. \tag{sup meaning supremum}
+    \]
+    The \emph{greatest lower bound} or \emph{infimum} of a set $B$, which is bounded below and non-empty, satisfies
+    \begin{enumerate}[label=\roman*)]
+      \item $\inf B$ is a lower bound for $B$
+      \item If $y$ is any lower bound for $B$, then $y\leq \inf B$
+    \end{enumerate}
+  \end{definition}
+  \begin{example}{}
+    Suppose
+    \begin{align*}
+      A &= \set{p\in \Q\mid p\geq 0, p^2 < 2}, \\
+      B &= \set{p\in \Q\mid p\geq 0, p^2 > 2}.
+    \end{align*}
+    Then $A$ is bounded above (say by $2$) and $B$ is bounded below (say by $0$). In the last lecture we proved that neither $\sup A$ nor $\inf B$ exist in $\Q$ (because the values would have been $\sqrt 2$).
+  \end{example}
+  \begin{example}{}
+    Let
+    \begin{align*}
+      C &= \set{p\in\Q\mid p < 0}, \\
+      D &= \set{p\in\Q\mid p \leq 0}.
+    \end{align*}
+    Then
+    \[
+      \sup C = \sup D = 0.
+    \]
+    However, notice that $\sup C\notin C$ and $\sup D\in D$.
+  \end{example}
+  \begin{definition}{Maximum}
+    We define $\max A$ to be the largest element of $A$, which satisfies:
+    \begin{enumerate}[label=\roman*)]
+      \item $\max A\in A$
+      \item For all $a\in A$, $a \leq \max A$
+    \end{enumerate}
+    The definition for minimum is similar.
+  \end{definition}
+  \begin{definition}{2.12---Least Upper Bound Property (LUBP)}
+    An \emph{ordered set} $E$ has the \emph{least upper bound property} if the following is true:
+    \begin{enumerate}[label=\roman*)]
+      \item If $A\sse E$, $A\neq\es$, $A$ is bounded above, then $\sup A$ exists and $\sup A\in E$.
+    \end{enumerate}
+  \end{definition}
+  \begin{note}{}
+    $\Q$ does not have the least upper bound property.
+  \end{note}
+  \begin{theorem}{2.13 (Existence of $\R$)}
+    There exists an ordered field $\R$ which has
+    \begin{enumerate}[label=\roman*)]
+      \item $\Q$ as a sub-field
+      \item The least upper bound property
+    \end{enumerate}
+  \end{theorem}
+  \subsection{Fundamental Properties of the Real Numbers (because of LUBP)}
+  \begin{theorem}{2.14 (Archimedean Property of $\R$)}
+    If $x, y\in\R$, and $x > 0$, then $\exists n\in \N$ such that $n\cdot x > y$.
+    \begin{proof}
+      Let $A = \set{nx\mid n\in\N}\sse \R$. Suppose towards a contradiction that there is no such $n$ that satisfies the statement above. In other words, for all $n\in\N$, $nx \leq y$. Thus $A$ is bounded above by $y$. Since $A$ is nonempty and is a subset of $\R$, we know that $\sup A$ exists. Consider the value given by $\sup A - x$, which is not an upper bound for $A$. Then we know there exists some $z\in A$ such that $\sup A - x < z$. Since $z = mx$ (because $z\in A$), we have
+      \begin{align*}
+        \sup A - x &< z \\
+        \sup A - x &< mx \\
+        \sup A &< (m + 1)x.
+      \end{align*}
+      We know that $(m + 1)x\in A$, which contradicts the definition of $\sup A$.
+    \end{proof}
+  \end{theorem}
+  Some remarks:
+  \begin{enumerate}
+    \item Let $x = 1$. Then $\forall y\in\R, \exists n\in\N$ such that $n > y$.
+    \item Let $y = 1$. Then $\forall x\in\R, \exists n\in\N$ such that $x > \frac{1}{n} > 0$.
+  \end{enumerate}
+  \begin{theorem}{2.15 (Density of $\Q$ in $\R$)}
+    For all $x,y\in \R$, $x < y$, there exists some $p\in\Q$ such that $x < p < y$.
+    \begin{proof}
+      Fix $x < y$. Then by the Archimedean property we have some $n\in\N$ such that $n(y - x) > 1$, or $y - x > \frac{1}{n}$. We may suppose $x > 0$, because otherwise we either have $x < 0 < y$ or $x < y < 0$ (multiply all sides by $-1$). \par
+      We want to show that
+      \[
+        nx < m < ny.
+      \]
+      Since $nx + 1 < ny$, we have $nx < m < nx + 1$, or $m - 1 < nx < m$. If $nx\in\Z$, we can take $m = nx + 1$. Thus
+      \[
+        x < x + \frac{1}{n} = \frac{nx + 1}{n} = \frac{m}{n} < \frac{ny}{n} < y.
+      \]
+      Otherwise we have $nx\notin \Z$. We then apply the following lemma:
+      \begin{lemma}{}
+        If $x\in\R$, there exists a $k\in\Z$ such that $k - 1\leq x\leq k$.
+      \end{lemma}
+      Then $m - 1 < nx < m$, as desired.
+    \end{proof}
+  \end{theorem}
+\end{document}

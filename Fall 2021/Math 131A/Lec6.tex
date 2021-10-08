@@ -1,0 +1,104 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 6}
+  \subsection{The Rationals}
+  On the natural numbers, we have a notion of addition, multiplication, and comparison ($\leq$). We constructed the integers and so we now have:
+  \begin{itemize}
+    \item A notion of an additive identity, $0\in\Z$
+    \item Additive inverses
+  \end{itemize}
+  However, we \emph{don't} have:
+  \begin{itemize}
+    \item Multiplicative inverses
+  \end{itemize}
+  When we think of the rationals, we consider the set
+  \[
+    \Q = \set{\frac{p}{q}\mid p, q\in\Z, q\neq 0}.
+  \]
+  \begin{note}{}
+    When dealing with $\Q$, we now have multiplicative inverses.
+  \end{note}
+  In particular, $(\Q, +, \cdot, \leq)$ is an \emph{ordered field}.
+  \begin{definition}{Ordered Field}
+    An \emph{ordered field} is a field $\F$ which is also an ordered set ($\leq$) such that:
+    \begin{enumerate}[label=(\roman*)]
+      \item If $x, y, z\in\F$ and $y < z$, then $x + y < x + z$
+      \item If $x, y\in\F$, $x > 0$ and $y > 0$, then $x\cdot y > 0$
+    \end{enumerate}
+  \end{definition}
+  Unfortunately, the rational numbers still don't allow us to solve polynomial equations (i.e. $x^2 = 2$).
+  \begin{definition}{Algebraic Numbers}
+    A number is called \emph{algebraic} if it solves
+    \[
+      c_nx^n + c_{n - 1}x^{n - 1} + \dotsb + c_1x + c_0 = 0,
+    \]
+    where $c_0,\dotsc,c_n\in\Z$, $c_n\neq 0$, $n\in\N$.
+  \end{definition}
+  \begin{example}{}
+    Every rational number is algebraic, because it solves the equation
+    \[
+      qx - p = 0.
+    \]
+  \end{example}
+  \begin{definition}{Dividing}
+    We say $k\in\Z$ \emph{divides} $m\in\Z$ if $\frac{m}{k}\in\Z$.
+  \end{definition}
+  \begin{theorem}{Rational Zeros Theorem}
+    Suppose $c_0,\dotsc,c_n\in\Z$, $c_n\neq 0$ and $r\in\Q$ satisfies
+    \[
+      c_nr^n + c_{n-1}r^{n-1} + \dotsb + c_1r + c_0 = 0.
+    \]
+    Then writing $r = \frac{c}{d}$ with $c, d$ having no common factors, $d\neq 0$, we have:
+    \begin{align*}
+      c \text{ divides } c_0 \\
+      d \text{ divides } c_n
+    \end{align*}
+    \begin{proof}
+      Since $r$ solves the equation, we have
+      \[
+        c_n \paren{\frac{c}{d}}^n + c_{n-1} \paren{\frac{c}{d}}^{n-1} + \dotsb + c_1 \paren{\frac{c}{d}} + c_0 = 0.
+      \]
+      Multiplying both sides by $d^n$, we get
+      \[
+        c_nc^n + c_{n-1}c^{n-1}d + \dotsb + c_1cd^{n-1} + c_0d^n = 0.
+      \]
+      Rearranging, we have
+      \[
+        c_nc^n =  -d(c_{n-1}c^{n-1} - \dotsb + c_1cd^{n-2} - c_0d^{n-1}).
+      \]
+      We know that $d\mid c_nc^n$. Since $c$ and $d$ have no common factors, we know $d\mid c_n$.
+      Rearranging terms again,
+      \[
+        -c(c_nc^{n-1} + c_{n-1}c^{n-2}d + \dotsb + c_1d^{n-1}) = c_0d^n.
+      \]
+      By the same reasoning as before, we have that $c\mid c_0$.
+    \end{proof}
+  \end{theorem}
+  \textbf{Corollary.} Suppose $r\in\Q$ solves
+  \[
+    r^n + c_{n-1}r^{n-1} + \dotsb + c_1r + c_0 = 0.
+  \]
+  Then $r\in\Z$ and $r\mid c_0$.
+  \begin{proof}
+    Since $r\in\Q$, we may express $r = \frac{c}{d}$, $c\mid c_0$ and $d\mid 1$. From this we know that $d = 1$, so $r = c$ and $c\mid c_0$. Therefore $r\in\Z$ and $r\mid c_0$.
+  \end{proof}
+  We have some deficiencies for $\Q$:
+  \begin{itemize}
+    \item There seem to be some ``gaps'' in $\Q$.
+  \end{itemize}
+  \textbf{Proposition.} We consider the sets $A = \set{p\in\Q\mid p\geq 0 \text{ and }p^2 < 2}$ and $B = \set{p\in\Q\mid p\geq 0 \text{ and } p^2 > 2}$. Notice that $A$ has no largest element and $B$ has no smallest element.
+  \begin{proof}
+    Given $p\in\Q$, let
+    \[
+      q = p - \frac{p^2-2}{p^2+2} = \frac{2(p + 1)}{p + 2}.
+    \]
+    We also have $q^2 - 2 = \frac{2(p^2-2)}{(p+2)^2}$. If $p\in A$, $p^2 - 2 < 0$ so $q > p$ and $q^2 - 2 > 0$. If $p\in B$, $p^2 - 2 > 0$ so $q < p$ and $q^2 - 2 > 0$.
+  \end{proof}
+\end{document}
