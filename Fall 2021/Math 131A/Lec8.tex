@@ -1,0 +1,74 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 8}
+  \subsection{A Construction of the Real Numbers}
+  We want to show that there exists some field $\R$ such that $\Q$ is a sub-field and $\R$ has the least upper bound property. This construction will be via Dedekind cuts.
+  \begin{definition}{2.17---Cut}
+    A \emph{cut} in $\Q$ is a pair of subsets $A, B\subset \Q$ such that:
+    \begin{enumerate}[label=(\roman*)]
+      \item $A\cap B = \es$, $A\cup B = \Q$, $A, B\neq \es$ (They partition $\Q$)
+      \item If $a\in A$ and $b\in B$, then $a < b$
+      \item $A$ contains no largest element
+    \end{enumerate}
+  \end{definition}
+  \begin{example}{}
+    An example of such a cut could be $A = \set{p\in\Q\mid p < 1}$ and $B = \set{p\in\Q\mid p\geq 1}$. We say that $A\mid B$ is a cut. Another such example is $A = \set{p\in\Q\mid p\leq 0 \text{ or } p^2 < 2}$ and $B = \set{p\in\Q\mid p > 0 \text{ and }p^2\geq 2}$
+  \end{example}
+  \begin{definition}{2.18---The Reals}
+    We may define
+    \[
+      \R = \set{X\mid X \text{ is a cut in }\Q}.
+    \]
+  \end{definition}
+  In order to show that the above is a valid definition for $\R$, we must show:
+  \begin{enumerate}[label=(\roman*)]
+    \item $\Q$ is contained in $\R$ in some ``natural way''
+    \item $\R$ is an ordered field
+    \item $\R$ has the least upper bound property
+  \end{enumerate}
+  \begin{definition}{2.19---Partial Order for the Reals}
+    We define a \emph{partial order} on $\R$ as follows:
+    If $X = A\mid B$ and $Y = C\mid D$, then we say $X < Y$ if and only if $A\subset C$ and $X\leq Y$ if and only if $A\sse C$.
+  \end{definition}
+  We will show that the reals contain the rationals.
+  \begin{proof}
+    We will begin by showing that $\Q\sse\R$. We say that $A\mid B$ is a \emph{rational cut} if for some $c\in\Q$, we have $A = \set{p\in\Q\mid p < c}$ and $B = \Q\sm A$. We will use $c^*$ to denote the rational cut at $c$. Then we may associate every $c\in\Q$ with a corresponding rational cut $c^*\in\R$.
+  \end{proof}
+  \begin{theorem}{2.20 (The Reals have the LUBP)}
+    With respect to the partial order $\leq$ defined earlier, we may show that $\R$ has the least upper bound property.
+    \begin{proof}
+      Let $\mathscr{C}$ be any non-empty collection of cuts which are bounded above, say by the cut $X$. We want to show that $\sup \mathscr{C}$ exists in $\R$, so $\sup \mathscr{C}$ is itself a cut. A candidate for $\sup \mathscr{C}$ is $C\mid D$, where
+      \[
+        C = \set{a\in\Q\mid \text{There exists a cut } A\mid B\in \mathscr{C} \text{ such that }a\in A}.
+      \]
+      Now, $Z = C\mid D$ is a cut in $\Q$. We claim that $C$ has no largest element. If $a\in C$, then there exists a cut $A\mid B\in \mathscr{C}$ such that $a\in A$. Since $A$ is a part of a cut, it has no largest element, so there exists some $a'\in A$ such that $a < a'$. Thus $a'\in C$ so $C$ has no largest element. \par
+      We must now show that $Z$ is the least upper bound of $\mathscr{C}$. For any $A\mid B\in \mathscr{C}, A\sse C$. Therefore $A\mid B\leq C\mid D = Z$ and $Z$ is an upper bound for $\mathscr{C}$. We must now show that it is the \emph{least} upper bound. Let $Z' = C'\mid D'$ be an upper bound for $\mathscr{C}$. Then $A\mid B\leq C'\mid D'$ and $A\sse C'$ for any $A\mid B\in \mathscr{C}$. Now by definition of $C$, we have $C\sse C'$. Therefore $C\mid D\leq C'\mid D'$, so $Z\leq Z'$. We have $Z = \sup \mathscr{C}\in \R$, so $\R$ has the least upper bound property.
+    \end{proof}
+  \end{theorem}
+  We now show that $\R$ is a field, namely an ordered field. We define the binary relations $+$ and $\cdot$ as follows: \\
+  Given two cuts $A\mid B$ and $C\mid D$, we may define
+  \[
+    E = A + C = \set{p\in \Q\mid p = a + c \text{ for some }a\in A, c\in C}.
+  \]
+  \begin{note}{}
+    This set summation is known as the Minkowski sum.
+  \end{note}
+  We must check that $E\mid F$ is a cut. We must also show that the additive identity for $\R$ is $0$, i.e. we must show that $0 + x = x + 0 = x$ for all $x\in\R$. To show the existence of additive inverses, show that for any cut $A\mid B$, there exists some $C\mid D\in \R$ such that $A\mid B + C\mid D = 0$. \par
+  Similarly, we define multiplication by
+  \[
+    E = \set{p\in\Q\mid p = ac \text{ for some }a\in A, c\in C}.
+  \]
+  \subsection{Interesting Questions}
+  \begin{enumerate}[label=(\alph*)]
+    \item Can we cut $\R$ to get something larger? No, because every possible cut in $\R$ is an element of $\R$. This is because $\R$ has the least upper bound property and every cut in $\R$ would just be a ``real cut'' at $\sup A$.
+    \item Is $\R$ unique in some natural way? Yes. If you take any other ordered field $\F$ such that $\Q\sse \F$ and $\F$ has the least upper bound property, then there exists some bijection between $\F$ and $\R$.
+    \item What about $+\infty$ and $-\infty$? We can't treat these as real numbers using Dedekind cuts, as either $A$ or $B$ would have to be empty.
+  \end{enumerate}
+\end{document}
