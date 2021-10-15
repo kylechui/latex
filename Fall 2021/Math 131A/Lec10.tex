@@ -1,0 +1,103 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 10}
+  \subsection{Convergence of Sequences Using the Definition of Convergence}
+  From last lecture, we have a basic definition of convergence. However, this is not very helpful for determining whether a sequence converges or not because we have to actually know what the sequence converges to.
+  \begin{example}{}
+    Consider the sequence $x_n = \frac{4n^3 + n}{n^3 - 6}$. We have an intuition that this converges to $4$ by dividing the leading coefficients of the numerator and denominator. \\[10pt]
+    We have
+    \begin{align*}
+      \abs{x_n - 4} &= \abs{\frac{4n^3 + n}{n^3 - 6} - 4} \\
+                    &= \abs{\frac{(4n^3 + n) - 4(n^3 - 6)}{n^3 - 6}} \\
+                    &= \abs{\frac{n + 24}{n^3 - 6}} \\
+                    &= \frac{\abs{n + 24}}{\abs{n^3 - 6}} \\
+                    &= \frac{n + 24}{n^3 - 6}
+    \end{align*}
+    We want to find some $N$ such that $\frac{n+24}{\abs{n^3 - 6}} < \eps$ for all $n > N$. Thus we want to show
+    \[
+      \frac{n+24}{\abs{n^3 - 6}}\leq \frac{C}{n^2}\leq \eps.
+    \]
+    If $n\geq 24$, we have $n + 24\leq 2n$. Suppose we wish for $\abs{n^3 - 6} > 0$, so $n \geq 2$. Furthermore, note that $n^3 - 6 \geq \frac{1}{2}n^3$ when $n\geq 12^{\frac{1}{3}}$. Thus for $n\geq 24$, we have
+    \begin{align*}
+      \frac{n + 24}{\abs{n^3 -6}} &\leq \frac{2n}{\frac{1}{2}n^3} \\
+                                  &= \frac{4}{n^2}.
+    \end{align*}
+    Thus we take 
+    \[
+      N = \max\paren{24, \ceil{\sqrt{\frac{4}{\eps}}}} = \max\paren{24, \ceil{\frac{2}{\sqrt{\eps}}}}.
+    \]
+    Thus for $n > N$, we have
+    \[
+      \frac{n + 24}{\abs{n^3 - 6}} < \eps.
+    \]
+    \begin{proof}
+      Fix $\eps > 0$ and choose $N = \max\paren{24, \ceil{\frac{2}{\sqrt{\eps}}}}$. Then
+      \begin{align*}
+        \abs{x_n - 4} &= \frac{n + 24}{\abs{n^3 - 6}} \\
+                      &\leq \frac{4}{n^2} \\
+                      &< \eps
+      \end{align*}
+      for all $n > N$. Thus $\lim_{n\to \infty}x_n = 4$.
+    \end{proof}
+  \end{example}
+  \begin{example}{}
+    Show that $x_n = (-1)^n$ diverges. \\[10pt]
+    Note that $x_{2k} = 1$, and $x_{2k + 1} = -1$ for some integer $k$.
+    \begin{proof}
+      Suppose towards a contradiction that $x_n$ converges to a point $x$. Since we know that the sequence only takes on the values $1$ and $-1$, we know that
+      \begin{align*}
+        2 &= \abs{(1 - x) + (x + 1)} \\
+          &\leq \abs{1 - x} + \abs{x + 1} \\
+        2 &\leq \abs{x_{2n} - x} + \abs{x - x_{2n + 1}}.
+      \end{align*}
+      Since $x_n\to x$, given $\eps > 0$, there exists $N$ such that $\abs{x_n - 1} < \eps$ for all $n > N$. For $n > N$, we have $\abs{x_{2n} - x} < \eps$ and $\abs{x - x_{2n + 1}} < \eps$. Thus we have $2\leq 2\eps$, so $1\leq \eps$, which contradicts that $\eps$ may be arbitrarily small. Hence the sequence diverges.
+    \end{proof}
+  \end{example}
+  \subsection{Limit Laws}
+  \textbf{Proposition 3.4} (Limits are Unique)---If $x_n\to x$ and $x_n\to y$, then $x = y$. \par
+  Idea: The points in the sequence have to be arbitrarily close to $x$ and $y$ simultaneously. \par
+  We see that
+  \begin{align*}
+    \abs{x - y}&\leq \abs{x - x_n} + \abs{x_n - y} \\
+               &= \eps,
+  \end{align*}
+  for any $\eps > 0$. By a previous theorem, we have $x = y$.
+  \begin{proof}
+    Fix $\eps > 0$. Since $x_n\to x$, there exists $N_1\in\N$ such that $\abs{x_n - x} < \frac{\eps}{2}$ for all $n > N_1$. Since $x_n\to y$, there exists $N_2\in\N$ such that $\abs{x_n - y} < \frac{\eps}{2}$ for all $n > N_2$. Then for $n > \max(N_1, N_2)$, the triangle inequality implies that
+    \begin{align*}
+      \abs{x - y} &\leq \abs{x_n - x} + \abs{y - x_n} \\
+                  &< \frac{\eps}{2} + \frac{\eps}{2} \\
+                  &= \eps.
+    \end{align*}
+    Since we have $\abs{x - y} < \eps$ for any $\eps > 0$, we have $x = y$.
+  \end{proof}
+  \begin{definition}{3.5---Boundedness for Sequences}
+    A sequence $(x_n)$ is \emph{bounded} if there exists some real number $M > 0$ such that $\abs{x_n}\leq M$ for all $n\in\N$.
+  \end{definition}
+  \begin{note}{}
+    In the above, our choice of $M$ does not depend on $n$. Additionally, all convergent sequences are bounded (since we may just choose an arbitrary $\eps$ and we know that $x_n$ will at some point rest between $x - \eps$ and $x + \eps$).
+  \end{note}
+  \begin{theorem}{3.6 (Convergent Sequences are Bounded)}
+    Suppose $x_n\to x$. Then for $\eps = 1$, we may find a $N\in\N$ such that $\abs{x_n - x} < 1$ for all $n > N$. Then when $n > N$, we have
+    \begin{align*}
+      \abs{x_n} &\leq \abs{x_n - x} + \abs{x} \\
+                &\leq 1 + \abs{x}.
+    \end{align*}
+    Hence, for $M = \max(\abs{x_1}, \abs{x_2},\dotsc, \abs{x_N}, 1 + \abs{x})$, we see that $\abs{x_n} \leq M$ for all $n\in \N$.
+  \end{theorem}
+  \begin{theorem}{3.7 (Algebraic Limit Theorem)}
+    Let $\lim_{n\to \infty}x_n = x$ and $\lim_{n\to \infty}y_n = y$. Then
+    \begin{enumerate}[label=(\roman*)]
+      \item $\lim_{n\to \infty}(ax_n + by_n) = ax + by$ for all $a, b\in\R$.
+      \item $\lim_{n\to \infty}(x_n\cdot y_n) = xy$.
+      \item $\lim_{n\to \infty} \frac{x_n}{y_n} = \frac{x}{y}$, provided $y\neq 0$.
+    \end{enumerate}
+  \end{theorem}
+\end{document}
