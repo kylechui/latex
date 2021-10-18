@@ -1,0 +1,94 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 11}
+  \subsection{Proof for Algebraic Limit Theorem}
+  We want to show that
+  \[
+    \abs{x_ny_n - xy} < \eps
+  \]
+  for all $\eps > 0$.
+  \begin{proof}
+    Observe that
+    \begin{align*}
+      \abs{x_ny_n - xy} &= \abs{x_ny_n - x_ny + x_ny - xy} \\
+                        &= \abs{x_n(y_n - y) + (x_n - x)y} \\
+                        &\leq \abs{x_n(y_n - y)} + \abs{y(x_n - x)} \\
+                        &= \abs{x_n}\abs{y_n - y} + \abs{y}\abs{x_n - x} \\
+      \intertext{Since convergent sequences are bounded, we know that there exist some $M > 0$ such that $\abs{x_n}\leq M$ for all $n\in\N$.}
+                        &\leq M\abs{y_n - y} + \abs{y}\abs{x_n - x} \\
+      \intertext{Fix $\eps > 0$. Then there exists $N_1$ such that $\abs{x_n - x} < \frac{\eps}{2(1 + \abs{y})}$ for all $n > N_1$. Furthermore, we know there exists some $N_2$ such that $\abs{y_n - y} < \frac{\eps}{2(1 + M)}$ for all $n > N_2$.}
+                        &< \frac{M\eps}{2(1 + M)} + \frac{\abs{y}\eps}{2(1 + \abs{y})} \\
+                        &< \frac{\eps}{2} + \frac{\eps}{2} \\
+                        &< \eps,
+    \end{align*}
+    for all $\eps > 0$. Therefore the limit exists and
+    \[
+      \lim_{n\to \infty} x_ny_n = xy.
+    \]
+  \end{proof}
+  We now want to show that
+  \[
+    \lim_{n\to \infty} \paren{\frac{x_n}{y_n}} = \frac{x}{y}.
+  \]
+  \begin{proof}
+    Observe that
+    \begin{align*}
+      \abs{\frac{x_n}{y_n} - \frac{x}{y}} &= \abs{\frac{x_ny - xy_n}{y_ny}} \\
+                                          &= \frac{1}{\abs{y_n}\abs{y}}\abs{x_ny - xy_n} \\
+                                          &= \frac{1}{\abs{y_n}\abs{y}} \abs{x_ny - xy + xy - xy_n} \\
+                                          &\leq \frac{1}{\abs{y_n}\abs{y}} \abs{y(x_n - x) + x(y - y_n)} \\
+                                          &= \frac{1}{\abs{y_n}\abs{y}} \paren{\abs{y}\abs{x_n - x}+ \abs{x}\abs{y - y_n}} \\
+      \intertext{We now need to show that $\frac{1}{\abs{y_n}}$ is upper bounded by some value. Since $(y_n)$ converges, we know that for all $\eps > 0$, there exists some $N\in \N$ such that $\abs{y_n - y} < \eps$. Suppose we choose $\eps = \frac{y}{2}$, so we have $\frac{1}{y_n} \leq \frac{2}{y}$. In a fashion similar to the previous part, we may manipulate the above expression to complete the proof.}
+    \end{align*}
+  \end{proof}
+  \begin{theorem}{3.8 (Order Limit Theorem)}
+    Assume $x_n\to x$ and $y_n\to y$.
+    \begin{enumerate}[label=(\roman*)]
+      \item If $x_n\geq 0$ for all $n\in\N$, then $x\geq 0$.
+      \item If $x_n\leq y_n$ for all $n\in\N$, then $x\leq y$.
+      \item If there exists $a\in\R$ such that $a\leq x_n$ for all $n\in\N$, then $a\leq x$. If there exists $b\in\R$ such that $b\geq x_n$ for all $n\in\N$, then $b\geq x$.
+    \end{enumerate}
+  \end{theorem}
+  \begin{note}{}
+    Strict inequalities are not necessarily respected! If $x_n\to x$ and $x_n > 0$, then the most we can say is that $x_n\geq 0$. For example, consider the case where $x_n = \frac{1}{n} > 0$, and $x = 0$.
+  \end{note}
+  \subsection{Monotone Sequences}
+  \begin{definition}{3.9---Monotonicity}
+    A sequence $(x_n)$ is \emph{increasing} if $x_n\leq x_{n + 1}$ for all $n\in \N$. A sequence $(x_n)$ is \emph{decreasing} if $x_n\geq x_{n + 1}$ for all $n\in \N$. We call both increasing and decreasing sequences \emph{monotone} or \emph{monotonic}.
+  \end{definition}
+  \begin{note}{}
+    If you iterate the definition for an increasing sequence, you get $x_n\leq x_m$ for $n\leq m$. A similar result comes from iterating the definition for a decreasing sequence.
+  \end{note}
+  \begin{example}{Monotone Sequences}
+    \begin{itemize}
+      \item $x_n = 1-\frac{1}{n}$ is increasing (and converges to $1$).
+      \item $x_n = \frac{1}{2^n}$ is decreasing (and converges to $0$).
+      \item $x_n = n$ is increasing (but is neither convergent nor bounded).
+      \item $x_n = (-1)^n$ is not monotonic (and does not converge).
+    \end{itemize}
+  \end{example}
+  \begin{note}{}
+    In the above examples, if a sequence is monotonic, then if it is bounded it converges, otherwise diverges. Can we prove this?
+  \end{note}
+  \begin{theorem}{3.10 (Monotone Convergence Theorem)}
+    Every monotonic and bounded sequence in $\R$ necessarily converges.
+    \begin{proof}
+      Let $(x_n)$ be a sequence in $\R$ which is both increasing and bounded (same argument works for decreasing). If we look at the set
+      \[
+        S = \set{x_n\mid n\in\N}\sse \R,
+      \]
+      we see that this set is non-empty and bounded above (because $(x_n)$ is bounded). Thus by the least upper bound property of $\R$ we know that $\sup S$ exists. We claim that $x = \sup S$ is the limit for $(x_n)$. Let $\eps > 0$. Then there exists some $x_N\in S$ such that $x_N > x - \eps$. We know that $(x_n)$ is increasing, then $x - \eps < x_N < x_n$ for all $n > N$. Furthermore, since $x$ is the supremum of $S$, we know that $x_n < x < x + \eps$. Thus we have
+      \[
+        x - \eps < x_n < x + \eps,
+      \]
+      so $\abs{x_n - x} < \eps$ for all $\eps > 0$ and all $n > N$.
+    \end{proof}
+  \end{theorem}
+\end{document}
