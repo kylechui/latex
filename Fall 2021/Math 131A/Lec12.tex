@@ -1,0 +1,113 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 12}
+  \begin{example}{}
+    Consider the sequence defined by $x_1 = 2$, and for $n\geq 2$
+    \[
+      x_{n + 1} = \frac{1}{2}\paren{x_n + \frac{2}{x_n}}.
+    \]
+    We don't have a nice function for $x_n$ in terms of $n$, so proving convergence by normal means is non-ideal. To find the limit of $(x_n)$, we:
+    \begin{itemize}
+      \item Show that $(x_n)$ is monotonic (decreasing in this case) and bounded
+      \item Apply the Monotonic Convergence Theorem, and say that there exists some $x\in\R$ such that $x_n\to x$
+      \item Apply limit laws to actually find the value of $x$
+      \begin{note}{}
+        If $x_n\to x$, we know that $x_{n + 1}\to x$.
+      \end{note}
+    \end{itemize}
+    Taking the first few terms, we see
+    \[
+      x_1 = 2, x_2 = \frac{3}{2}, \dotsc
+    \]
+    We guess that the sequence is always bounded, namely $1\leq x_n\leq 2$ for all $n\in\N$. We can prove this by induction. To show that the sequence is decreasing, we just need to show that for all $n\in\N$, we have $x_{n + 1} - x_n\leq 0$. We can then use induction again, along with the fact that the previous inequality can be expressed as a function of $x_n$, to show that the sequence is decreasing. \par
+    We can see that the sequence $(x_n)$ is strictly greater than zero, so we may use the Algebraic Limit Theorem. Thus we have
+    \begin{align*}
+      x &= \frac{1}{2}\paren{x + \frac{2}{x}} \\
+      2x &= x + \frac{2}{x} \\
+      x &= \frac{2}{x} \\
+      x^2 &= 2 \\
+      x &= \sqrt{2}.
+    \end{align*}
+  \end{example}
+  \subsection{Subsequences}
+  Consider the diverging sequence given by $x_n = (-1)^n$. If we take the even terms, we see that $x_{2n} = 1$, and if we take the odd terms, we have $x_{2n + 1} = -1$. Thus we see that ``parts'' of our diverging sequence are actually convergent sequences.
+  \begin{definition}{Subsequences}
+    Let $(x_n)$ be a sequence and
+    \[
+      n_1 < n_2 < n_3 < \dotsb
+    \]
+    be a strictly increasing sequence of natural numbers. Then for $k\in\N$, the sequence $(x_{n_k})$ is a \emph{subsequence} of the original sequence $(x_n)$.
+  \end{definition}
+  \begin{example}{Subsequences}
+    \begin{enumerate}
+      \item Consider $x_n = (-1)^n$. Then $x_{2k} = 1$ is a subsequence. Similarly, $x_{2k + 1} = -1$ is also a subsequence.
+      \item Consider $x_n = \frac{1}{n} = \paren{1, \frac{1}{2}, \frac{1}{3}, \dotsc}$. A valid subsequence could be $x_{n_k} = \frac{1}{2k}$ or $x_{n_k} = \frac{1}{10^k}$. However, the sequence given by
+      \[
+        n_1 = 10, n_2 = 50, n_3 = 20, n_4 = 5, n_5 = 1000
+      \]
+      is not a subsequence because the indices are not strictly increasing.
+    \end{enumerate}
+  \end{example}
+  \textbf{Observation.} Suppose we have $(n_k)$ is strictly increasing. Then we know that $n_k\geq k$, because it is strictly increasing and starts at $1$. Then if $x_{n_k} = \frac{1}{n_k}$, then we see
+  \[
+    x_{n_k}\leq \frac{1}{k}\to 0.
+  \]
+  Thus we see that for \emph{any} subsequence of our convergent sequence $x_n$, it converges to the same limit as $(x_n)$. \\[10pt]
+  \textbf{Proposition 3.12} Every subsequence of a converging sequence converges and does so to the same limit as the original sequence.
+  \begin{lemma}{}
+    We will show that $n_k\geq k$ for all $k\in\N$, assuming that $n_k$ is a strictly increasing sequence.
+    \begin{proof}
+      We proceed via induction. Observe that for $n_1\in\N$, we have $n_1\geq 1$. Suppose $n_k\geq k$ Then since $(n_k)$ is striclty increasing, we have $n_{k + 1} > n_k\geq k$, so $n_{k + 1}\geq k + 1$.
+    \end{proof}
+  \end{lemma}
+  \begin{proof}
+    Suppose $(x_n)$ converges to $x$. Let $(x_{n_k})$ be a subsequence of $(x_n)$. We claim that $x_{n_k}\to x$. Let $\eps > 0$. Then there exists some $N\in\N$ such that $\abs{x_n - x} < \eps$ for all $n > N$. Since $n_k\geq k$ for $k > N$, we have $\abs{x_{n_k} - x} < \eps$ for all $n_k > N$. Thus $x_{n_k}\to x$ as $k\to \infty$.
+  \end{proof}
+  \begin{note}{}
+    If $x_n\to x$, then $x_{n + 1}\to x$ because $(x_{n + 1})$ is a subsequence of $(x_n)$.
+  \end{note}
+  \begin{note}{}
+    Proposition $3.12$ can be used to prove divergence, by showing that two subsequences of $(x_n)$ converge to different values. For example, if $(x_n) = (-1)^n$, then
+    \begin{align*}
+      x_{2n} &= (-1)^{2n} = 1 \\
+      x_{2n + 1} &= (-1)^{2n + 1} = -1,
+    \end{align*}
+    so $(x_n)$ diverges.
+  \end{note}
+  \textbf{Proposition 3.13} Every sequence has a monotonic subsequence.
+  \begin{proof}
+    We need to carefully select our subsequence. Let $(x_n)$ be a sequence and
+    \[
+      D = \set{n\in\N \mid x_n > x_m \text{ for all }m > n}\sse \N.
+    \]
+    If $n\in D$, then $x_n > x_m$ for all $m > n$. We say that if $n\in D$, that $x_n$ is \emph{dominant}. We now consider when $D$ is finite and when $D$ is infinite.
+    \begin{enumerate}
+      \item If $D$ is infinite, then there exists $\set{n_k}\sse D$ such that $x_{n_k}$ is dominant. Then $x_{n_{k + 1}} < x_{n_k}$ and so $(x_{n_k})$ is a subsequence which is decreasing, and so monotonic.
+      \item If $D$ is finite, then there exists some $N$ such that $\max D = N$. Thus the last dominant term of our sequence is $x_N$. Hence there exists some $n_1 > N$ such that $x_{n_1} > x_{N + 1}$. However, since $n_1 > N$, we have $n_1\notin D$, so there must exist some $x_{n_2} > x_{n_1 + 1}$. By induction on $k\in\N$, we get $(n_k)$, so there exist
+      \[
+        n_1 < n_2 < n_3 < \dotsb
+      \]
+      such that
+      \[
+        x_{n_1} < x_{n_2} < \dotsb < x_{n_k} < x_N.
+      \]
+      Therefore $(x_{n_k})$ is an increasing subsequence, and so is monotonic.
+    \end{enumerate}
+  \end{proof}
+  \begin{theorem}{3.14 (Bolzano--Weierstrass)}
+    Every bounded sequence in $\R$ has a converging subsequence.
+    \begin{proof}
+      Suppose we have a bounded sequence $(x_n)$ in $\R$. Then by Proposition $3.13$ we know that there exists some subsequence $(x_{n_k})$ that is monotonic, which is also bounded. Thus by the Monotone Convergence Theorem we have that $(x_{n_k})$ converges in $\R$.
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    Bolzano--Weierstrass doesn't tell us anything about the original sequence, just that there are converging subsequences.
+  \end{note}
+\end{document}
