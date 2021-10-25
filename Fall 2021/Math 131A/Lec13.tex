@@ -1,0 +1,107 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 13}
+  \subsection{Cauchy Sequences}
+  The notion of a Cauchy sequence is a sequence that doesn't necessarily converge, but whose terms get ``arbitrarily close'' to each other.
+  \begin{definition}{Cauchy Sequence}
+    A sequence $(x_n)$ is \emph{Cauchy} if for all $\eps > 0$, there exists some $N\in\N$ such that
+    \[
+      \abs{x_n - x_m} < \eps\quad \text{for all }n,m > N.
+    \]
+  \end{definition}
+  \begin{note}{}
+    We don't need to know any limit $x$ in order to determine if a sequence is Cauchy.
+  \end{note}
+  \begin{example}{Cauchy Sequences}
+    \begin{enumerate}[label=\arabic*)]
+      \item $x_n = \frac{1}{n}$ is Cauchy.
+      \item $x_n = (-1)^n$ is not Cauchy.
+      \item $x_n = n$ is not Cauchy.
+    \end{enumerate}
+  \end{example}
+  \textbf{Proposition 3.16} Every convergent sequence is Cauchy.
+  \begin{proof}
+    Let $(x_n)$ be a convergent sequence. Then for all $\eps > 0$, there exists $N\in\N$ such that for all $n > N$, we have $\abs{x_n - x} < \frac{\eps}{2}$. Let $m > N$. Thus
+    \begin{align*}
+      \abs{x_n - x_m} &\leq \abs{x_n - x} + \abs{x - x_m} \\
+                      &= \abs{x_n - x} + \abs{x_m - x} \\
+                      &< \eps.
+    \end{align*}
+    Therefore $(x_n)$ is Cauchy.
+  \end{proof}
+  \textbf{Proposition 3.17} Every Cauchy sequence is bounded.
+  \begin{proof}
+    Let $(x_n)$ be Cauchy. For $\eps = 1$, we know there exists $N\in\N$ such that
+    \[
+      \abs{x_n - x_m} < 1\quad \text{for all }n, m > N.
+    \]
+    Thus $\abs{x_n}\leq 1 + \abs{x_{N + 1}}$ for all $n > N$. Suppose we choose
+    \[
+      M = \max(\abs{x_1}, \abs{x_2},\dotsc,\abs{x_N}, 1 + \abs{x_{N + 1}}).
+    \]
+    Then $\abs{x_n}\leq M$ for all $n\in\N$, and so $(x_n)$ is bounded.
+  \end{proof}
+  \subsection{Completeness}
+  \begin{theorem}{3.18 (Completeness of $\R$)}
+    $\R$ is \emph{complete}, in other words every Cauchy sequence in $\R$ converges.
+    \begin{proof}
+      Let $(x_n)$ be Cauchy in $\R$. We have two steps:
+      \begin{enumerate}[label=(\arabic*)]
+        \item Identify some candidate for the limit.
+        \item Show that the sequence converges to the candidate.
+      \end{enumerate}
+      (1) By Proposition $3.17$, we know that $(x_n)$ is bounded. By Bolzano--Weierstrass, there exists some subsequence $x_{n_k}\to x\in\R$ as $k\to\infty$. This is our candidate for our limit. \par
+      (2) We now show that our sequence converges to $x$. Bolzano--Weierstrass tells us that for a subsequence of $(x_n)$, we have the terms getting arbitrarily close to $x$. Because $(x_n)$ is Cauchy, we ``control'' the remaining terms by ``proximity'' to $(x_{n_k})$. \par
+      Fix $\eps > 0$, $x_{n_k}\to x$, there exists $N_1\in\N$ such that
+      \[
+        x_{\frac{n}{2}} < \frac{\eps}{2}\quad \text{for all }n_k > N_1.
+      \]
+      Since $(x_n)$ is Cauchy, there exists some $N_2\in\N$ such that
+      \[
+        \abs{x_n - x_m} < \frac{\eps}{2}\quad \text{for all }n,m > N_2.
+      \]
+      So for any $n > \max(N_1, N_2)$, and $n_k > \max(N_1, N_2)$,
+      \begin{align*}
+        \abs{x_n - x} &\leq \abs{x_n - x_{n_k}} + \abs{x_{n_k} - x} \\
+                      &< \frac{\eps}{2} + \frac{\eps}{2} \\
+                      &= \eps.
+      \end{align*}
+      Therefore $x_n\to x$.
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    The above proof makes use of Bolzano--Weierstrass, which applies to the reals, not rationals. Thus we think that the rationals are not complete.
+  \end{note}
+  \begin{theorem}{3.19 (Incompleteness of $\Q$)}
+    The rationals are \emph{not} complete. More precisely, there exists a Cauchy sequence of rational numbers that \emph{does not} converge.
+    \begin{proof}
+      Consider the sequence given by
+      \[
+        x_1 = 2, x_{n + 1} = \frac{1}{2}\paren{x_n + \frac{2}{x_n}}.
+      \]
+      We see that $(x_n)$ is a sequence of rationals. We know that it does not converge in the rationals, because if it did it would have to converge to $\sqrt{2}\notin\Q$. It remains to show that it is Cauchy. From one of the homeworks we know that $\abs{x_n - \abs{x_{n + 1}}} < \frac{1}{2^n}$ for all $n\in\N$. We can take telescoping sums by writing (for $n > m$):
+      \begin{align*}
+        \abs{x_n - x_m} &= \abs{\sum_{k=m}^{n - 1}(x_{k + 1} - x_k)} \\
+                        &\leq \sum_{k=m}^{n-1}\abs{x_{k + 1} - x_k} \\
+                        &< \abs{\sum_{k=m}^{n - 1} \frac{1}{2^k}}.
+        \intertext{This is a geometric series that sums to} 
+                        &= \frac{\paren{\frac{1}{2}}^m-\paren{\frac{1}{2}}^n}{1 - \frac{1}{2}} \\
+                        &= \frac{4}{2^m},
+      \end{align*}
+      which converges to $0$ as $m\to\infty$. Thus $(x_n)$ is Cauchy in $\Q$.
+    \end{proof}
+  \end{theorem}
+  \subsection{Bonus: Diverging to Infinity}
+  \begin{definition}{3.20---Diverging to $\pm\infty$}
+    Let $(x_n)$ be a sequence in $\R$. We say that $x_n\to\infty$ as $n\to\infty$ if:
+    for all $M > 0$, there exists $N\in\N$ such that $x_n > M$ for all $n > N$. \par
+    Similarly, we say $x_n\to-\infty$ if for all $M > 0$, there exists $N\in\N$ such that $x_n < -M$ for all $n > N$.
+  \end{definition}
+\end{document}
