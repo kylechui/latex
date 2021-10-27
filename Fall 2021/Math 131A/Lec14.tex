@@ -1,0 +1,103 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 14}
+  \subsection{Diverging Limits and Multiplication}
+  \textbf{Proposition 3.21} Let $x_n\to+\infty$ and $y_n\to y > 0$. Then
+  \[
+    \lim_{n\to \infty} (x_ny_n) = +\infty.
+  \]
+  The intuition via the Algebraic Limit Theorem tells us that this limit should approach ``$x\cdot y = +\infty\cdot y = +\infty$''.
+  \begin{note}{}
+    We can't always allow the case when $y = 0$, i.e. consider the case where $y_n = 0$, so 
+    \[
+      \lim_{n\to \infty} x_n\cdot 0 = \lim_{n\to \infty} 0 = 0.
+    \]
+  \end{note}
+  \textbf{Proposition 3.22} Let $(x_n)$, $x_n\geq 0$. Then $x_n\to+\infty$ if and only if $\frac{1}{x_n}\to 0$.
+  \begin{example}{}
+    Consider sequences of the form $x_n = n^p$, where $x_n\geq 0$ and $p > 0$. Then $x_n\to+\infty$ and $\frac{1}{x_n} = \frac{1}{n^p}\to 0$.
+  \end{example}
+  \subsection{Diverging Limits and Addition}
+  \begin{note}{}
+    Limits diverging to infinity don't behave nearly as well when subjected to addition and subtraction, in comparison to multiplication and division. For example, if $x_n\to+\infty$ and $y_n\to\-\infty$, we can't say for sure what $x_n + y_n$ converges to, if anything at all. \par
+  \end{note}
+  \subsection{Notion of Infinity}
+  We introduce symbols $+\infty$ and $-\infty$, and define the \emph{extended real numbers}:
+  \[
+    \overline{\R} = \R\cup \set{-\infty, +\infty}.
+  \]
+  We extend the notion of $\leq$ to $\overline\R$ as follows: For all $x\in\overline\R$, we have
+  \[
+    -\infty < x < +\infty.
+  \]
+  We aren't going to extend arithmetic (addition, subtraction, multiplication, division, etc.) to our new symbols. We also introduce the notation:
+  \begin{align*}
+    [a, +\infty) &= \set{x\in\R\mid a\leq x}. \\
+    (-\infty, b) &= \set{x\in\R\mid x\leq b}. \\
+    (-\infty, +\infty) &= \R.
+  \end{align*}
+  \begin{note}{}
+    If $A\neq \es$ and $A\sse\R$ which is unbounded above, then $\sup A = +\infty$. We should always write $+\infty$ and $-\infty$, not just $\infty$.
+  \end{note}
+  \subsection{More on Sequences}
+  Let $(x_n)$ be a sequence in $\R$. Define
+  \[
+    L = \set{x_0\in\overline\R\mid \text{There exists a subsequence }(x_{n_k})\text{ such that }x_{n_k}\to x_0}\sse\overline\R.
+  \]
+  We may think of the above by ``the set of all possible sub sequential limits of $(x_n)$''. We continue to study the three possible behaviors:
+  \begin{itemize}
+    \item Case 1: $x_n\to x$ (Converging) \par
+    Then we know that $L = \set{x}\in\R$ because if the sequence converges to a point $x$, then all sub sequences must converge to the same $x$.
+    \item Case 2: $x_n\to+\infty$. Then $L = \set{+\infty}$. \par
+    In other words, any subsequence of a sequence diverging to $+\infty$ must also diverge to $+\infty$.
+    \begin{proof}
+      Suppose $(x_{n_k})$ is a subsequence of $(x_n)$, which diverges to $+\infty$. Thus for all $M > 0$, there exists some $N$ such that $x_n > M$ for all $n > N$. We know that $n_k\geq k$, and so fixing $M > 0$, there exists $N$ such that
+      \[
+        n_k\geq k > N,
+      \]
+      so $x_{n_k} > M$. Thus $x_{n_k}\to+\infty$ as $k\to+\infty$.
+    \end{proof}
+    A similar result can be shown for if $x_n\to-\infty$.
+    \item Case 3: ``Oscillating Sequences'' \par
+    Characterized by $L$ having more than one element in the extended reals.
+    \begin{theorem}{3.22}
+      A sequence of real numbers which does not converge in $\overline\R$ has at least two distinct limit points, i.e. there exists two subsequences converging to different things.
+      \begin{proof}
+        Case 1: $(x_n)$ is unbounded from above. \par
+        We can extract a subsequence $(x_{n_k})$ such that $x_{n_k}\to+\infty$. Since $x_n$ is unbounded above, for all $M > 0$, there exists $n\in\N$ such that $x_n > M$.  We consider the subsequence
+        \[
+          \paren{x_n}_{n = n_1 + 1}^{\infty},
+        \]
+        which is also unbounded above. Let $M = 1$, so there exists $n_1\in\N$ such that $x_{n_1} > 1$.
+        We then choose $M = 2$, and get $n_2 > n_1$ such that
+        \[
+          \paren{x_n}_{n = n_2 + 1}^{\infty},
+        \]
+        and continue this pattern to construct a subsequence $(x_{n_k})$ such that $x_{n_k}\geq k\to+\infty$, so $+\infty\in L$. \par
+        Case 1.1: $(x_n)$ is also unbounded from below. Same arguments give you a subsequence $(x_{n_\ell})$ such that $x_{n_\ell}\to-\infty$, and so $-\infty\in L$. \par
+        Case 1.2: $(x_n)$ is bounded from below. \par
+        Since $(x_n)$ does not converge in the extended real numbers, it does \emph{not} diverge to $+\infty$. Then there exists $M > 0$ for all $N\in\N$, such that $x_n\leq M$ for some $n > N$. Thus we may extract a bounded subsequence. If $N = 1$, then there exists $n_1 > 1$ such that $x_{n_1} \leq M$. If $N = n_1$, there exists $n_2 > n_1$ such that $x_{n_2}\leq M$. We continue this process until we have constructed our subsequence, i.e.
+        \[
+          x_{n_k}\leq M\quad \text{for all }k\in \N.
+        \]
+        Bolzano--Weierstrass tells us that there exists a further subsequence $(x_{n_{k_\ell}})$ such that
+        \[
+          x_{n_{k_\ell}}\to x\in\R.
+        \]
+        We know that $(x_{n_{k_\ell}})$ is a subsequence of our subsequence $(x_{n_k})$, and so it must be a subsequence of our original sequence $(x_n)$.
+        Case 3: $(x_n)$ is bounded. From the homework we know that
+        \[
+          \liminf_{n\to\infty} x_n, \limsup_{x\to\infty}x_n\in L.
+        \]
+        Since $(x_n)$ does not converge in $\overline\R$, we have that the limits are distinct and so $L$ has more than $1$ element.
+      \end{proof}
+    \end{theorem}
+  \end{itemize}
+\end{document}
