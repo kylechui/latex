@@ -1,0 +1,118 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 16}
+  \begin{definition}{3.25---Cauchy Criterion for Series}
+    We say a series $\sum x_n$ satisfies the \emph{Cauchy Criterion} if the sequence of partial sums $(S_n)$ is a Cauchy sequence. In other words, for all $\eps > 0$, there exists some $N\in\N$ such that
+    \[
+      \abs{S_n - S_m} < \eps,
+    \]
+    for all $m, n > N$. Written another way, we have that for all $\eps > 0$, there exists some $N\in\N$ such that
+    \[
+      \abs{\sum_{k=m + 1}^{n}x_k} < \eps
+    \]
+    for all $n\geq m > N$.
+  \end{definition}
+  \begin{theorem}{3.26}
+    A series $\sum x_n$ satisfies the Cauchy criterion if and only if the series converges.
+    \begin{proof}
+      ($\Rightarrow$) We know that the sequence of partial sums is Cauchy. Since the reals are complete, we have that the partial sums converge, and so the series converges. \par
+      ($\Leftarrow$) If the series converges, the sequence of partial sums is converges, and so is Cauchy. Therefore the series satisfies the Cauchy criterion.
+    \end{proof}
+  \end{theorem}
+  \textbf{Corollary 3.27} If $\sum x_n$ converges, then $\lim_{n\to \infty} x_n = 0$.
+  \begin{proof}
+    Let $(S_n)$ denote the sequence of partial sums of $(x_n)$. Since $(S_n)$ converges, we know that it satisfies the Cauchy criterion. Since $(S_n)$ is Cauchy, we have that for all $\eps > 0$, there exists some $N\in\N$ such that
+    \[
+      \abs{\sum_{k=1}^{n}x_k - \sum_{k=1}^{m}x_k} = \sum_{k=m + 1}^{n}x_k < \eps,
+    \]
+    for all $m,n > N$. Letting $n = m + 1$, we have
+    \begin{align*}
+      \abs{\sum_{k=m + 1}^{n}x_k} &< \eps \\
+      \abs{\sum_{k=m + 1}^{m + 1}x_k} &< \eps \\
+      \abs{x_{m + 1}} &< \eps.
+    \end{align*}
+    Thus for all $n > N$, we have $\abs{x_n} < \eps$, and so
+    \[
+      \lim_{n\to \infty} x_n = 0.
+    \]
+  \end{proof}
+  \subsection{Various Convergence Tests}
+  \begin{note}{}
+    This gives us the ``divergence test''. If the limit of the summand of a series does not converge to $0$, then the series diverges.
+  \end{note}
+  \begin{example}{Divergence Test} \\
+    Consider the series given by
+    \[
+      \sum_{n=1}^{\infty} \frac{n^2 - 1}{n^2 + 1}.
+    \]
+    The above series diverges because the summand converges to $1$ (by Algebraic Limit Theorem). However, the sequence converging a necessary and non-sufficient condition to show that the series converges, i.e. consider $\sum x_n = \frac{1}{n}$.
+  \end{example}
+  \begin{theorem}{3.28 (Comparison Test)}
+    Assume $(x_n)$, $(y_n)$ are sequences in $\R$, $y_n\geq 0$ for all $n\in\N$. Then
+    \begin{enumerate}[label=(\roman*)]
+      \item If the series $\sum y_n$ converges and $\abs{x_n}\leq y_n$ for all $n\in\N$, then $\sum x_n$ converges.
+      \item If the series $\sum y_n$ diverges and $\abs{x_n}\geq y_n$ for all $n\in\N$, then $\sum x_n$ diverges.
+    \end{enumerate}
+    \begin{proof}
+      \begin{enumerate}[label=(\roman*)]
+        \item Suppose $n > m$. Then
+        \begin{align*}
+          \abs{\sum_{k=m+1}^{n}x_k} &\leq \sum_{k=m+1}^{n}\abs{x_k} \\
+                                    &\leq \sum_{k=m+1}^{n}y_k.
+        \end{align*}
+        Since $\sum y_n$ converges, it satisfies the Cauchy criterion. Thus we fix some $\eps > 0$, and there exists some $N\in\N$ such that
+        \[
+          \sum_{k=m+1}^{n}y_k < \eps,
+        \]
+        for all $n > m > N$. Continuing the inequality from before we get
+        \[
+          \abs{\sum_{k=m+1}^{n}x_k} < \eps,
+        \]
+        so $\sum x_k$ is Cauchy, and so converges.
+        \item Let $(X_n)$ be partial sums for $\sum x_n$, and $(Y_n)$ be partial sums for $\sum y_n$. By domination, we know that $X_n\geq Y_n$ for all $n\in\N$. Since $\sum y_n$ diverges, we have $Y_n\to+\infty$. This forces $X_n$ to diverge to $+\infty$ as well.
+      \end{enumerate}
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    The domination conditions in the previous theorem need only apply for all but finitely many $n$, rather than for all $n\in\N$. In other words, we only need those conditions to hold ``from some point onwards''. This is because a series' convergence is dictated by the convergence/divergence of its ``tail'':
+    \[
+      \sum_{n=1}^{\infty} x_n = \underbrace{\sum_{n=1}^{N}x_n}_{\text{Finite}} + \underbrace{\sum_{n=N+1}^{\infty}x_n}_{\text{``Tail''}}.
+    \]
+  \end{note}
+  \subsection{Convergent Series and the Harmonics}
+  \textbf{Question.} How close can we get to the Harmonic Series and still converge? \par
+  By the $p$-series test, we know that $\sum \frac{1}{n^p} < +\infty$ if and only if $p > 1$. Thus for any $\eps > 0$, we have $\sum \frac{1}{n}\cdot \frac{1}{n^{\eps}} = \sum \frac{1}{n^{1 + \eps}}$, which converges. The question remains whether we can replace $\frac{1}{n^\eps}$ by something that decays \emph{slower}. \par
+  We know that for any $a > 0$, there exists $N\in\N$ such that $\log n\leq n^a$ for all $n > N$. In other words, logarithms grow slower than any exponential. We know that the series
+  \[
+    \sum \frac{1}{n^p\log (1 + n)}
+  \]
+  converges when $p > 1$, by comparison with $\sum \frac{1}{n^p}$. Here we try replacing the $n^\eps$ from earlier with $\log (1 + n)$. Then
+  \[
+    \sum_{n=2}^{\infty} \frac{1}{n (\log n)^\beta}
+  \]
+  converges if and only if $\beta > 1$. We can continue to get closer to the $\beta = 1$ case by adding more logs, i.e.
+  \[
+    \sum_{n=2}^{\infty} \frac{1}{n (\log n)(\log\log n)^\alpha}
+  \]
+  converges if and only if $\alpha > 1$.
+  \subsection{Absolute and Conditional Convergence}
+  \begin{theorem}{3.29 (Absolute Convergence Test)}
+    If the series $\sum \abs{x_n}$ converges, then $\sum x_n$ converges.
+    \begin{proof}
+      Comparison test---we have $\abs{x_n}\leq \abs{x_n}$.
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    The converse of the above is generally false, as $\sum\frac{1}{n}$ diverges but $\sum \frac{(-1)^n}{n}$ converges.
+  \end{note}
+  \begin{definition}{3.30---Absolute/Conditional Convergence}
+    A series $\sum x_n$ converges \emph{absolutely} if $\sum \abs{x_n}$ converges. If the series $\sum x_n$ converges and $\sum \abs{x_n}$ diverges, we say $\sum x_n$ converges \emph{conditionally}.
+  \end{definition}
+\end{document}

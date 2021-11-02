@@ -1,0 +1,158 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 15}
+  \subsection{Infinite Series}
+  Infinite series are \emph{extremely} useful in applications, i.e. Taylor and Fourier series.
+  \begin{definition}{3.24---Infinite Series}
+    Let $(x_n)_{n = m}^{\infty}$ be a sequence in $\R$ ($m\in\Z$). We define the sequence $(S_n)_{n = m}^{\infty}$ to be defined by
+    \[
+      S_n = \sum_{k=m}^{n}x_k.
+    \]
+    We call $(S_n)$ the sequence of \emph{partial sums} of $(x_n)$. The \emph{infinite series} given by
+    \[
+      \sum_{n=m}^{\infty}x_n
+    \]
+    is said to converge if the sequence of partial sums converges, and we write
+    \[
+      \sum_{n=m}^{\infty}x_n \ceq \lim_{n\to \infty} S_n.
+    \]
+    A series that \emph{doesn't converge} is said to \emph{diverge}. If $S_n\to\pm\infty$, we say that
+    \[
+      \sum_{n=m}^{\infty}x_n = \pm\infty.
+    \]
+  \end{definition}
+  \subsection{Important Examples of Infinite Series}
+  \begin{enumerate}[label=\arabic*)]
+    \item Geometric Series---Series of the form
+    \[
+      \sum_{n=0}^{\infty}x^n = 1 + x + x^2 + \dotsb,
+    \]
+    where $x\in\R$. We know that
+    \begin{align*}
+      S_n &= \sum_{k=0}^{n}x^k \\
+          &= 1 + x + x^2 + \dotsb + x^k.
+    \end{align*}
+    With some algebra we find that for all $n\in\N$, $x\neq 1$,
+    \[
+      S_n = \frac{1-x^{n + 1}}{1 - x}.
+    \]
+    \begin{proof}
+      Observe that
+      \begin{align*}
+        (1 - x) S_n &= (1 - x)(1 + x + x^2 + \dotsb + x^n) \\
+                    &= 1 + x + \dotsb + x^n - x - x^2 - \dotsb - x^{n + 1} \\
+                    &= 1 - x^{n + 1}.
+      \end{align*}
+    \end{proof}
+    In the edge case where $x = 1$, we have that
+    \[
+      \sum_{n=0}^{\infty}1 = 1 + 1 + \dotsb \to+\infty.
+    \]
+    If $\abs{x} < 1$, then $x^{n + 1}\to 0$, and so
+    \[
+      S_n\to \frac{1}{1 - x}.
+    \]
+    If $\abs{x} > 1$, then $(S_n)$ diverges. If $x = 1$ we have $(S_n)$ diverges. When $x = -1$ we have
+    \[
+      S_n = \frac{1-(-1)^{n + 1}}{2},
+    \]
+    which does not converge. Thus we have that $(S_n)$ converges if and only if $\abs{x} < 1$, and
+    \[
+      \sum_{n=0}^{\infty}x^n = \frac{1}{1 - x}.
+    \]
+    \item Inverse Squares---Series of the form
+    \[
+      \sum_{n=1}^{\infty} \frac{1}{n^2} = 1 + \frac{1}{4} + \frac{1}{9} + \frac{1}{16} + \dotsb
+    \]
+    Then we have
+    \[
+      S_n = \sum_{k=1}^{n} \frac{1}{k^2}.
+    \]
+    Since this sequence is increasing, it suffices to find an upper bound to show that it converges. Observe that for all $n\in\N$,
+    \begin{align*}
+      S_n &= 1 + \frac{1}{2\cdot 2} + \frac{1}{3\cdot 3} + \frac{1}{4\cdot 4} + \dotsb \\
+          &\leq 1 + \frac{1}{2\cdot 1} + \frac{1}{3\cdot 2} + \dotsb + \frac{1}{n(n - 1)} \\
+          &= 1 + \paren{1 - \frac{1}{2}} + \paren{\frac{1}{2} - \frac{1}{3}} + \dotsb + \paren{\frac{1}{n - 1} + \frac{1}{n}} \\
+          &\leq 2 - \frac{1}{n} \\
+          &\leq 2.
+    \end{align*}
+    Thus $(S_n)$ is bounded above and so by Monotone Convergence Theorem, we know that
+    \[
+      \lim_{n\to \infty} S_n
+    \]
+    exists.
+    \newpage
+    \item The Harmonic Series---The infinite series given by
+    \[
+      \sum_{n=1}^{\infty} \frac{1}{n} = 1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + \dotsb
+    \]
+    \begin{theorem}{Divergence of the Harmonic Series}
+      The Harmonic Series diverges!
+      \begin{proof}
+        Let us write the harmonic series by
+        \[
+          S_n = \sum_{k=1}^{n} \frac{1}{k}.
+        \]
+        Since $S_n$ is increasing, it suffices to show that the series is unbounded from above. The idea here is that we will group the terms by powers of $2$. Observe that for all $n\in\N$, there exists some $m\in\N$ such that $2^{m} \leq n$, and so
+        \begin{align*}
+          S_n &\geq S_{2^m} \\
+              &= \sum_{k=1}^{2^m} \frac{1}{k} \\
+              &= 1 + \frac{1}{2} + \paren{\frac{1}{3} + \frac{1}{4}} + \paren{\frac{1}{5} + \frac{1}{6} + \frac{1}{7} + \frac{1}{8}} + \dotsb + \paren{\frac{1}{2^{m - 1} + 1} + \dotsb + \frac{1}{2^m}} \\
+              &\geq 1 + \frac{1}{2} + \paren{\frac{1}{4} + \frac{1}{4}} + \paren{\frac{1}{8} + \dotsb + \frac{1}{8}} + \dotsb + \paren{\frac{1}{2^m} + \dotsb + \frac{1}{2^m}} \\
+              &= 1 + \frac{1}{2} + \frac{2}{4} + \dotsb + \frac{2^{m - 1}}{2^m} \\
+              &= 1 + \underbrace{\frac{1}{2} + \dotsb + \frac{1}{2}}_{m\text{ times}} \\
+              &= 1 + \frac{m}{2}\to+\infty.
+        \end{align*}
+      \end{proof}
+    \end{theorem}
+  \end{enumerate}
+  \newpage
+  \subsection{Infinite Series Tests}
+  \begin{theorem}{3.23 (Cauchy condensation test)}
+    Suppose $(x_n)$ is \emph{decreasing} and $x_n\geq 0$ for all $n\in\N$. Then, the series $\sum_{n=1}^{\infty} x_n$ converges if and only if the series
+    \[
+      \sum_{n=0}^{\infty}\underbrace{2^n x_{2^n}}_{y_n}
+    \]
+    converges.
+    \begin{proof}
+      ($\Leftarrow$) Suppose $\sum 2^n x_{2^n}$ converges. Then
+      \[
+        t_n = \sum_{k=1}^{n} 2^kx_{2^k}
+      \]
+      converges, and so is bounded. Let
+      \[
+        S_n = \sum_{k=0}^{n} x_k. 
+      \]
+      We want to show that $S_n < t_m$ (bounded above). The idea here is to partition $[1, n]$ into dyadic intervals. Fix $n\in\N$ and let $m$ be large enough so that $n\leq 2^{m + 1} - 1$. Then we have
+      \begin{align*}
+        S_n &\leq S_{2^{m + 1} - 1} \\
+            &= \sum_{k=1}^{2^{m + 1} - 1}x_k \\
+            &= \sum_{\ell=0}^{m} \sum_{k=2^\ell}^{2^{\ell + 1} - 1}x_k \\
+            &\leq \sum_{\ell=0}^{m} \max_{2^\ell\leq k\leq 2^{\ell + 1} - 1} x_k \cdot \sum_{k=2^\ell}^{2^{\ell + 1} - 1}1 \\
+            &\leq \sum_{\ell=0}^{m} x_{2^\ell} (2^{\ell + 1} - 1 - 2^\ell + 1) \\
+            &\leq \sum_{\ell=0}^{m}2^\ell x_{2^\ell} \\
+            &= t_m.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \textbf{Corollary 3.24} The series
+  \[
+    \sum_{n=1}^{\infty} \frac{1}{n^p}
+  \]
+  converges if and only if $p > 1$.
+  \begin{proof}
+    \begin{align*}
+      \sum_{n=0}^{N} 2^nx_{2^n} &= \sum_{n=0}^{N}2^n \paren{\frac{1}{2^n}}^p \\
+                                &= \sum_{n=0}^{N} \frac{2^n}{2^{np}} \\
+                                &= \sum_{n=0}^{N} \paren{\frac{1}{2^{p - 1}}}^N,
+    \end{align*}
+    which converges by Geometric series.
+  \end{proof}
+\end{document}
