@@ -1,0 +1,163 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 17}
+  \begin{theorem}{3.31 (Alternating Series Test)}
+    Let $(x_n)$ be a sequence such that
+    \begin{enumerate}[label=(\roman*)]
+      \item $(x_n)$ is decreasing
+      \item $\lim_{n\to \infty} x_n = 0$
+    \end{enumerate}
+    Then
+    \[
+      \sum_{n=1}^{\infty}(-1)^{n + 1}x_n
+    \]
+    converges.
+    \begin{proof}
+      Let
+      \[
+        S_n = \sum_{k=1}^{n} (-1)^{k + 1}x_k.
+      \]
+      Then we have
+      \begin{align*}
+        S_1 &= x_1 \\
+        S_2 &= x_1 - x_2 \\
+        S_3 &= x_1 - x_2 + x_3 \\
+        S_4 &= x_1 - x_2 + x_3 - x_4.
+      \end{align*}
+      Since $(x_n)$ is decreasing, we have that $(S_{2n})$ is increasing (as $x_{2n - 1} - x_{2n - 2}$ is non-negative). Furthermore, we have $(S_{2n+1})$ is decreasing, as $x_{2n} - x_{2n - 1}$ is non-positive. Thus we have the inequality
+      \[
+        S_2\leq S_{2n}\leq S_{2n+1}\leq S_1.
+      \]
+      By the Monotone Convergence Theorem, we can say that both partial sum subsequences converge, say $S_{2n}\to a$ and $S_{2n+1}\to b$, for some $a,b\in\R$. By the Ordered Limit Theorem we know that $a\leq b$. \par
+      It remains to show that $a = b$ and that any subsequence of $(S_n)$ converges to $a$. Notice that
+      \[
+        S_{2n + 1} - S_{2n} = (-1)^{2n+ 2}x_{2n + 1},
+      \]
+      and so by Algebraic Limit Theorem we have $b - a = 0$ (since $(x_n)$ converges to $0$). Thus $a = b$. Fixing $m\in\N$, we know there exists some $n\in\N$ such that
+      \[
+        S_{2n}\leq S_n\leq S_{2n+1}.
+      \]
+      By Squeeze Theorem, we have $S_n\to a$ as $n\to\infty$.
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    This theorem is quite helpful for helping us test for conditional convergence.
+  \end{note}
+  \begin{example}{}
+    Consider the series given by $\frac{1}{n^p}$, where $p > 0$. Observe that this sequence is both decreasing and converges to zero. Hence
+    \[
+      \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n^p}
+    \]
+    converges. Furthermore, even something that decays much slower like
+    \[
+      \sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{\log\log\log\log(1 + n)}
+    \]
+    converges.
+  \end{example}
+  \begin{theorem}{3.32 (Ratio Test)}
+    Suppose $x_n\neq 0$ for all $n\in\N$ and
+    \[
+      L\ceq \lim_{n\to \infty} \abs{\frac{x_{n+1}}{x_n}}.
+    \]
+    Then the series $\sum x_n$:
+    \begin{enumerate}[label=(\roman*)]
+      \item If $L < 1$, the series converges absolutely.
+      \item If $L > 1$, the series diverges.
+      \item If $L = 1$, the test is inconclusive.
+    \end{enumerate}
+    \begin{proof}
+      \begin{enumerate}[label=(\roman*)]
+        \item For all $\eps > 0$, there exists some $N$ such that for all $n > N$,
+        \begin{align*}
+          \abs{\abs{\frac{x_{n+1}}{x_n}} - L} &< \eps \\
+          \abs{x_{n + 1}} &< (L + \eps)\abs{x_n}.
+        \end{align*}
+        If $L < 1$, we may choose $\eps > 0$ sufficiently small so that $L+\eps = L' < 1$. Thus we have
+        \begin{align*}
+          \abs{x_2} &< L'x_1 \\
+          \abs{x_3} &< L'x_2 < (L')^2x_1 \\
+          \abs{x_4} &< L'x_3 < (L')^3x_1.
+        \end{align*}
+        Iterating inductively, we see $\abs{x_{n + k}}\leq (L')^k\abs{x_n}$ for all $n > N$. We then may define
+        \[
+          \abs{x_n}\leq \begin{cases}
+            \max(\abs{x_1}, \dotsb, \abs{x_N}) & \text{for } 1\leq n\leq N, \\
+            (L')^{n - N} \abs{x_N} & \text{for }n > N.
+          \end{cases}
+        \]
+        Summing this up, we get
+        \[
+          \sum_{n=1}^{\infty}\abs{x_n} = \underbrace{\sum_{n=1}^{N} \max(\abs{x_1}, \dotsb, \abs{x_N})}_{\text{finite}} + \underbrace{\sum_{n=N+1}^{\infty}(L')^{n - N}\abs{x_N}}_{\text{converges geometrically}}
+        \]
+        converges.
+        \item We want to show that for all $\eps > 0$, there exists $N$ such that $\abs{x_{n + 1}} > (L - \eps)\abs{x_n}$ for all $n > N$. Since $L > 1$, we may choose some $\eps > 0$ small such that $L' = L - \eps > 1$. Iterating again, we get
+        \[
+          \abs{x_n} > (L')^{n - N} \abs{x_N}
+        \]
+        for all $n > N$. Since $L' > 1$, we have that the series diverges by Geometric Series.
+      \end{enumerate}
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    The test fails when $L = 1$ because there's no way to choose an $\eps > 0$ such that $L' < 1$ or $L' > 1$, so we can't claim that the series converges/diverges by Geometric Series.
+  \end{note}
+  \begin{note}{}
+    Alternatively, we may actually replace the $L$ in parts (i) and (ii) with $\limsup$ and $\liminf$, respectively. This makes a stronger statement since we know that $\limsup$ and $\liminf$ always exist.
+  \end{note}
+  \begin{theorem}{3.33 (Root Test)}
+    Let $(x_n)$ be a sequence such that
+    \[
+      \lim_{n\to \infty} \abs{x_n}^{\frac{1}{n}} = L.
+    \]
+    Then the series $\sum x_n$:
+    \begin{enumerate}[label=(\roman*)]
+      \item If $L < 1$ then $\sum x_n$ converges absolutely.
+      \item If $L > 1$ then $\sum x_n$ diverges.
+      \item If $L = 1$ then the test is inconclusive.
+    \end{enumerate}
+    \begin{proof}
+      Since we have that
+      \[
+        \lim_{n\to \infty} \abs{x_n}^{\frac{1}{n}} = L,
+      \]
+      we have that for all $\eps > 0$, there exists $N$ such that $\abs{\abs{x_n}^{\frac{1}{n}} - L} < \eps$ for all $n > N$. Thus we have
+      \[
+        L - \eps < \abs{x_n}^{\frac{1}{n}} < L + \eps.
+      \]
+      If $L < 1$, we may choose $\eps > 0$ such that $L' = L + \eps < 1$, so
+      \begin{align*}
+        \abs{x_n}^{\frac{1}{n}} &< L' \\
+        \abs{x_n} < (L')^n.
+      \end{align*}
+      Thus by the comparison test with a geometric series we see that $\sum x_n$ converges absolutely. If $L > 1$, we may choose $\eps > 0$ such that $L' = L - \eps > 1$, so
+      \begin{align*}
+        \abs{x_n}^{\frac{1}{n}} &> L' \\
+        \abs{x_n} &> (L')^n.
+      \end{align*}
+      Thus by the comparison test with a geometric series we see that $\sum x_n$ diverges.
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    In a fashion similar to the Ratio Test, if $L = 1$, we can't compare $\sum x_n$ to a geometric series, and so the test is inconclusive.
+  \end{note}
+  \begin{note}{}
+    If we consider the Ratio and Root Tests in the more general setting (with $\limsup$ and $\liminf$ instead of $\lim$), then the Root Test is ``better'' than the Ratio Test. However, if we just look at regular limits, then the tests yield the \emph{same information}. From Ross:
+    \[
+      \liminf \abs{\frac{x_{n + 1}}{x_n}}\leq \limsup \abs{x_n}^{\frac{1}{n}}\leq \limsup \abs{\frac{x_{n + 1}}{x_n}}.
+    \]
+    For the above, we ``lose a little bit'' when we use the Ratio Test, and have fewer cases where we can be bounded by a geometric series.
+  \end{note}
+  \begin{example}{}
+    An example where the Root Test works but the Ratio Test fails is for the series
+    \[
+      \sum_{n=1}^{\infty}2^{(-1)^n}2^{-n}.
+    \]
+  \end{example}
+\end{document}
