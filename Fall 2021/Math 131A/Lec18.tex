@@ -1,0 +1,168 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 18}
+  \subsection{Introduction to Continuity}
+  We now want to discuss functions on the reals,
+  \[
+    f\colon A\sse \R\to \R, \quad\dom(A) = f.
+  \]
+  We have a basic understanding of continuity---``if $x\in A$ is \emph{close} to $c\in A$, then $f(x)$ is \emph{close} to $f(c)$''. Written a bit more rigorously, we can say that ``$f$ is continuous at a point $c$ if $\lim\limits_{x\to c} f(x) = f(c)$''. However, we haven't defined the limit of a function yet. We'll call the limit above a ``functional limit''.
+  \begin{example}{Dirichlet's Function} \\
+    Let us define
+    \[
+      g(x) = \begin{cases}
+        1 & \text{if }x\in \Q, \\
+        0 & \text{if }x\notin \Q.
+      \end{cases}
+    \]
+    \textbf{Question.} What number should we associate with
+    \[
+      \lim_{x\to \frac{1}{2}} g(x)?
+    \]
+    We take a sequence of points in $\R$, apply $g$ to them, and see what that approaches as those points approach $\frac{1}{2}$. There exists some $(x_n)\in\Q$ such that $x_n\to \frac{1}{2}$, so $g(x_n) = 1$. Thus
+    \[
+      \lim_{n\to \infty} g(x_n) = 1.
+    \]
+    However, by the density of the irrationals, we know there exists some $(y_n)\in \R\sm\Q$ such that $y_n\to \frac{1}{2}$, so $g(y_n) = 0$. Thus
+    \[
+      \lim_{n\to \infty} g(y_n) = 0.
+    \]
+    Since these two values disagree with each other, we say that the limit does not exist. In particular for Dirichlet's function, we say that ``$g$ is discontinuous \emph{everywhere}''.
+  \end{example}
+  \begin{example}{}
+    Let us consider the function given by
+    \[
+      h(x) = \begin{cases}
+        x & x\in\Q, \\
+        0 & x\in\R\sm\Q.
+      \end{cases}
+    \]
+    Consider what the value of
+    \[
+      \lim_{x\to 0} h(x)
+    \]
+    should be. Let $(x_n)\sse\R$ such that $x_n\to 0$. Thus we have
+    \[
+      \abs{h(x_n)} \leq \abs{x_n} \to 0.
+    \]
+    Thus by Squeeze Theorem we have that $h(x_n)\to 0$ as $n\to\infty$. Therefore
+    ``$\displaystyle \lim_{x\to 0} h(x) = 0$'' and ``$h$ is continuous at $x = 0$ and discontinuous elsewhere''.
+  \end{example}
+  \subsection{Functional Limits}
+  \begin{definition}{4.1---Limit Points}
+    Let $A\sse \R$. We say $c\in\R$ is a \emph{limit point} of $A$ if there exists a sequence such that
+    \begin{itemize}
+      \item $(x_n)\sse A$
+      \item $x_n\neq c$ for all $n\in\N$
+      \item $\displaystyle\lim_{n\to \infty} x_n = c$
+    \end{itemize}
+    In other words, $c$ is a limit point if a sequence of points in $A$ (not equal to $c$) converges to $c$.
+  \end{definition}
+  \begin{note}{}
+    A limit point $c$ does not necessarily have to belong to the set $A$.
+  \end{note}
+  \begin{example}{}
+    \begin{itemize}
+      \item Let $A = (0, 1)$. If $x\in A$, then $x_n = x - \frac{1}{n}$ converges to $x$ when $n$ is sufficiently large, so all points in $A$ are limit points. Note that if we let $c = 1$, we can still define $x_n = 1 - \frac{1}{n}\to 1$ to see that $1$ is also a limit point of $A$ despite not belonging to $A$.
+      \item If $A = [0, 1]$, then $1\in A$ and every point in $A$ is a limit point of $A$.
+      \item Every interval for the form $[a, b] = \set{x\in\R, a\leq x\leq b}$, $a < b$ contains all of its limit points. We write $L_A\sse\R$ to be the set of all limit points.
+    \end{itemize}
+  \end{example}
+  \begin{note}{}
+    The set of limit points $L_A$ of a set $A$ in general can look very different from $A$ itself, and we can't draw any conclusions about one being the subset of the other.
+  \end{note}
+  \begin{definition}{Isolated Point}
+    A point in $A$ that is not a limit point of $A$ is called a \emph{isolated point}.
+  \end{definition}
+  \begin{definition}{4.2---Closed Set}
+    A set containing its limit points is called a \emph{closed set}.
+  \end{definition}
+  \begin{definition}{4.3---Functional Limit}
+    Let $A\sse\R$, $c\in\R$ be a limit point of $A$, and $f\colon A\to \R\; (\dom(f) = A)$. Then we define
+    \[
+      \lim_{x\to c} f(x) = L
+    \]
+    for some $L\in \R$, if for \emph{every} sequence $(x_n)$ in $A$ which converges to $c$, we have
+    \[
+      \lim_{n\to \infty} f(x_n) = L.
+    \]
+  \end{definition}
+  \begin{note}{}
+    We extend the definition to allow $c\in\R\cup \set{+\infty, -\infty}$ so we may have limits of the form
+    \[
+      \lim_{x\to +\infty} f(x)\quad \text{and}\quad \lim_{x\to -\infty} f(x). \tag{$L_A\sse \overline\R$}
+    \]
+    Furthermore, we extend $L\in\R\cup \set{+\infty, -\infty}$ so we may have limits of the form
+    \[
+      \lim_{x\to c} f(x) = \pm\infty.
+    \]
+  \end{note}
+  \begin{example}{}
+    \begin{enumerate}[label=\arabic*)]
+      \item Let $f(x) = x^2$, where $A = \R$. Furthermore, let $c\in\R$ and $x_n\to c$. Then $f(x_n) = x_n^2\to c^2$ by Algebraic Limit Theorem. Hence,
+      \[
+        \lim_{x\to c} f(x) = c^2
+      \]
+      \item Let $f(x) = \frac{x^2 - 4}{x - 2}$. We have that $A = (-\infty, 2)\cup (2, \infty)$. We can see that $2$ is a limit point of $A$. Let $(x_n)\sse A$ such that $x_n\to 2$, and $x_n\neq 2$ for all $n$. Then
+      \begin{align*}
+        f(x_n) &= \frac{x_n^2 - 4}{x_n - 2} \\
+               &= \frac{(x_n + 2)(x_n - 2)}{x_n - 2} \\
+               &= x_n + 2,
+      \end{align*}
+      which converges to $4$. Hence, $\displaystyle \lim_{x\to 2} f(x) = 4$.
+      \item Let $f(x) = \frac{1}{(x - 2)^3}$, so $A = \R\sm \set{2}$. We see that $\pm\infty$ are limit points of $A$, and want to show that
+      \[
+        \lim_{x\to +\infty} f(x) = \lim_{x\to -\infty} f(x) = 0.
+      \]
+      Let $x_n\to+\infty$, and $(x_n)\sse A$. Then $f(x_n) = \frac{1}{(x_n - 2)^3}\to 0$. \par
+      What about $\displaystyle \lim_{x\to 2} f(x)$? Looking at the graph, we suspect that the limit does not exist. If $(x_n)\sse A$ such that $x_n > 2$ and $x_n\to 2$, then
+      \[
+        f(x_n) = \frac{1}{(x_n - 2)^3}\to+\infty.
+      \]
+      If $(y_n)\sse A$ such that $y_n < 2$ and $y_n\to 2$, then
+      \[
+        f(y_n) = \frac{1}{(y_n - 2)^3}\to-\infty.
+      \]
+      We found two sequences such that when $f$ is applied, they converge to different values, and so $\displaystyle \lim_{x\to 2} f(x)$ does not exist. However, we take the notion of ``one-sided'' limits:
+      \begin{itemize}
+        \item $\displaystyle\lim_{x\to 2^+} f(x) = +\infty$.
+        \item $\displaystyle\lim_{x\to 2^-} f(x) = -\infty$.
+      \end{itemize}
+    \end{enumerate}
+  \end{example}
+  \begin{definition}{4.4---Left and Right Hand Limits}
+    Let $c$ be a limit point of $A\sse\R$. We define the \emph{right-hand limit} of $f\colon A\to \R$ by
+    \[
+      \lim_{x\to c^+} f(x) = c
+    \]
+    if for every $(x_n)\sse A$, $x_n > c$ and $x_n\to c$ we have
+    \[
+      \lim_{n\to \infty} f(x_n) = L.
+    \]
+    Similarly, we define the \emph{left-hand limit} of $f\colon A\to \R$ by
+    \[
+      \lim_{x\to c^-} f(x) = c
+    \]
+    if for every $(x_n)\sse A$, $x_n < c$ and $x_n\to c$ we have
+    \[
+      \lim_{n\to \infty} f(x_n) = L.
+    \]
+  \end{definition}
+  \begin{theorem}{4.5}
+    If $f\colon A\to \R$, $c$ a limit point of $A$, Then
+    \[
+      \lim_{x\to c} f(x) = L \tag{exists}
+    \]
+    if and only if
+    \[
+      \lim_{x\to c^+} f(x) = L\quad \text{and}\quad \lim_{x\to c^-} f(x) = L.
+    \]
+  \end{theorem}
+\end{document}
