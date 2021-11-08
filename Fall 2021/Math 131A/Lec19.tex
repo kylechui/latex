@@ -1,0 +1,103 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 19}
+  \begin{theorem}{4.6 (Algebraic Limit Theorem for Functional Limits)}
+    Let $f, g$ be defined on $A$, $c$ a limit point of $A$, and
+    \[
+      \lim_{x\to c} f(x) = L, \lim_{x\to c} g(x) = M.
+    \]
+    Then
+    \begin{enumerate}[label=(\roman*)]
+      \item $\displaystyle \lim_{x\to c} [af(x) + bg(x)] = aL + bM$ for all $a, b\in\R$.
+      \item $\displaystyle \lim_{x\to c} [f(x)\cdot g(x)] = L\cdot M$.
+      \item $\displaystyle \lim_{x\to c} \left[\frac{f(x)}{g(x)}\right] = \frac{L}{M}$, provided $M\neq 0$.
+    \end{enumerate}
+  \end{theorem}
+  \textbf{Proposition 4.7} (Divergence Criterion for Functional Limits) Let $f\colon A\to \R$, $c$ a limit point of $A$. If $(x_n), (y_n)\sse A$ such that $x_n\neq c, y_n\neq c$ and $x_n\to c, y_n\to c$, and
+  \[
+    \lim_{n\to \infty} f(x_n)\neq \lim_{n\to \infty} f(y_n),
+  \]
+  then $\displaystyle\lim_{x\to c} f(x)$ does not exist.
+  \begin{example}{}
+    Consider the function $f(x) = \sin (\frac{1}{x})$, where $A = \R\sm\set{0}$. We claim that $\displaystyle\lim_{x\to 0} f(x)$ does not exist. \par
+    If we choose $x_n = \frac{1}{2n\pi}$, we have $f(x_n) = \sin(2\pi n)\to 0$. If we choose $y_n = \frac{1}{2\pi n + \frac{\pi}{2}}$, then we get $f(y_n) = \sin(2\pi n + \frac{\pi}{2})\to 1$. Therefore the functional limit does not exist.
+  \end{example}
+  \begin{theorem}{4.8 (Quantitative Version of Functional Limits)}
+    Let $f\colon A\to \R$, $c$ a limit point of $A$ ($c\in \R, L\in\R$). Then the following are equivalent:
+    \begin{enumerate}[label=(\roman*)]
+      \item $\displaystyle \lim_{x\to c} f(x) = L$
+      \item For all $\eps > 0$, there exists some $\delta > 0$ such that whenever $0 < \abs{x - c} < \delta$, we have $\abs{f(x) - L} < \eps$
+    \end{enumerate}
+    \begin{proof}
+      (i) $\Rightarrow$ (ii) We proceed via contrapositive. Suppose that (ii) does not hold. Then there exists $\eps_0 > 0$ for all $\delta > 0$, such that $\abs{f(x) - L}\geq \eps_0$ whenever $0 < \abs{x - c} < \delta$. Letting $\delta = 1$, we know there exists $\eps_0 > 0$ such that whenever $0 < \abs{x - c} < \delta = 1$, we have $\abs{f(x) - L} \geq \eps_0$. Pick $x_1$ such that $0 < \abs{x_1 - c} < 1$. Inductively choose $\delta = \frac{1}{n}$, to get a sequence $(x_n)\sse A$ where $x_n\neq c$ and $x_n\to c$ (since $\abs{x_n - c} < \frac{1}{n}$). Notice that $f(x_n) - L\geq \eps_0$ for all $n\in\N$ because $0 < \abs{x_n - c} < \frac{1}{n} = \delta$. This contradicts $f(x)\to L$, so $f(x)\not\to L$ and
+      \[
+        \lim_{x\to c} f(x) \neq L.
+      \]
+      \par
+      (ii) $\Rightarrow$ (i) Let $(x_n)\sse A$, $x_n\neq c$, $x_n\to c$. Fix $\eps > 0$. Then there exists $\delta > 0$, such that $\abs{f(x) - L} < \eps$ whenever $0 < \abs{x - c} < \delta$. Since $x_n\to c$, there exists $N = N(\delta)$ such that $\abs{x_n - c} < \delta$ for all $n > N$. Thus $\abs{f(x_n) - L} < \eps$ for all $n > N$. Hence
+      \[
+        \lim_{n\to \infty} f(x_n) = L,
+      \]
+      and so
+      \[
+        \lim_{x\to c} f(x) = L.
+      \]
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    The above is also commonly referred to as the $(\eps, \delta)$ definition for functional limits.
+  \end{note}
+  \begin{example}{}
+    Let $f(x) = x^2$, $A = \R$. We wish to show that $\displaystyle\lim_{x\to c} f(x) = c^2$ for any $c\in\R$. \par
+    \textbf{Scratch Work.} We see that
+    \begin{align*}
+      \abs{f(x) - c^2} &= \abs{x^2 - c^2} \\
+                       &= \abs{x + c}\cdot \abs{x - c}
+      \intertext{If we choose $\delta < 1$, then we have $\abs{x + c} \leq \abs{x - c} + 2\abs{c} < \delta + 2\abs{c} < 1 + 2\abs{c}$. Thus}
+                       &< \abs{x + c} \delta \\
+                       &< (1 + 2\abs{c})\delta \\
+                       &< \eps.
+    \end{align*}
+    Thus we know that we should choose $\delta = \min(1, \frac{\eps}{1 + 2\abs{c}})$.
+    \begin{proof}
+      Given $\eps > 0$, pick $\delta = \min (1, \frac{\eps}{1 + 2\abs{c}})$. Then
+      \begin{align*}
+        \abs{f(x) - c^2} &\leq \abs{x + c}\abs{x - c} \\
+                         &< (1 + 2\abs{c})\delta \\
+                         &< \eps,
+      \end{align*}
+      whenever $0 < \abs{x - c} < \delta$. Hence
+      \[
+        \lim_{x\to c} f(x) = c^2.
+      \]
+    \end{proof}
+  \end{example}
+  \subsection{Continuity}
+  \begin{definition}{4.9---Continuity}
+    We say that $f\colon A\to \R$ is \emph{continuous at $c\in A$} if for all $\eps > 0$, there exists $\delta > 0$ such that $\abs{f(x) - f(c)} < \eps$ whenever $0 < \abs{x - c} < \delta$.
+  \end{definition}
+  \begin{note}{} How is this different from Theorem $4.8$?
+    \begin{itemize}
+      \item We need $f$ defined at $c$, i.e. $f(c)$ exists.
+      \item We are allowing $x = c$.
+      \item We don't say that $c$ is a limit point of $A$.
+      \begin{itemize}
+        \item Every point is continuous at isolated points of a set, since it trivially satisfies the conditions.
+      \end{itemize}
+    \end{itemize}
+  \end{note}
+  \begin{theorem}{4.11}
+    Let $f\colon A\to \R$ be a limit point of $A$. Then $f$ is continuous at $c$ if and only if
+    \[
+      \lim_{x\to c} f(x) = f(c).
+    \]
+    Moreover, for any point $c\in A$, $f$ is continuous at $c$ if and only if for any $(x_n)\sse A$ such that $x_n\to c$, $f(x_n)\to f(c)$.
+  \end{theorem}
+\end{document}
