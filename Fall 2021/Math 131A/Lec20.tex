@@ -1,0 +1,84 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 20}
+  \begin{theorem}{4.12}
+    Let $f, g\colon A\to \R$ be continuous at $c\in A$. Then:
+    \begin{enumerate}[label=(\roman*)]
+      \item $af + bg$ is continuous at $c$, for any $a, b\in\R$.
+      \item $f\cdot g$ is continuous at $c$.
+      \item $\frac{f}{g}$ is continuous at $c$, whenever the quotient is defined.
+    \end{enumerate}
+  \end{theorem}
+  \begin{example}{}
+    \begin{enumerate}[label=\arabic*)]
+      \item $g(x) = x$ is continuous on $\R$, which is to say that for all $c\in\R$, $g$ is continuous at $c$. Additionally, where $a\in\R$, is continuous on $\R$.
+      \item By Theorem $4.12$ and the examples given above, we have that \emph{any polynomial} is continuous on $\R$:
+      \[
+        p(x) = a_nx^n + \dotsb + a_1x + a_0,
+      \]
+      for $a_0,\dotsc,a_n\in\R, n\in\N$.
+      \item Every rational function is continuous wherever they are defined. We have for polynomials $p, q$, that
+      \[
+        r(x) = \frac{p(x)}{q(x)}.
+      \]
+      \item $f(x) = \sin (\frac{1}{x})$ on $\R\sm\set{0}$. Since $\displaystyle\lim_{x\to 0} f(x)$ does not exist, $f$ is not continuous at $x = 0$.
+      \item Consider the function
+      \[
+        g(x) = \begin{cases} x\sin (\frac{1}{x}) & x\neq 0, \\ 0 & x = 0. \end{cases}
+      \]
+      This function is continuous at $x = 0$ since the function gets squeezed to $0$.
+      \item $f(x) = \sqrt{x}$, $A = [0, \infty)$. We know that $f$ is continuous on $A$, but we need to consider the cases where $c = 0$ and $c\neq 0$. For the former, we have
+      \begin{align*}
+        \abs{f(x) - f(0)} &= \abs{\sqrt{x}} \\
+                          &= \sqrt{x} \\
+                          &< \eps,
+      \end{align*}
+      so we choose $\delta = \eps^2$. When $c\neq 0$, we have
+      \begin{align*}
+        \abs{f(x) - f(c)} &= \abs{\sqrt{x} - \sqrt{c}} \\
+                          &= \frac{\abs{x - c}}{\sqrt{x} + \sqrt{c}} \\
+                          &\leq \frac{1}{\sqrt{c}}\abs{x - c} \\
+                          &< \frac{\delta}{\sqrt{c}},
+      \end{align*}
+      so we choose $\delta = \eps\sqrt{c}$.
+    \end{enumerate}
+  \end{example}
+  \newpage
+  \textbf{Proposition 4.13} Let $f\colon A\to \R$, $g\colon B\to \R$, where $A, B\sse \R$. Assume $\Ran(f)\sse B$ so that the composition $(g\circ f)(x)$ is well defined. Assume that $f$ is continuous at $c\in A$ and $g$ is continuous at $f(c)\in B$. Then $g\circ f$ is continuous at $c\in A$.
+  \begin{proof}
+    We use sequences. Let $(x_n)\sse A$, $x_n\to c$. Since $f$ is continuous at $c$, we know that $f(x_n)\to f(c)$. Since $g$ is continuous at $f(c)$, we know that $g(f(x_n))\to g(f(c))$, so $(g\circ f)(x_n)\to (g\circ f)(c)$. Therefore $g\circ f$ is continuous at $c\in A$.
+  \end{proof}
+  \begin{example}{}
+    We are going to assume for this class that $f(x) = \cos x, \sin x, e^x, \log x$ are all continuous functions wherever they are defined. Thus $g(x) = \cos (e^x), e^{\sin x}, \sin(\sin(e^x))$ are all continuous on $\R$.
+  \end{example}
+  \subsection{The Extreme Value Theorem}
+  \begin{definition}{4.14---Compactness}
+    We say that a set $K\sse\R$ is \emph{compact} if for any sequence $(x_n)\sse K$ there exists a subsequence $(x_{n_k})$ which converges to $x\in K$.
+  \end{definition}
+  \begin{note}{}
+    This is a generalization of the notion of closed sets, which says that a set is closed if it contains all of its limit points.
+  \end{note}
+  \begin{example}{Compact Sets}
+    \begin{enumerate}[label=\arabic*)]
+      \item The set $K = [a, b]$ is compact, where $a\leq b$. \par
+      Let $(x_n)\sse K$. We see that $K$ is bounded, so $(x_n)$ is bounded. Thus by Bolzano--Weierstrass, we have there exists some subsequence $(x_{n_k})$ such that $x_{n_k}\to x\in\R$. Since $a\leq x_{n_k}\leq b$, we know that $a\leq x\leq b$, so $x\in K$.
+      \item The set $(a, b)$ is not compact. Observe that $x_n = b - \frac{b - a}{2n}\sse (a, b)$, but $x_n\to b\notin (a, b)$. Thus it is not compact.
+      \item $[0, \infty)$ is not compact, because $x_n = n$ diverges to $+\infty$, and so every subsequence $(x_{n_k})$ must also diverge to $+\infty$.
+    \end{enumerate}
+  \end{example}
+  \begin{theorem}{4.15 (Heine--Borel Theorem)}
+    A set $K\sse \R$ is compact if and only if it is closed and bounded.
+    \begin{proof}
+      ($\Leftarrow$) Suppose $K\sse\R$ is closed and bounded. We claim that $K$ is compact. Let $(x_n)\sse K$. Since $K$ is bounded, Bolzano--Weierstrass says that there exists some subsequence $(x_{n_k})\sse K$ such that $x_{n_k}\to x\in\R$. Since $K$ is closed, we know that $x\in K$, and so $K$ is compact. \par
+      ($\Rightarrow$) Suppose $K$ is compact. We first show that $K$ is bounded. Suppose towards a contradiction that $K$ is not bounded, so there exists some sequence $(x_n)\sse K$ such that $\abs{x_n}\to +\infty$. However, this means that every subsequence $\abs{x_{n_k}}$ must also diverge to $+\infty$, which contradicts compactness. \par
+      We now show that $K$ is closed, which is to say that if $(x_n)\sse K$ such that $x_n\to x\in \R$, then $x\in K$. By compactness, there exists a subsequence $(x_{n_k})$ such that $x_{n_k}\to y\in K$. However, since every subsequence of a convergent sequence must converge to the same value, we have $x = y\in K$ and so $K$ is closed.
+    \end{proof}
+  \end{theorem}
+\end{document}
