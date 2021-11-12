@@ -1,0 +1,77 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 21}
+  \begin{note}{Why do we like compact sets?}
+    \begin{itemize}
+      \item In general, continuous functions don't map closed sets to closed sets.
+      \item Continuous functions map compact sets to compact sets.
+      \item Over compact sets, continuous functions have both minima and maxima.
+    \end{itemize}
+  \end{note}
+  \begin{theorem}{4.16}
+    Let $f\colon A\to \R$ be continuous on $A$. If $K\sse A$ is compact, then $f(K)$ is also compact. In particular, $f$ is bounded on $K$ (by Heine--Borel):
+    \[
+      \exists M > 0 \text{ such that } \abs{f(x)}\leq M,
+    \]
+    for all $x\in K$.
+    \begin{proof}
+      Let $(y_n)\sse f(K)$, so there exists some sequence $(x_n)\sse K$ such that $f(x_n) = y_n$. We know that $K$ is compact, so there exists a subsequence $(x_{n_k})$ such that $x_{n_k}\to x\in K$. Thus we have $y_{n_k} = f(x_{n_k})\to f(x)\in f(K)$.
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{4.17 (Extreme Value Theorem)}
+    If $f\colon K\to \R$ is continuous on compact $K$, then there exists $x_1, x_2\in K$ such that
+    \[
+      f(x_1) \leq f(x) \leq f(x_2),
+    \]
+    for all $x\in K$. In other words, $f$ has a maxima and minima over $K$.
+    \begin{lemma}{}
+      If a non-empty set $K\sse\R$ is compact, then it has a maxima and a minima.
+      \begin{proof}
+        We begin by showing that $K$ has a maxima. By Heine--Borel, if a set is compact it must be closed and bounded, so $K$ is closed and bounded. Since $K$ is bounded and non-empty, it must have a supremum, and so $\sup K$ exists. We know that there exists a sequence $(x_n)\sse K$ that converges to $\sup K$. However, $K$ is closed so $\sup K\in K$, and so $K$ has a maxima. \par
+        We may apply similar logic to show that $K$ has a minima. Since $K$ is bounded and non-empty, it must have an infimum, so $\inf K$ exists. We know that there exists a sequence $(x_n)\sse K$ that converges to $\inf K$. Because $K$ is closed we have $\inf K\in K$, so $K$ has a minima.
+      \end{proof}
+    \end{lemma}
+    \begin{proof}
+      By Theorem $4.16$, we have that $f(K)$ is compact. Thus $f(K)$ has maxima and minima.
+    \end{proof}
+  \end{theorem}
+  \subsection{The Intermediate Value Theorem}
+  \begin{theorem}{4.18 (Intermediate Value Theorem)}
+    Let $f\colon [a, b]\to \R$ be continuous on $[a, b]$ and let $L\in \R$ such that
+    \begin{align*}
+      f(a) < L &< f(b) \quad \text{or} \\
+      f(b) < L &< f(a).
+    \end{align*}
+    Then, there exists some $c\in (a, b)$ such that $f(c) = L$.
+    \begin{proof}
+      We have some simplifying assumptions that make the proof easier:
+      \begin{itemize}
+        \item By shifting $f$, we may assume that $L = 0$. What this means is that we shift the function $f$ up or down until our $L$ becomes $0$.
+        \item We suppose that
+        \[
+          f(a) < 0 < f(b),
+        \]
+        as the other case is similar.
+      \end{itemize}
+      Consider the set $A = \set{x\in [a, b]\mid f(x)\leq 0}$. We claim that $\sup A$ not only exists, but also is in $[a, b]$. Since $f(a) < 0$, we have $a\in A$ and so $A\neq \es$. Furthermore, $A$ is bounded above by $b$, and so by the least upper bound property we have $c = \sup A$ exists. Note that $c\in (a, b)$ because $a\leq c\leq b$. \par
+      We now show that $f(c) = 0$. Suppose towards a contradiction that $f(c) > 0$. Since $c = \sup A$, there exists some sequence $(x_n)\sse A$ such that $x_n\to c$. Since $f$ is continuous we have $f(x_n)\to f(c)$. Furthermore, as $(x_n)\sse A$ we have $f(x_n) \leq 0$ for all $n$, so $f(c) \leq 0$, a contradiction. \par
+      Now suppose towards a contradiction that $f(c) < 0$. Let $z_n = \min(b, c + \frac{1}{n})$, so $(z_n)\sse [a, b]\sm A$. We know that $z_n\to c$, and by continuity of $f$, $f(z_n)\to f(c)$. Since $(z_n)$ is not a subset of $A$, $f(z_n) > 0$. Thus by Ordered Limit Theorem we have $f(c) \geq 0$, a contradiction. \par
+      Therefore $f(c) = 0$.
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    The zero found by the Intermediate Value Theorem is \emph{not necessarily unique}.
+  \end{note}
+  \subsubsection{Consequences of Intermediate Value Theorem}
+  \textbf{Corollary 4.19} If $f$ is continuous on an interval $I$, then $f(I)$ is an interval or a single point. \par
+  \begin{theorem}{Inverse Function Theorem}
+    Let $I$ be an interval and $f\colon I\to \R$ be strictly increasing (so $f(x) < f(y)$ if $x < y$) and continuous on $I$. Then $f\inv\colon f(I)\to \R$ exists, and is strictly increasing/decreasing and continuous on $f(I)$.
+  \end{theorem}
+\end{document}
