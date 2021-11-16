@@ -1,0 +1,91 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 22}
+  \subsection{Uniform Continuity}
+  \begin{definition}{Uniform Continuity}
+    Let $f\colon A\to \R$, $A\sse\R$. We say $f$ is \emph{uniformly continuous} over $A$ if:
+    \begin{itemize}
+      \item For all $\eps > 0$, there exists $\delta > 0$ such that
+      \[
+        \abs{f(x) - f(y)} < \eps
+      \]
+      whenever $\abs{x - y} < \delta$ for all $x, y\in A$.
+    \end{itemize}
+  \end{definition}
+  \begin{note}{}
+    Our value of $\delta$ is independent of our selection of points, i.e. $\delta$ does not depend on $x$ or $y$.
+  \end{note}
+  \begin{note}{}
+    Regular continuity is more concerned with whether or not a function is continuous at a given point, whereas uniform continuity is more concerned with whether or not a function is uniformly continuous \emph{over a given set}.
+  \end{note}
+  \textbf{Proposition 4.21} Every uniformly continuous function is continuous.
+  \begin{proof}
+    Fix $y = c$. Then for all $\eps > 0$, there exists $\delta > 0$ such that
+    \[
+      \abs{f(x) - f(c)} < \eps
+    \]
+    whenever $\abs{x - c} < \delta$, for all $x\in\R$.
+  \end{proof}
+  \begin{note}{}
+    We will show later that
+    \[
+      \set{f\colon A\to \R\mid f\text{ is uniformly continuous on }A}\subsetneq \set{f\colon A\to \R\mid f\text{ is continuous on }A}.
+    \]
+  \end{note}
+  \subsubsection{Equivalent Formulation for Uniform Continuity}
+  We say a function $f$ is uniformly continuous on $A$ if and only if for all $\eps > 0$, there exists $\delta > 0$ such that
+  \[
+    \sup_{x,y\in A} \paren{\abs{f(x) - f(y)}} < \eps,
+  \]
+  whenever $\abs{x - y} < \delta$. \par
+  \textbf{Proposition 4.22} Sequential Criterion for Non-uniform Continuity \par
+  A function $f\colon  A\to \R$ \emph{fails} to be uniformly continuous on $A$ if and only if there exists $\eps_0 > 0$ and two sequences $(x_n), (y_n)$ in $A$ such that $\abs{x_n - y_n}\to 0$ and $\abs{f(x_n) - f(y_n)} \geq \eps_0$.
+  \begin{proof}
+    ($\Rightarrow$) There exists $\eps_0 > 0$, such that for all $\delta > 0$, we have
+    \[
+      \sup_{\substack{x,y\in A\\ \abs{x-y} < \delta}} \abs{f(x) - f(y)}\geq 2\eps_0.
+    \]
+    Thus there exists $(x_n), (y_n)\sse A$ such that $\abs{x_n - y_n} < \frac{1}{n}$ and
+    \begin{align*}
+      \abs{f(x_n) - f(y_n)} &\geq \sup_{\substack{x,y\in A \\ \abs{x - y} < \delta}} \abs{f(x) - f(y)} - \eps_0 \\
+                            &\geq 2\eps_0 - \eps_0 \\
+                            &= \eps_0.
+    \end{align*}
+    ($\Leftarrow$) Suppose towards a contradiction that $f$ is uniformly continuous on $A$. Put $\eps = \eps_0$, then for $\delta = \delta(\eps_0)$, there exists $N$ such that $\abs{x_n - y_n} < \delta$ for all $n > N$. Thus for $n > N$,
+    \begin{align*}
+      \eps_0 &\leq \abs{f(x_n) - f(y_n)} \\
+             &\leq \sup_{\substack{x,y\in A \\ \abs{x- y} < \delta}} \abs{f(x) - f(y)} \\
+             &< \eps_0,
+    \end{align*}
+    a contradiction.
+  \end{proof}
+  \begin{note}{}
+    The above proposition does not imply that $x_n\to x$ and $y_n\to x$, both of them can diverge. All it assumes is that $\abs{x_n - y_n}\to 0$.
+  \end{note}
+  \subsubsection{Enemies of Uniform Continuity}
+  \begin{itemize}
+    \item Rapid growth: Either as $\abs{x}\to+\infty$ or there exists some asymptote in a bounded domain. For example, consider the functions $f(x) = x^2$ on $\R$, and $f(x) = \frac{1}{x}$ on $(0, 1)$.
+    \item Rapid oscillation: Too much variation in small intervals. For example, consider the function $f(x) = \sin(\frac{1}{x})$.
+  \end{itemize}
+  \begin{example}{}
+    Let $f(x) = x^2$ over $\R$, and $x_n n$ and $y_n = n + \frac{1}{n}$. Thus we have $\abs{x_n - y_n} = \frac{1}{n}\to 0$. However,
+    \begin{align*}
+      \abs{f(x_n) - f(y_n)} &= \abs{n^2 - \paren{n + \frac{1}{n}}^2} \\
+                            &= \abs{n^2 - \paren{n^2 + 2 + \frac{1}{n^2}}} \\
+                            &= \abs{2 + \frac{1}{n^2}} \\
+                            &\geq 2.
+    \end{align*}
+    Thus $f$ is not uniformly continuous over $\R$.
+  \end{example}
+  \begin{theorem}{4.23}
+    A function that is continuous on a compact set is \emph{uniformly continuous} on that set.
+  \end{theorem}
+  We are studying uniform continuity because it is useful for integration.
+\end{document}
