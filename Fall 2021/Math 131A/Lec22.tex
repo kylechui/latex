@@ -75,7 +75,7 @@
     \item Rapid oscillation: Too much variation in small intervals. For example, consider the function $f(x) = \sin(\frac{1}{x})$.
   \end{itemize}
   \begin{example}{}
-    Let $f(x) = x^2$ over $\R$, and $x_n n$ and $y_n = n + \frac{1}{n}$. Thus we have $\abs{x_n - y_n} = \frac{1}{n}\to 0$. However,
+    Let $f(x) = x^2$ over $\R$, and $x_n = n$ and $y_n = n + \frac{1}{n}$. Thus we have $\abs{x_n - y_n} = \frac{1}{n}\to 0$. However,
     \begin{align*}
       \abs{f(x_n) - f(y_n)} &= \abs{n^2 - \paren{n + \frac{1}{n}}^2} \\
                             &= \abs{n^2 - \paren{n^2 + 2 + \frac{1}{n^2}}} \\
@@ -86,6 +86,13 @@
   \end{example}
   \begin{theorem}{4.23}
     A function that is continuous on a compact set is \emph{uniformly continuous} on that set.
+    \begin{proof}
+      Suppose towards a contradiction that $f\colon K\to \R$ is continuous but not uniformly continuous, where $K$ is a compact subset of $\R$. By Proposition $4.22$, we know there exists $\eps_0 > 0$ and sequences $(x_n), (y_n)\sse K$ such that
+      \[
+        \abs{x_n - y_n}\to 0 \quad\text{and}\quad \abs{f(x_n)-f(y_n)}\geq \eps_0.
+      \]
+      Since $K$ is compact, we know there exists some sequence of points $(x_{n_k})$ such that $x_{n_k}\to x\in K$. We look at the subsequence of $(y_{n_k})$, and see that $y_{n_k} =y_{n_k} - x_{n_k} + x_{n_k}$. Taking the limit of both sides, we have $y_{n_k}\to x$. Since $f$ is compact, $f(x_{n_k}) - f(y_{n_k})\to f(x) - f(x) = 0$, a contradiction.
+    \end{proof}
   \end{theorem}
   We are studying uniform continuity because it is useful for integration.
 \end{document}

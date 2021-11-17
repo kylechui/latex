@@ -1,0 +1,98 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 23}
+  \subsection{Differentiation}
+  The derivative is just the slope of a tangent line to a function at a point. We can get this slope by taking the limit of the slopes of a bunch of secant lines.
+  \begin{definition}{5.1---Derivative at a Point}
+    Let $I = (a, b)$ be an interval, $a < b$, $f\colon I\to \R$ and let $c\in I$. The \emph{derivative of $f$ at $c$} is defined by:
+    \[
+      f'(c) = \lim_{x\to c} \frac{f(x) - f(c)}{x - c},
+    \]
+    provided the limit exists (i.e. it converges to a real number). If $f'(c)$ exists for all $c\in I$, then we say that $f$ is \emph{differentiable} on $I$.
+  \end{definition}
+  \begin{note}{}
+    \begin{enumerate}[label=\arabic*)]
+      \item If we put $h = x - c$, we may rewrite the limit as
+      \[
+        f'(c) = \lim_{h\to 0} \frac{f(c + h) - f(h)}{h}.
+      \]
+      \item It is often useful to think of $f'$ as a function in its own right: $\dom(f')\sse\dom(f)$. We may write $f'\colon \dom(f')\to \R$, where
+      \[
+        f'(c) = \lim_{h\to 0} \frac{f(c + h) - f(h)}{h}.
+      \]
+    \end{enumerate}
+  \end{note}
+  \begin{example}{Derivatives}
+    \begin{enumerate}[label=\arabic*)]
+      \item Let $f(x) = x^n$, $n\in\N$. We claim that $f$ is differentiable on $\R$ and $f'(x) = nx^{n - 1}$.
+      \begin{proof}
+        Fix $c\in\R$, so
+        \begin{align*}
+          \frac{f(x) - f(c)}{x - c} &= \frac{x^n - c^n}{x - c} \\
+                                    &= \frac{(x - c)(x^{n - 1} + \dotsb + c^{n - 1})}{x - c} \\
+                                    &= \sum_{j=0}^{n - 1}x^jc^{n - 1 - j}.
+        \end{align*}
+        Since polynomials are continuous, we may take the limit of this as $x$ goes to $c$, which is
+        \begin{align*}
+          f'(c) &= \lim_{x\to c} \paren{\sum_{j=0}^{n - 1}x^jc^{n - 1 - j}} \\
+                &= \sum_{j=0}^{n - 1}c^j\cdot c^{n - 1 - j} \\
+                &= \sum_{j=0}^{n - 1}c^{n - 1} \\
+                &= nc^{n - 1}.
+        \end{align*}
+      \end{proof}
+      \item The function $f(x) = \abs{x}$ is differentiable on $\R\sm\set{0}$, and not differentiable at $x = 0$. At $x\neq 0$, we have $f'(x) = \begin{cases}1 & x > 0 \\ -1 & x < 0\end{cases}$. We see that
+      \[
+        \lim_{x\to 0^-} \frac{f(x)}{x} = -1\neq 1 = \lim_{x\to 0^+} \frac{f(x)}{x}.
+      \]
+      In particular, this is an example of a function that is continuous everywhere but not necessarily continuous everywhere.
+      \item Bolzano's function (Weierstrass function): A function that is continuous everywhere but differentiable nowhere.
+    \end{enumerate}
+  \end{example}
+  \textbf{Proposition 5.2} If a function $f\colon I\to \R$ is differentiable at $c\in I$, then $f$ is continuous at $c$.
+  \begin{proof}
+    For $x\neq c$, we may write
+    \[
+      f(x) = f(c) + \frac{f(x) - f(c)}{x - c}\cdot (x - c).
+    \]
+    Thus we have
+    \[
+      \lim_{x\to c} f(x) = f(c) + f'(c)\cdot 0 = f(c).
+    \]
+    Therefore $f$ is continuous at $c$.
+  \end{proof}
+  \begin{theorem}{5.3}
+    Let $f,g\colon I\to \R$ and $f, g$ are differentiable at $c\in I$. Then:
+    \begin{enumerate}[label=(\roman*)]
+      \item For all $a, b\in\R$, we have $af + bg$ is differentiable at $c$, and
+      \[
+        (af + bg)'(c) = af'(c) + bg'(c).
+      \]
+      \item Leibniz Rule: We know that $fg$ is differentiable at $c$, in particular
+      \[
+        (fg)'(c) = f'(c)g(c) + f(c)g'(c).
+      \]
+      \begin{proof}
+        When $x\neq c$, we have
+        \[
+          \frac{f(x)g(x) - f(c)g(c)}{x - c} = f(x)\cdot \frac{g(x) - g(c)}{x - c} + g(x)\cdot \frac{f(x) - f(c)}{x - c}.
+        \]
+        Taking the limit, we have what we are looking for.
+      \end{proof}
+      \item If $g(c)\neq 0$, then $\frac{f}{g}$ is differentiable at $c$, and
+      \[
+        \paren{\frac{f}{g}}'(c) = \frac{g(c)f'(c) - f(c)g'(c)}{g^2(c)}.
+      \]
+    \end{enumerate}
+  \end{theorem}
+  \textbf{Proposition 5.4} (Chain Rule): Let $f\colon I\to \R$, $g\colon J\to \R$ such that $f(I)\sse J$, so $g\circ f$ is well-defined on $I$. Then if $f$ is differentiable at $c\in I$ and $g$ is differentiable at $g(c)\in J$, then $g\circ f\colon I\to \R$ is differentiable at $c$ and
+  \[
+    (g\circ f)'(c) = f'(c)\cdot g'(f(c)).
+  \]
+\end{document}
