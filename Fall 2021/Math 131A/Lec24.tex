@@ -1,0 +1,120 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 24}
+  \textbf{Proposition 5.5} Let $I = (a, b)$, $f\colon I\to \R$, $c\in I$. Then
+  \[
+    \lim_{x\to c} \frac{f(x) - f(c)}{x - c} \text{ exists in }\R,
+  \]
+  if and only if there exists $L\in\R$, $R\colon I\to \R$ such that $\displaystyle \lim_{x\to c} R(x) = 0$ and
+  \[
+    f(x) = f(c) + (x - c)L + (x - c)R(x).
+  \]
+  \begin{note}{}
+    The above more or less states that the derivative of $f$ at a point $c$ exists if and only if when we approximate $f$ with a line, the remainder function goes to $0$. Additionally, it says that if 
+    \[
+      \lim_{x\to c} \frac{f(x) - f(c)}{x - c} = f'(c),
+    \]
+    then $f'(c) = L$.
+  \end{note}
+  \begin{proof}
+    ($\Rightarrow$) Assume $\displaystyle \frac{f(x) - f(c)}{x - c} = L\in\R$. Define
+    \[
+      R(x)\ceq \begin{cases}\frac{f(x) - f(c)}{x - c} - L & \text{if }x\neq c,\\0 & \text{if $x$ = c}.\end{cases}
+    \]
+    Then
+    \[
+      \lim_{x\to c} R(x) = \lim_{x\to c} \paren{\frac{f(x) - f(c)}{x - c} - L} = L - L = 0.
+    \]
+    Thus for $x\neq c$, we have $(x - c)(L + R(x)) = f(x) - f(c)$. \par
+    ($\Leftarrow$) If $x\neq c$, we write
+    \[
+      \frac{f(x) - f(c)}{x - c} = L + R(x).
+    \]
+    Thus by Algebraic Limit Theorem,
+    \[
+      \lim_{x\to c} \frac{f(x) - f(c)}{x - c} = L + 0 = L.
+    \]
+  \end{proof}
+  \begin{note}{}
+    We can also rewrite the linear approximation by
+    \[
+      f(c + h) = f(c) + hL + hR(h),
+    \]
+    for some other remainder function where
+    \[
+      \lim_{h\to 0} R(h) = 0.
+    \]
+  \end{note}
+  We now have the tools necessary to prove the Chain Rule.
+  \begin{proof}
+    By Proposition $5.5$, we may write
+    \begin{align*}
+      f(c + h) &= f(c) + f'(c)h + hR_1(h) \\
+      g(f(c) + \widetilde h) &= g(f(c)) + \widetilde h g'(f(c)) + \widetilde h R_2(\widetilde h).
+    \end{align*}
+    Thus we have
+    \begin{align*}
+      \frac{g(f(c + h)) - g(f(c))}{h} &= \frac{1}{h}\paren{g(f(c) + \underbrace{hf'(c) + hR_1(h)}_{\widetilde h}) - g(f(c))} \\
+                                      &= \frac{1}{h}\paren{g(f(c) + \widetilde h) - g(f(c))} \\
+                                      &= \frac{1}{h} \paren{g(f(c)) + \widetilde h g'(f(c)) + \widetilde h R_2(\widetilde h) - g(f(c))} \\
+                                      &= \frac{\widetilde h}{h} \paren{g'(f(c)) + R_2(\widetilde h)} \\
+                                      &= (f'(c) + R_1(h))\cdot (g'(f(c)) + R_2(\widetilde h)) \\
+                                      &= (f'(c) + R_1(h))\cdot (g'(f(c)) + R_2(hf'(c) + hR_1(h))).
+    \end{align*}
+    Note that by taking the limit as $h\to 0$, we may apply the Algebraic Limit Theorem, getting:
+    \begin{align*}
+      \lim_{h\to 0} \frac{(g\circ f)(c + h) - (g\circ f)(c)}{h} &= \lim_{h\to 0} (f'(c) + R_1(h))\cdot (g'(f(c)) + R_2(hf'(c) + hR_1(h))) \\
+                                                                &= f'(c)\cdot (g'(f(c)) + 0) \\
+                                                                &= f'(c)\cdot g'(f(c)).
+    \end{align*}
+    Hence $(g\circ f)'(c)$ exists and is equal to $f'(c)\cdot g'(f(c))$.
+  \end{proof}
+  \textbf{Question.} Is the derivative of a function a continuous function? \par
+  In general, no. Consider the function defined for all $n\in\N\cup \set{0}$ by
+  \[
+    f_n(x) = \begin{cases}x^n\sin \paren{\frac{1}{x}} & x\neq 0, \\ 0 & x = 0.\end{cases}
+  \]
+  When $n = 0$, we see that $f_0$ is not even continuous at $x = 0$. \par
+  When $n = 1$, $f_1$ is continuous at $x = 0$ because of Squeeze Theorem. When $x\neq 0$, $f_1'(x) = \sin(\frac{1}{x}) - \frac{1}{x}\cos(\frac{1}{x})$, which doesn't have a limit as $x$ goes to $0$. Similarly, if we take a difference quotient, we still get that the limit doesn't exist so $f_1$ is not differentiable at $x = 0$. \par
+  When $n = 2$, we have that $f_2$ is continuous at $x = 0$ by Squeeze Theorem. Through some algebra, we see that $f_2$ is differentiable on $\R\sm \set{0}$, and by taking a difference quotient we are able to see that $f_2$ \emph{is} differentiable at $x = 0$. However, $f_2'$ is not continuous on $\R$.
+  \begin{note}{}
+    It is possible to have a function that is differentiable everywhere, but that derivative is \emph{not} necessarily continuous everywhere.
+  \end{note}
+  \subsection{Properties of Derivatives}
+  We can use derivatives to help us locate extrema. \\
+  \textbf{Proposition 5.6} (Interior Extremum Theorem) Let $I = (a, b)$, $f\colon I\to \R$, $c\in I$. If $c$ is an extremum point for $f$ (i.e. a max or min), and $f$ is differentiable at $c$, then $f'(c) = 0$.
+  \begin{proof}
+    Since $I$ is an interval, we can find sequences $x_n < c < y_n$ such that $x_n\to c$ and $y_n\to c$. Suppose $f$ has a maximum at $c$. Then $f(y_n)\leq f(c)$ for all $n\in\N$, so $f(y_n) - f(c)\leq 0$. Thus
+    \[
+      f'(c) = \lim_{n\to \infty} \frac{f(y_n) - f(c)}{y_n - c} \leq 0.
+    \]
+    Similarly, we have $f(x_n)\leq f(c)$ for all $n\in \N$, so $f(x_n) - f(c)\leq 0$. Thus
+    \[
+      f'(c) = \lim_{n\to \infty} \frac{f(x_n) - f(c)}{x_n - c} \geq 0.
+    \]
+    Hence $f'(c) = 0$.
+  \end{proof}
+  \begin{note}{}
+    A local maxima of $f$ at $c\in (a, b)$ exists if there exists $\delta > 0$ such that $f(x)\leq f(c)$ for all $x\in (c - \delta, c + \delta)$.
+  \end{note}
+  \begin{note}{}
+    The converse of Proposition $5.6$ is false, i.e. if there exists $c$ such that $f'(c) = 0$, it \emph{is not necessarily true} that $f(c)$ is an extremum. For instance, consider $f(x) = x^3$ at $c = 0$.
+  \end{note}
+  \newpage
+  \textbf{Proposition 5.7} (Location of Extrema) Let $f\colon [a, b]\to \R$, continuous on $[a, b]$, differentiable on $(a, b)$. Then $f$ has extrema in $[a, b]$ and they occur:
+  \begin{enumerate}[label=(\roman*)]
+    \item At $a$.
+    \item At $b$.
+    \item At some $c\in (a, b)$ where $f'(c) = 0$.
+  \end{enumerate}
+  \begin{example}{}
+    Consider the function $f(x) = x^2$ over the interval $[-1, 1]$. Then we have maxima at the endpoints, $c=\pm 1$. The minima is at $0\in (-1, 1)$, and $f'(0) = 0$.
+  \end{example}
+\end{document}
