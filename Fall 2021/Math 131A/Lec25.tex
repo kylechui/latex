@@ -1,0 +1,87 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 25}
+  \subsection{Mean Value Theorem}
+  Using the Mean Value Theorem, we are able to show the link between differentiation and integration.\begin{definition}{Lipschitz bound}
+    A function that has a \emph{Lipschitz bound} is a function of the form
+    \[
+      \abs{f(x) - f(y)}\leq M\abs{x - y},
+    \]
+    where $M\in\R$.
+  \end{definition}
+  We use monotonicity to prove very useful inequalities, and verify assumptions for the Inverse of a Function Theorem.
+  \begin{theorem}{5.9 (Rolle's Theorem)}
+    Let $f\colon [a, b]\to \R$ be continuous on $[a, b]$ and differentiable on $(a, b)$. If $f(a) = f(b)$, then there exists $c\in (a, b)$ such that $f'(c) = 0$.
+    \begin{proof}
+      By Proposition $5.7$, we know that $f$ has extrema at $a, b$ or points $c\in (a, b)$ such that $f'(c) = 0$. If maxima and minima occur at the endpoints, ($a$ and $b$), then $f$ must be constant, and $f'(c) = 0$ for all $c\in [a, b]$. If not, then there exists some extrema in the interval, and so there exists some $c\in [a, b]$ such that $f'(c) = 0$.
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{5.10 (Mean Value Theorem)}
+    Let $f\colon [a, b]\to \R$, $f$ continuous on $[a, b]$, differentiable on $(a, b)$. Then there exists $c\in (a, b)$ such that
+    \[
+      f'(c) = \frac{f(b) - f(a)}{b - a}.
+    \]
+    \begin{proof}
+      Notice that the line going through $(a, f(a))$ and $(b, f(b))$ can be expressed as:
+      \[
+        g(x) = \frac{f(b) - f(a)}{b - a}\cdot (x - a) + f(a).
+      \]
+      Let us also define
+      \[
+        h(x)\ceq (f - g)(x),
+      \]
+      so $h(a) = f(a) - f(a) = 0$ and $h(b) = f(b) - f(b) = 0$. Thus by Rolle's Theorem there exists some point $c$ in $(a, b)$ such that $h'(c) = 0$. Hence there exists $c\in (a, b)$ such that
+      \[
+        0 = f'(c) - g'(c),
+      \]
+      so $\displaystyle f'(c) = g'(c) = \frac{f(b) - f(a)}{b - a}$, and we are done.
+    \end{proof}
+  \end{theorem}
+  \subsubsection{Monotonicity Applications}
+  \textbf{Proposition 5.11} Let $f\colon [a, b]\to \R$, continuous on $[a, b]$ and differentiable on $(a, b)$. Then:
+  \begin{enumerate}[label=(\roman*)]
+    \item If $f'(x) = 0$ for all $x\in [a, b]$ then $f$ is constant.
+    \item If $f'(x) \geq 0$ for all $x\in [a, b]$ then $f$ is non-decreasing.
+    \item If $f'(x) \leq 0$ for all $x\in [a, b]$ then $f$ is non-increasing.
+  \end{enumerate}
+  \begin{enumerate}[label=(\roman*)]
+    \item
+    \begin{proof}
+      Let $a < x < y < b$ and apply Mean Value Theorem on every subinterval $[x, y]$:
+      \[
+        0 = f'(c) = \frac{f(y) - f(x)}{y - x},
+      \]
+      so $f(x) = f(y)$ so $f$ is constant.
+    \end{proof}
+    \item 
+    \begin{proof}
+      Let $a < x < y < b$. Then by Mean Value Theorem we know that
+      \[
+        \frac{f(y) - f(x)}{y - x} = f'(c)\geq 0,
+      \]
+      so $f(y) - f(x)\geq 0$ for all $x, y\in [a, b]$.
+    \end{proof}
+    \item 
+    \begin{proof}
+      Let $a < x < y < b$. Then by Mean Value Theorem we know that
+      \[
+        \frac{f(y) - f(x)}{y - x} = f'(c)\leq 0,
+      \]
+      so $f(y) - f(x)\leq 0$ for all $x, y\in [a, b]$.
+    \end{proof}
+  \end{enumerate}
+  \begin{example}{}
+    Prove $\log x\leq x$ for all $x\geq x_0\geq 1$. Let us define $f(x) = x - \log x$, so
+    \[
+      f'(x) = 1 - \frac{1}{x} = \frac{x - 1}{x},
+    \]
+    which is positive for all $x > 1$. Hence $f$ is non-decreasing on $[1, \infty)$, so $f(x)\geq 1 > 0$. Thus $x\geq \log x$ for $x$ sufficiently large.
+  \end{example}
+\end{document}
