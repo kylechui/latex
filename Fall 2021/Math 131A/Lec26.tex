@@ -1,0 +1,125 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 26}
+  \subsection{The Riemann--Darboux Integral}
+  The classic result that we are going to show is the Fundamental Theorem of Calculus, which comes in the following two flavors:
+  \begin{enumerate}[label=(\arabic*)]
+    \item If $F(x) = \int_{a}^{x}f(t) \,\mathrm dt$, then $F'(x) = f(x)$
+    \item $\int_{a}^{b}f'(x) \,\mathrm dx = f(b) - f(a)$
+  \end{enumerate}
+  We already know how to define/compute derivatives, but what about integrals? \par
+  \textbf{Idea.} Try to define $\int_{a}^{b}f(x) \,\mathrm dx$ by there exists $F$ such that $F' = f$. \par
+  However, this doesn't work for discontinuous functions. \par
+  \begin{theorem}{Darboux's Theorem}
+    Every derivative has the Intermediate Value Property.
+  \end{theorem}
+  \subsection{Riemann's Idea}
+  We should divorce our notion of an integral from anything we know about derivatives, and then come back and show its properties. Just as we have seen in elementary calculus courses, we approximate the area under a curve by partitioning it into rectangles. We write
+  \[
+    \mathcal{R}(f, \mathcal{P}) = \sum_{j=1}^{n} f(t_j^*)(t_j - t_{j - 1}),
+  \]
+  and hope that $\mathcal{R}(f, \mathcal{P})$ converges to some real number as $\mathcal{P}$ gets finer and finer.
+  \begin{definition}{6.1---Partition}
+    Let $a < b$. We call $\mathcal{P}$ a \emph{partition} of $[a, b]$ if
+    \[
+      P = \set{t_j\mid j = 0,\dotsc,n},\text{ where }n\in\N,
+    \]
+    and $a = t_0 < t_1 < \dotsb < t_{n - 1} < t_n = b$.
+  \end{definition}
+  \begin{definition}{6.2---Darboux Sum}
+    Given $f\colon [a, b]\to \R$ and a partition $\mathcal{P}$ of $[a, b]$, we define the \emph{upper Darboux sum}:
+    \[
+      \mathcal{U}(f, \mathcal{P}) = \sum_{j=0}^{n} \sup \set{f(x)\mid x\in [t_{j - 1}, t_j]}\cdot (t_j - t_{j - 1}).
+    \]
+    Similarly, we may define the \emph{lower Darboux sum} by
+    \[
+      \mathcal{L}(f, \mathcal{P}) = \sum_{j=0}^{n} \inf \set{f(x)\mid x\in [t_{j - 1}, t_j]}\cdot (t_j - t_{j - 1}).
+    \]
+  \end{definition}
+  We hope to show that as $\mathcal{P}$ gets finer, that the upper Darboux sum decreases and the lower Darboux sum increases. \par
+  \textbf{Lemma 6.3} For all partitions $\mathcal{P}$ of $[a, b]$, we have
+  \[
+    \mathcal{L}(f, \mathcal{P})\leq \mathcal{R}(f, \mathcal{P})\leq \mathcal{U}(f, \mathcal{P}).
+  \]
+  \begin{proof}
+    Let us define $I_j\ceq [t_{j - 1}, t_j]$, so
+    \[
+      \inf_{x\in I_j} f(x)\leq f(t_j^*)\leq \sup_{x\in I_j}f(x),
+    \]
+    since $t_j^*\in I_j$. The result follows.
+  \end{proof}
+  \textbf{Lemma 6.4} If $\mathcal{P}$ and $\mathcal{P}'$ are partitions of $[a, b]$ such that $\mathcal{P}\sse \mathcal{P}'$ (we call $\mathcal{P}'$ a \emph{refinement} of $\mathcal{P}$), then
+  \begin{align*}
+    \mathcal{U}(f, \mathcal{P}')&\leq \mathcal{U}(f, \mathcal{P}) \\
+    \mathcal{L}(f, \mathcal{P}')&\geq \mathcal{L}(f, \mathcal{P}).
+  \end{align*}
+  In other words, the lower Darboux sums increase and the upper Darboux sums decrease.
+  \begin{proof}
+    Let $\mathcal{P} = \set{t_j\mid j = 0,\dotsc,n}$. It suffices to show the statement is true when $\mathcal{P}'$ has only one more point than $\mathcal{P}$. In other words, there exists $j$ such that $s\in [t_{j - 1}, t_j]$, where $s\in \mathcal{P}'\sm \mathcal{P}$. Then we have that
+    \begin{align*}
+      \sup_{x\in I_j} f(x)\cdot (t_j - t_{j - 1}) &= \sup_{x\in I_j} f(x)\cdot ((t_j - s) + (s - t_{j - 1})) \\
+                                                  &= \sup_{x\in I_j} f(x)\cdot (t_j - s) + \sup_{x\in I_j} f(x)\cdot (s - t_{j - 1}) \\
+                                                  &\geq \sup_{x\in [s, t_j]} f(x)\cdot (t_j - s) + \sup_{x\in [t_{j - 1}, s]} f(x)\cdot (s - t_{j - 1}),
+    \end{align*}
+    so $\mathcal{U}(f, \mathcal{P}')\leq \mathcal{U}(f, \mathcal{P})$. The proof for lower Darboux sums is similar. Take the function $-f$ so you have $\sup -f = \inf f$.
+  \end{proof}
+  \begin{note}{}
+    Combining Lemmas $6.3$ and $6.4$, we have
+    \[
+      0\leq \mathcal{U}(f, \mathcal{P}') - \mathcal{L}(f, \mathcal{P}') \leq \mathcal{U}(f, \mathcal{P}) - \mathcal{L}(f, \mathcal{P}).
+    \]
+  \end{note}
+  \textbf{Lemma 6.5} For all partitions $\mathcal{P}'$ and $\mathcal{P}''$ of $[a, b]$, we have
+  \[
+    \mathcal{L}(f, \mathcal{P}')\leq \mathcal{U}(f, \mathcal{P}'').
+  \]
+  In other words, we have that \emph{all} lower Darboux sums are less than \emph{all} upper Darboux sums.
+  \begin{proof}
+    We begin by taking $\mathcal{P} = \mathcal{P}'\cup \mathcal{P}''$. Hence $\mathcal{P}$ is a refinement of both $\mathcal{P}'$ and $\mathcal{P}''$, and is called a ``common refinement'' of $\mathcal{P}'$ and $\mathcal{P}''$. Then by using the previous lemmas, we have
+    \[
+      \mathcal{L}(f, \mathcal{P}')\leq \mathcal{L}(f, \mathcal{P})\leq \mathcal{U}(f, \mathcal{P})\leq \mathcal{U}(f, \mathcal{P}'').
+    \]
+  \end{proof}
+  \begin{definition}{Upper and lower Darboux integrals}
+    Given $f\colon [a, b]\to \R$, the \emph{upper Darboux integral} is defined by:
+    \[
+      \overline{\int_{a}^{b}f(x) \,\mathrm dx}\ceq \inf_{\mathcal{P}\subset [a, b]}\mathcal{U}(f, \mathcal{P}).
+    \]
+    Similarly, the \emph{lower Darboux integral} is defined by:
+    \[
+      \underline{\int_{a}^{b}f(x) \,\mathrm dx}\ceq \sup_{\mathcal{P}\subset [a, b]}\mathcal{U}(f, \mathcal{P}).
+    \]
+    We take the infima and suprema over all partitions $\mathcal{P}$ of $[a, b]$.
+  \end{definition}
+  \textbf{Proposition 6.7} For all $f\colon [a, b]\to \R$,
+  \[
+    \underline{\int_{a}^{b}f(x) \,\mathrm dx}\leq \overline{\int_{a}^{b}f(x) \,\mathrm dx}.
+  \]
+  \begin{proof}
+    By Lemma $6.5$, we have that $\mathcal{L}(f, \mathcal{P}')\leq \mathcal{U}(f, \mathcal{P}'')$ for all partitions $P', P''$, so
+    \begin{align*}
+      \mathcal{L}(f, \mathcal{P}') \leq \inf_{\mathcal{P}\subset [a, b]}\mathcal{U}(f, \mathcal{P}) \\
+      \mathcal{L}(f, \mathcal{P}') \leq \overline{\int_{a}^{b}f(x) \,\mathrm dx} \\
+      \sup_{\mathcal{P}\subset [a, b]}\mathcal{L}(f, \mathcal{P}) \leq \overline{\int_{a}^{b}f(x) \,\mathrm dx} \\
+      \underline{\int_{a}^{b}f(x) \,\mathrm dx}\leq \overline{\int_{a}^{b}f(x) \,\mathrm dx}.
+    \end{align*}
+  \end{proof}
+  \begin{definition}{6.8 (Riemann/Darboux integrability and integral)}
+    We say that $f\colon [a, b]\to \R$ is \emph{Riemann integrable} if 
+    \[
+      \underline{\int_{a}^{b}f(x) \,\mathrm dx} = \overline{\int_{a}^{b}f(x) \,\mathrm dx}\in\R,
+    \]
+    i.e. the upper and lower integrals are finite and equal. In such a case, we define
+    \[
+      \int_{a}^{b}f(x) \,\mathrm dx\ceq \underline{\int_{a}^{b}f(x) \,\mathrm dx} = \overline{\int_{a}^{b}f(x) \,\mathrm dx}
+    \]
+    to be the \emph{Riemann/Darboux integral} of $f$ on $[a, b]$.
+  \end{definition}
+\end{document}
