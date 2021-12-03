@@ -1,0 +1,163 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 28}
+  \begin{example}{Integrating a function with a jump discontinuity} \par
+    Consider the function given by
+    \[
+      f(x) = \begin{cases}1 & x\neq 1 \\ \frac{1}{2} & x = 1\end{cases}, \text{ on } [0, 2].
+    \]
+    We claim that $f$ is integrable on $[0, 2]$ and $\int_{0}^{2}f(x) \,\mathrm dx = 2$. Observe that for any partition $\mathcal{P}$, we know that $\mathcal{U}(f, \mathcal{P}) = 2$. The issue arises when we take the lower Darboux sum, namely near the point of discontinuity. The idea here is to choose a partition such that the interval containing $x = 1$ is \emph{small}, so the difference between upper and lower Darboux sums is minimized. Given $\eps > 0$ small, consider
+    \[
+      \mathcal{P}_\eps = \set{0, 1 - \frac{\eps}{3}, 1 + \frac{\eps}{3}, 2}.
+    \]
+    The lower Darboux sum is thus:
+    \begin{align*}
+      \mathcal{L}(f, \mathcal{P}_\eps) &= 1\cdot \paren{1 - \frac{\eps}{3}} + \frac{1}{2}\cdot \paren{\frac{2\eps}{3}} + 1\cdot \paren{1 - \frac{\eps}{3}} \\
+                                       &= 2 - \frac{\eps}{3}.
+    \end{align*}
+    Hence if we take the difference of our Darboux sums, we have
+    \[
+      \mathcal{U}(f, \mathcal{P}_\eps) - \mathcal{L}(f, \mathcal{P}_\eps) = 2 - \paren{2 - \frac{\eps}{3}} = \frac{\eps}{3} < \eps.
+    \]
+    Thus $f$ is Riemann integrable on $[0, 2]$. Since $\mathcal{U}(f, \mathcal{P}) = 2$ for all partitions $\mathcal{P}$, we know that
+    \[
+      \int_{0}^{2}f(x) \,\mathrm dx = \overline{\int_{0}^{2}f(x) \,\mathrm dx} = 2.
+    \]
+  \end{example}
+  \subsection{Properties of the Riemann Integral}
+  \textbf{Proposition 6.12} Additivity---If $f, g\colon [a, b]\to \R$ are integrable, then so is $f + g$ and
+  \[
+    \int_{a}^{b}(f + g)(x) \,\mathrm dx = \int_{a}^{b}f(x) \,\mathrm dx + \int_{a}^{b}g(x) \,\mathrm dx.
+  \]
+  \begin{proof}
+    We know that $f + g$ is bounded since both $f$ and $g$ are bounded (since they are integrable). Thus all Darboux sums for $f + g$ are finite. We will show that the upper integrals are \emph{sub-additive}, i.e.
+    \[
+      \overline{\int_{a}^{b}(f + g)(x) \,\mathrm dx}\leq \overline{\int_{a}^{b}f(x) \,\mathrm dx} + \overline{\int_{a}^{b}g(x) \,\mathrm dx}.
+    \]
+    Similarly, the lower integrals are \emph{super-additive}, i.e.
+    \[
+      \underline{\int_{a}^{b}(f + g)(x) \,\mathrm dx}\geq \underline{\int_{a}^{b}f(x) \,\mathrm dx} + \underline{\int_{a}^{b}g(x) \,\mathrm dx}.
+    \]
+    For $I\sse [a, b]$,
+    \[
+      \sup_{x\in I} [f(x) + g(x)]\leq \sup_{x\in I} [f(x)] + \sup_{x\in I} [g(x)].
+    \]
+    Thus we know that for all partitions $\mathcal{P}$,
+    \[
+      \mathcal{U}(f + g, \mathcal{P})\leq \mathcal{U}(f, \mathcal{P}) + \mathcal{U}(g, \mathcal{P}).
+    \]
+    Let $\eps > 0$, so there exist $\mathcal{P}_\eps', \mathcal{P}_\eps''$ such that
+    \begin{align*}
+      \mathcal{U}(f, \mathcal{P}_\eps')&\leq \overline{\int_{a}^{b}f(x) \,\mathrm dx} + \frac{\eps}{2} \\
+      \mathcal{U}(g, \mathcal{P}_\eps'')&\leq \overline{\int_{a}^{b}g(x) \,\mathrm dx} + \frac{\eps}{2}.
+    \end{align*}
+    Taking the common refinement, we have $\mathcal{P}_\eps = \mathcal{P}_\eps'\cup \mathcal{P}_\eps''$. Hence
+    \begin{align*}
+      \overline{\int_{a}^{b}(f + g)(x) \,\mathrm dx} &\leq \mathcal{U}(f + g, \mathcal{P}_\eps) \\
+                                                     &\leq \mathcal{U}(f, \mathcal{P}_\eps) + \mathcal{U}(g, \mathcal{P}_\eps) \\
+                                                     &\leq \overline{\int_{a}^{b}f(x) \,\mathrm dx} + \overline{\int_{a}^{b}g(x) \,\mathrm dx} + \eps.
+    \end{align*}
+    If we map $f\mapsto -f$ and $g\mapsto -g$, we have the same super-additivity of the lower integrals. Therefore
+    \begin{align*}
+      \int_{a}^{b}f(x) \,\mathrm dx + \int_{a}^{b}g(x) \,\mathrm dx &= \underline{\int_{a}^{b}f(x) \,\mathrm dx} + \underline{\int_{a}^{b}g(x) \,\mathrm dx} \\
+                                                                    &\leq \underline{\int_{a}^{b}(f + g)(x) \,\mathrm dx} \\
+                                                                    &\leq \overline{\int_{a}^{b}(f + g)(x) \,\mathrm dx} \\
+                                                                    &\leq \overline{\int_{a}^{b}f(x) \,\mathrm dx} + \overline{\int_{a}^{b}g(x) \,\mathrm dx} \\
+                                                                    &= \int_{a}^{b}f(x) \,\mathrm dx + \int_{a}^{b}g(x) \,\mathrm dx.
+    \end{align*}
+    Since the expressions at the beginning and at the end are equal, we know that all of the terms in between are also equal, and so
+    \[
+      \int_{a}^{b}f(x) \,\mathrm dx + \int_{a}^{b}g(x) \,\mathrm dx = \int_{a}^{b}(f + g)(x) \,\mathrm dx.
+    \]
+  \end{proof}
+  \textbf{Lemma 6.13} Homogeneity \par
+  If $f$ is integrable on $[a, b]$ and $\lam\in\R$, then $\lam f$ is integrable and
+  \[
+    \int_{a}^{b}(\lam f)(x) \,\mathrm dx = \lam \int_{a}^{b}f(x) \,\mathrm dx.
+  \]
+  \begin{note}{}
+    This implies that integration is \emph{linear}, i.e.
+    \[
+      \int_{a}^{b}(\lam f + \mu g) \,\mathrm dx = \lam \int_{a}^{b}f(x) \,\mathrm dx + \mu \int_{a}^{b}g(x) \,\mathrm dx.
+    \]
+  \end{note}
+  \textbf{Lemma 6.14} Monotonicity \par
+  If $f, g$ are integrable and $f(x)\leq g(x)$ for all $x\in [a, b]$, then
+  \[
+    \int_{a}^{b}f(x) \,\mathrm dx \leq \int_{a}^{b}g(x) \,\mathrm dx.
+  \]
+  We can prove this by showing that
+  \[
+    \int_{a}^{b}(g - f)(x) \,\mathrm dx\geq \mathcal{L}(g - f, \mathcal{P})\geq 0.
+  \]
+  \textbf{Lemma 6.15} Let $f$ be integrable on $[a, b]$. Then $f$ is integrable on any interval $I\sse [a, b]$ and for any $c\in (a, b)$, we have
+  \[
+    \int_{a}^{b}f(x) \,\mathrm dx = \int_{a}^{c}f(x) \,\mathrm dx + \int_{c}^{b}f(x) \,\mathrm dx.
+  \]
+  \subsection{Fundamental Theorem of Calculus}
+  \begin{theorem}{6.17 (Fundamental Theorem of Calculus I)}
+    Let $f\colon [a, b]\to \R$ be continuous on $[a, b]$, and let $F\colon [a, b]\to \R$ be defined by $F(a) = 0$ and $F(x) = \int_{a}^{x}f(t) \,\mathrm dt$. The claim is that $F$ is differentiable on $[a, b]$ and $F'(x) = f(x)$ for all $x\in (a, b)$.
+    \begin{proof}
+      We claim that for all $x_0\in (a, b)$, we have that if $f$ is continuous at $x_0$, then $F$ is differentiable at $x_0$ and $F'(x_0) = f(x_0)$. Let $\eps > 0$. Since $f$ is continuous at $x_0$, there exists $\delta > 0$ such that
+      \[
+        \abs{f(x) - f(x_0)} < \eps
+      \]
+      whenever
+      \[
+        \abs{x - x_0} < \delta.
+      \]
+      Now let $x\in (a, b)$ such that $0 < \abs{x - x_0} < \delta$. We consider the case where $x > x_0$, so we have
+      \begin{align*}
+        \abs{\frac{F(x) - F(x_0)}{x - x_0}} &= \abs{\frac{1}{x - x_0}\paren{\int_{a}^{x}f(t) \,\mathrm dt - \int_{a}^{x_0}f(t) \,\mathrm dt} - f(x_0)} \\
+                                            &= \abs{\frac{1}{x - x_0}\int_{x_0}^{x}f(t) \,\mathrm dt - f(x_0)} \\
+                                            &= \abs{\frac{1}{x - x_0} \int_{x_0}^{x}(f(t) - f(x_0)) \,\mathrm dt} \\
+                                            &\leq \frac{1}{\abs{x - x_0}} \int_{x_0}^{x}\underbrace{\abs{f(t) - f(x_0)}}_{< \eps} \,\mathrm dt \\
+                                            &< \frac{1}{\abs{x - x_0}}\cdot (x - x_0)\eps \\
+                                            &= \eps.
+      \end{align*}
+      Therefore $F$ is differentiable at $x_0$ and $F'(x_0) = f(x_0)$.
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{6.18 (Fundamental Theorem of Calculus II)}
+    If $f\colon [a, b]\to \R$ is \emph{continuous} on $[a, b]$ and \emph{differentiable} on $(a, b)$ and $f'$ is integrable on $[a, b]$, then
+    \[
+      \int_{a}^{b}f'(t) \,\mathrm dt = f(b) - f(a).
+    \]
+    \begin{proof}
+      We proceed by showing that
+      \[
+        \int_{a}^{b}f'(t) \,\mathrm dt - (f(b) - f(a)) < \eps
+      \]
+      for any $\eps > 0$. Since $f'$ is integrable, by Proposition 6.10 we have that for all $\eps > 0$, there exists a partition $\mathcal{P}_\eps$ such that
+      \[
+        \mathcal{U}(f, \mathcal{P}_\eps) - \mathcal{L}(f, \mathcal{P}_\eps) < \eps.
+      \]
+      Then
+      \begin{align*}
+        f(b) - f(a) &= \sum_{j=1}^{n} (f(t_j) - f(t_{j - 1})) \\
+                    &= \sum_{j=1}^{n} \frac{f(t_j) - f(t_{j - 1})}{t_j - t_{j - 1}}(t_j - t_{j - 1}) \\
+                    &= \sum_{j=1}^{n} f'(t_j^*)(t_j - t_{j - 1}). \tag{MVT on $[t_{j - 1}, t_j], t_j^*\in [t_{j - 1}, t_j]$}
+      \end{align*}
+      We know that
+      \[
+        \mathcal{L}(f', \mathcal{P}_\eps) \leq \sum_{j=1}^{n} f'(t_j^*)(t_j - t_{j - 1})\leq \mathcal{U}(f', \mathcal{P}_\eps).
+      \]
+      Thus
+      \begin{align*}
+        \abs{\int_{a}^{b}f'(t) \,\mathrm dt - \sum_{j=1}^{n}f'(t_j^*)(t_j - t_{j - 1})} &\leq \mathcal{U}(f', \mathcal{P}_\eps) - \mathcal{L}(f', \mathcal{P}_\eps) \\
+                                                                                            &< \eps,
+      \end{align*}
+      for all $\eps > 0$. Therefore
+      \[
+        \int_{a}^{b}f'(t) \,\mathrm dt = f(b) - f(a).
+      \]
+    \end{proof}
+  \end{theorem}
+\end{document}
