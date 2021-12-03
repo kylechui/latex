@@ -1,0 +1,160 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 27}
+  \textbf{Question} Which functions can we integrate? \par
+  \textbf{Lemma 6.9} If $f\colon [a, b]\to \R$ is Riemann, then $f$ is bounded on $[a, b]$.
+  \begin{proof}
+    We proceed via proof by contrapositive. Suppose $f$ is not bounded on $[a, b]$, so
+    \[
+      \sup_{x\in [a, b]}\abs{f(x)} = +\infty.
+    \]
+    Hence $f$ is either unbounded from above or from below. We wish to show that $f$ is not Riemann integrable. Observe that since $f$ is unbounded (say, from above), for any partition $\mathcal{P} = \set{t_j}_{j = 1}^n$ there exists some $j\in [1, n]$ such that
+    \[
+      \sup_{x\in [t_{j - 1}, t_j]}f(x) = +\infty.
+    \]
+    Thus $\mathcal{U}(f, \mathcal{P}) = +\infty$, and since $\mathcal{P}$ is arbitrary we have
+    \[
+      \overline{\int_{a}^{b}f(x) \,\mathrm dx} = +\infty.
+    \]
+    Thus $f$ is not Riemann integrable. Using similar logic, we may show that $f$ is not integrable when $f$ is unbounded from below.
+  \end{proof}
+  \begin{note}{}
+    We have that
+    \[
+      \set{f\colon [a, b]\to \R\mid f\text{ is Riemann integrable}}\subset \set{f\colon [a, b]\to \R\mid f\text{ is bounded}}.
+    \]
+  \end{note}
+  \begin{note}{}
+    Not every bounded function is integrable! Consider Dirichlet's function over the interval $[0, 1]$:
+    \[
+      f(x) = \begin{cases}1 & x\in \Q, \\ 0 & x\notin \Q.\end{cases}
+    \]
+    It is clearly true that $f$ is bounded. Notice that by the density of the rationals and irrationals, we have
+    \begin{align*}
+      \mathcal{U}(f, \mathcal{P}) &= \sum_{i=1}^{n}\sup_{x\in [t_{j - 1}, t_j]}f(x)\cdot (t_j - t_{j - 1}) & \mathcal{L}(f, \mathcal{P}) &= \sum_{i=1}^{n}\inf_{x\in [t_{j - 1}, t_j]}f(x)\cdot (t_j - t_{j - 1}) \\
+                                  &= \sum_{i=1}^{n} (t_j - t_{j - 1}) & &= \sum_{i=1}^{n} 0 \\
+                                  &= t_n - t_0 & &= 0. \\
+                                  &= 1.
+    \end{align*}
+    Since this holds for any partition $\mathcal{P}$, we have that
+    \[
+      \overline{\int_{0}^{1}f(x) \,\mathrm dx} = 1\neq 0 = \underline{\int_{0}^{1}f(x) \,\mathrm dx},
+    \]
+    so the $f$ is non-integrable over $[0, 1]$.
+  \end{note}
+  \textbf{Lemma 6.9} Suppose $f\colon [a, b]\to \R$ is \emph{bounded}, i.e. there exists $M > 0$ such that $\sup_{x\in [a, b]}\abs{f(x)}\leq M$. Then for every partition $\mathcal{P}$ of $[a, b]$, 
+  \[
+    -M(b - a)\leq \mathcal{L}(f, \mathcal{P})\leq \mathcal{U}(f, \mathcal{P})\leq M(b - a).
+  \]
+  Furthermore, if $f$ is Riemann integrable, then
+  \[
+    \abs{\int_{a}^{b}f(x) \,\mathrm dx}\leq M(b - a).
+  \]
+  \begin{proof}
+    Since $\mathcal{P}$ is a partition of $[a, b]$, we have
+    \[
+      \sum_{j=1}^{n}(t_j - t_{j - 1}) = t_n - t_0 = b - a.
+    \]
+    Furthermore, we have
+    \begin{align*}
+      -M &\leq \inf_{x\in [a, b]} f(x) \\
+         &\leq \inf_{x\in [t_{j - 1}, t_j]}f(x) \\
+         &\leq \sup{x\in [t_{j - 1}, t_j]}f(x) \\
+         &\leq \sup_{x\in [a, b]} f(x) \\
+         &= M.
+    \end{align*}
+    Combining these two statements yields the desired result.
+  \end{proof}
+  \begin{note}{}
+    If $f$ is Riemann integrable, then $\abs{f}$ is as well and
+    \[
+      \abs{\int_{a}^{b}f(x) \,\mathrm dx} \leq \int_{a}^{b}\abs{f(x)} \,\mathrm dx.
+    \]
+    Furthermore, if $f, g$ are Riemann integrable over $[a, b]$ where $f\leq g$, then
+    \[
+      \int_{a}^{b}f(x) \,\mathrm dx\leq \int_{a}^{b}g(x) \,\mathrm dx.
+    \]
+    Thus if $f$ is Riemann integrable, we have $\sup_{x\in [a, b]}\abs{f(x)}\leq M$ and
+    \begin{align*}
+      \abs{\int_{a}^{b}f(x) \,\mathrm dx} &\leq \int_{a}^{b}\abs{f(x)} \,\mathrm dx \\
+                                          &\leq \int_{a}^{b}M \,\mathrm dx \\
+                                          &= M(b - a).
+    \end{align*}
+  \end{note}
+  \textbf{Proposition 6.10} Let $f\colon [a, b]\to \R$ be \emph{bounded}. Then $f$ is Riemann integrable on $[a, b]$ if and only if for any $\eps > 0$, there exists a partition $\mathcal{P}_\eps$ of $[a, b]$ such that
+  \[
+    0\leq \mathcal{U}(f, \mathcal{P}_\eps) - \mathcal{L}(f, \mathcal{P}_\eps)\leq \eps.
+  \]
+  \begin{proof}
+    ($\Rightarrow$) Let $\eps > 0$, and suppose $f$ is Riemann integrable on $[a, b]$ so
+    \[
+      \int_{a}^{b}f(x) \,\mathrm dx = \overline{\int_{a}^{b}f(x) \,\mathrm dx} = \underline{\int_{a}^{b}f(x) \,\mathrm dx}\in\R.
+    \]
+    Since $\overline{\int_{a}^{b}f(x) \,\mathrm dx}$ is an infimum, there exists some $\mathcal{P}_\eps'$ such that
+    \[
+      \mathcal{U}(f, \mathcal{P}_\eps') < \overline{\int_{a}^{b}f(x) \,\mathrm dx} + \frac{\eps}{2}.
+    \]
+    Since $\underline{\int_{a}^{b}f(x) \,\mathrm dx}$ is a supremum, there exists $\mathcal{P}_\eps''$ such that
+    \[
+      \mathcal{L}(f, \mathcal{P}_\eps'') > \underline{\int_{a}^{b}f(x) \,\mathrm dx} - \frac{\eps}{2}.
+    \]
+    Taking the common refinement $\mathcal{P}_\eps = \mathcal{P}_\eps' \cup \mathcal{P}_\eps''$, we have
+    \[
+      \mathcal{U}(f, \mathcal{P}_\eps)\leq \mathcal{U}(f, \mathcal{P}_\eps'),
+    \]
+    and
+    \[
+      \mathcal{L}(f, \mathcal{P}_\eps')\leq \mathcal{L}(f, \mathcal{P}_\eps).
+    \]
+    Hence we have that
+    \begin{align*}
+      \mathcal{U}(f, \mathcal{P}_\eps) - \mathcal{L}(f, \mathcal{P}_\eps) &< \paren{\overline{\int_{a}^{b}f(x) \,\mathrm dx} + \frac{\eps}{2}} - \paren{\underline{\int_{a}^{b}f(x) \,\mathrm dx} - \frac{\eps}{2}} \\
+                                                                          &= \frac{\eps}{2} + \frac{\eps}{2} \tag{$f$ is Riemann integrable}\\
+                                                                          &= \eps.
+    \end{align*}
+    ($\Leftarrow$) We proceed via proof by contrapositive. Suppose that $f$ is \emph{not} Riemann integrable, so
+    \[
+      \overline{\int_{a}^{b}f(x) \,\mathrm dx} - \underline{\int_{a}^{b}f(x) \,\mathrm dx} > 0.
+    \]
+    Let us pick
+    \[
+      \eps = \frac{1}{2}\paren{\overline{\int_{a}^{b}f(x) \,\mathrm dx} - \underline{\int_{a}^{b}f(x) \,\mathrm dx}}.
+    \]
+    Then we can never have a partition $\mathcal{P}_\eps$ such that
+    \[
+      0\leq \mathcal{U}(f, \mathcal{P}_\eps) - \mathcal{L}(f, \mathcal{P}_\eps) < \eps.
+    \]
+  \end{proof}
+  \textbf{Proposition 6.11} Every continuous function $f\colon [a, b]\to \R$ is Riemann integrable on $[a, b]$.
+  \begin{proof}
+    We will use Proposition $6.10$ to prove this statement. Let $\eps > 0$. Since $f$ is continuous on compact $[a, b]$, we have that $f$ is bounded on $[a, b]$. Moreover, $f$ is \emph{uniformly} continuous on $[a, b]$. Hence there exists $\delta > 0$ such that
+    \[
+      \sup_{\substack{x, y\in [a, b]\\ \abs{x - y}<\delta}} \abs{f(x) - f(y)} < \frac{\eps}{b - a}.
+    \]
+    Let $\mathcal{P}$ be a partition of $[a, b]$ such that $t_j - t_{j - 1} < \delta$ for all $j = 1,\dotsc,n$. Then on $I_j = [t_{j - 1}, t_j]$, the Extreme Value Theorem implies that $f$ has a maximum and minimum (say at $x_j^*$ and $y_j^*$). Hence
+    \[
+      \sup_{x\in I_j}f(x) - \inf_{x\in I_j} = f(x_j^*) - f(y_j^*) < \frac{\eps}{b - a}.
+    \]
+    Therefore
+    \begin{align*}
+      \mathcal{U}(f, \mathcal{P}) &= \sum_{j=1}^{n} \paren{\sup_{I_j} f - \inf_{I_j}f}\cdot (t_j - t_{j - 1}) \\
+                                  &< \frac{\eps}{b - a}\cdot \sum_{j=1}^{n}(t_j - t_{j - 1}) \\
+                                  &= \eps.
+    \end{align*}
+    Since $\eps > 0$ and arbitrary, Proposition $6.10$ implies that $f$ is Riemann integrable over $[a, b]$.
+  \end{proof}
+  \begin{note}{}
+    We can also integrate functions that are continuous, but not ``too discontinuous'', i.e. any function with a finite number of:
+    \begin{enumerate}[label=(\alph*)]
+      \item Removable discontinuities: there exists $\displaystyle \lim_{x\to c} f(x)\neq f(c)$.
+      \item Jump discontinuities: $\displaystyle \lim_{x\to c^-} f(x)\neq \lim_{x\to c^+} f(x)$.
+    \end{enumerate}
+  \end{note}
+\end{document}
