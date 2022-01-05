@@ -79,17 +79,17 @@
   We can think of the storage process as mapping normalized real numbers to normalized machine numbers. We do this via rounding or truncating. \par
   Consider some $y\in\R\sm \set{0}$.
   \begin{itemize}
-    \item Truncating ($k$-digit truncation of $y = \pm d_1d_2d_3\dotsc d_kd_{k + 1}d_{k + 2}\dotsc\cdot 10^n$)
+    \item Truncating ($k$-digit truncation of $y = \pm 0.d_1d_2d_3\dotsc d_kd_{k + 1}d_{k + 2}\dotsc\cdot 10^n$)
     Simply omit the digits from $d_{k + 1}$ and onwards, in other words
     \[
-      f_\ell(\pm d_1d_2d_3\dotsc d_kd_{k + 1}d_{k + 2}\dotsc\cdot 10^n) = \pm d_1d_2\dotsc d_k\cdot 10^n.
+      f_\ell(\pm 0.d_1d_2d_3\dotsc d_kd_{k + 1}d_{k + 2}\dotsc\cdot 10^n) = \pm 0.d_1d_2\dotsc d_k\cdot 10^n.
     \]
     Thus we have $y\approx f_\ell(y)$.
-    \item Rounding ($k$-digit rounding of $y = \pm d_1d_2d_3\dotsc d_kd_{k + 1}d_{k + 2}\dotsc\cdot 10^n$) \par
+    \item Rounding ($k$-digit rounding of $y = \pm 0.d_1d_2d_3\dotsc d_kd_{k + 1}d_{k + 2}\dotsc\cdot 10^n$) \par
     If $d_{k + 1} < 5$, then we drop $d_{k + 1}d_{k + 2}\dotsc$ (same with truncating) \par
     If $d_{k + 1} \geq 5$, then add $1$ to $d_k$ and drop $d_{k + 1}d_{k + 2}\dotsc$
     \[
-      f_\ell(\pm d_1d_2d_3\dotsc d_kd_{k + 1}d_{k + 2}\dotsc\cdot 10^n) = \pm \delta_1\delta_2\dotsc \delta_k\cdot 10^m.
+      f_\ell(\pm 0.d_1d_2d_3\dotsc d_kd_{k + 1}d_{k + 2}\dotsc\cdot 10^n) = \pm \delta_1\delta_2\dotsc \delta_k\cdot 10^m.
     \]
   \end{itemize}
 \end{document}
