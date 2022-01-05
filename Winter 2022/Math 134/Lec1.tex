@@ -1,0 +1,35 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 1}
+  \subsection{Introduction to Dynamical Systems}
+  Models of real-world phenomena can often be classified as either \emph{static} or \emph{dynamic}. Furthermore, these systems can either be \emph{discrete} ($x_1,x_2,\dotsc$ where $x_i\in\R$ for $i\geq 1$) or \emph{continuous} ($x = x(t)$ where $t\geq 0$ and $x\in\R$, and $\dot x = f(x)$).
+  \subsubsection{Where Do ``Dynamical Systems'' Come From?}
+  \begin{enumerate}
+    \item Observed phenomena
+    \item Mathematical model
+    \item ``Solve'' the model
+    \item Make predictions
+  \end{enumerate}
+  \subsection{Autonomous ODEs}
+  \begin{definition}{Autonomous ODEs}
+    We say that an ordinary differential equation is \emph{autonomous} if the right-hand side does not depend on $t$.
+  \end{definition}
+  \begin{itemize}
+    \item The SIR (susceptible, infected, recovered) model is an example of a \emph{first order} system of \emph{autonomous} ODEs.
+    \[
+      \begin{cases}
+        \dot x_1 = f_1(x_1,\dotsc,x_n) \\
+        \hspace{2pt}\vdots \\
+        \dot x_n = f_1(x_1,\dotsc,x_n) \\
+      \end{cases}
+    \]
+    \item We will refer to $n$ as the \emph{dimension} of the system.
+  \end{itemize}
+\end{document}
