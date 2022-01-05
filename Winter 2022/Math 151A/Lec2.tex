@@ -1,0 +1,31 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 2}
+  \begin{note}{}
+    Since we use the notation $\fl$ to denote both $k$-digit truncation as well as $k$-digit rounding, be sure not to mix the two up.
+  \end{note}
+  \begin{definition}{Errors}
+    Suppose $p^*$ is an approximation of $p$. Then the \emph{actual error} is $p - p^*$, the \emph{absolute error} is $\abs{p - p^*}$, and the relative error is $\frac{\abs{p - p^*}}{\abs{p}}$, where $p\neq 0$.
+  \end{definition}
+  \begin{definition}{Significant Digits}
+    The number $p^*$ is said to approximate $p$ to ``$t$'' significant digits if ``$t$'' is the largest non-negative integer for which
+    \[
+      \frac{\abs{p - p^*}}{\abs{p}}\leq 5\cdot 10^{-t}.
+    \]
+  \end{definition}
+  \subsection{Computer Arithmetic}
+  Assume that $x, y$ are real numbers, then
+  \begin{align*}
+    x\oplus y &= \fl(\fl(x) + \fl(y)) \\ 
+    x\ominus y &= \fl(\fl(x) - \fl(y)) \\ 
+    x\otimes y &= \fl(\fl(x) \cdot  \fl(y)) \\ 
+    x\odiv y &= \fl(\fl(x) + \fl(y))
+  \end{align*}
+\end{document}
