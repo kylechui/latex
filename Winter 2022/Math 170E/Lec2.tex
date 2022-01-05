@@ -1,0 +1,62 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 2}
+  \subsection{Inclusion-Exclusion Principle}
+  \begin{theorem}{Inclusion-Exclusion Principle}
+    If $A, B\sse\Omega$ are events, then
+    \[
+      \P[A\cup B] = \P[A] + \P[B] - \P[A\cap B].
+    \]
+    \begin{proof}
+      Observe that we may write
+      \[
+        A\cup B = [A\sm(A\cap B)]\cup[A\cap B]\cup[B\sm(A\cap B)],
+      \]
+      where $A\cap B$, $B\sm(A\cap B)$, and $A\sm (A\cap B)$ are mutually exclusive. Hence
+      \begin{align*}
+        \P[A\cup B] &= \P[A\sm(A\cap B)] + \P[B\sm(A\cap B)] + \P[A\cap B] \\
+                    &= (\P[A] - \P[A\cap B]) + (\P[B] - \P[A\cap B]) + \P[A\cap B] \\
+                    &= \P[A] + \P[B] - \P[A\cap B].
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{Union Bound}
+    If $A_1, A_2,\dotsc,A_n\sse\Omega$ are events, then
+    \[
+      \P\left[\bigcup_{j = 1}^nA_j\right] \leq \sum_{j=1}^{n}\P[A_j].
+    \]
+    \begin{proof}
+      We proceed via proof by induction. Observe that for $n = 1$, we have $\P[A_1]\leq \P[A_1]$, which is obviously true. Suppose that this statements holds for some $k\geq 1$. Then
+      \begin{align*}
+        \P\left[\bigcup_{j = 1}^{k + 1}A_j\right] &= \P\left[\paren{\bigcup_{j = 1}^kA_j}\cup A_{k + 1}\right] \\
+                                                  &= \P\left[\bigcup_{j = 1}^kA_j\right] + \P[A_{k + 1}] - \P\left[\paren{\bigcup_{j = 1}^kA_j}\cap A_{k + 1}\right] \\
+                                                  &\leq \P\left[\bigcup_{j = 1}^kA_j\right] + \P[A_{k + 1}] \\
+                                                  &\leq \sum_{j=1}^{k}\P[A_j] + \P[A_{k + 1}] \\
+                                                  &= \sum_{j=1}^{k + 1}\P[A_j].
+      \end{align*}
+      Hence the statement holds for $k + 1$, and so holds for all natural numbers $n$.
+    \end{proof}
+  \end{theorem}
+  \subsection{Mutual Independence}
+  \begin{definition}{Independence}
+    We say that two events $A, B\sse\Omega$ are \emph{independent} if
+    \[
+      \P[A\cap B] = \P[A]\P[B].
+    \]
+    If two events are not independent, then we say that they are \emph{dependent}.
+  \end{definition}
+  \begin{definition}{Mutual Independence}
+    We say that events $A_1,\dotsc,A_n\sse\Omega$ are \emph{mutually independent} if, given any $1\leq k\leq n$ and $1\leq j_1 < j_2 \dotsb < j_k\leq n$ we have
+    \[
+      \P\left[\bigcap_{\ell = 1}^k A_{j_\ell}\right] = \prod_{\ell = 1}^k\P[A_{j_\ell}].
+    \]
+  \end{definition}
+
+\end{document}
