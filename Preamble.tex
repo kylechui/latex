@@ -44,6 +44,7 @@
 \newcommand{\C}{\ensuremath{\mathbb{C}}}
 \newcommand{\F}{\ensuremath{\mathbb{F}}}
 \newcommand{\M}{\ensuremath{\mathbb{M}}}
+\renewcommand{\P}{\ensuremath{\mathbb{P}}}
 \newcommand{\lam}{\ensuremath{\lambda}}
 \newcommand{\nab}{\ensuremath{\nabla}}
 \newcommand{\eps}{\ensuremath{\varepsilon}}
@@ -119,7 +120,9 @@
       colframe=theoremAccent,
       breakable
     ]
-      \color{theoremAccent}\textbf{Theorem --- }\emph{#1}\\\color{black}
+      % \color{theoremAccent}\textbf{Theorem --- }\emph{#1}\\\color{black}
+    \ifx &#1& \color{theoremAccent}\textbf{Theorem. }\color{black}
+    \else \color{theoremAccent}\textbf{Theorem --- #1 }\color{black} \fi
   }
   {
     \end{tcolorbox}

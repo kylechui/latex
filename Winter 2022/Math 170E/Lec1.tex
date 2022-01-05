@@ -1,0 +1,104 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 1}
+  The goal of this class is to \emph{quantify randomness}. The main topics for the term are:
+  \begin{enumerate}
+    \item The fundamentals of probability theory, including conditional probability and enumeration arguments.
+    \item Discrete and continuous random variables.
+    \item Sequences of i.i.d. random variables, including the Weak Law of Large Numbers and the Central Limit Theorem.
+  \end{enumerate}
+  \subsection{Properties of Probability}
+  Probability theory takes place inside a \emph{probability space} $(\Omega, \mathcal{F}, \P)$.
+  \begin{definition}{Probability Space}
+    A \emph{probability space} is a triplet $(\Omega, \mathcal{F}, \P)$ satisfying:
+    \begin{enumerate}
+      \item A non-empty set $\Omega$, called the \emph{sample space}.
+      \item A set $\mathcal{F}$ of subsets of $\Omega$ satisfying certain properties:
+      \begin{itemize}
+        \item Elements of $\mathcal{F}$ are called \emph{events}.
+        \item Events $A_1, A_2, \dotsc, A_k$ are called \emph{mutually exclusive} if they are \emph{pairwise disjoint}, i.e. if $i\neq j$ then $A_i\cap A_j = \es$.
+        \item Events $A_1, A_2, \dotsc, A_k$ are called \emph{exhaustive} if their union is the sample space, i.e.
+        \[
+          \bigcup_{j = 1}^k A_j = \Omega.
+        \]
+        \item For this class you may ignore $\mathcal{F}$ and assume that all subsets of $\Omega$ are events.
+      \end{itemize}
+      \item A function $\P\colon \mathcal{F}\to [0, 1]$, called a \emph{probability measure}, which satisfies:
+      \begin{itemize}
+        \item $\P[\Omega] = 1$, or ``the probability that something happens is $1$''.
+        \item If $A_1, A_2, \dotsc, A_n$ are mutually exclusive events, then
+        \[
+          \P\left[\bigcup_{j = 1}^n A_j\right] = \sum_{j=1}^{n} \mathbb{P}[A_j].
+        \]
+        \item If $A_1, A_2, \dotsc$ are mutually exclusive events, then
+        \[
+          \P\left[\bigcup_{j = 1}^\infty A_j\right] = \sum_{j=1}^{\infty} \mathbb{P}[A_j].
+        \]
+      \end{itemize}
+    \end{enumerate}
+  \end{definition}
+  \begin{example}{}
+    Suppose I flip two fair coins. Then the sample space can be written as $\Omega = \set{HH, HT, TH, TT}$. The probability measure should be defined as
+    \begin{align*}
+      P[HH] &= \frac{1}{4} \\ 
+      P[HT] &= \frac{1}{4} \\ 
+      P[TH] &= \frac{1}{4} \\ 
+      P[TT] &= \frac{1}{4}.
+    \end{align*}
+    The probability of getting exactly one head is hence $\P[\set{HT, TH}] = \mathbb{P}[HT] + \mathbb{P}[TH] = \frac{1}{2}$.
+  \end{example}
+  \begin{theorem}{}
+    $\P[\es] = 0$.
+    \begin{proof}
+      We know that $\Omega$ and $\es$ are mutually exclusive, since, $\Omega\cap \es = \es$. Thus
+      \begin{align*}
+        \P[\Omega] &= \P[\Omega\cup \es] \\
+                  &= \P[\Omega] + \P[\es],
+      \end{align*}
+      and so $\P[\es] = 0$.
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $A\sse \Omega$ is an event and $A' = \Omega\sm A$ then
+    \[
+      \P[A] = 1 - \P[A'].
+    \]
+    \begin{proof}
+      Since we have that $A' = \Omega\sm A$, we know that $A'\cap A = \es$, so they are mutually exclusive. Thus we have
+      \begin{align*}
+        \P[\Omega] &= \P[A\cup A'] \\
+        1 &= \P[A] + \P[A'] \\ 
+        \P[A] &= 1 - \P[A'].
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $A\sse B$ then
+    \[
+      \P[B\sm A] = \P[B] - \P[A].
+    \]
+    \begin{proof}
+      We know that $B = A\cup (B\sm A)$ and $A\cap(B\sm A) = \es$. Hence 
+      \[
+        \P[B] = \P[A\cup (B\sm A)] = \P[A] + \P[B\sm A],
+      \]
+      and the result follows.
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $A\sse B$ then $\P[A]\leq \P[B]$.
+    \begin{proof}
+      From the previous theorem we have
+      \[
+        \P[A]\leq \P[A] + \P[B\sm A] = \P[B].
+      \]
+    \end{proof}
+  \end{theorem}
+\end{document}
