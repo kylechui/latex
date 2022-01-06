@@ -1,0 +1,126 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 2}
+  \subsection{Reducing ODEs to First Order Autonomous Systems}
+  Consider the set of differential equations given by
+  \[
+    \begin{cases}
+      \dot{x} = -\kappa(t)xy, \\
+      \dot{y} = \kappa(t)xy - \delta y, \\
+      \dot{z} = \delta y.
+    \end{cases}
+  \]
+  Introduce a new variable, i.e. $\tau = \tau(t) = t$. Then we may rewrite the above as
+  \[
+    \begin{cases}
+      \dot{x} = -\kappa(\tau)xy, \\
+      \dot{y} = \kappa(\tau)xy - \delta y, \\
+    \dot{z} = \delta y, \\
+      \dot{\tau} = 1.
+    \end{cases}
+  \]
+  Note that the above system is now autonomous.
+  \begin{example}{The Pendulum} \\
+    We can model the angle $\theta$ of a pendulum of length $L > 0$ by
+    \[
+      \ddot{\theta} + \frac{g}{L}\sin\theta = 0.
+    \]
+    Applying Newton's Second Law, we can get the equations
+    \begin{align*}
+      mL\ddot\theta &= -mg\sin\theta \\
+      \theta &= \theta(t).
+    \end{align*}
+    Observe that if we let $x = \theta$ and $y = \dot{\theta}$, then we get
+    \[
+      \begin{cases}
+        \dot{x} = y \\
+        \dot{y} = -\frac{g}{L}\sin\theta.
+      \end{cases}
+    \]
+  \end{example}
+  \begin{example}{Pendulum with an external force} \\
+    If we add an external force to our pendulum, then we get
+    \[
+      \ddot\theta + \frac{g}{L}\sin\theta = \frac{1}{m}F(t).
+    \]
+    Thus if we let $x = \theta$, $y = \dot{\theta}$, and $z = t$, then we get
+    \[
+      \begin{cases}
+        \dot{x} = y \\
+        \dot{y} = -\frac{g}{L}\sin x + \frac{1}{m}F(z) \\
+        \dot{z} = 1.
+      \end{cases}
+    \]
+  \end{example}
+  \begin{note}{}
+    In general, higher order ODEs of the form
+    \[
+      \frac{\mathrm{d}^kx}{\mathrm{d}t^k} = f(x, \frac{\mathrm{d}x}{\mathrm{d}t}, \frac{\mathrm{d}^2x}{\mathrm{d}t^2}, \dotsc, \frac{\mathrm{d}^{k - 1}x}{\mathrm{d}t^{k - 1}})
+    \]
+    can be converted into a first order system by taking
+    \[
+      z_1 = x, z_2 = \frac{\mathrm{d}x}{\mathrm{d}t},\dotsc, z_k = \frac{\mathrm{d}^{k - 1}x}{\mathrm{d}t^{k - 1}}.
+    \]
+    We get the system
+    \[
+      \begin{cases}
+        \dot{z}_1 = \frac{\mathrm{d}x}{\mathrm{d}t} = z_2 \\
+        \dot{z}_2 = \frac{\mathrm{d}^2x}{\mathrm{d}t^2} = z_3 \\
+        \hspace{2pt}\vdots \\
+        \dot{z}_k = f(z_1, z_2,\dotsc, z_k)
+      \end{cases}
+    \]
+  \end{note}
+  \subsubsection{Flows on the Line}
+  We will now consider systems of the form
+  \[
+    \dot{x} = f(x)
+  \]
+  where $f\colon \R\to \R$ is a smooth function.
+  \begin{example}{}
+    Consider the ODE given by
+    \[
+      \dot{x} = x(x + 1)(x - 1)^2.
+    \]
+    We could use separation of variables to solve this.
+  \end{example}
+  \begin{note}{}
+    Solutions to ODEs usually come in three different flavors:
+    \begin{itemize}
+      \item Analytic methods (separation of variables)
+      \item Geometric methods (direction fields)
+      \item Numerical methods (Euler's method)
+    \end{itemize}
+  \end{note}
+  \begin{definition}{Phase Space}
+    To help us analyze these differential equations, we can plot $\dot{x}$ against $x$ on a graph, and see the behavior around zeroes. This is called a \emph{phase space}. If some neighborhood of points around a zero $x$ tend towards $x$, then $x$ is called a \emph{stable point}. If they tend to move away from $x$, then $x$ is an \emph{unstable point}. On a phase space graph, we denote stable points with $\bullet$, unstable points with $\circ$, and other points with a half-filled circle.
+  \end{definition}
+  \subsubsection{Fixed Points}
+  \begin{definition}{Fixed Point}
+    We say that $x^*$ is a \emph{fixed point} of the system
+    \[
+      \dot{x} = f(x)
+    \]
+    if $f(x^*) = 0$. If $x^*$ is a fixed point then the system has a constant solution given by $x(t) = x^*$. These points are also known as equilibrium points, stationary points, rest points, critical points, and steady states.
+  \end{definition}
+  \subsubsection{Stability}
+  \begin{definition}{Stability}
+    Let $x^*$ be a fixed point of the system
+    \[
+      \dot{x} = f(x).
+    \]
+    For now, we say that $x^*$ is:
+    \begin{itemize}
+      \item \emph{Stable} if solutions starting close to $x^*$ approach $x^*$ as $t\to\infty$.
+      \item \emph{Unstable} if solutions starting close to $x^*$ diverge from $x^*$ as $t\to\infty$.
+      \item \emph{Half-stable} if solutions starting close to $x^*$ approach $x^*$ from one side, but diverge from the other side.
+    \end{itemize}
+  \end{definition}
+\end{document}
