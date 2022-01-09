@@ -1,0 +1,70 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 3}
+  \begin{theorem}{Multiplication Principle}
+    Suppose I run $r$ \emph{mutually independent} experiments so that
+    \begin{itemize}
+      \item The 1\tsup{st} experiment has $n_1$ possible outcomes.
+      \item The 2\tsup{nd} experiment has $n_2$ possible outcomes.
+      \item $\dotsc$
+      \item The $r$\tsup{th} experiment has $n_r$ possible outcomes.
+    \end{itemize}
+    The composite experiment then has $n_1\cdot n_2\cdot \dotsb\cdot n_r$ outcomes.
+  \end{theorem}
+  In some experiments we care about taking samples of size $r$ from a set of $n$ objects.
+  \begin{itemize}
+    \item We can seek \emph{ordered} or \emph{unordered} samples.
+    \item We can do this \emph{with} or \emph{without} replacement.
+  \end{itemize}
+  \begin{theorem}{}
+    There are $n^r$ possible choices of an \emph{ordered} sample of size $r$ from a set of $n$ objects \emph{with replacement}.
+    \begin{proof}
+      We run $r$ experiments corresponding to each choice. For each choice, we have $n$ possible outcomes because we are performing the choices with replacement. The Multiplication Principle tells us that there are $n\cdot n\cdot \dotsb\cdot n = n^r$ outcomes.
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    There are
+    \[
+      \phantom{}_nP_r = \frac{n!}{(n - r)!}
+    \]
+    \emph{ordered} samples of size $r$ from a set of $n$ objects \emph{without} replacement. The number $_nPr$ is known as the number of \emph{permutations} of $n$ objects, taken $r$ at a time.
+    \begin{proof}
+      Each choice is an independent experiment:
+      \begin{itemize}
+        \item 1\tsup{st} choice: $n$ outcomes
+        \item 2\tsup{nd} choice: $n - 1$ outcomes
+        \item 3\tsup{rd} choice: $n - 2$ outcomes \\
+        \vdots
+        \item $r$\tsup{th}: $n - (r - 1)$ outcomes
+      \end{itemize}
+      Hence the composite experiment has
+      \[
+        n\cdot (n - 1)\cdot \dotsb\cdot (n - r + 1) = \phantom{}_nP_r
+      \]
+      outcomes.
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    There are
+    \[
+      \phantom{}_nC_r = \frac{n!}{(n - r)!r!}
+    \]
+    \emph{unordered} samples of size $r$ from a set of $n$ objects \emph{without} replacement.
+    \begin{proof}
+      From the previous theorem, there are $\phantom{}_nP_r$ ordered samples of size $r$ from $n$ objects without replacement. However, we have over counted because our sample will show up $r!$ times (in every possible permutation). Hence we divide by $r!$ to get
+      \[
+        \phantom{}_nC_r = \frac{\phantom{}_nP_r}{r!} = \frac{n!}{(n - r)!r!}.
+      \]
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    $\phantom{}_nC_r = \phantom{}_nC_{n - r}$.
+  \end{note}
+\end{document}

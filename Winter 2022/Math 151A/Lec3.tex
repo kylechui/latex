@@ -1,0 +1,36 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 3}
+  \begin{note}{}
+    When computing relative error, keep $2$ non-zero digits.
+  \end{note}
+  If after performing our operation with $k$-digit chopping, we still have $k$ significant digits, then our operation is pretty good (because it did not lose precision). In general, the $\oplus$ operator will lose at most one significant digit. Unlike addition, the $\ominus$ operator can lose multiple significant digits (when you subtract almost identical numbers). \par
+  We see errors introduced in computations:
+  \begin{itemize}
+    \item Subtraction of almost identical numbers results in loss of significant digits
+    \item More operations $\to$ more errors $\to$ loss of significant digits
+  \end{itemize}
+  To avoid loss of \emph{accuracy}, we can perform some manipulations to avoid scenarios that involve inaccuracies:
+  \begin{example}{Quadratic formula} \\
+    For a given quadratic $ax^2 + bx + c = 0$, we know that a solution is
+    \[
+      x_1 = \frac{-b + \sqrt{b^2 - 4ac}}{2a}.
+    \]
+    Suppose $b > 0$ and $b^2\gg 4ac$. Then $b^2 - 4ac\approx b^2$, so $b\approx \sqrt{b^2 - 4ac}$. This can lead to inaccuracies because we are subtracting nearly identical numbers. To avoid this, we can perform some algebra as follows:
+    \begin{align*}
+      x_1 &= \frac{-b + \sqrt{b^2 - 4ac}}{2a} \\
+          &= \frac{-b + \sqrt{b^2 - 4ac}}{2a}\cdot \frac{-b-\sqrt{b^2 - 4ac}}{-b-\sqrt{b^2 - 4ac}} \\
+          &= \frac{b^2 - (b^2 - 4ac)}{2a(-b - \sqrt{b^2 - 4ac})} \\
+          &= \frac{4ac}{2a(-b - \sqrt{b^2 - 4ac})} \\
+          &= \frac{2c}{-b - \sqrt{b^2 - 4ac}}.
+    \end{align*}
+    Since this solution avoids the subtraction of two nearly identical numbers, it is more accurate. For the other root, we are subtracting two negative numbers that are nearly identical, so there is no issue.
+  \end{example}
+\end{document}
