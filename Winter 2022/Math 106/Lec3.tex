@@ -1,0 +1,63 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 3}
+  Another tablet titled ``YBC7289'' contains approximations for $\sqrt{2}$ and $\frac{1}{\sqrt{2}}$ that has an error of less than $1$ in $2$ million.
+  \subsection{Greek Mathematics}
+  \begin{note}{}
+    A lot of ``Greek'' mathematicians did not come from what is nowadays Greece, but rather the old Hellenistic empire (which was larger).
+  \end{note}
+  \subsubsection{The Theorem of Pythagoras}
+  Probably the oldest ``mathematical theorem'', known (in some form) to:
+  \begin{itemize}
+    \item Egyptians
+    \item Babylonians
+    \item Chinese
+    \item Indians
+    \item Greeks
+  \end{itemize}
+  \emph{before} Pythagoras.
+  \paragraph{What we know about Pythagoras with (quasi-)certainty}
+  \begin{itemize}
+    \item He existed (\tilde $580$ BCE--$500$ BCE)
+    \item He was born in Samos (modern day Turkey)
+    \item He left no writings himself
+    \item He founded a school in Croton (c. $540$ BCE)
+    \begin{itemize}
+      \item We say ``school'' but it was more like a sect, with strict rules and secrecy
+      \item Their central belief was ``All is number'', and that every number has a meaning
+      \item The number $10$ was a ``holy number'', often drawn as a triangle
+      \item Theory of music based on whole fractions
+      \item Largely responsible for introducing ``rigorous'' mathematics
+      \item They viewed ``pure'' mathematics as the opposite of ``applied'' mathematics
+    \end{itemize}
+  \end{itemize}
+  \begin{theorem}{Pythagorean Theorem}
+    Given a right triangle with legs $a$ and $b$ and hypotenuse $c$, we have
+    \[
+      a^2 + b^2 = c^2.
+    \]
+  \end{theorem}
+  \begin{definition}{Pythagorean Triples}
+    Triples $(a, b, c)$ that satisfy $a^2 + b^2 = c^2$ are called \emph{Pythagorean triples}.
+  \end{definition}
+  \textbf{General Formula:} For positive integers $p, q, r$ such that $p\geq q$, we can use the following equations:
+  \begin{align*}
+    a &= (p^2 - q^2)r \\
+    b &= 2pqr \\
+    c &= (p^2 + q^2)r
+  \end{align*}
+  \paragraph{``Facts'':}
+  \begin{itemize}
+    \item Less general formulas were known to Pythagoras' school, Plato, Babylonians...
+    \item The first statement \emph{and} proof of this formula is from Euclid's ``Elements'', book 10
+  \end{itemize}
+  \subsubsection{Rational points on the circle}
+  Finding rational points on the unit circle with rational coordinates is actually very related to finding Pythagorean triples.
+\end{document}
