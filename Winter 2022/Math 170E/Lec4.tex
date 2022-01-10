@@ -1,0 +1,86 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 4}
+  \begin{itemize}
+    \item There are $n^r$ \emph{ordered} samples of size $r$ from $n$ objects \emph{with replacement}.
+    \item There are $\phantom{}_nP_r$ \emph{ordered} samples of size $r$ from $n$ objects \emph{without replacement}.
+    \item There are $\phantom{}_nC_r = \frac{n!}{r!(n - r)!}$ \emph{unordered} samples of size $r$ from $n$ objects \emph{without replacement}.
+    \item There are $\phantom{}_{n + r - 1}C_r = \frac{n!}{r!(n - r)!}$ \emph{unordered} samples of size $r$ from $n$ objects \emph{with replacement}.
+  \end{itemize}
+  \subsection{Distinguishable Permutations}
+  \begin{itemize}
+    \item Suppose we are given $n$ objects, but some of them are identical.
+    \item How many \emph{distinguishable} permutations of the $n$ objects are there?
+  \end{itemize}
+  \begin{theorem}{}
+    Suppose you have:
+    \begin{itemize}
+      \item $n_1$ objects of type $1$,
+      \item $n_2$ objects of type $2$,
+      \item ...
+      \item $n_r$ objects of type $r$.
+    \end{itemize}
+    Let $n = n_1 + n_2 + \dotsb + n_r$. Then the number of distinguishable permutations is
+    \[
+      \binom{n}{n_1,n_2,\dotsc,n_r} = \frac{n!}{n_1!n_2!\dotsb n_r!}.
+    \]
+    \begin{proof}
+      We have $n$ locations.
+      \begin{itemize}
+        \item First choose $n_1$ locations for type $1$ objects: $\choose{n}{n_1}$ choices.
+        \item Then choose $n_2$ locations for type $2$ objects: $\choose{n - n_1}{n_2}$ choices.
+        \item $\dotsb$
+        \item Finally we choose $n_r$ locations for type $r$ objects: $\choose{n - n_1 - \dotsb - n_{r - 1}}{n_r}$ choices.
+      \end{itemize}
+      Using the multiplication principle to take the product of all of these combinations, we have
+      \[
+        \binom{n}{n_1,\dotsc,n_r} = \frac{n!}{n_1!n_2!\dotsb n_r!}.
+      \]
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    An alternate way to think about this theorem is to first consider how many regular permutations of $n$ objects there are ($n!$), and then divide by how many possible times we over count ($n_k!$ for each $1\leq k\leq r$). 
+  \end{note}
+  \subsection{The Binomial Theorem}
+  \begin{theorem}{Binomial Theorem}
+    If $n\geq 0$ then
+    \[
+      (x + y)^n = \sum_{r=0}^{n}\binom{n}{r}x^ry^{n - r},
+    \]
+    where the \emph{binomial coefficient} is
+    \[
+      \binom{n}{r} = \choose{n}{r}.
+    \]
+    \begin{proof}
+      If we multiply out $(x + y)^n = \underbrace{(x + y)\dotsb(x + y)}_{n\text{ times}}$ without using the fact that multiplication is commutative, we see that the number of times $x^ry^{n - r}$ appears is equal to how many different ways there are to rearrange $r$ ``$x$'' terms in $n$ total terms.
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    We have
+    \[
+      \sum_{r=0}^{n} \binom{n}{r} = 2^n.
+    \]
+    % \begin{proof}
+    %   Observe that
+    %   \[
+    %     \sum_{r=0}^{n}\binom{n}{r} = \sum_{r=0}^{n}\binom{n}{r}1^r1^{n - r} = (1 + 1)^n = 2^n.
+    %   \]
+    % \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $n, r\geq 0$ then
+    \[
+      (x_1 + x_2 + \dotsb + x_r)^n = \sum_{n_1 + \dotsb + n_r = n}\binom{n}{n_1, n_2, \dotsc, n_r}x_1^{n_1}x_2^{n_2}\dotsb x_r^{n_r}.
+    \]
+    \begin{proof}
+      Similar to the binomial theorem, we have that to get each term we just need to find the number of distinguishable permutations of $n_1$ terms of $x_1$, ..., $n_r$ terms of $x_r$, which is our multinomial coefficient from before.
+    \end{proof}
+  \end{theorem}
+\end{document}
