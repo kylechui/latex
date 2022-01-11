@@ -1,0 +1,49 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 4}
+  \subsection{Rational Points on the Circle}
+  \textbf{Observation.} If $a^2 + b^2 = c^2$, then
+  \[
+    \paren{\frac{a}{c}}^2 + \paren{\frac{b}{c}}^2 = 1.
+  \]
+  Hence rational points on the unit circle correspond to Pythagorean triples.
+  \subsection{Chord-Tangent Construction}
+  \begin{itemize}
+    \item The idea is most likely due to Diophantos, circa $250$ CE.
+    \item Worked out in detail in the 17\tsup{th} century (Lagrange, Euler, etc.).
+    \item Take a line through $(-1, 0)$ to $(x, y)$ with slope $t$. The equation of this line is thus $y = t(x + 1)$.
+    \item We claim that $R$ has rational coordinates if and only if $t$ is rational.
+    \begin{proof}
+      ($\Rightarrow$) Suppose $R = (x_0, y_0)$, with $x_0, y_0\in\Q$. The slope of the line can be computed to be $\frac{y_0}{1 + x_0} = t$. Thus $t$ is rational. \par
+      ($\Leftarrow$) Suppose $t$ is rational. Since the line intersects the unit circle, we have
+      \begin{align*}
+        x^2 + y^2 &= 1 \\
+        x^2 + t(x + 1)^2 &= 1 \\
+        x^2 + tx^2 + 2tx + t &= 1 \\
+        (1 + t)x^2 + (2t)x + (t - 1) &= 0.
+      \end{align*}
+      \textbf{Observation:} If $x_0$, $x_1$ are solutions of $ax^2 + bx + c = 0$, then we know that we can factor into $a(x - x_0)(x - x_1) = 0$. Thus by equating coefficients, we see that $x_0$ is rational if $x_1$ is rational. \par
+      We already know that $x_1 = -1$ is a solution to our equation, so we know that $x$ must be rational. Since $y = t(x_0 + 1)$, it must be rational as well, so $R$ has rational coordinates.
+    \end{proof}
+    If we actually solve the equation, we get the point $R$ has coordinates $(-1, 0)$ or $\displaystyle \paren{\frac{1-t^2}{1+t^2}, \frac{2t}{1 + t^2}}$. If we write $t = \frac{p}{q}$ for integers $p, q$, then we have
+    \[
+      x_0 = \frac{p^2 - q^2}{p^2 + q^2}, y_0 = \frac{2pq}{p^2 + q^2}.
+    \]
+    Thus we may convert this into a true Pythagorean triple via
+    \begin{align*}
+      a &= (p^2 - q^2)r \\
+      b &= 2pqr \\
+      c &= (p^2 + q^2)r
+    \end{align*}
+  \end{itemize}
+  \begin{note}{}
+    The general takeaway from this proof is that you can use ``known'' points to help you deduce properties of certain ``unknown'' points. In this case, we found an intersection point between a line and a circle, using that we are given the other intersection point.
+  \end{note}
+\end{document}
