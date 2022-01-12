@@ -1,0 +1,48 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 5}
+  \subsection{Root Finding (Single Variable)}
+  Given a function $f(x) = 0$ with a root $p\in [a, b]$, we want to find a sequence $p_1,p_2,\dotsc$ such that $p_n\to p$. We want to find the root using the Intermediate Value Theorem. Suppose $f$ is a continuous function on $[a, b]$ with $f(a)\cdot f(b) < 0$. Then $f$ has at least one root in $(a, b)$.
+  \begin{note}{}
+    This statement holds true because it means that $f(a)$ and $f(b)$ have opposite sign, or that $0$ is between $f(a)$ and $f(b)$. Hence there must exist some $p\in (a, b)$ such that $f(p) = 0$.
+  \end{note}
+  \subsubsection{Bisection Method}
+  \textbf{Idea.} Use binary search to find the root. \par
+  You first find the midpoint of your interval (let's call this $m$), and check whether the sign of $f(m)$ is the same as $f(a)$ or $f(b)$. If the former, then we may ``shrink'' the interval to $[m, b]$, otherwise we may ``shrink'' the interval to $[a, m]$. If $f(m) = 0$, then we have found our root. If we perform this algorithm recursively, then we may find a sequence of points that converges to our root.
+  \begin{note}{}
+    \begin{itemize}
+      \item The bisection method \emph{always} converges to a root.
+      \item We stop the iteration if:
+      \begin{itemize}
+        \item We reach the maximum iteration number.
+        \item For some small $\eps > 0$,
+        \[
+          \abs{p_n - p_{n - 1}} < \eps \text{ or } \frac{\abs{p_n - p_{n - 1}}}{\abs{p_n}} < \eps \text{ or } \abs{f(p_n)} < \eps.
+        \]
+      \end{itemize}
+    \end{itemize}
+  \end{note}
+  \begin{theorem}{}
+    Suppose $f\in C[a, b]$ and $f(a) - f(b) < 0$. The Bisection method generates a sequence $\set{p_n}_{n = 1}^\infty$ approximating a zero $p$ of $f(x)$ with
+    \[
+      \abs{p_n - p}\leq \frac{b- a}{2^n}, \text{ where }n\geq 1.
+    \]
+    \begin{proof}
+      For $n\geq 1$, we have $p_n = \frac{a_n + b_n}{2^n}$, $p\in (a_n, b_n)$. Then we know that 
+      \begin{align*}
+        \abs{p_n - p}&\leq \frac{1}{2}(b_n - a_n) \\
+                     &= \frac{1}{2}\paren{\frac{1}{2}(b_{n - 1} - a_{n - 1})} \\
+                     &= \dotsb \\
+                     &= \underbrace{\frac{1}{2}\cdot \dotsb\cdot \frac{1}{2}}_{n \text{ times}}(b_1 - a_1) \\
+                     &= \frac{1}{2^n}(b - a).
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+\end{document}
