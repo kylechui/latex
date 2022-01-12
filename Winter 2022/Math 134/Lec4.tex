@@ -1,0 +1,132 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 4}
+  \begin{example}{}
+    Consider the differential equation $\dot{x} = x - x^3$. Since we have $\dot{x} = -V'(x)$, we have
+    \[
+      V(x) = \frac{1}{4}x^4 - \frac{1}{2}x^2 = \frac{1}{4}(x^2 - 1)^2 - \frac{1}{4}.
+    \]
+    When we look at the graph of $V'(x)$, we may pretend that there is a ball rolling down a hill from every point, which tells us how to find the stability of points. Each point will settle in the first ``well'' that it meets.
+  \end{example}
+  \begin{theorem}{}
+    Let $V\colon \R\to \R$ be smooth and consider the system
+    \[
+      \dot{x} = -V'(x).
+    \]
+    Then the \emph{potential energy} $V(x(t))$ is non-increasing (as a function of time). Furthermore, if $x(t)$ is not a fixed point for all $t\in (T_1, T_2)$, then the potential energy is strictly decreasing on $(T_1, T_2)$.
+    \begin{proof}
+      Observe that
+      \begin{align*}
+        \frac{\mathrm{d}}{\mathrm{d}t} V(x(t)) &= V'(x(t))\cdot \dot{x}(t) \\
+                                               &= -V'(x(t))^2.
+      \end{align*}
+      Hence the potential energy is non-increasing, as its derivative is always non-positive. Thus if $V'(x_1) = 0$, then $x_1$ is a critical point!
+    \end{proof}
+  \end{theorem}
+  \textbf{Corollary.} Let $V\colon \R\to \R$ be smooth and consider the system
+  \[
+    \dot{x} = -V'(x).
+  \]
+  If $x^*$ is an isolated critical point of $V$ then
+  \begin{itemize}
+    \item If it is a local minima of $V$, it is a stable fixed point.
+    \item If it is a local maxima of $V$, it is a unstable fixed point.
+    \item If it is an inflection point of $V$, it is a half-stable fixed point.
+  \end{itemize}
+  \begin{proof}
+    If we imagine the ball analogy again, we can see that if $x^*$ is a local minima then points around it will tend towards $x^*$, and so it is stable. The opposite happens for divergence near a local maxima, and the analogy still holds for the half-stableness when $x^*$ is an inflection point.
+  \end{proof}
+  \begin{note}{}
+    Every one dimensional system is a gradient flow, because if $f$ is smooth, then we can take the integral and define
+    \[
+      V(x)\ceq -\int_{0}^{x}f(s) \,\mathrm ds.
+    \]
+  \end{note}
+  \subsection{Impossibility of Oscillations}
+  \begin{definition}{Periodic Functions}
+    If there exists a constant $p > 0$ so that for all $t$ we have
+    \[
+      x(t + p) = x(t),
+    \]
+    then we say that $p$ is \emph{periodic}.
+  \end{definition}
+  \begin{note}{}
+    All constant functions are periodic.
+  \end{note}
+  \begin{theorem}{}
+    There are no non-constant periodic solutions of the system
+    \[
+      \dot{x} = f(x).
+    \]
+    \begin{proof}
+      Suppose that $x$ is a periodic solution, with period $p > 0$. If $0 \leq t \leq p$ then, as the potential energy is non-increasing,
+      \[
+        V[x(p)] \leq V[x(t)] \leq V(x(0)).
+      \]
+      Since $x(p) = x(0)$, we have $V[x(t)]$ is constant. Hence $x(t)$ is constant.
+    \end{proof}
+  \end{theorem}
+  \subsection{Numerical Methods}
+  \subsubsection{Integral Equations}
+  We want to find a solution of the equation 
+  \[
+    \begin{cases}
+      \dot{x} = f(x) \\
+      x(0) = x_0
+    \end{cases}
+  \]
+  Observe that
+  \begin{align*}
+    \dot{x} &= f(x) \\
+    \int_{0}^{t} \frac{\mathrm{d}x(s)}{\mathrm{d}s} \,\mathrm ds &= \int_{0}^{t}f(x(s)) \,\mathrm ds \\
+    x(t) - x(0) &= \int_{0}^{t} f(x(s)) \,\mathrm ds \\
+    x(t) &= x_0 + \int_{0}^{t}f(x(s)) \,\mathrm ds.
+  \end{align*}
+  We call this an \emph{integral equation}, because the unknown now appears in the integral.
+  \begin{example}{}
+    Write the equation 
+    \[
+      \begin{cases}
+        \dot{x} = \sin x \\
+        x(0) = 1
+      \end{cases}
+    \]
+    as an integral equation. \par
+    We have that
+    \[
+      x(t) = 1 + \int_{0}^{t}\sin(x(s)) \,\mathrm ds.
+    \]
+  \end{example}
+  \subsubsection{Numerical Approximation}
+  Suppose we have the equation 
+  \[
+    \begin{cases}
+      \dot{x} = f(x) \\
+      x(0) = x_0
+    \end{cases}
+  \]
+  Let's take $\Delta t > 0$ small. Then we have
+  \[
+    x(\Delta t) = x_0 + \int_{0}^{\Delta t}f(x(s)) \,\mathrm ds.
+  \]
+  We will approximate $x(s) \approx x_0$ on the interval $(0, \Delta t)$. Thus we have
+  \begin{align*}
+    x(\Delta t) &= x_0 + \int_{0}^{\Delta t}f(x(s)) \,\mathrm ds \\
+                &= x_0 + \int_{0}^{\Delta t}f(x_0) \,\mathrm ds \\
+                &= x_0 + f(x_0)\Delta t \tag{$x_1\ceq x_0 + f(x_0)\Delta t$}.
+  \end{align*}
+  Euler's method is to repeat the above to get $x_2\approx x(2\Delta t)$. We have
+  \begin{align*}
+    x_2 &= x_1 + f(x_1)\Delta t, \\
+    x_3 &= x_2 + f(x_2)\Delta t, \\
+        &\dotsb \\
+    x_{n + 1} &= x_n + f(x_n)\Delta t.
+  \end{align*}
+\end{document}
