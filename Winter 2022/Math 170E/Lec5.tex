@@ -1,0 +1,83 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 5}
+  \subsection{Conditional Probability}
+  Suppose that $A, B\sse \Omega$ are events. If we know that the event $B$ occurs, how does this affect the probability that $A$ occurs? \par
+  We write $\P[A]$ for the probability of $A$, and $\P[A\mid B]$ for the probability of $A$ \emph{conditioned on} $B$.
+  \begin{example}{}
+    \begin{itemize}
+      \item Suppose that 5\% of UCLA students take a math class and 6\% take a physics class.
+      \item Suppose that 80\% of UCLA students that take a math class also take a physics class.
+      \item If we know that a randomly chosen student takes a math class, what is the probability they take a physics class?
+    \end{itemize}
+    Let us define 
+    \begin{align*}
+      \Omega &= \set{\text{All UCLA students}}, \\
+      A &= \set{\text{Students taking a physics class}}, \\
+      B &= \set{\text{Students taking a math class}}.
+    \end{align*}
+    Then we want to find $\P[A\mid B]$. Thus we have
+    \begin{align*}
+      \P[A\mid B] &= \frac{\P[A\cap B]}{\P[B]} \\
+                  &= \frac{0.05\cdot 0.8}{0.05} \\
+                  &= 0.8.
+    \end{align*}
+  \end{example}
+  \begin{definition}{Conditional Probability}
+    Suppose $A, B$ are events. Then the probability of $A$ \emph{conditioned on} $B$ is given by
+    \[
+      \P[A\mid B] = \frac{\P[A\cap B]}{\P[B]}.
+    \]
+  \end{definition}
+  \begin{theorem}{}
+    If $B\sse \Omega$ is an event so that $\P[B]\neq 0$ then $\P[\cdot \mid B]$ is a probability measure. Precisely:
+    \begin{itemize}
+      \item $\P[\Omega\mid B] = 1$.
+      \begin{proof}
+        Observe that
+        \[
+          \P[\Omega\mid B] = \frac{\P[\Omega\cap B]}{\P[B]} = \frac{\P[B]}{\P[B]} = 1.
+        \]
+      \end{proof}
+      \item If $A_1,A_2,\dotsc,A_n$ are mutually exclusive events then
+      \[
+        \P\left.\left[\bigcup_{j = 1}^nA_j\right| B\right] = \sum_{j=1}^{n} \P[A_j\mid B].
+      \]
+      \begin{proof}
+        If $A_1,\dotsc,A_n$ are mutually exclusive, so are $A_1\cap B, A_2\cap B, \dotsc, A_n\cap B$. Then
+        \begin{align*}
+          \P\left.\left[\bigcup_{j = 1}^nA_j\right| B\right] &= \frac{\P\left[\paren{\bigcup_{j = 1}^n A_j}\cap B\right]}{\P[B]} \\
+                                                          &= \frac{\P[\bigcup_{j = 1}^n(A_j\cap B)]}{\P[B]} \\
+                                                          &= \sum_{j=1}^{n} \frac{\P[A_j\cap B]}{\P[B]} \\
+                                                          &= \sum_{j=1}^{n} \P[A_j\mid B].
+        \end{align*}
+      \end{proof}
+      \item If $A_1,A_2,\dotsc,A_n$ are mutually exclusive events then
+      \[
+        \P\left.\left[\bigcup_{j = 1}^\infty A_j\right| B\right] = \sum_{j=1}^{\infty} \P[A_j\mid B].
+      \]
+      \begin{proof}
+        The proof for this is very similar to the one above.
+      \end{proof}
+    \end{itemize}
+  \end{theorem}
+  \begin{theorem}{}
+    If $A$ and $B$ are independent events so that $\P[B]\neq 0$ then
+    \[
+      \P[A\mid B] = \P[A].
+    \]
+    \begin{proof}
+      Observe that
+      \[
+        \P[A\mid B] = \frac{\P[A\cap B]}{\P[B]} = \frac{\P[A]\cdot \P[B]}{\P[B]} = \P[A].
+      \]
+    \end{proof}
+  \end{theorem}
+\end{document}
