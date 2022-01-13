@@ -1,0 +1,61 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 5}
+  \subsection{Irrational Numbers}
+  \textbf{Claim.} The square root of $2$ is irrational.
+  \begin{lemma}{}
+    If $a^2$ is even, then so is $a$.
+    \begin{proof}
+      We proceed via proof by contrapositive. Suppose $a$ is odd, so $a = 2k + 1$ for some $k\in\Z$. Then
+      \[
+        a^2 = (2k + 1)^2 = 4k^2 + 4k + 1 = 2(2k^2 + 2k) + 1.
+      \]
+      Hence $a^2$ is odd.
+    \end{proof}
+  \end{lemma}
+  \begin{proof}
+    Suppose towards a contradiction that $\sqrt{2}$ is rational, so $\sqrt{2} = \frac{p}{q}$ for $p, q\in\Z$ where $q\neq 0$. We may also assume that the greatest common factor of $p, q$ is $1$, since we otherwise could have pulled the factor out. Hence
+    \begin{align*}
+      \paren{\frac{p}{q}}^2 &= 2 \\
+      p^2 &= 2q^2.
+    \end{align*}
+    Since $p^2$ is even, $p$ must be even, and so $p = 2k$ for some $k\in\Z$. Thus
+    \begin{align*}
+      (2k)^2 &= 2q^2 \\
+      4k^2 &= 2q^2 \\
+      2k^2 &= q^2.
+    \end{align*}
+    Since $q^2$ is even, so must $q$. However, this contradicts our assumption that the greatest common factor of $p$ and $q$ is $1$.
+  \end{proof}
+  The original Greek conclusion was that ``geometric quantities'' were different from ``numbers''. They used rational numbers to ``describe'' irrational numbers. This later led to the ``theory of proportions'' and the method of exhaustion, which inspired Dedekind cuts.
+  \begin{note}{}
+    The theorem of Pythagoras also gives a notion of \emph{distance} between points in the plane, e.g.
+    \[
+      d((x_1, y_1), (x_2, y_2)) = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}.
+    \]
+  \end{note}
+  \subsection{Greek Geometry}
+  The most important resource for Greek geometry is Euclid's ``The Elements''.
+  \begin{itemize}
+    \item It was written circa $300$ BCE
+    \item It consists of $465$ theorems and proofs in $13$ books
+    \item Mostly comprised of works from earlier mathematicians
+    \item Main contributions:
+    \begin{itemize}
+      \item The deductive method
+      \item Unified framework for ``Euclidean geometry''.
+    \end{itemize}
+  \end{itemize}
+  Facts about Euclid:
+  \begin{itemize}
+    \item Lived in Alexandria
+    \item Called the ``father of geometry''
+  \end{itemize}
+\end{document}
