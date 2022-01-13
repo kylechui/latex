@@ -1,0 +1,131 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 5}
+  \subsection{Euler's Method}
+  \begin{itemize}
+    \item We want to approximate the solution of
+    \[
+      \begin{cases}
+        \dot{x} = f(x) \\
+        x(0) = x_0
+      \end{cases}
+    \]
+    \item Given a time step $\Delta t$, for $n\geq 0$ define
+    \[
+      x_{n + 1} = x_n + f(x_n)\Delta t
+    \]
+    \item Thus we take $x_n$ to be our approximation to $x(n\Delta t)$.
+  \end{itemize}
+  \subsubsection{Truncation Error of a Numerical Method}
+  \begin{itemize}
+    \item Let $x_n\approx x(n\Delta t)$.
+    \item We define the \emph{local truncation error} to be
+    \[
+      e_1 = x(\Delta t) - x_1.
+    \]
+    We will use Taylor's theorem with Lagrange residue to approximate the error:
+    \begin{align*}
+      x(\Delta t) &= x(0) + x'(0)\Delta t + \frac{x''(\xi)}{2}(\Delta t)^2 \tag{$\xi\in (0, \Delta t)$} \\
+                  &= x_0 + f(x_0)\Delta t + \frac{f'(\xi)f(\xi)}{2}(\Delta t)^2. \tag{$\dot{x} = f$, Chain rule}
+    \end{align*}
+    Thus if $f$ and $f'$ are bounded and continuous, then $\abs{\text{Remainder}}\leq C(\Delta t)^2$. Substituting into our local truncation error definition, we have
+    \begin{align*}
+      e_1 &= x(\Delta t) - x_1 \\
+          &= x(\Delta t) - (x_0 + f(x_0)\Delta t) \\
+          &= \frac{x''(\xi)}{2}(\Delta t)^2.
+    \end{align*}
+    Hence $e_1$ is bounded above by $C(\Delta t)^2$.
+    \begin{note}{}
+      If we decrease $\Delta t$, then we decrease our error as well.
+    \end{note}
+    Euler's method is of first order because $\abs{e_1}\leq C(\Delta t)^2$. If we apply Euler's method $n$ times over some interval, then we will get $n$ errors:
+    \[
+      \abs{e_1} + \abs{e_2} + \dotsb + \abs{e_n}\leq Cn(\Delta t)^2 = Cn\paren{\frac{T}{n}}\Delta t = CT\Delta t.
+    \]
+  \end{itemize}
+  \paragraph{How can we improve our results?}
+  \begin{itemize}
+    \item Take smaller time steps $\Delta t$.
+    \begin{itemize}
+      \item Unfortunately, this means that we need to perform more computations.
+      \item There will be more ``round-off errors''.
+    \end{itemize}
+    \item Improve the approximation (see next section)
+  \end{itemize}
+  \subsubsection{Improved Euler's Method}
+  \begin{itemize}
+    \item We still want to approximate the solution of
+    \[
+      \begin{cases}
+        \dot{x} = f(x) \\
+        x(0) = x_0
+      \end{cases}
+    \]
+    \item For $n\geq 0$:
+    \begin{itemize}
+      \item We make our first approximation
+      \[
+        \tilde x_{n + 1} = x_n + f(x_n)\Delta t.
+      \]
+      \item Use this to make a better approximation
+      \[
+        x_{n + 1} = x_n + \frac{1}{2} \paren{f(x_n) + f(\tilde x_{n + 1})}\Delta t.
+      \]
+    \end{itemize}
+    \item Take $x_n$ to be our approximation for $x(n\Delta t)$.
+  \end{itemize}
+  The local truncation error for the improved Euler's method is of the form $C(\Delta t)^3$, and the global error is $CT(\Delta t)^2$.
+  \subsubsection{Runge--Kutta 4th Order Method}
+  \begin{itemize}
+    \item We still want to approximate the solution of
+    \[
+      \begin{cases}
+        \dot{x} = f(x) \\
+        x(0) = x_0
+      \end{cases}
+    \]
+    \item For $n\geq 0$, take:
+    \begin{itemize}
+      \item $k_n^{(1)} = f(x_n)\Delta t$
+      \item $k_n^{(2)} = f(x_n + \frac{1}{2}k_n^{(1)})\Delta t$
+      \item $k_n^{(3)} = f(x_n + \frac{1}{2}k_n^{(2)})\Delta t$
+      \item $k_n^{(4)} = f(x_n + \frac{1}{2}k_n^{(3)})\Delta t$
+    \end{itemize}
+    \item Then we may set
+    \[
+      x_{n + 1} = x_n + \frac{1}{6}(k_n^{(1)} + 2k_n^{(2)} + 2k_n^{(3)} + k_n^{(4)}).
+    \]
+    \item The local truncation error satisfies
+    \[
+      \abs{e_1}\leq C(\Delta t)^5,
+    \]
+    and the global error is 4\tsup{th} order, satisfying $CT(\Delta t)^4$.
+  \end{itemize}
+  \subsection{Existence and Uniqueness of Solutions}
+  \begin{theorem}{Cauchy--Peano Existence Theorem}
+    Let $f\colon (a, b)\to \R$ be continuous and $x_0\in (a, b)$. Then there exists some $\delta > 0$ and a solution $x\colon [-\delta, \delta]\to \R$ of the IVP
+    \[
+      \begin{cases}
+        \dot{x} = f(x) \\ 
+        x(0) = x_0
+      \end{cases}
+    \]
+  \end{theorem}
+  \begin{theorem}{Picard--Lindel\"of Existence and Uniqueness Theorem}
+    Let $f\colon (a, b)\to \R$ be continuous and $x_0\in (a, b)$. If $f$ is locally Lipschitz continuous, then there exists a \emph{unique local solution} $\bar{x}\in C^1(I, \R)$ of the IVP
+    \[
+      \begin{cases}
+        \dot{x} = f(x) \\ 
+        x(0) = x_0
+      \end{cases}
+    \]
+    where $I$ is some interval around $0$.
+  \end{theorem}
+\end{document}
