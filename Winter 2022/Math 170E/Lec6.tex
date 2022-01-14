@@ -1,0 +1,71 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 6}
+  \begin{theorem}{The Law of Total Probability}
+    Let $A\sse \Omega$ be an event and $B_1,B_2\dotsc,B_n\sse \Omega$ be mutually exclusive events so that $\P[B_j]\neq 0$ and
+    \[
+      A\sse \bigcup_{j = 1}^n B_j.
+    \]
+    Then
+    \[
+      \P[A] = \sum_{j=1}^{n}\P[A\mid B_j]\P[B_j].
+    \]
+    \begin{proof}
+      As $A\sse \bigcup_{j = 1}^n B_j$ we have
+      \[
+        A = A\cap \left[\bigcup_{j = 1}^n B_j\right] = \bigcup_{j = 1}^n (A\cap B_j).
+      \]
+      As all of the $B_j$ are mutually exclusive, so are $A\cap B_j$. Hence
+      \begin{align*}
+        \P[A] &= \P\left[\bigcup_{j = 1}^n (A\cap B_j)\right] \\
+              &= \sum_{j=1}^{n}\P[A\cap B_j] \\
+              &= \sum_{j=1}^{n}\P[A\mid B_j]\P[B_j].
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    The same result is true if we have a countable number of events $B_1, B_2,\dotsc$.
+  \end{note}
+  \subsection{Bayes' Theorem}
+  \begin{theorem}{Bayes' Theorem}
+    If $A, B\sse \Omega$ are events so that $\P[A], \P[B]\neq 0$ then
+    \[
+      \P[B\mid A] = \frac{\P[A\mid B]\P[B]}{\P[A]}
+    \]
+    \begin{proof}
+      By definition, we have
+      \begin{align*}
+        \P[B\mid A] &= \frac{\P[A\cap B]}{\P[A]} \\
+                    &= \frac{\P[A\mid B]\P[B]}{\P[A]}.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{Bayes' Theorem (Improved Version)}
+    If $A\sse \Omega$ is an event and $B_1, B_2,\dotsc, B_n\sse \Omega$ are mutually exclusive events so that $\P[A], \P[B_j]\neq 0$ and
+    \[
+      A\sse \bigcup_{j = 1}^nB_j,
+    \]
+    then for any $1\leq k\leq n$ we have
+    \[
+      \P[B_k\mid A] = \frac{\P[A\mid B_k]\P[B_k]}{\sum_{j=1}^{n}\P[A\mid B_j]\P[B_j]}.
+    \]
+    \begin{proof}
+      The Law of Total Probability tells us that
+      \[
+        \P[A] = \sum_{j=1}^{n}\P[A\mid B_j]\P[B_j].
+      \]
+      Hence by Bayes' Theorem we have
+      \begin{align*}
+        \P[B_k\mid A] &= \frac{\P[A\mid B_k]\P[B_k]}{\P[A]} \\
+                      &= \frac{\P[A\mid B_k]\P[B_k]}{\sum_{j=1}^{n}\P[A\mid B_j]\P[B_j]}.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+\end{document}
