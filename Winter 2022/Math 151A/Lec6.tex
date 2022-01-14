@@ -1,0 +1,65 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 6}
+  \subsection{Fixed Point Method (Finding Roots)}
+  \begin{definition}{Fixed Point}
+    We say $p$ is a \emph{fixed point} of $g(x)$ if $g(p) = p$.
+  \end{definition}
+  \begin{itemize}
+    \item We first need to translate our root-finding problem into a fixed point problem.
+    \item We want to solve $f(x) = 0$, so we should find $p$ such that $f(p) = 0$.
+    \item We rewrite $f(x) = 0$ as $g(x)\ceq f(x) + x = x$.
+    \item Consider the relation between $f$ and $g$:
+    \begin{itemize}
+      \item Assume $p$ is a root of $f(x)$, so $g(p) = f(p) + p = 0 + p = p$.
+      \item Thus if $p$ is a root of $f$, then it must be a fixed point of $g$.
+    \end{itemize}
+  \end{itemize}
+  \begin{note}{}
+    The fixed point function $g(x)$ is \emph{not} unique! In general, we have that $g(x)\ceq cf(x) + x$ is a fixed point function of $f$, given that $c\neq 0$.
+  \end{note}
+  How can we find the fixed point $p$ of $g(x)$?
+  \begin{itemize}
+    \item Choose an initial approximation $p_0$ (of $p$).
+    \item We have $p_1 = g(p_0), p_2 = g(p_1), \dotsc$, so compute $p_n = g(p_{n - 1})$ for $n\geq 1$.
+    \item If $\abs{p_n - p_{n - 1}} < \eps$ or $\frac{\abs{p_n - p_{n - 1}}}{\abs{p_n}} < \eps$, then stop.
+  \end{itemize}
+  \begin{note}{}
+    Some fixed point functions can diverge! You should choose a fixed point that converges.
+  \end{note}
+  \begin{theorem}{Fixed Point Theorem}
+    \begin{enumerate}[label=(\arabic*)]
+      \item If $g\in C[a, b]$ and $g(x)\in [a, b]$ for all $x\in [a, b]$, then $g(x)$ has at least one fixed point in $[a, b]$.
+      \item If, in addition, $g'(x)$ exists on $(a, b)$ and there exists a positive constant $k < 1$ such that
+      \[
+        \abs{g'(x)}\leq k, \quad \text{for all }x\in (a, b),
+      \]
+      then there is exactly one fixed point in $[a, b]$.
+    \end{enumerate}
+    \begin{enumerate}[label=(\arabic*)]
+      \item
+      \begin{proof}
+        If $g(a) = a$ or $g(b) = b$ then we are done. Hence we may assume that $g(a)\neq a, g(b)\neq b$. Let us define a function $h(x)\ceq g(x) - x$, which is continuous. Then we know that since $g(a) > a$, then $h(a) > 0$. Similarly, as $g(b) < b$, we have $h(b) < 0$. Hence by Intermediate Value Theorem there exists a point $c\in (a, b)$ such that $h(c) = 0$. In other words, there exists a point such that $g(c) - c = 0$, or $g(c) = c$.
+      \end{proof}
+      \item
+      \begin{proof}
+        We have that $\abs{g'(x)}\leq k < 1$. Suppose towards a contradiction that there are two fixed points $p, q$ of $g(x)$ on $[a, b]$ where $p\neq q$. Thus we have
+        \begin{align*}
+          \abs{p - q} &= \abs{g(p) - g(q)} \\
+                      &= \abs{p - q}\cdot \frac{g(p) - g(q)}{\abs{p - q}} \\
+                      &= \abs{p - q}\cdot g'(c) \tag{MVT, $c\in (a, b)$}
+        \end{align*}
+        Dividing both sides by $\abs{p - q}$, we have $g'(c) = 1$, a contradiction. Hence $g(x)$ has a \emph{unique} fixed point on $[a, b]$.
+      \end{proof}
+    \end{enumerate}
+  \end{theorem}
+  \subsubsection{Convergence of Fixed Point Iteration}
+  A fixed point of $g(x)$ is the point where $g(x)$ intersects the line $y = x$.
+\end{document}
