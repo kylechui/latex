@@ -1,0 +1,88 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 6}
+  \subsection{Existence and Uniqueness}
+  \begin{definition}{Locally Lipschitz Continuity}
+    Let $f\colon (a, b)\to \R$. We call $f$ \emph{locally Lipschitz continuous} if for every $[d, c]\sse (a, b)$ there exists $k > 0$ such that
+    \[
+      \abs{f(x) - f(y)} \leq k \abs{x - y}. \tag*{$\forall x, y\in [d, c]$}
+    \]
+  \end{definition}
+  \begin{definition}{Global Lipschitz Continuity}
+    A function $f\colon (a, b)\to \R$ is said to be \emph{global Lipschitz continuous} if there exists $L > 0$ such that
+    \[
+      \abs{f(x) - f(y)}\leq L\abs{x - y}\tag*{$\forall x,y\in(a, b)$}
+    \]
+  \end{definition}
+  \textbf{Fact.} Continuously differentiable functions are Lipschitz continuous, and so are continuous.
+  \begin{example}{}
+    \begin{itemize}
+      \item The function $f(x) = \sqrt{\abs{x}}$ is continuous but it is not Lipschitz continuous.
+      \item The function $g(x) = \abs{x}$ is not differentiable but it is Lipschitz continuous on $[-1, 1]$.
+    \end{itemize}
+  \end{example}
+  \begin{note}{}
+    In general, if it has a cusp, then it is not Lipschitz continuous.
+  \end{note}
+  \subsubsection{Finite Time Blowup}
+  \begin{example}{}
+    Does the solution of 
+    \[
+      \begin{cases}
+        \dot{x} = x^2 \\ 
+        x(0) = 1
+      \end{cases}
+    \]
+    blow up in finite time? \par
+    If we solve the differential equation, then we get $x(t) = \frac{1}{1 - t}$ (which is not well defined for all $t > 0$).
+  \end{example}
+  \begin{theorem}{}
+    Let $f\colon \R\to \R$ be Lipschitz continuous. Then there exists a unique \emph{global} solution $x\colon \R\to \R$ of
+    \[
+      \begin{cases}
+        \dot{x} = f(x) \\
+        x(0) = x_0.
+      \end{cases}
+    \]
+  \end{theorem}
+  \begin{theorem}{}
+    Let $f\leq g$ be smooth and let $x_0\leq y_0$. Suppose that $x$ and $y$ are solutions of the ODES
+    \[
+      \begin{cases}
+        \dot{x} = f(x) \\
+        x(0) = x_0
+      \end{cases}\quad\text{and}\quad
+      \begin{cases}
+        \dot{y} = g(y) \\
+        y(0) = y_0
+      \end{cases}
+    \]
+    on an interval $[0, T]$. Then $x(t)\leq y(t)$ for all $t\in [0, T]$.
+  \end{theorem}
+  \subsection{Bifurcations}
+  \subsubsection{External Parameters}
+  \begin{itemize}
+    \item Consider the ODE
+    \[
+      \dot{x} = f(x, r)
+    \]
+    where $r$ is a parameter of the model.
+    \item \textbf{Question.} How do the dynamics vary as we vary $r$?
+  \end{itemize}
+  \begin{example}{}
+    Consider the differential equation $\dot{x} = r + x^2$. Depending on the value of $r$, we could have:
+    \begin{itemize}
+      \item $2$ critical points, one of which is stable (when $r < 0$)
+      \item $1$ critical point, which is half-stable (when $r = 0$)
+      \item $0$ critical points, (when $r > 0$)
+    \end{itemize}
+    This change in behavior as $r$ goes from negative to positive is called a \emph{bifurcation}. We say that a bifurcation occurs at $(x^*, r^*) = (0, 0)$.
+  \end{example}
+\end{document}
