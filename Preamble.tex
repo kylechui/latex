@@ -1,14 +1,12 @@
 % Import packages
 \usepackage[margin=1in]{geometry}
 
-\usepackage[many]{tcolorbox}
 \usepackage{amssymb, amsthm}
 \usepackage{comment}
 \usepackage{enumitem}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
 \usepackage{import}
-\usepackage{listings}
 \usepackage{mathrsfs, mathtools}
 \usepackage{multicol}
 \usepackage{pdfpages}
@@ -16,8 +14,10 @@
 \usepackage{transparent}
 \usepackage{xcolor}
 
-\usetikzlibrary{decorations.pathreplacing}
-\tcbuselibrary{skins}
+\usepackage{minted}
+\usepackage[many]{tcolorbox}
+\tcbuselibrary{minted}
+
 % Declare math operators
 \DeclareMathOperator{\lcm}{lcm}
 \DeclareMathOperator{\proj}{proj}
@@ -155,20 +155,20 @@
 \definecolor{lemmaAccent}{RGB}{255,153,0}
 \newenvironment{lemma}[1]
   {
-  \begin{tcolorbox}[
-    enhanced,
-    boxrule=0pt,
-    frame hidden,
-    sharp corners,
-    colback=lemmaBackground,
-    borderline west={3pt}{-1.5pt}{lemmaAccent},
-    breakable
+    \begin{tcolorbox}[
+      enhanced,
+      boxrule=0pt,
+      frame hidden,
+      sharp corners,
+      colback=lemmaBackground,
+      borderline west={3pt}{-1.5pt}{lemmaAccent},
+      breakable
     ]
     \ifx &#1& \color{lemmaAccent}\textbf{Lemma. }\color{black}
     \else \color{lemmaAccent}\textbf{Lemma #1. }\color{black} \fi
-    }
-    {
-  \end{tcolorbox}
+  }
+  {
+    \end{tcolorbox}
   }
 \definecolor{definitionBackground}{RGB}{246,246,246}
 \newenvironment{definition}[1]
@@ -196,26 +196,22 @@
       \end{array}
     \right]
   }
-\definecolor{codeBackground}{RGB}{253,246,225}
-\definecolor{dkgreen}{rgb}{0,0.6,0}
-\definecolor{gray}{rgb}{0.5,0.5,0.5}
-\definecolor{mauve}{rgb}{0.58,0,0.82}
-\lstset{
-  language=C++,
-  aboveskip=3mm,
-  belowskip=3mm,
-  backgroundcolor=\color{codeBackground},
-  showstringspaces=false,
-  columns=flexible,
-  basicstyle={\small\ttfamily},
-  numbers=none,
-  numberstyle=\tiny\color{gray},
-  keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
-  stringstyle=\color{mauve},
-  breaklines=true,
-  breakatwhitespace=true,
-  tabsize=2
+
+\definecolor{codeBackground}{RGB}{253,246,227}
+\renewcommand\theFancyVerbLine{\arabic{FancyVerbLine}}
+\newtcblisting{cpp}[1][]{
+  boxrule=1pt,
+  sharp corners,
+  colback=codeBackground,
+  listing only,
+  breakable,
+  minted language=cpp,
+  minted style=material,
+  minted options={
+    xleftmargin=10pt,
+    baselinestretch=1.2,
+    linenos,
+  }
 }
 
 \author{Kyle Chui}
