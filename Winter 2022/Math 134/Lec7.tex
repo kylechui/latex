@@ -1,0 +1,34 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 7}
+  \subsection{Saddle-Node Bifurcations}
+  \begin{definition}{Bifurcation}
+    Consider the following autonomous system
+    \[
+      \dot{x} = f(x, \lam)
+    \]
+    where $x\in\R$ and $\lam\in\R$. A \emph{bifurcation} occurs at parameter $\lam = \lam_0$ if there are parameter values $\lam_1$ arbitrarily close to $\lam_0$ with dynamics topologically inequivalent from those at $\lam_0$.
+  \end{definition}
+  \subsection{Identifying Bifurcations}
+  If the system
+  \[
+    \dot{x} = f(x, r)
+  \]
+  has a bifurcation at $(x, r) = (x^*, r^*)$, then
+  \[
+    f(x^*, r^*) = 0\quad\text{and}\quad \frac{\partial f}{\partial x}(x^*, r^*) = 0.
+  \]
+  \begin{note}{}
+    The converse is \emph{not} necessarily true! This helps us find \emph{possible} bifurcation points, but we still need to perform further analysis in order to check whether these points are \emph{actually} bifurcation points.
+  \end{note}
+  \begin{proof}
+    We define $\eta = x - x^*$, which implies that $\dot{\eta} = \frac{\partial f}{\partial x}(x^*, r^*)\eta$, which is stable if $\frac{\partial f}{\partial x}(x^*, r^*) < 0$ and unstable if $\frac{\partial f}{\partial x}(x^*, r^*) > 0$. Hence there is a change in stability when $\frac{\partial f}{\partial x}(x^*, r^*) = 0$.
+  \end{proof}
+\end{document}
