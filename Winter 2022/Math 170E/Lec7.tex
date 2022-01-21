@@ -1,0 +1,97 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 7}
+  \subsection{Discrete Random Variables}
+  \begin{definition}{Random Variable}
+    Given a set $S$, a \emph{random variable} is a function $X\colon \Omega\to S$ satisfying certain properties. For the sake of this class, we will assume that all functions $X\colon \Omega\to S$ are random variables. Some notation follows:
+    \begin{align*}
+      \P[X = x] &= \P{\set{\omega\in\Omega\mid X(\omega) = x}}, \\
+      \P[X\in A] &= \P{\set{\omega\in\Omega\mid X(\omega)\in A}}.
+    \end{align*}
+  \end{definition}
+  \begin{definition}{Discrete Random Variable}
+    Let $X\colon \Omega\to S$ be a random variable. We say that $X$ is a \emph{discrete random variable} if $S\sse \R$ is a countable set. We define the \emph{probability mass function} (PMF) of $X$ to be the function $p_X\colon S\to [0, 1]$ given by
+    \[
+      p_X(x) = \P[X = x].
+    \]
+    We define the \emph{cumulative distribution function} (CDF) of $X$ to be the function $F_X\colon \R\to [0, 1]$ given by
+    \[
+      F_X(x) = \P[X \leq x].
+    \]
+    We say that two random variables $X, Y$ are \emph{identically distributed} if they have the same CDF, and we write $X\sim Y$.
+  \end{definition}
+  \begin{definition}{Uniform Distribution}
+    Let $m \geq 1$. We say that a discrete random variable $X$ is \emph{uniformly distributed} on $\set{1, 2, \dotsc, m}$ and write $X\sim\Uniform(\set{1,2,\dotsc,m})$ if it has PMF
+    \[
+      p_X(x) = \frac{1}{m}\quad\text{if } x\in \set{1,2,\dotsc,m}.
+    \]
+  \end{definition}
+  If $X\sim\Uniform (\set{1,2,\dotsc,m})$, then it has CDF
+  \[
+    F_X(x) = \begin{cases}
+      0 & \text{if } x < 1, \\
+      \frac{k}{m} & \text{if } k\leq x < k + 1 \text{ and } k\in \set{1,2,\dotsc,m - 1}, \\
+      1 & \text{if }x \geq m.
+    \end{cases}
+  \]
+  If $X$ is a discrete random variable taking values in a countable set $S\sse \R$ and $A\sse \R$ is any set then
+  \[
+    \P[X\in A] = \sum_{x\in A\cap S} p_X(x).
+  \]
+  \begin{proof}
+    Since $S$ is countable, we know that $A\cap S = \set{a_1,a_2,\dotsc,a_n}$ (or $\set{a_1,a_2,\dotsc}$). Hence
+    \begin{align*}
+      \P[X\in A] &= \P[X\in \set{a_1,\dotsc,a_n}] \\
+                 &= \P\left[\bigcup_{j = 1}^n \set{X = a_j}\right] \\
+                 &= \sum_{j=1}^{n} \P[X = a_j] \\
+                 &= \sum_{j=1}^{n} p_X(a_j) \\
+                 &= \sum_{x\in A\cap S}p_X(x).
+    \end{align*}
+  \end{proof}
+  If $X$ is a discrete random variable taking values in a countable set $S\sse\R$ then
+  \[
+    F_X(x) = \sum_{\substack{y \leq x \\y\in S}} p_X(y).
+  \]
+  \begin{proof}
+    Observe that
+    \begin{align*}
+      F_X(x) &= \P[X \leq x] \\
+             &= \P[X\in (-\infty, x]] \\
+             &= \sum_{y\in (-\infty, x]\cap S}p_X(y) \\
+             &= \sum_{\substack{y \leq x \\y\in S}} p_X(y).
+    \end{align*}
+  \end{proof}
+  If $X$ is a discrete random variable and $a < b$ then
+  \[
+    \P[a < X \leq b] = F_X(b) - F_X(a).
+  \]
+  \begin{proof}
+    Observe that
+    \begin{align*}
+      \P[a < X \leq b] &= \P[X\in (a, b]] \\
+                       &= \sum_{x\in (a, b]\cap S}p_X(x) \\
+                       &= \sum_{\substack{x \leq b\\x \in S}}p_X(x) - \sum_{\substack{x \leq a\\x \in S}}p_X(x) \\
+                       &= F_X(b) - F_X(a).
+    \end{align*}
+  \end{proof}
+  If $X$ is a discrete random variable taking values in a countable set $S\sse \R$ then
+  \[
+    \sum_{x\in S}p_X(x) = 1.
+  \]
+  \begin{proof}
+    Observe that
+    \begin{align*}
+      \sum_{x\in S}p_X(x) &= \sum_{x\in \R\cap S} \\
+                          &= \P[X\in R] \\
+                          &= \P[\Omega] \\
+                          &= 1.
+    \end{align*}
+  \end{proof}
+\end{document}
