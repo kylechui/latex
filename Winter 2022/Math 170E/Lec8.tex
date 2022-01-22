@@ -1,0 +1,72 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 8}
+  \subsection{Expected Value}
+  \begin{definition}{Expected Value}
+    If $X$ is a discrete random variable taking values in a countable set $S\sse\R$, we define its \emph{expected value} to be
+    \[
+      \E[X] = \sum_{x\in S}x\cdot p_X(x)
+    \]
+    provided the sum converges in a suitable sense.
+  \end{definition}
+  \begin{note}{}
+    We often use the notation $\mu_X = \E[X]$ to denote the ``mean'' or ``average'' value.
+  \end{note}
+  \subsubsection{Bernoulli Distribution}
+  \begin{definition}{Bernoulli Random Variable}
+    Let $p\in (0, 1)$. We say that a discrete random variable $X$ is a \emph{Bernoulli random variable} and write $X\sim \Bernoulli(p)$ if it has PMF
+    \[
+      p_X(x) = \begin{cases}
+        p & \text{if }x = 1, \\
+        1 - p & \text{if }x = 0.
+      \end{cases}
+    \]
+    Then by definition we have
+    \[
+      \E[X] = 0\cdot p_X(0) + 1\cdot p_X(1) = p.
+    \]
+  \end{definition}
+  Let $X$ be a discrete random variable. If $a\in\R$ then $\E[a] = a$.
+  \begin{proof}
+    Let $g(x) = a$. Then
+    \begin{align*}
+      \E[a] &= \E[g(X)] \\
+            &= \sum_{x\in S} g(x)p_X(x) \\
+            &= \sum_{x\in S}ap_X(x) \\
+            &= a\sum_{x\in S}p_X(x) \\
+            &= a,
+    \end{align*}
+    since $\sum\limits_{x\in S}p_X(x) = 1$.
+  \end{proof}
+  Let $X$ be a discrete random variable taking values in a countable set $S\sse\R$. If $a, b\in \R$ and $g, h\colon S\to \R$ then
+  \[
+    \E[ag(X) + bh(X)] = a\E[g(X)] + b\E[h(X)].
+  \]
+  \begin{proof}
+    By definition, we have
+    \begin{align*}
+      \E[ag(X) + bh(X)] &= \sum_{x\in S}(ag(x) + bh(x))p_X(x) \\
+                        &= a\sum_{x\in S}g(x)p_X(x) + b\sum_{x\in S}h(x)p_X(x) \\
+                        &= a\E[g(X)] + b\E[h(X)].
+    \end{align*}
+  \end{proof}
+  Let $X$ be a discrete random variable taking values in a countable set $S\sse \R$. If $g, h\colon S\to \R$ satisfy $g(x) \leq h(x)$ for all $x\in S$ then
+  \[
+    \E[g(X)] \leq \E[h(X)].
+  \]
+  \begin{proof}
+    Observe that
+    \begin{align*}
+      \E[g(X)] &= \sum_{x\in S}g(x)p_X(x) \\
+               &\leq \sum_{x\in S}h(x)p_X(x) \tag{$g(x) \leq h(x), p_X(x) > 0$}\\
+               &= \E[h(X)].
+    \end{align*}
+  \end{proof}
+\end{document}
