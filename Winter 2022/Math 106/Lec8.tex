@@ -1,0 +1,45 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 8}
+  \subsection{Ruler and Compass Constructions}
+  Even though it was ``abstract'', Greek mathematics was largely guided by geometric intuition. Most of their geometry is built on constructions with ruler (straight lines) and compass (circles). \par
+  They typically constructed:
+  \begin{itemize}
+    \item Perpendicular lines
+    \item Bisection of an angle
+    \item Square root of a given length
+    \item Circle through three points
+  \end{itemize}
+  \textbf{Fact.} Given points $P_1,\dotsc,P_n$ in the plane, we can construct with ruler and compass exactly those points whose coordinates can be obtained from the $P_i$'s using $+, -, \times, \div, \sqrt{}$. \par
+  Famous impossible problems that the Greeks tried to solve:
+  \begin{itemize}
+    \item Doubling the cube
+    \item Trisecting an angle
+    \item Squaring the circle
+  \end{itemize}
+  All of the above were proven impossible in the 19\tsup{th} century with modern techniques.
+  \subsection{Conic Sections}
+  We obtain conic sections by finding the intersection between two cones (one inverted) and a plane. We think that these curves were invented by Menaechmos, circa 400 BCE. From this we get our equations for conic sections:
+  \begin{itemize}
+    \item Hyperbola: $\displaystyle \frac{x^2}{a^2} - \frac{y^2}{b^2} = 1$.
+    \item Ellipse: $\displaystyle \frac{x^2}{a^2} + \frac{y^2}{b^2} = 1$.
+    \item Parabola: $y = ax^2$.
+  \end{itemize}
+  \subsection{Higher Degree Curves}
+  \begin{note}{}
+    The Greeks did not have ``equations''.
+  \end{note}
+  \subsubsection{Cissoid of Diocles}
+  Another graph that has a nice mathematical description, but is impossible to construct with just a ruler and compass. It has the equation
+  \[
+    y^2(1 + x) = (1 - x)^3. \tag{$0 \leq x\leq 1$}
+  \]
+  \textbf{Fact.} Both conic sections and the cissoid can be used to solve the doubling of the cube, i.e. to construct $\sqrt[3]{2}$.
+\end{document}
