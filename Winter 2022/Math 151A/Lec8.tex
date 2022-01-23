@@ -1,0 +1,62 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 8}
+  \subsection{Newton's Method}
+  \begin{itemize}
+    \item Choose an initial approximation $p_0$ of $p$.
+    \item Set $p_n$ to be the $x$-intercept of the tangent line passing through $(p_{n - 1}, f(p_{n - 1}))$. If we wish to solve this equation we have:
+    \begin{align*}
+      y - f(p_{n - 1}) &= f'(p_{n - 1})\cdot (x - p_{n - 1}) \\
+      x &= p_{n - 1} - \frac{f(p_{n - 1})}{f'(p_{n - 1})}.
+    \end{align*}
+    We can only use this for $f'(p_{n - 1})\neq 0$, since if it were then the tangent line would have no $x$-intercept. We can treat this method as a form of a fixed point method, with $g(x) = x - \frac{f(x)}{f'(x)}$.
+  \end{itemize}
+  \begin{note}{}
+    Newton's method converges faster than the regular fixed point method when $p_0\approx p$.
+  \end{note}
+  \begin{theorem}{Convergence of Newton's Method}
+    Let $f(x)\in C^2[a, b]$. If $p\in (a, b)$ such that $f(p) = 0$ and $f'(p)\neq 0$, then there exists a $\delta > 0$ such that the Newton's method generates a sequence $\set{p_n}_{n = 1}^\infty$ which converges to $p$ for any initial approximation $p_0\in [p - \delta, p + \delta]$.
+  \end{theorem}
+  \begin{proof}
+    Consider Newton's method to be a fixed-point method with
+    \[
+      g(x) = x - \frac{f(x)}{f'(x)}.
+    \]
+    We wish to show:
+    \begin{enumerate}[label=(\roman*)]
+      \item $g(x)$ exists on $(p - \delta, p + \delta)$.
+      \item $g(x)$ exists on $(p - \delta, p + \delta)$ and there exists $0 < k < 1$ such that $\abs{g'(x) \leq k}$.
+      \item $g(x)\in [p - \delta, p + \delta]$ for $x\in [p - \delta, p + \delta]$.
+    \end{enumerate}
+    Since $f(x)\in C^2[a, b]$, we know that $f$, $f'$, and $f''$ are continuous on $[a, b]$. Since $f'(p)\neq 0$ and $f'$ continuous, there exists $\delta_1 > 0$ such that $f'(x)\neq 0$ for all $x\in [p - \delta_1, p + \delta_1]$. Hence $g(x)$ is continuous on $[p - \delta_1, p + \delta_1]$. \\
+    Observe that
+    \[
+      g'(x) = 1 - \frac{(f'(x))^2 - f(x)f''(x)}{(f'(x))^2} = \frac{f(x)\cdot f''(x)}{(f'(x))^2}.
+    \]
+    Since $f$, $f'$, and $f''$ are continuous on $[p - \delta_1, p + \delta_1]$ and $f'(x)\neq 0$ on $[p - \delta_1, p + \delta_1]$, we have that $g'(x)$ is continuous on $[p - \delta_1, p + \delta_1]$. Hence
+    \[
+      g'(p) = \frac{f(p)f''(p)}{(f'(p))^2} = 0,
+    \]
+    so there must be some small interval $0 < \delta < \delta_1$ such that $\abs{g'(x)} \leq k$ where $0 < k < 1$. \par
+    We must finally show that $g(x)\in [p - \delta, p + \delta]$ when $x\in [p - \delta, p + \delta]$. Let $x\in [p - \delta, p + \delta]$, so
+    \begin{align*}
+      \abs{g(x) - p} &= \abs{g(x) - g(p)} \\
+                     &= \abs{g'(\xi)\cdot (x - p)} \tag{MVT} \\
+                     &= \abs{g'(\xi)} \abs{x - p} \\
+                     &< \abs{x - p} \\
+                     &\leq \delta.
+    \end{align*}
+    Thus $g(x)\in (p - \delta, p + \delta)$. \\
+    Therefore there exists some $\delta > 0$ such that the above three statements hold, and so by the convergence of a fixed point iteration we have that any $p_0\in [p - \delta, p + \delta]$ generates a sequence that converges to $p$.
+  \end{proof}
+  \begin{note}{}
+    This theorem only tells us the \emph{existence} of such a $\delta$, and doesn't tell us anything about $\delta$. In practice, we usually run a few bisection iterations to get closer to the actual root (since it will converge towards the root), and then switch over to Newton's method.
+  \end{note}
+\end{document}
