@@ -1,0 +1,95 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 9}
+  \subsection{Secant Method (extension of Newton's Method)}
+  From last lecture, we have
+  \[
+    p_n = p_{n - 1} - \frac{f(p_{n - 1})}{f'(p_{n - 1})},
+  \]
+  where $p_0$ is given and $n \geq 1$. However:
+  \begin{itemize}
+    \item $f'(x)$ might not be available
+    \item $f'(x)$ might be expensive to compute
+    \item $f'(p_{n - 1})\neq 0$
+  \end{itemize}
+  Instead, we can try approximating the tangent line using secant lines, giving us
+  \begin{align*}
+    f'(p_{n - 1}) &= \lim_{x\to p_{n - 1}} \frac{f(x) - f(p_{n - 1})}{x - p_{n - 1}} \\
+    f'(p_{n - 1}) &\approx \frac{f(p_{n - 2}) - f(p_{n - 1})}{p_{n - 2} - p_{n - 1}}.
+  \end{align*}
+  Hence for the Secant Method, we replace $f'(p_{n - 1})$ with $\displaystyle\frac{f(p_{n - 2}) - f(p_{n - 1})}{p_{n - 2} - p_{n - 1}}$, yielding
+  \begin{align*}
+    p_n &= p_{n - 1} - \frac{f(p_{n - 1})}{f'(p_{n - 1})} \\
+        &= p_{n - 1} - f(p_{n - 1})\cdot \frac{p_{n - 2} - p_{n - 1}}{f(p_{n - 2}) - f(p_{n - 1})} \\
+        &= p_{n - 1} - f(p_{n - 1})\cdot \frac{p_{n - 1} - p_{n - 2}}{f(p_{n - 1}) - f(p_{n - 2})}.
+  \end{align*}
+  \begin{note}{}
+    In order to run this algorithm, we have to have \emph{two} previous iterations, i.e. we need both $p_{n - 1}$ and $p_{n - 2}$ to run the iteration, instead of just $p_{n - 1}$ like we need for Newton's method.
+  \end{note}
+  \subsection{Convergence of Some Iterative Methods}
+  \begin{theorem}{}
+    Let $g\in C^1[a, b]$ such that $g(x)\in [a, b]$ for all $x\in [a, b]$. Then there exists $0 < k < 1$ such that $\abs{g'(x)} < k$ for all $x\in (a, b)$. If $g'(p)\neq 0$, then for any number $p_0\in [a, b]$ with $p_0\neq p$, the sequence
+    \[
+      p_n = g(p_{n - 1})\tag{$n\geq 1$}
+    \]
+    converges linearly to the unique fixed point in $[a, b]$.
+    \begin{proof}
+      We know that the unique fixed point $p$ exists and the sequence $\set{p_n}$ converges, as we have shown before. Observe that if we Taylor expand at $p$, then we get
+      \[
+        p_n = g(p_{n - 1}) = g(p) + g'(\xi_{n - 1})(p - p_{n - 1}),
+      \]
+      so
+      \[
+        p_n - p = g'(\xi_{n - 1})(p - p_{n - 1}).
+      \]
+      Hence we have
+      \begin{align*}
+        \lim_{n\to \infty} \frac{\abs{p_n - p}}{\abs{p_{n - 1} - p}^1} &= \lim_{n\to \infty} \frac{\abs{g'(\xi_{n - 1})(p - p_{n - 1})}}{\abs{p_{n - 1} - p}} \\
+                                                                       &= \lim_{n\to \infty} \abs{g'(\xi_{n - 1})}.
+      \intertext{Since $g\in C^1$, we know that $g'$ is continuous on $[a, b]$. Thus}
+                                                                       &= \abs{g'\paren{\lim_{n\to \infty} \xi_{n - 1}}} \\
+                                                                       &= \abs{g'(p)} \\
+                                                                       &> 0.
+      \end{align*}
+      Furthermore, since $g'$ is continuous on $[a, b]$, by Extreme Value Theorem we know that it is bounded, so
+      \[
+        \lim_{n\to \infty} \frac{\abs{p_n - p}}{p_{n - 1} - p} = \lam,
+      \]
+      where $0 < \lam < \infty$.
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    Let $\alpha\in\Z$, and $g\in C^\alpha[a, b]$ such that $g(x)\in [a, b]$ for all $x\in [a, b]$. Then there exists $0 < k < 1$ such that $\abs{g'(x)} < k$ for all $x\in (a, b)$. If $g'(p)\neq 0$, then for any number $p_0\in [a, b]$ with $p_0\neq p$, the sequence
+    \[
+      p_n = g(p_{n - 1})\tag{$n\geq 1$}
+    \]
+    converges with order $\alpha$ to the unique fixed point in $[a, b]$.
+    \begin{proof}
+      Just like the last proof, we Taylor expand:
+      \begin{align*}
+        g(p_{n - 1}) &= g(p) + g'(p)(p - p_{n - 1}) + \dotsb + \frac{g^{(\alpha - 1)}(p)}{(\alpha - 1)!}(p - p_{n - 1})^{\alpha - 1} + \frac{g^{(\alpha)}(\xi_{n - 1})}{\alpha!}(p - p_{n - 1})^\alpha \\
+                     &= g(p) + \frac{g^{(\alpha)}(\xi_{n - 1})}{\alpha!}(p - p_{n - 1})^\alpha \\
+                     &= p + \frac{g^{(\alpha)}(\xi_{n - 1})}{\alpha!}(p - p_{n - 1})^\alpha.
+      \end{align*}
+      Hence we have
+      \begin{align*}
+        \lim_{n\to \infty} \frac{\abs{p_n - p}}{(p - p_{n - 1})^\alpha} &= \lim_{n\to \infty} \frac{g^{(\alpha)}(\xi_{n - 1})}{\alpha!} \\
+                                                                        &= \frac{g^{(\alpha)}(p)}{\alpha!}.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  Thus from the above two theorems we have the following:
+  \begin{itemize}
+    \item If $g'(p)\neq 0$, then it converges linearly.
+    \item If $g'(p) = 0$ but $g''(p)\neq 0$, then it converges quadratically.
+    \item If $g'(p) = 0$ and $g''(p) = 0$ but $g''(p)\neq 0$, then it converges with third order.
+  \end{itemize}
+  If we apply this to Newton's method, we see that $f(p) = 0$ and $f'(p)\neq 0$. Furthermore, for $g(x)\ceq f(x) + x$, we have $g(p) = p$ and $g'(p) = 0$. Hence we conclude that Newton's method is \emph{at least} quadratic.
+\end{document}
