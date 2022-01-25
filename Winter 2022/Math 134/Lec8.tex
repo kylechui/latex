@@ -1,0 +1,24 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 8}
+  \subsection{Transcritical Bifurcations}
+  We are analyzing differential equations of the form
+  \[
+    \dot{x} = rx - x^2 = x(r - x).
+  \]
+  We see that there are fixed points at $x = 0, r$. To find the bifurcations, we solve for when
+  \begin{align*}
+    f(x, r) &= rx - x^2 = 0, \\
+    \frac{\partial f}{\partial x}(x, r) &= r - 2x = 0.
+  \end{align*}
+  Hence we have $2x^2 - x^2 = x^2 = 0$, so the only possible bifurcation occurs at $x = r = 0$.
+  \subsection{Subcritical Bifurcations}
+  \subsection{Supercritical Bifurcations}
+\end{document}
