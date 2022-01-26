@@ -1,0 +1,51 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 9}
+  \subsection{Greek Number Theory}
+  \textbf{Fact.} The basics of number theory are contained in the Elements, mostly connected to the ``Euclidean algorithm''.
+  \begin{itemize}
+    \item The only other major advancement in the Greek empire: Diophantos (circa 250 AD, Alexandria), who studied Diophantine equations
+    \item Later, there are much more advances in India, China, the Middle East, etc.
+  \end{itemize}
+  \subsubsection{Polygonal, Prime, Perfect Numbers}
+  Polygonal numbers were studied by the Pythagoreans. We start with triangular numbers, which are just equilateral triangles consisting of dots, like $\therefore$. They go $1, 3, 6, 10,\dotsc$. Square numbers are what you think they are, just perfect squares. The pentagonal numbers start $1, 5, 12, 22,\dotsc$.
+  \begin{note}{}
+    While interesting, the polygonal numbers don't seem to have many uses. They are also given by quadratic equations, i.e.the $n$\tsup{th} pentagonal number is given by
+    \[
+      P_n = \frac{3n^2 - n}{2}.
+    \]
+  \end{note}
+  \subsubsection{Prime Numbers}
+  \begin{definition}{Prime}
+    A number is \emph{prime} if it is only divisible by 1 and themselves.
+  \end{definition}
+  \begin{note}{}
+    The Greeks called them ``numbers with no rectangular representations'', where a rectangular representation was a drawing of $n$ dots that wasn't just a line of dots.
+  \end{note}
+  Euclid proved that there are infinitely many prime numbers, ``Prime numbers are more than any assigned multitude of primes''.
+  \begin{proof}
+    Suppose towards a contradiction that there are finitely many primes, say $p_1,\dotsc,p_n$. Then observe that $p_1p_2\dotsb p_n + 1$ is not divisible by any $p_i$ for $i = 1,\dotsc,n$, and so must be prime. Hence there must be infinitely many primes.
+  \end{proof}
+  \subsubsection{Perfect Numbers}
+  \begin{definition}{Perfect Numbers}
+    A \emph{perfect} number is a number that equals the sum of its divisors (excluding itself).
+  \end{definition}
+  For example, $6 = 1 + 2 + 3$ and $28 = 1 + 2 + 7 + 14$. \par
+  \textbf{Fact.} We know that $k$ is an even perfect number if and only if $k$ takes the form
+  \[
+    k = 2^{n - 1}(2^n - 1)
+  \]
+  for $n\in \N$ and $2^n - 1$ is prime (Mersenne prime).
+  \paragraph{Open Problems}
+  \begin{itemize}
+    \item Are there any odd perfect numbers?
+    \item Are there infinitely many even perfect numbers/Mersenne primes (51 known)?
+  \end{itemize}
+\end{document}
