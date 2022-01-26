@@ -1,0 +1,115 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 9}
+  \subsection{Special Mathematical Expectations}
+  \begin{definition}{Moments}
+    Let $X$ be a discrete random variable taking values in a discrete set $S\sse \R$ and $b\in \R$. We define \emph{the $r$\tsup{th} moment of $X$ about $b$ to be}
+    \[
+      \E[(X - b)^r] = \sum_{x\in S}(x - b)^rp_X(x).
+    \]
+    When $b = 0$ we refer to this simply as the \emph{$r$\tsup{th} moment} of $X$.
+  \end{definition}
+  \begin{definition}{}
+    Let $X$ be a discrete random variable. We define the \emph{variance} of $X$ to be
+    \[
+      \var(X) = \E\left[(X - \E[X])^2\right]
+    \]
+    whenever it converges. We use the notation $\sigma_X^2 = \var(X)$. The \emph{standard deviation} of $X$ is $\sigma_X = \sqrt{\var(X)}$.
+  \end{definition}
+  \begin{theorem}{}
+    If $X$ is a discrete random variable and $a, b\in\R$ then:
+    \begin{itemize}
+      \item $\E[aX + b] = a\E[X] + b$
+      \item $\var(aX + b) = a^2\var[X]$
+    \end{itemize}
+    \begin{proof}
+      Observe that
+      \begin{align*}
+        \E[aX + b] &= \sum_{x\in S}(ax + b)p_X(x) \\
+                   &= a\sum_{x\in S}x\cdot p_X(x) + \sum_{x\in S} b\cdot p_X(x) \\
+                   &= a\E[X] + b.
+      \end{align*}
+      Furthermore, we have
+      \begin{align*}
+        \var(aX + b) &= \E\left[(aX + b - \E[aX + b])^2\right] \\
+                     &= \E\left[(aX + b - a\E[X] - b)^2\right] \\
+                     &= \E\left[(aX - a\E[X])^2\right] \\
+                     &= a^2\cdot \E\left[(X - \E[X])^2\right] \\
+                     &= a^2\var(X).
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $X$ is a discrete random variable then
+    \[
+      \var(X) = \E[X^2] - \E[X]^2.
+    \]
+    \begin{proof}
+      Let $\mu_X = \E[X]$, so then
+      \begin{align*}
+        \var(X) &= \E\left[(X - \mu_X)^2\right] \\
+                &= \E[X^2 - 2\mu_XX + \mu_X^2] \\
+                &= \E[X^2] - 2\mu_X\E[X] + \mu_X^2 \\
+                &= \E[X^2] - 2\E[X]^2 + \E[X]^2 \\
+                &= \E[X^2] - \E[X]^2
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{example}{}
+    Let $m \geq 1$ and $X\sim \Uniform(\set{1,2,\dotsc,m})$. What is $\var (X)$? \par
+    By using a Gaussian sum, we can see that $\E[X] = \frac{m + 1}{2}$. To compute $\E[X^2]$, we have
+    \begin{align*}
+      \E[X^2] &= \sum_{x=1}^{m}x^2\cdot \frac{1}{m} \\
+              &= \frac{1}{m}\cdot \frac{m\cdot (m + 1)\cdot (2m + 1)}{6} \\
+              &= \frac{(m + 1)(2m + 1)}{6}.
+    \end{align*}
+    Hence the variance is
+    \[
+      \frac{1}{6}(m + 1)(2m + 1) - \paren{\frac{m + 1}{2}}^2 = \frac{m^2 - 1}{12}.
+    \]
+  \end{example}
+  \subsection{Moment Generating Functions}
+  \begin{definition}{Moment Generating Function (MGF)}
+    If $X$ is a discrete random variable we define the \emph{Moment Generating Function} (MGF) of $X$ to be the function
+    \[
+        M_X(t) = \E[e^{tX}],
+    \]
+    whenever it exists.
+  \end{definition}
+  \begin{theorem}{}
+    Let $X$ be a discrete random variable with MGF $M_X(t)$ that is well-defined and smooth for $t\in (-\delta, \delta)$. Then
+    \[
+      \frac{\mathrm{d}^r}{\mathrm{d}t^r}M_X|_{t = 0} = \E[X^r].
+    \]
+    \begin{proof}
+      Let $S$ be the set of outputs of $X$. Then
+      \begin{align*}
+        M_X(t) &= \E[e^{tX}] \\
+               &= \sum_{x\in S}e^{tx}p_X(x).
+      \end{align*}
+      Hence we have
+      \begin{align*}
+        \frac{\partial^r}{\partial t^r} M_X(t) &= \frac{\partial^r}{\partial t^r}\sum_{x\in S}e^{tx}p_X(x) \\
+                                                  &= \sum_{x\in S} x^re^{tx}p_X(x).
+      \end{align*}
+      Therefore
+      \[
+        \frac{\partial^r}{\partial t^r} M_X(t)|_{t = 0} = \sum_{x\in S}x^rp_X(x) = \E[X^r]
+      \]
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    Let $X$ be a discrete random variable with MGF $M_X(t)$ that is well-defined and smooth for $t\in (-\delta, \delta)$.
+    \begin{itemize}
+      \item $\displaystyle \frac{\mathrm{d}}{\mathrm{d}t} \ln M_X|_{t = 0} = \E[X]$.
+      \item $\displaystyle \frac{\mathrm{d}^2}{\mathrm{d}t^2} \ln M_X|_{t = 0} = \var(X)$.
+    \end{itemize}
+  \end{theorem}
+\end{document}
