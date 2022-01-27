@@ -89,7 +89,8 @@
   \begin{itemize}
     \item If $g'(p)\neq 0$, then it converges linearly.
     \item If $g'(p) = 0$ but $g''(p)\neq 0$, then it converges quadratically.
-    \item If $g'(p) = 0$ and $g''(p) = 0$ but $g''(p)\neq 0$, then it converges with third order.
+    \item If $g'(p) = 0$ and $g''(p) = 0$ but $g'''(p)\neq 0$, then it converges with third order.
   \end{itemize}
-  If we apply this to Newton's method, we see that $f(p) = 0$ and $f'(p)\neq 0$. Furthermore, for $g(x)\ceq f(x) + x$, we have $g(p) = p$ and $g'(p) = 0$. Hence we conclude that Newton's method is \emph{at least} quadratic.
+  If we apply this to Newton's method, we see that $f(p) = 0$ and $f'(p)\neq 0$. Furthermore, for $g(x)\ceq x - \frac{f(x)}{f'(x)}$, we have $g(p) = p$ and $g'(p) = 0$. Hence we conclude that Newton's method is \emph{at least} quadratic.
+  
 \end{document}

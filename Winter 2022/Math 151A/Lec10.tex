@@ -1,0 +1,76 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 10}
+  For Newton's Method to work, we assume that $f(p) = 0$ and $f'(p)\neq 0$. Let us now consider the case where $f'(p) = 0$. We have
+  \[
+    g(p) = p - \frac{f(p)}{f'(p)},
+  \]
+  which is undefined because $f'(p) = 0$. If we try to compute $g'(p)$, we get
+  \[
+    g'(p) = \frac{f(p)f''(p)}{(f'(p))^2},
+  \]
+  which is also undefined. Hence in this case Newton's Method converges \emph{slower} than quadratically (specifically linearly).
+  \subsection{Multiple Roots (Multiplicity)}
+  \begin{definition}{Multiplicity}
+    We say that $p$ is a root of $f(x)$ with \emph{multiplicity $m$} if $f(x) = (x - p)^mq(x)$ where $\lim\limits_{x\to p} q(x)\neq 0$.
+  \end{definition}
+  \begin{example}{}
+    Consider the function $f(x) = e^x - x - 1$. We see that it has a root at $p = 0$. We write
+    \begin{align*}
+      f(x) &= 1 + x + \frac{x^2}{2!} + \dotsb - x - 1 \\
+           &= \frac{1}{2}x^2 + \frac{1}{6}x^3 + \dotsb \\
+           &= (x - 0)^2\underbrace{\paren{\frac{1}{2} + \frac{1}{6}x + \dotsb}}_{q(x)}.
+    \end{align*}
+    Hence we have
+    \[
+      \lim_{x\to 0} q(x) = \frac{1}{2}\neq 0.
+    \]
+    Therefore $f(x)$ has a root at 0 with multiplicity 2.
+  \end{example}
+  In general, if the multiplicity of a root is larger than 1, then it converges slower. What this means for Newton's method is that:
+  \begin{itemize}
+     \item If $f(p) = 0$ and $f'(p)\neq 0$ then the root is a single root, and so the convergence is at least quadratic.
+     \item If $f(p) = 0$ and $f'(p) = 0$ then the root has multiplicity at least two, and so the convergence is at best linear.
+  \end{itemize}
+  \begin{theorem}{}
+    The function $f(x)\in C^m[a, b]$ has a zero of multiplicity $m$ at $p$ if and only if $f(p) = f'(p) = \dotsb = f^{(m - 1)}(p) = 0$ and $f^{(m)}(p)\neq 0$.
+  \end{theorem}
+  \begin{theorem}{}
+    If $p$ is a root of $f(x)$ with multiplicity $m$ then $p$ is a single root of
+    \[
+      \mu(x) = \frac{f(x)}{f'(x)}.
+    \]
+    \begin{proof}
+      If $p$ is a root of $f(x)$ with multiplicity $m$ then we may write
+      \[
+        f(x) = (x - p)^m\cdot q(x),
+      \]
+      where $\lim\limits_{x\to p} q(x)\neq 0$. Hence
+      \begin{align*}
+        \mu(x) &= \frac{(x - p)^m\cdot q(x)}{(x - p)^m\cdot q'(x) + m(x - p)^{m - 1}q(x)} \\
+               &= (x - p)\cdot \frac{q(x)}{(x - p)q'(x) + mq(x)}.
+      \end{align*}
+      Since $\lim\limits_{x\to p} q(x)\neq 0$, we have
+      \[
+        \lim_{x\to p} \frac{q(x)}{(x - p)q'(x) + mq(x)} = \frac{1}{m} \neq 0.
+      \]
+      Thus by definition $p$ is a single root of $\mu(x)$.
+    \end{proof}
+  \end{theorem}
+  \subsection{Modified Newton's Method}
+  If $p$ is a root of $f(x)$ with multiplicity $m \geq 2$, then we apply Newton's Method to
+  \[
+    \mu(x)\ceq \frac{f(x)}{f'(x)}.
+  \]
+  The new method will converge at least quadratically.
+  \begin{note}{}
+    The drawback of the Modified Newton's Method is that we now require the \emph{second} derivative of $f$, rather than just the first.
+  \end{note}
+\end{document}
