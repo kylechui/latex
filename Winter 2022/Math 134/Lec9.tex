@@ -1,0 +1,46 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 9}
+  \subsection{Subcritical Pitchfork}
+  Look at the bifurcation diagram for
+  \[
+    \dot{x} = rx + x^3.
+  \]
+  \subsection{Supercritical Pitchfork}
+  Look at the bifurcation diagram for
+  \[
+    \dot{x} = rx - x^3.
+  \]
+  \subsection{Symmetry}
+  Note that the Saddle-node bifurcation ($\dot{x} = r + x^2$) and the Transcritical bifurcation ($\dot{x} = rx - x^2$) are \emph{not} symmetric with respect to $y = -x$, i.e. $x\to -x$. For the Saddle-node bifurcation, we have
+  \begin{align*}
+    \dot{x} &= r + x^2 \\
+    -\dot{y} &= r + x^2 \\
+    \dot{y} &= -r - y^2,
+  \end{align*}
+  and the Transcritical bifurcation yields
+  \begin{align*}
+    \dot{x} &= rx - x^2 \\
+    -\dot{y} &= -ry - y^2 \\
+    \dot{y} &= ry + y^2.
+  \end{align*}
+  However, for the subcritical pitchfork bifurcation, we have
+  \begin{align*}
+    \dot{x} &= rx + x^3 \\
+    -\dot{y} &= -ry - y^3 \\
+    \dot{y} &= ry + y^3,
+  \end{align*}
+  so it \emph{is} symmetric.
+  \subsection{Hysteresis}
+  Consider the ODE given by
+  \[
+    \dot{x} = rx + x^3 - x^5.
+  \]
+\end{document}
