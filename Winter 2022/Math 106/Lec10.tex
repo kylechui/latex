@@ -1,0 +1,63 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 10}
+  \subsection{The Euclidean Algorithm}
+  This algorithm is used to find the greatest common divisor of two numbers. It was most likely known before Euclid, but it first appears in the Elements.
+  \subsubsection{Performing the Algorithm}
+  We wish to find $\gcd(a, b)$ where $a, b\in \Z$.
+  \begin{itemize}
+    \item Construct $a_1 = \max(a, b) - \min(a, b)$ and $b_1 = \min(a, b)$. Note that $\gcd(a, b) = \gcd(a_1, b_1)$.
+    \item Repeat this until $a_n = b_n$, at which point $\gcd(a, b) = a_n$.
+  \end{itemize}
+  \subsubsection{Consequences of the Euclidean Algorithm}
+  \begin{itemize}
+    \item Given $a, b\in \Z^+$, there exist integers $m, n\in\Z$ such that
+    \[
+      am + bn = \gcd(a, b).
+    \]
+    \begin{note}{}
+      If you ``work backwards'' through the Euclidean Algorithm, you see that $\gcd(a, b)$ is a linear combination of $a$ and $b$.
+    \end{note}
+    \item If a prime number $p$ divides $ab$, then $p$ divides a or $p$ divides $b$.
+    \begin{proof}
+      Suppose $p$ does not divide $a$. We claim that $p$ divides $b$. Since $p$ is prime and does not divide $a$, we have $\gcd(p, a) = 1$. Hence there exist $m, n\in \Z^+$ such that $mp + na = 1$. Multiplying both sides by $b$, we have
+      \[
+        mpb + nab = 1.
+      \]
+      Since $p$ divides $ab$, we have $ab = kp$ for some $k\in \Z$. Hence
+      \begin{align*}
+        mpb + nkp &= b \\
+        p(mb + nk) &= b.
+      \end{align*}
+      Therefore $p$ divides $b$.
+    \end{proof}
+    \item Each positive integer has a unique factorization into primes.
+  \end{itemize}
+  \subsection{Greek Number Systems}
+  \begin{itemize}
+    \item There were different number systems in different parts of the Hellenistic realm.
+    \item They are usually decimal (base 10).
+    \item They are usually \emph{not} place-valued.
+  \end{itemize}
+  \begin{example}{Acrophonic System}
+    \begin{itemize}
+      \item Symbols for 1, 5, 10, 100, 1000, and \emph{sometimes} for 50, 500, etc.
+      \item Not place-valued, just add symbols.
+      \item Lead to ``Roman numerals'', which were used in Europe till the late Middle Ages (\ttilde 1500).
+    \end{itemize}
+  \end{example}
+  \begin{example}{Alphabetic System (most common)}
+    \begin{itemize}
+      \item 27 letters of the alphabet were used for 1--9, 10--90, and 100--900.
+      \item This was used for numbers up to 999, and it becomes similar to a place-valued system.
+      \item The symbol \textbf{M} was used to represent ``multiplication by 10000''.
+    \end{itemize}
+  \end{example}
+\end{document}
