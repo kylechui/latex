@@ -1,0 +1,77 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 10}
+  \begin{note}{}
+    Hysteresis is a concept that appears due to the non-reversibility as the parameter $r$ varies. If we look at the bifurcation diagram's stable branches, we take one path as we increase $r$ past 0, but take a different path as we decrease $r$ back below 0.
+  \end{note}
+  \subsection{Taylor's Theorem}
+  \subsubsection{Single Variable}
+  Let $F(t)$ be continuous and $\displaystyle \frac{\mathrm{d}^nF}{\mathrm{d}t^n}$ is continuous for $1 \leq n \leq N + 1$. Then we can write
+  \[
+    F(t) = \sum_{n=0}^{N} \frac{1}{n!} \frac{\mathrm{d}^nF}{\mathrm{d}t^n}(0)t^n + R_N(t),
+  \]
+  where $\displaystyle R_N(t) = \underbrace{\frac{1}{(N + 1)!} \frac{\mathrm{d}^{N + 1}F}{\mathrm{d}t^{N + 1}}\paren{\tilde t}t^{n + 1}}_{\text{Lagrange form residue}}$ for some $\tilde t\in (0, t)$.
+  \subsubsection{Multi Variable}
+  Let $f(x, r)$ be smooth (so $\displaystyle\frac{\partial^n}{\partial x^n} \frac{\partial^m}{\partial r^m}f$ is continuous for all $m, n \geq 1$). Then let $F(t) = f(tx, tr)$ and apply Taylor's Theorem. We have
+  \[
+    \frac{\mathrm{d}^n}{\mathrm{d}t^n} F(t) = \sum_{j=0}^{n} \binom{n}{j} \frac{\partial^nf}{\partial_x^{n - j}\partial_r^j}(tx, tr)x^{n - j}r^j.
+  \]
+  When we take $t = 1$, we have
+  \begin{align*}
+    f(x, t) &= F(1) \\
+            &= \sum_{n=0}^{N} \frac{1}{n!} \frac{\mathrm{d}^nF}{\mathrm{d}t^n}(0) + R_N(0) \\
+            &= \sum_{n=0}^{N} \sum_{j=0}^{n} \frac{1}{(n - j)!j!} \frac{\partial^nf}{\partial_x^{n - j}\partial r^j}(0, 0)x^{n - j}r^j + R_N(0)
+  \end{align*}
+  \begin{theorem}{Taylor's Theorem}
+    Suppose all partial derivatives of $f(x, r)$ up to order $N + 1$ are continuous. Then,
+    \[
+      f(x, r) = \sum_{n=0}^{N} \sum_{j=0}^{n} \frac{1}{(n - j)!j!} \frac{\partial^nf}{\partial x^{n - j}\partial r^j}(0, 0) x^{n - j}r^j + R_N(x, r),
+    \]
+    where the remainder term can be written as
+    \[
+      R_N(x, r) = \sum_{j=0}^{N + 1} \frac{1}{(N + 1 - j)!j!} \frac{\partial^{N + 1}f}{\partial x^{N + 1 - j}\partial r^j}(tx, tr) x^{N + 1 - j}r^j,
+    \]
+    for some $0 < t < 1$.
+  \end{theorem}
+  \begin{example}{Special Case} \par
+    Consider the case where $N = 2$ for the Taylor expansion. Plugging that into the formula, we have that the quadratic expansion of $f(x, r)$ at $(0, 0)$ is
+    \begin{align*}
+      f(x, r) &= f(0, 0) + \frac{\partial f}{\partial x}(0, 0)\cdot x + \frac{\partial f}{\partial r}(0, 0)\cdot r \\
+              &+ \frac{\partial f}{\partial x\partial r}(0, 0)\cdot xr + \frac{1}{2}\cdot \frac{\partial^2 f}{\partial x^2}(0, 0)\cdot x^2 + \frac{1}{2}\cdot \frac{\partial^2 f}{\partial r^2}(0, 0)\cdot r^2.
+    \end{align*}
+  \end{example}
+  \subsection{Normal Forms}
+  Consider the Taylor expansion for a saddle-node bifurcation about the point $(x^*, r^*)$:
+  \begin{align*}
+    \dot{x} &= f(x, r) \\
+            &= f(x^*, r^*) + \underbrace{\partial x f(x^*, r^*)}_{q_1}(x - x^*) + \underbrace{\partial r f(x^*, r^*)}_{p_1}(r - r^*) \\
+            &+ \underbrace{\frac{1}{2}\partial_{xx} f(x^*, r^*)}_{q_2}(x - x^*)^2 + \underbrace{\partial_{xr} f(x^*, r^*)}_{p_2}(x - x^*)(r - r^*) \\
+            &+ \underbrace{\frac{1}{2}\partial_{rr} f(x^*, r^*)}_{Q}(r - r^*)^2 + \text{higher order terms}.
+  \end{align*}
+  \begin{theorem}{}
+    Suppose that $f(x^*, r^*) = 0$, $q_1 = 0$, $p_1\neq 0$, $q_2\neq 0$. Then $\dot{x} = f(x, r)$ undergoes a saddle-node bifurcation at $(x^*, r^*)$ and
+    \[
+      \dot{x} = \frac{\partial f}{\partial r}(x^*, r^*)(r - r^*) + \frac{1}{2}\partial_{xx} f(x^*, r^*)(x - x^*)^2 + \mathcal{O}(\eps^3)
+    \]
+    for $\abs{r - r^*} < \eps^2$ and $\abs{x - x^*} < \eps$. Moreover, there exists a change of variables
+    \[
+      (t, x, r)\mapsto (s, y, R)
+    \]
+    such that
+    \begin{align*}
+      \dot{x} &= p_1(r - r^*) + q_2(x - x^*)^2 + \text{higher order terms}
+    \end{align*}
+    takes the form
+    \[
+      \frac{\mathrm{d}y}{\mathrm{d}s} = R + y^2\tag{Saddle-node bifurcation}
+    \]
+    near $(0, 0) = (y(x^*), R(r^*))$.
+  \end{theorem}
+\end{document}
