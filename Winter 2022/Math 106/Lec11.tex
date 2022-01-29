@@ -1,0 +1,66 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 11}
+  \subsection{Infinity in Greek Mathematics}
+  \begin{itemize}
+    \item Greek mathematicians (back then) were ``afraid'' of infinity.
+    \item They did not believe that actual ``infinite processes''  exist.
+  \end{itemize}
+  \begin{example}{Zeno's Paradoxes}
+    \begin{itemize}
+      \item Attributed to Zeno of Elea (\ttilde 450 BCE).
+      \item Not clear what his intentions were.
+      \item Sources: Aristotle.
+    \end{itemize}
+    \paragraph{Achilles and the Tortoise Paradox}
+    \begin{itemize}
+      \item Achilles runs faster than the tortoise.
+      \item For the race, the tortoise gets a head start.
+      \item Intuitively, Achilles should catch up to the tortoise, but in order to catch up to the tortoise he first must reach where the tortoise currently is, and in that time the tortoise will have already moved on. Hence Achilles will never overtake the tortoise.
+    \end{itemize}
+    \paragraph{Dichotomy Paradox}
+    \begin{itemize}
+      \item Motion cannot exist because what is moved has to first arrive at the halfway point before reaching the destination.
+      \item Before reaching the halfway point, it must reach the halfway point to the halfway point, and so on and so forth.
+    \end{itemize}
+  \end{example}
+  \begin{note}{}
+    By trying to avoid $\infty$, the Greeks laid the foundations of a rigorous treatment of it.
+  \end{note}
+  \paragraph{Eudoxus of Knidos}
+  \begin{itemize}
+    \item Lived around 375 BCE.
+    \item Developed both the ``theory of proportions'' and ``method of exhaustion''.
+    \item For example, he described a ``quantity'' (real number) by its position among rational numbers.
+    \item His works are contained in Book V of the Elements.
+  \end{itemize}
+  \subsection{Theory of Proportions}
+  \begin{example}{Describing the quantity $\sqrt{2}$ with rational numbers}
+      Observe that $\sqrt{2}$ is determined by two sets:
+      \begin{align*}
+        L_{\sqrt{2}} &= \set{r\in \Q\mid r^2 < 2}, \\
+        U_{\sqrt{2}} &= \set{r\in \Q\mid r^2 > 2}.
+      \end{align*}
+      Namely, $\sqrt{2}$ is the \emph{unique} quantity so that every rational number in $L_{\sqrt{2}}$ is smaller than it, and every rational number in $U_{\sqrt{2}}$ is larger than it.
+  \end{example}
+  Often used in the following way: ``Two quantities $\lam_1$ and $\lam_2$ are equal if every rational length less than $\lam_1$ is also less than $\lam_2$, and vice versa''. Using the notation from the example above, we have
+  \[
+    L_{\lam_1} = L_{\lam_2}.
+  \]
+  \begin{note}{}
+    If we only have one side of the inequality, we can define $\lam_1 \leq \lam_2$.
+  \end{note}
+  There are two main viewpoints for irrational numbers:
+  \begin{itemize}
+    \item Geometric: we find some way to express these values as a length or area.
+    \item Arithmetic: we need some kind of ``infinite'' description of the quantity.
+  \end{itemize}
+  Until the 19\tsup{th} century, the overall belief was that ``geometry is a better foundation for mathematics''. Later on, there were more rigorous definitions of convergence, which led to other non-geometric axiomatic systems and ``set theory'' became the foundation for mathematics.
+\end{document}
