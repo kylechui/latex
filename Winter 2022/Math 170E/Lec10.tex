@@ -1,0 +1,204 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 10}
+  \subsection{Binomial Random Variables}
+  \begin{definition}{Binomial Random Variable}
+    A \emph{Bernoulli trial} is an experiment that has probability $p\in (0, 1)$ of success and probability $1 - p$ of failure.
+    \begin{itemize}
+      \item Suppose we run $n \geq 1$ independent, identical Bernoulli trials, and let $X$ be the number of successes.
+      \item Then we know that $X$ is a discrete random variable taking values in the set $S = \set{0,1,\dotsc,n}$.
+      \item We say that $X$ is a \emph{Binomial random variable} with parameters $n, p$ and write $X\sim \Binomial(n, p)$.
+    \end{itemize}
+  \end{definition}
+  \begin{theorem}{}
+    If $X\sim \Binomial(n, p)$ then its PMF is
+    \[
+      p_X(x) = \binom{n}{x}p^x(1 - p)^{n - x}\quad\text{if}\quad x\in \set{0,1,\dotsc,n}.
+    \]
+    \begin{proof}
+      Recall that $p_X(x) = \P[X = x]$. We know that there are $\binom{n}{x}$ ways to arrange exactly $x$ ``successes'' in a total of $n$ trials. Since each trial has a ``success'' rate of $p$, and a ``failure'' rate of $1 - p$, and they are independent, each arrangement has a $p^x(1 - p)^{n - x}$ probability of occurring. Hence the total probability of any of the arrangements occurring (as they are mutually independent) is
+      \[
+        p_X(x) = \binom{n}{x}p^x(1 - p)^{n - x}.
+      \]
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    By the Binomial Theorem we have
+    \[
+      \sum_{x=0}^{n} p_X(x) = (p + (1 - p))^n = 1.
+    \]
+  \end{note}
+  \begin{theorem}{}
+    If $X\sim \Binomial(n, p)$, its MGF is
+    \[
+      M_X(t) = (1 - p + pe^t)^n.
+    \]
+    \begin{proof}
+      We compute
+      \begin{align*}
+        M_X(t) &= \E[e^{tx}] \\
+               &= \sum_{x=0}^{n}e^{tx}p_X(x) \\
+               &= \sum_{x=0}^{n}e^{tx}\binom{n}{x}p^x(1 - p)^{n - x} \\
+               &= \sum_{x=0}^{n}\binom{n}{x}(pe^t)^x(1 - p)^{n - x} \\
+               &= (1 - p + pe^t)^n.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    Recall that $(1 - p + pe^t)$ is the MFG of the Bernoulli random variable.
+  \end{note}
+  \begin{theorem}{}
+    If $X\sim \Binomial(n, p)$ its mean is
+    \[
+      \E[X] = np.
+    \]
+    \begin{proof}
+      Recall that $M_X(t) = (pe^t + 1 - p)^n$ so $M_X'(t) = n(pe^t + 1 - p)^{n - 1}\cdot pe^t$. Hence
+      \[
+        \E[X] = M_X'(0) = n(p + 1 - p)^{n - 1}\cdot p = np.
+      \]
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    Recall that $p$ is the expected value of the Bernoulli random variable.
+  \end{note}
+  \begin{theorem}{}
+    If $X\sim \Binomial(n, p)$ its variance is
+    \[
+      \var(X) = np(1 - p)
+    \]
+    \begin{proof}
+      Recall that $\var(X) = \E[X^2] - \E[X]^2 = \E[X^2] - (np)^2$. Furthermore, we just showed that
+      \[
+        M_X'(t) = n(pe^t + 1 - p)^{n - 1}\cdot pe^t,
+      \]
+      so
+      \[
+        M_X''(t) = n(n - 1)(pe^t + 1 - p)^{n - 2}\cdot (pe^t)^2 + n(pe^t + 1 - p)^{n - 1}\cdot pe^t.
+      \]
+      Hence
+      \begin{align*}
+        \E[X^2] &= M_X''(0) \\
+                &= n(n - 1)(p + 1 - p)^{n - 2}\cdot p^2 + n(p + 1 - p)^{n - 1}\cdot p \\
+                &= n(n - 1)\cdot p^2 + np.
+      \end{align*}
+      Therefore
+      \begin{align*}
+        \var(X) &= n(n - 1)\cdot p^2 + np - (np)^2 \\
+                &= n^2p^2 - np^2 + np - n^2p^2 \\
+                &= np(1 - p).
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    Recall that $p(1 - p)$ is the variance of a regular Bernoulli random variable.
+  \end{note}
+  \subsection{Geometric Random Variables}
+  \begin{definition}{Geometric Random Variable}
+    Suppose we repeatedly run independent, identical Bernoulli trials with probability $p\in (0, 1)$ of success.
+    \begin{itemize}
+      \item Let $X$ be the trial on which we first achieve success.
+      \item $X$ is a discrete random variable taking values in the set $S = \set{1,2,3,\dotsc}$.
+      \item We say that $X$ is a \emph{geometric random variable} with parameter $p$ and write $X\sim \Geometric(p)$.
+    \end{itemize}
+  \end{definition}
+  \begin{note}{}
+    Sometimes geometric random variables are defined differently, but this is the definition that we will use for this class.
+  \end{note}
+  \begin{theorem}{}
+    If $X\sim \Geometric(p)$ then its PMF is
+    \[
+      p_X(x) = (1 - p)^{x - 1}p\quad\text{if}\quad x\in \set{1,2,3,\dotsc}.
+    \]
+    \begin{proof}
+      The probability that $X = x$ is the probability that we have $x - 1$ failures, followed by a success. Since the events are independent, this gives us the desired result.
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    For the infinite series version of this, we have
+    \begin{align*}
+      \sum_{x=1}^{\infty} p_X(x) &= \sum_{x=1}^{\infty} (1 - p)^{x - 1}p \\
+                                 &= p \sum_{x=1}^{\infty}(1 - p)^{x - 1} \\
+                                 &= p\cdot \frac{1}{1 - (1 - p)} \\
+                                 &= 1.
+    \end{align*}
+  \end{note}
+  \begin{theorem}{}
+    If $X\sim \Geometric(p)$ then its MGF is 
+    \[
+      M_X(t) = \frac{e^tp}{1 - (1 - p)e^t}\quad\text{if}\quad t < -\ln(1 - p).
+    \]
+    \begin{proof}
+      We have
+      \begin{align*}
+        M_X(t) &= \E[e^{tX}] \\
+               &= \sum_{x=1}^{\infty} e^{tx}p_X(x) \\
+               &= \sum_{x=1}^{\infty} e^{tx}(1 - p)^{x - 1}p \\
+               &= e^tp \sum_{x=1}^{\infty} (e^t(1 - p))^{x - 1} \\
+               &= e^tp\cdot \frac{1}{1 - (e^t(1 - p))} \\
+               &= \frac{e^tp}{1 - (1 - p)e^t},
+      \end{align*}
+      as desired.
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    The condition comes from the denominator, where
+    \[
+      (1 - p)e^t < 1.
+    \]
+  \end{note}
+  \begin{theorem}{}
+    If $X\sim \Geometric(p)$ then its mean is
+    \[
+      \E[X] = \frac{1}{p}.
+    \]
+    \begin{proof}
+      From the previous theorem, we showed that
+      \[
+        M_X(t) = \frac{e^tp}{1 - e^t(1 - p)}.
+      \]
+      Hence
+      \begin{align*}
+        \ln M_X(t) &= \ln \paren{\frac{e^tp}{1 - e^t(1 - p)}} \\
+                   &= \ln (e^tp) - \ln(1 - e^t(1 - p)) \\
+                   &= t + \ln p - \ln (1 - e^t(1 - p)).
+      \end{align*}
+      Thus we have that
+      \[
+        (\ln M_X)' = 1 - \frac{1}{1 - e^t(1 - p)}\cdot (p - 1)e^t = \frac{1}{1 - e^t(1 - p)}.
+      \]
+      Therefore
+      \[
+        \E[X] = (\ln M_X)'(0) = \frac{1}{p}.
+      \]
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $X\sim \Geometric(p)$ then its variance is
+    \[
+      \var(X) = \frac{1 - p}{p^2}.
+    \]
+    \begin{proof}
+      From the last problem we have that
+      \[
+        (\ln M_X)' = \frac{1}{1 - e^t(1 - p)},
+      \]
+      so
+      \[
+        (\ln M_X)'' = -\frac{1}{(1 - e^t(1 - p))^2}\cdot (p - 1)e^t = \frac{e^t(1 - p)}{(1 - e^t(1 - p))^2}.
+      \]
+      Therefore
+      \[
+        \var(X) = (\ln M_X)''(0) = \frac{1 - p}{p^2},
+      \]
+      as desired.
+    \end{proof}
+  \end{theorem}
+\end{document}
