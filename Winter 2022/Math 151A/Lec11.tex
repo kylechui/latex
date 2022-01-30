@@ -1,0 +1,77 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 11}
+  \subsection{Lagrange Interpolation Polynomial}
+  The problem is that we are given $n + 1$ points of the form $(x_i, y_i)$ for $i = 0,1,\dotsc,n$ ($x_i$ are distinct). We wish to find a polynomial $P_n(x)$ of degree at most ``$n$'' such that
+  \[
+    P_n(x_i) = y_i
+  \]
+  for all $i = 0,1,\dotsc,n$.
+  \begin{itemize}
+    \item If we have a $y^*$ corresponding to some $x^*\neq x_i$, we can approximate it with $y^*\approx P_n(x^*)$.
+    \item Given $f(x)$ and distinct $x_i$ ($i = 0,1,\dotsc,n$). We can find a polynomial function $P_n(x)$ of degree at most ``$n$'' such that $P_n(x_i) = f(x_i)$.
+    \item We are approximating our function $f$ with a polynomial, and this extends to derivatives and integrals as well.
+    \item General form of a polynomial $P_n(x)$ of degree at most ``$n$'':
+    \[
+      P_n(x) = a_nx^n + a_{n - 1}x^{n - 1} + \dotsb + a_1x + a_0.
+    \]
+    Hence it suffices to just find the coefficients such that the polynomial value equals the original function value.
+  \end{itemize}
+  If we try to solve for the coefficients by plugging in the $n + 1$ points, we essentially solve the matrix:
+  \[
+  \begin{bmatrix}
+    1 & x_0 & \dotsb & x_0^2 \\
+    1 & x_1 & \dotsb & x_1^n \\
+    \vdots & \vdots & \ddots & \vdots \\
+    1 & x_n & \dotsb & x_n^n
+  \end{bmatrix}
+  \begin{bmatrix}
+    a_0 \\
+    a_1 \\
+    \vdots \\
+    a_n
+  \end{bmatrix} = 
+  \begin{bmatrix}
+    y_0 \\
+    y_1 \\
+    \vdots \\
+    y_n
+  \end{bmatrix}.
+  \]
+  \begin{note}{}
+    If the $x_i$ are distinct, we know that the matrix is non-singular (i.e. there exists a unique solution for the $a_i$).
+  \end{note}
+  \paragraph{Drawbacks}
+  \begin{itemize}
+    \item Solving the linear system might be computationally expensive.
+    \item The matrix is ``ill-conditioned'', which means that it's ``sensitive to inaccuracies'' (i.e. storage or computation errors).
+  \end{itemize}
+  \subsection{Lagrange Polynomials}
+  We are given $(x_i, y_i)$, where the $x_i$ are distinct.
+  \begin{itemize}
+    \item Construct base functions (cardinal functions) \par
+    Given $x_0,x_1,\dotsc,x_n$ (distinct), construct $\ell_0(x), \ell_1(x),\dotsc,\ell_n(x)$ of degree ``$n$'' polynomials such that
+    \[
+      \ell_i(x_j) = \delta_{ij} = \begin{cases}1 & \text{if }i = j \\ 0 &\text{otherwise}\end{cases}.
+    \]
+    Then we have
+    \[
+      \ell_i(x) = \frac{(x - x_0)(x - x_1)\dotsb(x - x_{i - 1})(x - x_{i + 1})\dotsb(x_i - x_n)}{(x_i - x_0)(x_i - x_1)\dotsb(x_i - x_{i - 1})(x_i - x_{i + 1})\dotsb(x_i - x_n)}.
+    \]
+    In other words,
+    \[
+      \ell_i(x) = \prod_{\substack{j = 0\\j\neq i}}^n \frac{x - x_j}{x_i - x_j}.
+    \]
+  \end{itemize}
+  We can then construct $\P_n(x)$ via
+  \[
+    P_n(x) = \sum_{i=0}^{n}\ell_i(x)\cdot y_i.
+  \]
+\end{document}
