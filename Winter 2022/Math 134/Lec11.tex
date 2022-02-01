@@ -1,0 +1,46 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 11}
+  \subsection{Normal Forms for Saddle-Node Bifurcations}
+  \begin{note}{}
+    The mapping in the previous theorem basically just maps $(x^*, r^*)$ to the origin in the $yR$-plane.
+  \end{note}
+  \begin{example}{}
+    Consider the ODE given by
+    \[
+      \dot{x} = r + x - 1 - e^{x - 1}.
+    \]
+    To find possible bifurcation points, we find where
+    \begin{align*}
+      r + x - 1 - e^{x - 1} &= 0, \\
+      1 - e^{x - 1} &= 0.
+    \end{align*}
+    Hence the only possible bifurcation point occurs at $(1, 1)$. We now Taylor expand $f$ about $(1, 1)$ to get
+    \begin{align*}
+      f(x, r) &= r + x - 1 - \paren{1 + (x - 1) + \frac{1}{2}(x - 1)^2 + \dotsb} \\
+              &= (r - 1) - \frac{1}{2}(x - 1)^2 + \mathcal{O}(\abs{x - 1}^3).
+    \end{align*}
+    We can see that the above takes the form
+    \[
+      \frac{\mathrm{d}y}{\mathrm{d}s} = R + y^2,
+    \]
+    so wee have a saddle-node bifurcation.
+  \end{example}
+  \subsection{Normal Forms for Transcritical Bifurcations}
+  \begin{theorem}{}
+    Suppose that $\dot{x} = f(x, r)$ has a bifurcation at $(x, r) = (x^*, r^*)$. If 
+    \begin{align*}
+      \frac{\partial^nf}{\partial r^n}(x^*, r^*) &= 0\quad\text{for all }n \\
+      \frac{\partial^2f}{\partial x\partial r}(x^*, r^*) &\neq 0 \\
+      \frac{\partial^2f}{\partial x^2}(x^*, r^*) &\neq 0
+    \end{align*}
+    Then $(x^*, r^*)$ is a transcritical bifurcation. 
+  \end{theorem}
+\end{document}
