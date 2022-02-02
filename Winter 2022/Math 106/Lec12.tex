@@ -1,0 +1,40 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 12}
+  \begin{note}{}
+    In 1858, Dedekind used this theory of proportions to define the reals using ``Dedekind cuts''. For example, he defined $\sqrt{2}$ to be $(L_{\sqrt{2}}, U_{\sqrt{2}})$.
+  \end{note}
+  \subsection{Method of Exhaustion}
+  This theory was also developed by Eudoxus, and generalizes the theory of proportions to higher dimensions. For example, you could approximate the area of a circle or volume of a pyramid via a bunch of intermediary steps, i.e. circumscribed polygons etc. \par
+  \begin{theorem}{}
+    The area of a circle of radius $r$ is proportional to $r^2$.
+    \begin{proof}
+      Assume by contradiction the area is \emph{not} proportional to $r^2$, then by taking a polygon ``close enough'' to the circle, it would fail for the polygon. Hence we have arrived at a contradiction.
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    \begin{itemize}
+      \item Rather than taking an infinite limit, such proofs by contradiction only need finitely many steps.
+      \item This is very much reminiscent of modern $(\eps,\delta)$ proofs.
+    \end{itemize}
+  \end{note}
+  Archimedes (250 BCE) from Syracuse (Sicily)
+  \begin{itemize}
+    \item Known for physics (particularly mechanics) and mathematics.
+    \item Applied and refined the method of exhaustion with great success.
+    \item Manuscript of him was discovered in 1906, revealing \emph{how} he discovered many of his results.
+    \begin{itemize}
+      \item ``\emph{not} with an immediate perfect proof, rather first with intuition and lots of trial and error''.
+      \item A document describing the philosophy of math.
+    \end{itemize}
+    \item Approximated $\pi$ to $3.1408 < \pi < 3.1429$.
+    \item According to legend, he died during the Roman siege of Syracuse during in 212 BCE after angering a Roman soldier by refusing to leave his home until he finished his math problem, telling the soldier ``Don't disturb my circles!''.
+  \end{itemize}
+\end{document}
