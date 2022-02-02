@@ -1,0 +1,37 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 12}
+  \begin{note}{}
+    Using Lagrange interpolation yields the same result as solving the system of linear equations, but without the need to solve a matrix equation.
+  \end{note}
+  \begin{theorem}{}
+    Suppose $x_0,x_1,\dotsc,x_n$ are distinct numbers in the interval $[a, b]$ and $f\in C^{n + 1}[a, b]$. Then for each $x\in [a, b]$, there exists $\xi_x\in (a, b)$ such that
+    \[
+      f(x) = P_n(x) + \frac{f^{(n + 1)}(\xi_x)}{(n + 1)!}(x - x_0)\dotsb(x - x_n)
+    \]
+    where $P_n(x)$ is the interpolation polynomial.
+    \begin{proof}
+      Let $x\in [a, b]$. Then we have two cases: either $x = x_i$ for some $i = 0,1,\dotsc,n$, or $x\neq x_i$ for any $i = 0,1,\dotsc,n$. In the former case we have $(x - x_0)\dotsb(x - x_n) = 0$ so for any $\xi_x\in (a, b)$, we have
+      \[
+        \frac{f^{(n + 1)}(\xi_x)}{(n + 1)!}(x - x_0)\dotsb(x - x_n) = 0.
+      \]
+      Furthermore, since $f(x_i) = P(x_i)$ for all $i = 0,1,\dotsc,n$, the statement holds true for any $\xi_x\in (a, b)$. \par
+      In the latter case, we define a new function $g(t)\colon [a, b]\to\R$ by
+      \[
+        g(t)\ceq f(t) - P_n(t) - (f(x) - P_n(x))\cdot \prod_{i = 0}^n \frac{t - x_i}{x - x_i}.
+      \]
+      Since $f(t), P(x)\in C^{n + 1}[a, b]$, we have that $g(t)\in C^{n + 1}[a, b]$. Observe that $g(x_i) = 0$ for all $i = 0,1,\dotsc,n$, so $g$ has at least $n + 1$ distinct roots. Furthermore, we also have $g(x) = 0$, so $g$ has a total of $n + 2$ distinct roots. Hence we may apply generalized Rolle's Theorem to get that there exists some $\xi_x\in (a, b)$ such that $g^{(n + 1)}(\xi_x) = 0$. Therefore
+      \begin{align*}
+        g^{(n + 1)}(\xi_x) &= f^{(n + 1)}(\xi_x) - 0 - (f(x) - P_n(x))\cdot (n + 1)! = 0 \\
+        f(x) &= P_n(x) + \frac{f^{(n + 1)}(\xi_x)}{(n + 1)!}(x - x_0)\dotsb(x - x_n).
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+\end{document}
