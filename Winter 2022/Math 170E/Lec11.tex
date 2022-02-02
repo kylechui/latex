@@ -1,0 +1,149 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 11}
+  \subsection{Negative Binomial Distribution}
+  \begin{definition}{Negative Binomial Distribution}
+    Suppose we repeatedly run independent, identical Bernoulli trials with probability $p\in (0, 1)$ of success.
+    \begin{itemize}
+      \item Let $r \geq 1$ and let $X$ be the trial on which we first achieve the $r$\tsup{th} success.
+      \item $X$ is a discrete random variable taking values in the set $S = \set{r, r + 1, r + 2, \dotsc}$.
+      \item We say that $X$ is a \emph{negative binomial random variable} with parameters $r, p$ and write $X\sim \NegativeBinomial(r, p)$.
+    \end{itemize}
+  \end{definition}
+  \begin{note}{}
+    If we ask about a negative binomial with parameter $(1, p)$, we see that this should be the same as a Geometric random variable.
+  \end{note}
+  \begin{theorem}{}
+    If $X\sim \NegativeBinomial(r, p)$, then its PMF is
+    \[
+      p_X(x) = \binom{x - 1}{r - 1}p^r(1 - p)^{x - r}\quad\text{if}\quad x\in \set{r, r + 1, \dotsc}
+    \]
+    \begin{proof}
+      If we want to get our $r$\tsup{th} success on the $x$\tsup{th} trial, then we must have gotten $r - 1$ successes in the last $x - 1$ trials, and a success on the last trial. Notice that the former is similar to a binomial distribution. Hence the PMF should be
+      \begin{align*}
+        p_X(x) &= \binom{x - 1}{r - 1}p^{r - 1}(1 - p)^{(x - 1) - (r - 1)}\cdot p \\
+               &= \binom{x - 1}{r - 1}p^r(1 - p)^{x - r}.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $r \geq 1$ is an integer and $0 < s < 1$ then
+    \[
+      \paren{\frac{1}{1 - s}}^r = \sum_{x=r}^{\infty}\binom{x - 1}{r - 1}s^{x - r}.
+    \]
+    \begin{proof}
+      Let $g(s) = (1 - s)^{-r}$ be the left hand side of the above. We apply Taylor's theorem:
+      \[
+        g(s) = \sum_{\ell=0}^{\infty} \frac{1}{\ell!}\cdot \frac{\mathrm{d}^\ell g}{\mathrm{d}s^\ell}(0)s^\ell.
+      \]
+      Observe that:
+      \begin{itemize}
+        \item If $\ell = 0$ then $\frac{\mathrm{d}^\ell g}{\mathrm{d}s^\ell}(0) = g(0) = 1$
+        \item If $\ell = 1$ then $\frac{\mathrm{d}^\ell g}{\mathrm{d}s^\ell}(0) = g'(0) = r$
+        \item If $\ell = 1$ then $\frac{\mathrm{d}^\ell g}{\mathrm{d}s^\ell}(0) = g'(0) = r(r - 1)$
+      \end{itemize}
+      In general,
+      \[
+        \frac{\mathrm{d}^\ell g}{\mathrm{d}s^\ell}(0) = r(r + 1)\dotsb(r + \ell - 1) = \frac{(r + \ell - 1)!}{(r - 1)!}.
+      \]
+      Hence
+      \[
+        g(s) = \sum_{\ell=0}^{\infty} \frac{1}{\ell!}\cdot \frac{(r + \ell - 1)!}{(r - 1)!}\cdot s^\ell.
+      \]
+      If we let $x = r + \ell$, we have $\ell = x - r$, so
+      \begin{align*}
+        g(s) &= \sum_{x=r}^{\infty} \frac{1}{(x - r)!}\cdot \frac{(x - 1)!}{(r - 1)!}\cdot s^{x - r} \\
+             &= \sum_{x=r}^{\infty} \binom{x - 1}{r - 1}s^{x - r}.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    Recall that if $X\sim \NegativeBinomial(r, p)$ then
+    \[
+      p_X(x) = \binom{x - 1}{r - 1} p^r(1 - p)^{x - r}.
+    \]
+    Hence
+    \begin{align*}
+      \sum_{x=r}^{\infty} p_X(x) &= \sum_{x=r}^{\infty} \binom{x - 1}{r - 1} p^r(1 - p)^{x - r} \\
+                                 &= p^r \sum_{x=r}^{\infty} \binom{x - 1}{r - 1} (1 - p)^{x - r} \\
+                                 &= p^r\cdot (1 - (1 - p))^{-r} \\
+                                 &= 1.
+    \end{align*}
+  \end{note}
+  \begin{theorem}{}
+    If $X\sim \NegativeBinomial(r, p)$ then its MGF is
+    \[
+      M_X(t) = \paren{\frac{e^tp}{1 - (1 - p)e^t}}^r\quad\text{if}\quad t < -\ln(1 - p).
+    \]
+    \begin{proof}
+      We compute that the MGF is
+      \begin{align*}
+        M_X(t) &= \E[e^{tX}] \\
+               &= \sum_{x=r}^{\infty} e^{tx}p_X(x) \\
+               &= \sum_{x=r}^{\infty} e^{tx}\binom{x - 1}{r - 1}p^r(1 - p)^{x - r} \\
+               &= e^{tr}p^r \sum_{x=r}^{\infty} \binom{x - 1}{r - 1}\paren{e^t(1 - p)}^{x - r} \\
+               &= e^{tr}p^r\cdot \frac{1}{(1 - (e^t(1 - p)))^r} \\
+               &= \paren{\frac{e^tp}{1 - (1 - p)e^t}}^r.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $X\sim \NegativeBinomial(r, p)$ then
+    \begin{align*}
+      \E[X] &= \frac{r}{p}, \\
+      \var(X) &= \frac{r(1 - p)}{p^2}.
+    \end{align*}
+    \begin{proof}
+      Let
+      \[
+        h(t) = \ln \paren{\frac{pe^t}{1 - e^t(1 - p)}}.
+      \]
+      Since $X$ is a negative binomial random variable, its moment generating function is geometric. We know that for geometric random variables, $h'(0) = \frac{1}{p}$ and $h''(0) = \frac{1 - p}{p^2}$. Hence if $X\sim \NegativeBinomial(r, p)$ then
+      \begin{align*}
+        \ln M_X(t) &= \ln \paren{\frac{pe^t}{1 - e^t(1 - p)}}^r \\
+                   &= r\cdot h(t).
+      \end{align*}
+      Therefore
+      \begin{align*}
+        \E[X] &= \frac{r}{p}, \\
+        \var(X) &= \frac{r(1 - p)}{p^2}.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \subsection{Poisson Distribution}
+  \begin{definition}{Poisson Random Variable}
+    We make the following assumptions about arrivals in a given time interval:
+    \begin{itemize}
+      \item If the time intervals $(a_1, b_1], (a_2, b_2],\dotsc,(a_n, b_n]$ are disjoin then the number of arrivals in each time interval are independent.
+      \item If $h = b - a$ is sufficiently small then the probability of exactly one arrival in the time interval $(a, b]$ is $\lam h$.
+      \item If $h = b - a$ then the probability of having more than one arrival in the time interval $(a, b]$ converges to 0 as $h\to 0$.
+    \end{itemize}
+    An arrival process satisfying these assumptions is called an \emph{approximate Poisson process}. If we take $X$ to be the number of arrivals in a unit of time, then we call $X$ a \emph{Poisson random variable} and write $X\sim \Poisson(\lam)$.
+  \end{definition}
+  \begin{theorem}{}
+    If $X\sim \Poisson(\lam)$ then it has PMF
+    \[
+      p_X(x) = e^{-\lam} \frac{\lam^x}{x!}\quad\text{if}\quad x\in \set{0,1,2,\dotsc}.
+    \]
+    \begin{proof}
+      Let $X$ be the number of arrivals in a unit interval with width $\frac{1}{n}$. As $n$ gets very large, we can think of the number of arrivals in each interval to be either 0 or 1 (Bernoulli trial with success rate $\frac{\lam}{n}$). Thus the overall setup looks like a Binomial distribution, so
+      \[
+        X\approx \Binomial\paren{n, \frac{\lam}{n}}.
+      \]
+      We now just need to take $n\to\infty$. Hence
+      \begin{align*}
+        p_X(x) &= \lim_{n\to \infty} \binom{n}{x}\paren{\frac{\lam}{n}}^x \paren{1 - \frac{\lam}{n}}^{x - n} \\
+               &= \lim_{n\to \infty} \frac{\lam^x}{x!}\cdot \frac{n\cdot (n - 1)\dotsb(n - x + 1)}{n\cdot n\dotsb n}\cdot \paren{1 - \frac{\lam}{n}}^{x - n} \\
+               &= \lim_{n\to \infty} \frac{\lam^x}{x!} \paren{1 - \frac{\lam}{n}}^{x - n} \\
+               &= \frac{\lam^x}{x!}\cdot e^{-\lam}.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+\end{document}
