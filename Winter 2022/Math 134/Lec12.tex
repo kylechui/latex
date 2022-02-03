@@ -1,0 +1,61 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 12}
+  \subsection{Dimensional Analysis}
+  \begin{note}{}
+    For dimensional analysis:
+    \begin{itemize}
+      \item Express all of your time derivatives in a unit-less form by substituting another variable, i.e. $\tau\ceq \frac{t}{T}$.
+      \item Make the equation truly dimensionless by dividing all sides by the common unit, i.e. a unit of force.
+    \end{itemize}
+  \end{note}
+  Since we are not well-equipped to study second-order differential equations yet, we try to find certain conditions that make the second-order term vanish to zero (but not any of the other terms). Consider the following differential equation:
+  \[
+    \frac{r}{gT^2}\cdot \frac{\mathrm{d}^2\phi}{\mathrm{d}\tau^2} = -\frac{b}{mgT} \frac{\mathrm{d\phi}}{\mathrm{d}\tau} - \sin\phi + \frac{r\Omega^2}{g}\sin\phi\cos\phi.
+  \]
+  We wish to study a regime where
+  \[
+    \frac{b}{mgT} = 1,
+  \]
+  so we have that $T = \frac{b}{mg}$. Plugging this $T$ into the second-order term above, we get
+  \begin{align*}
+    \underbrace{\frac{r}{g\paren{\frac{b}{mg}}^2}}_{\eps} \frac{\mathrm{d}^2\phi}{\mathrm{d}\tau^2} &= -\frac{\mathrm{d}\phi}{\mathrm{d}\tau} - \sin\phi + \underbrace{\frac{r\Omega^2}{g}}_{\gamma}\sin\phi\cos\phi \\
+    \eps \frac{\mathrm{d}^2\phi}{\mathrm{d}\tau^2} &= -\frac{\mathrm{d}\phi}{\mathrm{d}\tau} - \sin\phi + \gamma\sin\phi\cos\phi.
+  \end{align*}
+  If $\eps \ll 1$, then we get that
+  \begin{align*}
+    \frac{r}{g\paren{\frac{b}{mg}}^2} &\ll 1 \\
+    m^2gr &\ll b^2.
+  \end{align*}
+  Thus we are left with the equation
+  \begin{align*}
+    0 &= -\frac{\mathrm{d}\phi}{\mathrm{d}\tau} - \sin\phi + \gamma\sin\phi\cos\phi \\
+    \frac{\mathrm{d}\phi}{\mathrm{d}\tau} &= - \sin\phi + \gamma\sin\phi\cos\phi \\
+    \frac{\mathrm{d}\phi}{\mathrm{d}\tau} &= \sin\phi(\gamma\cos\phi - 1).
+  \end{align*}
+  \begin{note}{}
+    The non-dimensionalized form of our model is
+    \[
+      \eps \frac{\mathrm{d}^2\phi}{\mathrm{d}\tau^2} + \frac{\mathrm{d}\phi}{\mathrm{d}\tau} = \sin\phi(\gamma\cos\phi - 1).
+    \]
+    If $\eps \ll 1$, then
+    \[
+      \frac{\mathrm{d}\phi}{\mathrm{d}\tau} = \sin\phi(\gamma\cos\phi - 1).
+    \]
+  \end{note}
+  \subsubsection{Bifurcation Analysis of the First-order Equation}
+  We see that we have fixed points when $\phi = n\pi$ for all $n\in\Z$ or $\cos\phi = \frac{1}{\gamma}$. When $0 < \gamma < 1$, then there are no solutions to $\cos\gamma = \phi$. For $\gamma > 1$, we are going to have two solutions, symmetric about $\phi = 0$, given by $\phi^* = \pm \cos^{-1}(\frac{1}{\gamma})$. Finally, when $\gamma = 1$, then $\phi = 0$. \par
+  We wish to find when $\frac{\partial f}{\partial \phi} = 0$, so
+  \begin{align*}
+    \cos\phi(\gamma\cos\phi - 1) + \sin\phi(-\gamma\sin\phi) &= \gamma\cos^2\phi - \cos\phi - \gamma\sin^2\phi \\
+                                                             &= \gamma\cos^2\phi - \cos\phi - \gamma(1 - \cos^2\phi) \\
+                                                             &= 2\gamma\cos^2\phi - \cos\phi - \gamma.
+  \end{align*}
+\end{document}
