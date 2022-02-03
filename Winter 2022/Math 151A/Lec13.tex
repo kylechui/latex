@@ -1,0 +1,28 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 13}
+  Since we have that $f(x) = P_n(x) + R(x)$, we have that our error term is given by:
+  \begin{align*}
+    \text{error} &= \abs{f(x) - P_n(x)} \\\
+                 &= \abs{R(x)} \\
+                 &= \abs{\frac{f^{(n + 1)}(\xi_x)}{(n + 1)!}(x - x_0)\dotsb(x - x_n)},
+  \end{align*}
+  for $x\in [a, b]$, $\xi_x\in (a, b)$. However, we can't explicitly find $\xi_x$, so we can't find the error. However, we can find an upper bound for the error by just finding the largest value of $f^{(n + 1)}(x)$ over the interval $(a, b)$. Hence our equation becomes
+  \[
+    \text{error} \leq \frac{M}{(n + 1)!}\prod_{i = 0}^n \abs{x - x_i},
+  \]
+  for $x\in [a, b]$ and $M = \max_{a < \xi_x < b}\abs{f^{(n + 1)}(\xi_x)}$. \par
+  \textbf{Question.} It is a bit wasteful to always have to recompute the interpolation polynomial whenever we add a new point. Can we somehow use $P_n(x)$ to generate $P_{n + 1}(x)$?
+  \subsection{Neville's Method}
+  Let $P_{0,1,\dotsc,n}(x)$ be the Lagrange polynomial interpolating $(x_0, f(x_0)),\dotsc,(x_n, f(x_n))$. We need to recursively generate the interpolation polynomial. Suppose we have the $k + 1$ points $x_0,\dotsc,x_k$. Let $0 \leq i < j \leq k$. Then a polynomial interpolating these $k + 1$ points can be given by
+  \[
+    P_{0,\dotsc,k}(x) = \frac{(x - x_i)P_{0,\dotsc,i - 1,i + 1,\dotsc,k}(x) - (x - x_j)P_{0,\dotsc,j - 1,j + 1,\dotsc,k}(x)}{x_j - x_i}.
+  \]
+\end{document}
