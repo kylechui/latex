@@ -1,0 +1,133 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 12}
+  To verify that the PMF that we found last lecture is valid, we observe that
+  \begin{align*}
+    \sum_{x=0}^{\infty} p_X(x) &= \sum_{x=0}^{\infty} \frac{\lam^x}{x!}e^{-\lam} \\
+                               &= e^{-\lam} \sum_{x=0}^{\infty} \frac{\lam^x}{x!} \\
+                               &= e^{-\lam}e^\lam \\
+                               &= 1.
+  \end{align*}
+  \begin{theorem}{}
+    Consider an approximate Poisson process with rate $\lam > 0$ per unit time. Let $X$ be the number of arrivals in a time interval of length $T > 0$ units. Then $X\sim \Poisson(\lam T)$.
+    \begin{proof}
+      As before, we cut up our time interval $T$ into $n$ sub-intervals, so $X\approx \Binomial(n, \frac{\lam T}{n})$. When we take $n\to\infty$, then we have $p_X(x) = e^{-\lam T} \frac{(\lam T)^x}{x!}$, so $X\sim \Poisson(\lam T)$.
+    \end{proof}
+  \end{theorem}
+  \begin{example}{}
+    \begin{itemize}
+      \item I receive phone notifications according to an approximate Poisson process with rate $\frac{1}{15}$ notifications per minute.
+      \item What is the probability that I receive at least one notification in an hour?
+    \end{itemize}
+    Let $X$ be the number of notifications I receive in an hour. Hence $X\sim \Poisson(4)$. Therefore $p_X(x \geq 1) = 1 - p_X(0) = 1 - e^{-4}$.
+  \end{example}
+  \begin{theorem}{}
+    If $\lam > 0$ and $X\sim \Poisson(\lam)$ then its MGF is
+    \[
+      M_X(t) = e^{\lam(e^t - 1)}.
+    \]
+    \begin{proof}
+      We compute
+      \begin{align*}
+        M_X(t) &= \E[e^{tX}] \\
+               &= \sum_{x=0}^{\infty} e^{tx}p_X(x) \\
+               &= \sum_{x=0}^{\infty} e^{tx} e^{-\lam}\cdot \frac{\lam^x}{x!} \\
+               &= e^{-\lam}\sum_{x=0}^{\infty} \frac{(\lam e^t)^x}{x!} \\
+               &= e^{-\lam}e^{\lam e^t} \\
+               &= e^{\lam e^t - \lam} \\
+               &= e^{\lam(e^t - 1)}.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $\lam > 0$ and $X\sim \Poisson(\lam)$, then
+    \begin{align*}
+      \E[X] &= \lam \\
+      \var(X) &= \lam.
+    \end{align*}
+    \begin{proof}
+      Observe that $\ln M_X(t) = \lam (e^t - 1)$. Hence
+      \[
+        \E[X] = (\ln M_X(t))'(0) = \lam.
+      \]
+      Furthermore,
+      \[
+        \var(X) = (\ln M_X(t))''(0) = \lam.
+      \]
+    \end{proof}
+  \end{theorem}
+  \subsection{Random Variables of the Continuous Type}
+  \begin{definition}{Continuous Random Variable}
+    Let $X\colon \Omega\to \R$ be a random variable.
+    \begin{itemize}
+      \item We say that $X$ is a \emph{continuous random variable} if there exists a non-negative integrable function $f_X\colon \R\to [0, \infty)$ so that
+      \[
+        F_X(x) = \int_{-\infty}^{x}f_X(t) \,\mathrm dt.
+      \]
+      Note that this ensures that $F_X(x)$ is continuous.
+      \item We call $f_X(x)$ a \emph{probability density function} for $X$.
+    \end{itemize}
+  \end{definition}
+  \begin{theorem}{}
+    If $X$ is a continuous random variable with PDF $f_X\colon \R\to [0, \infty)$ then
+    \[
+      \int_{-\infty}^{\infty}f_X(x) \,\mathrm dx = 1.
+    \]
+    \begin{proof}
+      As $\displaystyle F_X(x) = \int_{-\infty}^{x}f_X(x) \,\mathrm dx$ and $\displaystyle \lim_{x\to +\infty} F_X(x) = 1$, then
+      \begin{align*}
+        1 &= \lim_{x\to +\infty} F_X(x) \\
+          &= \lim_{x\to +\infty} \int_{-\infty}^{x}f_X(x) \,\mathrm dx \\
+          &=\int_{-\infty}^{\infty}f_X(x) \,\mathrm dx.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    This is analogous to
+    \[
+      \sum_{x\in S}p_X(x) = 1
+    \]
+    for a discrete random variable.
+  \end{note}
+  \phantom{}
+  \begin{theorem}{}
+    If $X$ is a continuous random variable with PDF $f_X\colon \R\to [0, \infty)$ and $a < b$ then
+    \[
+      \P[a < X \leq b] = \int_{a}^{b}f_X(x) \,\mathrm dx.
+    \]
+    \begin{proof}
+      Observe that we have
+      \begin{align*}
+        \P[a < X \leq b] &= \P[\set{X \leq b}\sm \set{X \leq a}] \\
+                         &= \P[X \leq b] - \P[X \leq a] \\
+                         &= \int_{-\infty}^{b}f_X(x) \,\mathrm dx - \int_{-\infty}^{a}f_X(x) \,\mathrm dx \\
+                         &= \int_{a}^{b}f_X(x) \,\mathrm dx.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $X$ is a continuous random variable with PDF $f_X\colon \R\to [0, \infty)$ then for all $x\in\R$ we have
+    \[
+      \P[X = x] = 0.
+    \]
+    \begin{proof}
+      Let $\delta > 0$. Then
+      \begin{align*}
+        \P[X = x] &\leq \P[x - \delta \leq X \leq x] \\
+                  &\leq \int_{x - \delta}^{x}f_X(t) \,\mathrm dt.
+      \end{align*}
+      As we take $\delta \to 0$, we find that $\P[X = x]\to 0$. Hence $\P[X = x] = 0$.
+    \end{proof}
+  \end{theorem}
+  A consequence of the above fact (if $X$ is a \emph{continuous} random variable):
+  \begin{itemize}
+    \item $\P[a < X < b] = \P[a \leq X < b] = \P[a < X \leq b] = \P[a \leq X \leq b]$.
+  \end{itemize}
+\end{document}
