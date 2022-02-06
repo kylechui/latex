@@ -1,0 +1,33 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 14}
+  \subsection{Newton's Divided Difference}
+  As long as you are interpolating the same $n$ points, you will always get the same polynomial if you use any of the methods studied before. \par
+  This method is similar to Neville's method in the sense that it is iterative, and the procedure is as follows:
+  \begin{itemize}
+    \item First find $P_0(x) = f(x_0)$.
+    \item We interpolate $(x_1, f(x_1))$ by writing
+    \[
+      P_1(x) = P_0(x) + a_1(x - x_0),
+    \]
+    for some $a_1$ such that $P_1(x_1) = f(x_1)$.
+    \item We interpolate $(x_2, f(x_2))$ by writing
+    \[
+      P_2(x) = P_1(x) + a_2(x - x_0)(x - x_1),
+    \]
+    for some $a_2$ such that $P_2(x_2) = f(x_2)$.
+    \item Hence we have
+    \begin{align*}
+      P_n(x) &= P_{n - 1}(x) + a_n(x - x_0)\dotsb(x - x_{n - 1}) \\
+             &= f(x_0) + a_1(x - x_0) + \dotsb + a_{n - 1}(x - x_0)\dotsb(x - x_{n - 2}) + a_n(x - x_0)\dotsb(x - x_{n - 1}).
+    \end{align*}
+    It remains to find these coefficients $a_i$ for $i\in 0,\dotsc,n$.
+  \end{itemize}
+\end{document}
