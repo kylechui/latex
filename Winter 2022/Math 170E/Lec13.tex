@@ -1,0 +1,84 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 13}
+  \subsection{Uniform Distribution on an Interval}
+  \begin{definition}{Uniform Distribution}
+    Let $a < b$. I pick a point $X$ at random in the interval $[a, b]$. If I have an equal probability of picking every point in $[a, b]$, we say that $X$ is \emph{uniformly distributed on the interval $[a, b]$}. We write $X\sim \Uniform([a, b])$.
+  \end{definition}
+  \begin{theorem}{}
+    If $a < b$ and $X\sim\Uniform([a, b])$ then it has PDF
+    \[
+      f_X(x) = \begin{cases} \frac{1}{b-a} & \text{if}\quad x\in (a, b)\\0 & \text{otherwise}\end{cases}
+    \]
+    \begin{proof}
+      We know that $\P[X \leq x]$ should be 0 if $x \leq a$ and 1 if $x > b$. If $a < x \leq b$ then $\P[X \leq x] = \frac{x - a}{b - a}$. Hence
+      \[
+        f_X(x) = F_X'(x) = \frac{1}{b - a}\quad \text{for } a < x < b.
+      \]
+    \end{proof}
+  \end{theorem}
+  \subsection{Expected Value of a Continuous Random Variable}
+  \textbf{Idea.} In order to find the expected value of a continuous random variable, we first cut up the interval into $n$ pieces, and then take the limit of the approximate discrete random variable as $n\to \infty$. \par
+  Let $n \geq 1$ and define $X_n$ to be the discrete random variable taking values in the set $\set{0, \pm \frac{1}{n}, \pm \frac{2}{n},\dotsc}$ with PMF
+  \[
+    P_{X_n}(x) = \int_{\frac{j - 1}{n}}^{\frac{j}{n}}f_X(x) \,\mathrm dx\quad\text{if}\quad x = \frac{j}{n}.
+  \]
+  We can see that this is well-defined because when we add up $p_{X_n}(x)$ for all $x\in S$, we get the integral over the reals of $f_X(x)$, which yields 1.
+  \begin{theorem}{}
+    We have
+    \[
+      \E[X_n] \to \int_{-\infty}^{\infty}xf_X(x) \,\mathrm dx.
+    \]
+    \begin{proof}
+      We compute that
+      \begin{align*}
+        \E[X_n] &= \sum_{x\in S} xp_{X_n}(x) \\
+                &= \sum_{j=-\infty}^{\infty} \frac{j}{n}p_{X_n}\paren{\frac{j}{n}} \\
+                &= \sum_{j=-\infty}^{\infty} \frac{j}{n} \int_{\frac{j - 1}{n}}^{\frac{j}{n}}f_X(x) \,\mathrm dx.
+      \end{align*}
+      Observe that if $x\in [\frac{j - 1}{n}, \frac{j}{n}]$, then $x \leq \frac{j}{n} \leq x + \frac{1}{n}$. Hence
+      \begin{gather*}
+        \sum_{j=-\infty}^{\infty} \int_{\frac{j - 1}{n}}^{\frac{j}{n}}xf_X(x) \,\mathrm dx \leq \sum_{j=-\infty}^{\infty} \int_{\frac{j - 1}{n}}^{\frac{j}{n}}\frac{j}{n}f_X(x) \,\mathrm dx \leq \sum_{j=-\infty}^{\infty} \int_{\frac{j - 1}{n}}^{\frac{j}{n}}\paren{x + \frac{1}{n}}f_X(x) \,\mathrm dx \\
+        \int_{-\infty}^{\infty}xf_X(x) \,\mathrm dx \leq \E[X_n] \leq \int_{-\infty}^{\infty}\paren{x + \frac{1}{n}}f_X(x) \,\mathrm dx
+      \end{gather*}
+      If we take $n\to\infty$ and apply Squeeze Theorem, we have
+      \[
+        \lim_{n\to \infty} \E[X_n] = \int_{-\infty}^{\infty}xf_X(x) \,\mathrm dx.
+      \]
+    \end{proof}
+  \end{theorem}
+  \begin{definition}{Expected Value}
+    If $X$ is a continuous random variable with PDF $f_X(x)$ we define its \emph{expected value} to be
+    \[
+      \E[X] = \int_{-\infty}^{\infty}xf_X(x) \,\mathrm dx.
+    \]
+    We still use the notation $\mu_X = \E[X]$. More generally, if $g\colon \R\to \R$ is any function, we define
+    \[
+      \E[g(X)] = \int_{-\infty}^{\infty}g(x)f_X(x) \,\mathrm dx.
+    \]
+  \end{definition}
+  \begin{theorem}{}
+    Let $X$ be a continuous random variable.
+    \begin{itemize}
+      \item If $a\in\R$ is a constant then
+      \[
+        \E[a] = a.
+      \]
+      \item If $a, b\in\R$ are constants and $g, h\colon \R\to \R$ then
+      \[
+        \E[ag(X) + bh(X)] = a\E[g(X)] + b\E[h(X)].
+      \]
+      \item If $g(x) \leq h(x)$ for all $x\in\R$ then
+      \[
+        \E[g(X)] \leq \E[h(X)].
+      \]
+    \end{itemize}
+  \end{theorem}
+\end{document}
