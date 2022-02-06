@@ -1,0 +1,76 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 13}
+  We now perform stability analysis on the differential equation from last lecture. When we are at the fixed point $\phi = 0$, we have that
+  \begin{align*}
+    \left.\frac{\partial f}{\partial \phi}\right|_{\phi = 0} &= (2\gamma\cos^2\phi - \cos\phi - \gamma)|_{\phi = 0} \\
+                                                             &= \gamma - 1.
+  \end{align*}
+  \begin{itemize}
+    \item If $\gamma > 1$, then we have an unstable fixed point at $\phi = 0$.
+    \item If $0 < \gamma < 1$, then we have a stable fixed point at $\phi = 0$.
+    \item If $\gamma = 1$, there is a possible bifurcation at $\phi = 0$.
+  \end{itemize}
+  We now consider the fixed points $\phi = \pm\pi$.
+  \begin{align*}
+    \left.\frac{\partial f}{\partial \phi}\right|_{\phi = \pi} &= (2\gamma\cos^2\phi - \cos\phi - \gamma)|_{\phi = \pi} \\
+                                                             &= \gamma + 1.
+  \end{align*}
+  \begin{itemize}
+    \item We have that this fixed point is unstable for all $\gamma > 0$.
+  \end{itemize}
+  Finally, we consider the fixed points $\phi = \pm\cos^{-1}(\frac{1}{\gamma})$.
+  \begin{align*}
+    \left.\frac{\partial f}{\partial \phi}\right|_{\phi = \pm\cos^{-1}{(1/\gamma)}} &= (2\gamma\cos^2\phi - \cos\phi - \gamma)|_{\phi = \pm\cos^{-1}{(1/\gamma)}} \\
+                                                             &= \frac{1}{\gamma} - \gamma.
+  \end{align*}
+  \begin{itemize}
+    \item If $\gamma > 1$, then we have stable fixed points.
+    \item If $0 < \gamma < 1$, then we have unstable fixed points.
+    \item If $\gamma = 1$, there is a possible bifurcation.
+  \end{itemize}
+  \subsection{Singularly Perturbed Problems}
+  We consider problems of the form
+  \[
+    \eps\phi'' + \phi' = f(\phi).
+  \]
+  We wish to see how the solutions of $\phi' = f(\phi)$ relate to the solutions of the above.
+  \subsection{Another Non-dimensionalization Problem}
+  Consider a damped pendulum with length $L$, mass $m$, friction constant $k$ and gravitational constant $g$. By Newton's Second Law we have
+  \[
+    mL\ddot\theta = -k \dot{\theta} - mg \sin \theta.
+  \]
+  \textbf{Question.} In which region can we approximate it by a first order differential equation? \par
+  We again define $\tau\ceq \frac{t}{T}$, where $T > 0$ is a typical time scale. Thus
+  \[
+    \frac{\mathrm{d}\theta}{\mathrm{d}\tau} = \frac{\mathrm{d}\theta}{\mathrm{d}\tau} \cdot \frac{\mathrm{d}\tau}{\mathrm{d}t} = \frac{\mathrm{d}\theta}{\mathrm{d}\tau}\cdot \frac{1}{T}.
+  \]
+  Hence we have
+  \[
+    \frac{\mathrm{d}^2\theta}{\mathrm{d}t^2} = \frac{\mathrm{d}^2\theta}{\mathrm{d}\tau^2}\cdot \frac{1}{T^2}.
+  \]
+  Therefore the original equation can be rewritten as
+  \[
+    \frac{mL}{T^2}\cdot \frac{\mathrm{d}^2\theta(\tau)}{\mathrm{d}\tau^2} = -\frac{k}{T} \cdot \frac{\mathrm{d}\theta(\tau)}{\mathrm{d}\tau} - mg\sin(\theta(\tau))
+  \]
+  Since the units of each of these terms is force, we divide everything by $mg$, yielding
+  \[
+    \frac{L}{T^2g}\cdot \frac{\mathrm{d}^2\theta(\tau)}{\mathrm{d}\tau^2} = -\frac{k}{Tmg}\cdot \frac{\mathrm{d}\theta(\tau)}{\mathrm{d}\tau} - \sin(\theta(\tau)).
+  \]
+  We choose $T = \frac{k}{mg}$, giving us a coefficient of
+  \[
+    \eps = \frac{L}{g\paren{\frac{k}{mg}}^2} = \frac{m^2gL}{k^2},
+  \]
+  so
+  \[
+    \eps\ddot\theta = -\dot{\theta} - \sin\theta.
+  \]
+  If we take $\eps\ll 1$ then $\dot{\theta} = -\sin\theta$, which is quite a good approximation to the original problem.
+\end{document}
