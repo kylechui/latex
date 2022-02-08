@@ -1,0 +1,63 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 14}
+  The stated problem was: ``Find a number that leaves remainders 2 on division by 3, 3 on division by 5, and 2 on division by 7''. \par
+  \textbf{Explanation.}
+  If we count by threes and have remainder 2, put down 140. If we count by fives and have remainder 3, put down 63. If we count by sevens and have remainder 2, put down 30. Add them all to get 233, and subtract 210 to get the answer (23). \par
+  \textbf{Observation.}
+  \begin{align*}
+    140\equiv 2 \pmod 3 \\
+    140\equiv 0 \pmod 5 \\
+    140\equiv 0 \pmod 7 \\
+    63\equiv 0 \pmod 3 \\
+    63\equiv 3 \pmod 5 \\
+    63\equiv 0 \pmod 7 \\
+    30\equiv 0 \pmod 3 \\
+    30\equiv 0 \pmod 5 \\
+    30\equiv 2 \pmod 7
+  \end{align*}
+  Notice that each one of these numbers ``takes care of'' exactly one of the conditions. If we add all of them together, we get the correct remainders for each of the divisions. We can then just subtract as many of the products of all the numbers as many times as possible (since 105 is congruent to 0 mod 3, 5, and 7). \par
+  It remains to see how to get the values of 140, 63, and 30. \par
+  \textbf{Explanation.} If we count by threes and have remainder 1, put down 70. If we count by fives and have remainder 1, put down 21. If we count by sevens and have remainder 1, put down 15. \par
+  \textbf{Observation.} 70 is the smallest multiple of 5 and 7 with remainder 1 after division by 3. The same rule follows for 21 and 15 (3 and 7, 3 and 5). The numbers from before are simply multiples of these values.
+  \subsection{General Method for Chinese Remainder Theorem}
+  To find a number $m$ such that:
+  \begin{align*}
+    m\equiv a\pmod p \\
+    m\equiv b\pmod q \\
+    m\equiv c\pmod r,
+  \end{align*}
+  perform the following:
+  \begin{enumerate}[label=(\arabic*)]
+    \item 
+    \begin{itemize}
+      \item Find a multiple of $qr$ with remainder 1 on division by $p$.
+      \item Find a multiple of $pr$ with remainder 1 on division by $q$.
+      \item Find a multiple of $pq$ with remainder 1 on division by $r$.
+    \end{itemize}
+    \item Multiply these numbers by $a$, $b$, and $c$, respectively.
+    \item Sum the resulting numbers.
+    \item Subtract an appropriate multiple of $pqr$ to get the \emph{smallest} possible solution.
+  \end{enumerate}
+  \begin{note}{}
+    It is entirely possible that there exists \emph{no solution} for step 1!
+  \end{note}
+  \textbf{Fact.} Step 1 is possible if $p$, $q$, and $r$ have no common divisors. In particular,
+  \[
+    \gcd(p, q) = \gcd(p, r) = \gcd(q, r) = 1.
+  \]
+  This was first solved in full generality in the ``Shushu Jiuzhang'' or the ``Mathematical Treatise in Nine Sections'' of Qin Jinshao, 1247 CE. \par
+  \textbf{Idea.} Via the Euclidean Algorithm, there exists $m, n$ such that
+  \[
+    mqr + np = 1,
+  \]
+  if $\gcd(qr, p) = 1$. Hence $mqr\equiv 1\pmod p$. \par
+  \textbf{Fact.} We can find $m$ by ``reversing'' the Euclidean Algorithm.
+\end{document}
