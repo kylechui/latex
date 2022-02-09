@@ -1,0 +1,126 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 14}
+  We still use the same notation for variance,
+  \[
+    \var(X) = \E[(X - \E[X])^2],
+  \]
+  and the standard deviation is still defined by $\sigma_X^2 = \var(X)$.
+  \begin{theorem}{}
+    If $X$ is a continuous random variable then
+    \[
+      \var(X) = \E[X^2] - \E[X]^2.
+    \]
+    \begin{proof}
+      The exact same as for the discrete case!
+    \end{proof}
+  \end{theorem}
+  \begin{definition}{Moment Generating Function}
+    If $X$ is a continuous random variable we define its \emph{moment generating function} to be 
+    \[
+      M_X(t) = \E[e^{tX}],
+    \]
+    for all $t\in\R$ for which this makes sense.
+  \end{definition}
+  The properties that we have proved before for discrete variables still apply in this continuous case.
+  \subsection{The Exponential Distribution}
+  \begin{example}{Customers at a Coffee Shop}
+    \begin{itemize}
+      \item Customers arrive at a coffee shop according to an approximate Poisson process with rate 1 customer per minute.
+      \item Let $X$ be the arrival time (in minutes) of the first customer.
+      \item What is the probability that $X \leq \frac{1}{2}$?
+    \end{itemize}
+    Let $N$ be the number of arrivals in half a minute, so $N\sim \Poisson(\frac{1}{2})$. Then
+    \[
+      \P[X \leq \frac{1}{2}] = \P[N \geq 1] = 1 - \P[N = 0] = 1 - e^{-\frac{1}{2}},
+    \]
+    since $p_N(x) = \paren{\frac{1}{2}}^x\cdot \frac{1}{x!}e^{-\frac{1}{2}}$ for $x = 0,1,2,\dotsc$.
+  \end{example}
+  \begin{definition}{Exponential Distribution}
+    Consider an approximate Poisson process with rate $\lam > 0$ per unit time.
+    \begin{itemize}
+      \item Let $X$ be the time of the first arrival.
+      \item We say that $X$ is \emph{exponentially distributed} with mean waiting time $\theta = \frac{1}{\lam}$ and write $X\sim \Exponential(\theta)$.
+    \end{itemize}
+  \end{definition}
+  \begin{note}{}
+    Some textbooks/authors use $\lam$ as the parameter instead of $\theta$.
+  \end{note}
+  \begin{theorem}{}
+    If $\theta > 0$ and $X\sim \Exponential(\theta)$ then its PDF is
+    \[
+      f_X(x) = \frac{1}{\theta}e^{-\frac{x}{\theta}}\quad\text{if}\quad x > 0.
+    \]
+    \begin{proof}
+      Consider an approximate Poisson process with rate $\lam = \frac{1}{\theta}$. Clearly, there are no arrivals before time 0, so $F_X(x) = 0$ if $x < 0$. If $x > 0$, let $N$ be the number of arrivals in time interval $[0, x]$, so $N\sim \Poisson(\lam x)$. As in our example
+      \begin{align*}
+        F_X(x) &= \P[X \leq x] \\
+               &= \P[N \geq 1] \\
+               &= 1 - \P[N = 0] \\
+               &= 1 - e^{-\lam x}.
+      \end{align*}
+      So we have
+      \[
+        F_X(x) = \begin{cases}
+          1 - e^{-\lam x} & \text{if } x > 0, \\
+          0 & \text{if }x \leq 0.
+        \end{cases}
+      \]
+      Hence
+      \[
+        f_X(x) = F_X'(x) = \lam e^{-\lam x},
+      \]
+      and substituting $\lam = \frac{1}{\theta}$ gives us the desired result.
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    If we take $x\to\infty$ for the CDF $F_X(x)$, we see that $F_X(x)\to 1$.
+  \end{note}
+  \begin{theorem}{}
+    If $\theta > 0$ and $X\sim \Exponential(\theta)$ then its MGF is
+    \[
+      M_X(t) = \frac{1}{1 - \theta t}\quad\text{if }\quad t <\frac{1}{\theta}.
+    \]
+    \begin{proof}
+      We compute
+      \begin{align*}
+        M_X(t) &= \E[e^{tX}] \\
+               &= \int_{0}^{\infty}e^{tx}\cdot \frac{1}{\theta}e^{-\frac{x}{\theta}} \,\mathrm dx \\
+               &= \frac{1}{\theta} \int_{0}^{\infty}e^{(t - \frac{1}{\theta}) x} \,\mathrm dx \\
+               &= \frac{1}{\theta}\cdot -\frac{1}{t - \frac{1}{\theta}} \tag{$t < \frac{1}{\theta}$} \\
+               &= \frac{1}{1 - \theta t}.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $\theta > 0$ and $X\sim \Exponential(\theta)$ then
+    \begin{align*}
+      \E[X] &= \theta, \\
+      \var(X) &= \theta^2.
+    \end{align*}
+    \begin{proof}
+      We compute
+      \begin{align*}
+        \ln M_X(t) &= -\ln(1 - \theta t) \\
+        (\ln M_X)'(t) &= \frac{\theta}{1 - \theta t} \\
+        (\ln M_X)''(t) &= \frac{\theta^2}{(1 - \theta t)^2}.
+      \end{align*}
+      Substituting $t = 0$ into the above derivatives yields the desired results.
+    \end{proof}
+  \end{theorem}
+  \subsection{Random Processes}
+  \begin{definition}{Random Process}
+    A \emph{random process} is a collection of random variables, indexed by a ``time'' parameter. For example:
+    \begin{itemize}
+      \item Approximate Poisson process
+      \item Bernoulli process (repeated flips of an unfair coin)
+    \end{itemize}
+  \end{definition}
+\end{document}
