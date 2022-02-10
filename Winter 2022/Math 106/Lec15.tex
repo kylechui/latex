@@ -1,0 +1,49 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 15}
+  \begin{theorem}{Chinese Remainder Theorem}
+    If $p_1, \dotsc, p_k$ are relatively prime (i.e. $\gcd(p_i, p_j) = 1$ for all $i \leq i\neq j \leq k$) and $r_1 < p_1,\dotsc, r_k < p_k$, then there exists an integer $n$ such that
+    \[
+      n\equiv r_i\pmod {p_i}
+    \]
+    for every $i$.
+  \end{theorem}
+  \begin{example}{}
+    Find $n$ such that
+    \begin{align*}
+      n\equiv 2\pmod 3, \\
+      n\equiv 2\pmod 4, \\
+      n\equiv 3\pmod 5.
+    \end{align*}
+    We first find a multiple of $4\cdot 5$ with remainder 1 on division by 3. In this case, 40 suffices. We then find multiples of other pairs of numbers that result on a remainder by 1 when divided by the last number, which yields 45 and 36. We then scale by their respective multiples, which gives us 80, 90, 108. Their sum is 278, and then we take it mod $3\cdot 4\cdot 5$ to get 38 as our final answer.
+  \end{example}
+  \subsection{Linear Diophantine Equations}
+  ``$ax + by = c$ has an integer solutions in $x, y$ if and only if $\gcd(a, b)\mid c$''. \par
+  This was observed and used a lot in China, India, etc.
+  \subsection{Linear Equations and Elimination}
+  In the ``Nine Chapters of Mathematical Art'', (c. 200BCE--200CE), the method of Gaussian elimination (row reduction) is explained. It is used to solve \emph{systems} of linear equations. The general form is
+  \begin{align*}
+    a_{11}x_1 + a_{12}x_2 + \dotsb + a_{1n}x_n &= b_1 \\
+    a_{21}x_1 + a_{22}x_2 + \dotsb + a_{2n}x_n &= b_2 \\
+    \vdots\hspace{43pt} \\
+    a_{n1}x_1 + a_{n2}x_2 + \dotsb + a_{nn}x_n &= b_n \\
+  \end{align*}
+  \textbf{Idea.} Subtract a multiple of each equation from the ones below to get a ``triangular'' system.
+  \begin{note}{}
+    This is only possible if we don't create rows with only zeroes, or if the matrix of coefficients is invertible.
+  \end{note}
+  \textbf{Fact.} Around the 12\tsup{th} century China, a similar method was applied to systems of polynomial equations (not necessarily linear) in two or more variables.
+  \paragraph{General Form in 2 Unknowns}
+  \begin{align*}
+    a_0(x)y^m + a_1(x)y^{m - 1} + \dotsb + a_{m - 1}(x)y + a_m(x) &= 0, \\
+    b_0(x)y^m + b_1(x)y^{m - 1} + \dotsb + b_{m - 1}(x)y + b_m(x) &= 0,
+  \end{align*}
+  where $a_i(x), b_i(x)$ are polynomials in $x$.
+\end{document}
