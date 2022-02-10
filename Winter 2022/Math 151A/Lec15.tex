@@ -1,0 +1,60 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 15}
+  \begin{definition}{Divided Difference}
+    The zeroth divided difference is written as
+    \[
+      f[x_i] = f(x_i).
+    \]
+    The first divided difference is written as
+    \[
+      f[x_i, x_{i + 1}] = \frac{f[x_{i + 1}] - f[x_i]}{x_{i + 1} - x_i}.
+    \]
+    The second divided difference is written as
+    \[
+      f[x_i, x_{i + 1}, x_{i + 2}] = \frac{f[x_{i + 1, x_{i + 2}}] - f[x_i, x_{i + 1}]}{x_{i + 2} - x_i}.
+    \]
+    Hence the $k$\tsup{th} divided difference is
+    \[
+      f[x_i,\dotsc,x_{i + k}] = \frac{f[x_{i + 1},\dotsc,x_{i + k}] - f[x_i,\dotsc,x_{i + k - 1}]}{x_{i + k} - x_i}.
+    \]
+  \end{definition}
+  \begin{note}{}
+    The value of the divided differences is \emph{independent} of the order of $x_0,\dotsc,x_k$.
+  \end{note}
+  \subsection{Newton's Divided Difference Form of the Interpolation Polynomial}
+  When we take $n = 1$, we have $P_1(x) = f(x_0) + a_1(x - x_0)$. To find $a_1$ such that $P_1(x_1) = f(x_1)$, we have
+  \begin{align*}
+    f(x_0) + a_1(x_1 - x_0) &= f(x_1) \\
+    a_1 &= \frac{f(x_1) - f(x_0)}{x_1 - x_0} \\
+    a_1 &= f[x_0, x_1].
+  \end{align*}
+  When we have $n = 2$, we have
+  \[
+    P_2(x) = f(x_0) + a_1(x - x_0) + a_2(x - x_0)(x - x_1).
+  \]
+  Hence we solve for $a_2$ such that $P_2(x_2) = f(x_2)$. If we continue these computations we find that
+  \[
+    P_n(x) = f[x_0] + f[x_0, x_1](x - x_0) + \dotsb + f[x_0,\dotsc,x_n](x - x_0)\dotsb(x - x_{n - 1}).
+  \]
+  \begin{note}{}
+    A benefit for using the Divided difference algorithm is that we can continually factor out $x - x_i$ terms, without expanding the polynomial.
+  \end{note}
+  \begin{theorem}{Uniqueness of Interpolation Polynomials}
+    If $x_0,x_1,\dotsc,x_n$ are $n + 1$ distinct numbers and $f$ is a function whose values are gives at these inputs, then a unique polynomial $P$ of degree at most ``$n$'' exists with $P(x_i) = f(x_i)$ for all $i\in 0,\dotsc,n$.
+    \begin{proof}
+      We first show existence, by defining
+      \[
+        P(x) = \sum_{i=0}^{n} \ell_i(x)f(x_i),
+      \]
+      where $\ell_i(x)$ is our base function from before. We now show uniqueness. Let $P(x)$ and $Q(x)$ be two interpolation polynomials such that $P(x_i) = Q(x_i) = f(x_i)$ for all $i=0,\dotsc,n$. We define a difference function $D(x) = P(x) - Q(x)$, so $D(x_i) = 0$ for all $i = 0,\dotsc,n$ and $D(x)$ has degree at most ``$n$''. Since it has more distinct roots than it has degree, it must be identically zero. Therefore $P(x) = Q(x)$ and our interpolation polynomial is unique.
+    \end{proof}
+  \end{theorem}
+\end{document}
