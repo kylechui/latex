@@ -1,0 +1,102 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 16}
+  \subsection{The Normal Distribution}
+  In general with large samples, we observe the same distribution over and over again.
+  \begin{definition}{Normal Distribution}
+    We say a continuous random variable $X$ is \emph{normally distributed} with mean $\mu$ and variance $\sigma^2$ if it has PDF
+    \[
+      f_X(x) = \frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(x - \mu)^2}{2\sigma^2}}\quad\text{for}\quad x\in\R.
+    \]
+    We write $X\sim \mathcal{N}(\mu, \sigma^2)$. If $\mu = 0$ and $\sigma^2 = 1$ we say that $X$ is a \emph{standard normal} random variable.
+  \end{definition}
+  \begin{theorem}{}
+    We have
+    \[
+      \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(t - \mu)^2}{2\sigma^2}} \,\mathrm dt = 1.
+    \]
+    \begin{proof}
+      Let $x = \frac{t - \mu}{\sigma}$ so $\mathrm{d}x = \frac{1}{\sigma}\mathrm{d}t$. Then
+      \[
+        \int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi\sigma^2}}e^{-\frac{(t - \mu)^2}{2\sigma^2}} \,\mathrm dt = \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} \,\mathrm dx.
+      \]
+    \end{proof}
+    Let's call the above $I$. Then we have
+    \begin{align*}
+      I^2 &= \paren{\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{x^2}{2}} \,\mathrm dx}\paren{\int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi}} e^{-\frac{y^2}{2}} \,\mathrm dy} \\
+          &= \frac{1}{2\pi} \int_{-\infty}^{\infty}\int_{-\infty}^{\infty}e^{-\frac{x^2 + y^2}{2}} \,\mathrm dx \,\mathrm dy \\
+          &= \frac{1}{2\pi}\int_{0}^{2\pi}\int_{0}^{\infty} e^{-\frac{1}{2}r^2}r\,\mathrm dr \,\mathrm d\theta \\
+          &= 1.
+    \end{align*}
+    Therefore $I = 1$.
+  \end{theorem}
+  \begin{theorem}{}
+    If $X\sim \mathcal{N}(\mu, \sigma^2)$ then it has MGF
+    \[
+      M_X(t) = e^{\mu t + \frac{1}{2}\sigma^2t^2}.
+    \]
+    \begin{proof}
+      We compute
+      \begin{align*}
+        M_X(t) &= \E[e^{tX}] \\
+               &= \int_{-\infty}^{\infty} \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x - \mu)^2}{2\sigma^2}}e^{tx} \,\mathrm dx \\
+               &= \text{a lot of computation} \\
+               &= e^{\mu t + \frac{1}{2}\sigma^2t^2}.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $X\sim \mathcal{N}(\mu, \sigma^2)$ then
+    \begin{align*}
+      \E[X] &= \mu, \\
+      \var(X) &= \sigma^2.
+    \end{align*}
+    \begin{proof}
+      As with before, we compute $(\ln M_X)'$ and $(\ln M_X)''$ and evaluate them at 0 to get the desired results.
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If
+    \[
+      \Phi(x) = \int_{-\infty}^{x} \frac{1}{\sqrt{2\pi}}e^{-\frac{t^2}{2}} \,\mathrm dt
+    \]
+    is the CDF of the standard normal distribution then
+    \[
+      \Phi(-x) = 1 - \Phi(x).
+    \]
+  \end{theorem}
+  \begin{theorem}{}
+    If $X\sim \mathcal{N}(0, 1)$, then $-X\sim \mathcal{N}(0, 1)$.
+    \begin{proof}
+      Let $Y = -X$. Then
+      \begin{align*}
+        F_Y(y) &= \P[Y \leq y] \\
+               &= \P[-X \leq y] \\
+               &= \P[-y \leq X] \\
+               &= 1 - \P[X < -y] \\
+               &= 1 - \Phi(-y) \\
+               &= \Phi(y).
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $X\sim \mathcal{N}(\mu, \sigma^2)$ then $Z = \frac{1}{\sigma}(X - \mu)\sim \mathcal{N}(0, 1)$.
+    \begin{proof}
+      We compute
+      \begin{align*}
+        F_Z(z) &= \P[Z \leq z] \\
+               &= \P[\frac{1}{\sigma}(X - \mu) \leq z] \\
+               &= \P[X \leq \mu + \sigma z] \\
+               &= \int_{-\infty}^{\mu + \sigma z} \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{1}{2\sigma^2}(x - \mu)} \,\mathrm dx \\
+               &= \Phi(z).
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+\end{document}
