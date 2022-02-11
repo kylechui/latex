@@ -1,0 +1,131 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 15}
+  \subsection{The Gamma Distribution}
+  \begin{definition}{Gamma Distribution}
+    Consider an approximate Poisson process with rate $\lam > 0$ per unit time.
+    \begin{itemize}
+      \item Let $\alpha \geq 1$ be an integer and $X$ be the time of the $\alpha$\tsup{th} arrival.
+      \item We say that $X$ is \emph{gamma distributed} with parameters $\alpha, \theta = \frac{1}{\lam}$ and write $X\sim \mathrm{Gamma}(\alpha, \theta)$.
+    \end{itemize}
+  \end{definition}
+  \begin{note}{}
+    By definition, we have that $\Exponential(\theta)\sim \mathrm{Gamma}(1, \theta)$.
+  \end{note}
+  \begin{theorem}{}
+    Let $\alpha \geq 1$ be an integer and $\theta > 0$. If $X\sim \mathrm{Gamma}(\alpha, \theta)$ then its PDF is
+    \[
+      f_X(x) = \frac{1}{\theta^\alpha(\alpha - 1)!}x^{\alpha - 1}e^{-\frac{x}{\theta}}\quad\text{if}\quad x > 0.
+    \]
+    \begin{proof}
+      Let $X > 0$ and $N$ be the number of arrivals in the time interval $[0, x]$. Then we know that $N\sim \Poisson(\lam x)$, where $\lam = \frac{1}{\theta}$. Hence
+      \begin{align*}
+        \P[X \leq x] &= 1 - \P[X > x] \\
+                     &= 1 - \P[N \leq \alpha - 1] \\
+                     &= 1 - \sum_{n=0}^{\alpha - 1} p_N(n) \\
+                     &= 1 - \sum_{n=0}^{\alpha - 1} \frac{(\lam x)^n}{n!}e^{-\lam x}.
+      \end{align*}
+      Thus we have
+      \begin{align*}
+        f_X(x) &= F_X'(x) \\
+               &= -\sum_{n=1}^{\alpha - 1} \lam\cdot \frac{(\lam x)^{n - 1}}{(n - 1)!}e^{-\lam x} + \sum_{n=0}^{\alpha - 1} \frac{(\lam x)^n}{n!} \lam e^{-\lam x} \\
+               &= -\lam \sum_{n=0}^{\alpha - 2} \frac{(\lam x)^n}{n!}e^{-\lam x} + \lam \sum_{n=0}^{\alpha - 1} \frac{(\lam x)^n}{n!}e^{-\lam x} \\
+               &= \lam \frac{(\lam x)^{\alpha - 1}}{(\alpha - 1)!}e^{-\lam x} \\
+               &= \frac{x^{\alpha - 1}}{\theta^\alpha(\alpha - 1)!}e^{-\frac{x}{\theta}}\quad\text{if}\quad x > 0.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{definition}{Gamma Function}
+    We define
+    \[
+      \Gamma(\alpha) \ceq \int_{0}^{\infty}x^{\alpha - 1}e^{-x} \,\mathrm dx.
+    \]
+  \end{definition}
+  \begin{theorem}{}
+    We have that
+    \begin{itemize}
+      \item $\Gamma(1) = 1$
+      \item For $\alpha > 1$ we have
+      \[
+        \Gamma(\alpha) = (\alpha - 1)\Gamma(\alpha - 1)
+      \]
+      \item If $\alpha \geq 1$ is an integer then
+      \[
+        \Gamma(\alpha) = (\alpha - 1)!
+      \]
+    \end{itemize}
+    \begin{proof}
+      \begin{itemize}
+        \item Observe that
+        \[
+          \Gamma(1) = \int_{0}^{\infty}e^{-x} \,\mathrm dx = 1.
+        \]
+        \item We compute
+        \begin{align*}
+          \Gamma(\alpha) &= \int_{0}^{\infty}x^{\alpha - 1}e^{-x} \,\mathrm dx \\
+                         &= [-x^{\alpha - 1}e^{-x}]_0^\infty + \int_{0}^{\infty}(\alpha - 1) x^{\alpha - 2}e^{-x}\,\mathrm dx \\
+                         &= 0 + (\alpha - 1)\Gamma(\alpha - 1).
+        \end{align*}
+        \item This is a direct consequence of the previous two properties.
+      \end{itemize}
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    Using the gamma function, we may extend our definition of the Gamma distribution to be
+    \[
+      f_X(x) = \frac{1}{\theta^\alpha\Gamma(\alpha)}x^{\alpha - 1}e^{-\frac{x}{\theta}}.
+    \]
+  \end{note}
+  \begin{theorem}{}
+    Let $\alpha, \theta > 0$ and $X\sim \mathrm{Gamma}(\alpha, \theta)$. Then $X$ has MGF
+    \[
+      M_X(t) = \frac{1}{(1 - \theta t)^\alpha}\quad\text{if}\quad t < \frac{1}{\theta}.
+    \]
+  \end{theorem}
+  \begin{theorem}{}
+    Let $\alpha, \theta > 0$ and $X\sim \mathrm{Gamma}(\alpha, \theta)$. Then
+    \begin{align*}
+      \E[X] &= \alpha\theta, \\
+      \var(X) &= \alpha\theta^2.
+    \end{align*}
+  \end{theorem}
+  \subsection{The Chi-Square Distribution}
+  This is a special case of the Gamma distribution.
+  \begin{definition}{Chi-Square Distribution}
+    If $r\in \set{1,2,3,\dotsc}$ we call the $\Gamma(\frac{r}{2}, 2)$ distribution the \emph{chi-square distribution} with $r$ degrees of freedom. If $X\sim \chi^2(r)$ then it has PDF
+    \[
+      f_X(x) = \frac{1}{2^{\frac{r}{2}}\Gamma(\frac{r}{2})}x^{\frac{r}{2} - 1}e^{-\frac{x}{2}}\quad\text{if}\quad x > 0,
+    \]
+    as well as
+    \[
+      \E[X] = r\quad\text{and}\quad \var(X) = 2r.
+    \]
+  \end{definition}
+  \begin{example}{}
+    Suppose that $X$ is a continuous random variable with PDF
+    \[
+      f_X(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}.
+    \]
+    Then $X^2\sim \chi^2(1)$.
+    \begin{proof}
+      Let $Z = X^2$. Then
+      \begin{align*}
+        F_Z(z) &= \P[Z \leq z] \\
+               &= \P[X^2 \leq z] \\
+               &= \P[-\sqrt{z} \leq X \leq\sqrt{z}] \tag{if $z > 0$} \\
+               &= \int_{-\sqrt{z}}^{\sqrt{z}}\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \,\mathrm dx \\
+               &= 2\int_{0}^{\sqrt{z}}\frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}} \,\mathrm dx \\
+               &= \frac{2}{\sqrt{2\pi}} \int_{0}^{z}e^{-\frac{u}{2}}\cdot \frac{1}{2\sqrt{u}} \,\mathrm du \\
+               &= \frac{1}{\sqrt{2\pi}} \int_{0}^{z}e^{-\frac{u}{2}}\cdot u^{-\frac{1}{2}} \,\mathrm du.
+      \end{align*}
+      Therefore we have $f_Z(z) = \frac{1}{\sqrt{2 \pi}}z^{-\frac{1}{2}}e^{-\frac{z}{2}}$ if $z > 0$, and $Z\sim \chi^2(1)$.
+    \end{proof}
+  \end{example}
+\end{document}
