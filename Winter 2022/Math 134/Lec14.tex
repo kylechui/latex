@@ -1,0 +1,22 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 14}
+  \subsection{Imperfect Bifurcations}
+  We consider differential equations of the form
+  \[
+    \dot{x} = f(x, r, h).
+  \]
+  Note that in this case we have \emph{two} parameters. How can we study fixed points/stability/bifurcations?
+  \begin{example}{}
+    Consider the differential equation given by $\dot{x} = h + rx - x^3$. \par
+    We can rewrite this as $\dot{x} = x(r - x^2) - (-h)$, and we let $y_1 = x(r - x^2)$ and $y_2 = -h$. When $h = 0$, we have a supercritical pitchfork bifurcation. We call $h$ the \emph{imperfection parameter}. \par
+    We first fix $r$ and vary $h$. Critical points occur whenever $y_1(x) = y_2(x)$. We see that when $r \leq 0$ we have 1 stable critical point. \par
+  \end{example}
+\end{document}
