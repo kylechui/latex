@@ -1,0 +1,47 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 16}
+  \subsection{Numerical Differentiation and Integration}
+  Given $f(x)$:
+  \begin{itemize}
+    \item Approximate $f'(x^*)$.
+    \item Approximate $\int_{a}^{b}f(x) \,\mathrm dx$.
+  \end{itemize}
+  Given $f(x^*), f(x^* \pm h), f(x^*\pm 2h),\dotsc$:
+  \begin{itemize}
+    \item Approximate $f'(x^*)$.
+    \item Approximate $\int_{a}^{b}f(x) \,\mathrm dx$.
+  \end{itemize}
+  \subsubsection{Numerical Differentiation}
+  We can just use secant lines to approximate the slopes of a tangent line:
+  \[
+    f'(x^*)\approx \frac{f(x^* \pm h) - f(x^*)}{h}.
+  \]
+  We have the forward difference given by
+  \[
+    \Delta f(x^*)= f(x^* + h) - f(x^*),
+  \]
+  and the backwards difference given by
+  \[
+    \nab f(x^*)= f(x^*) - f(x^* - h).
+  \]
+  \textbf{Idea.} We should take the average of these two approximations and see if the ``errors cancel out''. We have
+  \[
+    f'(x^*)\approx \frac{f(x^* + h) - f(x^* - h)}{2h}.
+  \]
+  We call our central difference $f(x^* + h) - f(x^* - h)$. \par
+  From polynomial interpolations we can get an approximation for $f$, and we use this to approximate $f'$. We find a polynomial that interpolates the points $(x^*, f(x^*)), (x^* + h, f(x^* + h))$ to be
+  \[
+    f'(x^*) = \frac{f(x^* + h) - f(x^*)}{h} - \underbrace{\frac{h}{2}f''(\xi_*)}_{\text{Error}}\tag{$\xi_*\in (x^*, x^* + h)$}
+  \]
+  \begin{note}{}
+    If our function is in $C^2$, we have that $\abs{f''(\xi_*)}$ has a maximum value, and hence the error is order $\mathcal{O}(h)$.
+  \end{note}
+\end{document}
