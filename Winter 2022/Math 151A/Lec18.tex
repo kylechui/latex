@@ -1,0 +1,35 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 18}
+  If we Taylor expand $f(x^* + h)$ and $f(x^* - h)$ at $x^*$, we can solve for $f''(x^*)$, yielding
+  \[
+    f''(x^*) = \frac{f(x^* + h) - 2f(x^*) + f(x^* - h)}{h^2} + \frac{h^2}{24}\paren{f^{(4)}(\xi_h) + f^{(4)}(\xi_{-h})},
+  \]
+  where $\xi_{-h}\in (x^* - h, x^*)$ and $\xi_h\in (x^*, x^* + h)$.
+  \subsection{Richardson's Extrapolation}
+  \begin{itemize}
+    \item From lower accuracy method to higher accuracy method.
+    \item Need to have the formula for approximation, as well as explicit error terms.
+    \begin{itemize}
+      \item For the first case, we suppose that $M = N_1(h) + k_1h + k_2h^2 + k_3h^3 + \dotsb$, so $N_1(h)$ is an $\mathcal{O}(h)$ approximation of $M$. We also have that $M = N_1(\frac{h}{2}) + k_1\cdot \frac{h}{2} + \dotsb$, so we can combine these two equations to find
+      \[
+        M = 2N_1\paren{\frac{h}{2}} - N_1(h) - \frac{k_2h^2}{2} - \frac{k_3h^3}{4} - \dotsb,
+      \]
+      which is an $\mathcal{O}(h^2)$ approximation of $M$.
+      \begin{note}{}
+        We can define $N_2(h) = 2N_1(\frac{h}{2}) - N_1(h)$.
+      \end{note}
+    \end{itemize}
+  \end{itemize}
+  In general, we have
+  \[
+    N_k(h) = \frac{2^{k - 1}N_{k - 1}\paren{\frac{h}{2}} - N_{k - 1}(h)}{2^{k - 1} - 1}.
+  \]
+\end{document}
