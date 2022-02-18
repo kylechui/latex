@@ -1,0 +1,44 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 18}
+  \subsection{Pell's Equation in India}
+  Recall that both the ancient Chinese and Indians found integer solutions to linear equations using Chinese remainder theorem
+  \begin{itemize}
+    \item Chinese found general (approximate) solutions to ``more complicated equations'' (systems of polynomial equations)
+    \item Indians found integer solutions to other equations
+  \end{itemize}
+  Pell's equation takes the form
+  \[
+    x^2 - ny^2 = 1,
+  \]
+  where $n$ is a positive integer and not a square.
+  \textbf{Observation.} We may rewrite this equation to be
+  \begin{align*}
+    x^2 - ny^2 &= 1 \\
+    (x + y\sqrt{n})(x - y\sqrt{n}) &= 1
+  \end{align*}
+  Hence if $\sqrt{n}$ is an integer, then we have the trivial solution $x = \pm 1, y = 0$. If $\sqrt{n}\notin \Z$, there could be ``non-trivial'' solutions to this equation.
+  \paragraph{Why this equation?} \par
+  Solutions to this equation can give good approximations for $\sqrt{n}\approx \frac{x}{y}$.
+  \begin{note}{}
+    This equation with $n = 2$ appears already in Greece, China, etc.
+  \end{note}
+  \paragraph{Brahmagupta's Discovery} \par
+  Suppose we have $(x_1^2 - ny_1^2)(n_2^2 - ny_2^2) = (x_1x_2 + ny_1y_2)^2 - n(x_1y_2 + x_2y_1)^2 = 1$. Hence we can define a new pair $(x_3, y_3)$ to be $x = x_1x_2 + ny_1y_2, y = x_1y_2 + x_2y_1$. Furthermore, if $x_1^2-ny_1^2 = k_1$ and $x_2^2-ny_2^2 = k_2$, then we have $x_3^2 - ny_3^2 = k_1k_2$. \par
+  We say that the triple $(x_3, y_3, k_1k_2)$ is the \emph{composition} of the $(x_1,y_1,k_1)$ and $(x_2,y_2,k_2)$. \par
+  \textbf{Observation.} If we have any solution with $x, y\neq 0$, we can generate infinitely many solutions (since the composition is strictly larger than the previous solutions).
+  \begin{example}{}
+    We start with $n = 2$, and let $x = 3, y = 2$. We can find another solution by composing that solution with itself. We find that the composition of $(3, 2, 1)$ with itself is $(17, 12, 1)$.
+  \end{example}
+  \textbf{Fact.} Sometimes, we can find solutions to Pell's equation from solutions to $x^2 - ny^2 = k$ for some $k\in\Z$.
+  \begin{example}{}
+    If $k = -1$, then composing with itself yields a solution to Pell's equation.
+  \end{example}
+\end{document}
