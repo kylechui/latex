@@ -1,0 +1,57 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 16}
+  To solve a system of equations in many variables, keep reducing the highest-order term via Gaussian elimination, until you have an equation only in $x$.
+  \begin{note}{}
+    Using this method will simplify the problem to only one variable, but the degrees of the terms will be higher.
+  \end{note}
+  Recall that due to the anonymity of most early Chinese mathematicians, we are largely unsure who was the first to introduce these mathematical methods, and when they were introduced. Starting in the 12\tsup{th} and 13\tsup{th} century, we learn more. \par
+  \paragraph{Qin Jiushao (Daogu) $c$. 1202--1261}
+  \begin{itemize}
+    \item Born in the Sichuan Province
+    \item Main profession was \emph{not} a mathematician
+    \item First he joined the army, later studied astronomy and math, became a government employee, and eventually became governor
+    \item There is still a bridge in Hangzhou over the Xixi river that bears his name, which he allegedly constructed after not being able to cross the river when coming home
+    \item Allegedly very corrupt, accused of bribery and poisoning his enemies
+  \end{itemize}
+  He wrote the ``Mathematical Treatise in Nine Sections'' in 1247:
+  \begin{itemize}
+    \item In the form ``Problem--numerical solution--general solution--description of the calculations using counting rods''
+    \item Problems related to agriculture, astronomy, engineering, taxation, etc.
+    \item Contents:
+    \begin{itemize}
+      \item Chinese Remainder Theorem (first full solution)
+      \item Horner's Method on polynomial evaluation, 570 years before Horner
+      \item Heron's formula for the area of a triangle
+      \item Linear systems of equations
+      \item Introduced the number zero in \emph{written} Chinese mathematics
+    \end{itemize}
+  \end{itemize}
+  \paragraph{Zhu Shijie (Hanqing) 1249--1314}
+  \begin{itemize}
+    \item Born near Beijing
+    \item Travelling teacher
+    \item Wrote two books:
+    \begin{itemize}
+      \item Suanxue Qimeng or ``Introduction to Mathematical Science'', 1299
+      \begin{itemize}
+        \item Introductory textbook, mostly calculational
+        \item Didactic textbook, not for research
+      \end{itemize}
+      \item Siyuan Yujian or ``Jade Mirror of the Four Unknowns'', 1303
+      \begin{itemize}
+        \item Rewrites the usual ``descriptions'' of polynomial equations using 4 unknowns (Heaven, Earth, Person, Matter)
+        \item Extends polynomial elimination to 4 variables
+        \item Solves many quadratic and cubic equations
+        \item Contains and uses ``Pascal's Triangle''.
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{document}
