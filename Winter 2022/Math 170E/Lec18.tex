@@ -1,0 +1,89 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 18}
+  \begin{definition}{Expected Value}
+    Let $X, Y$ be a pair of discrete random variables taking values in sets $S_X, S_Y\sse\R$ and let $S = S_X\times S_Y$.
+    \begin{itemize}
+      \item Let $X, Y$ have joint PMF $P_{X, Y}(x, y)$.
+      \item If $g\colon S\to \R$ we define the \emph{expected value of $g(X, Y)$} to be
+      \[
+        \E[g(X, Y)] = \sum_{(x, y)\in S}g(x, y)p_{X, Y}(x, y).
+      \]
+    \end{itemize}
+  \end{definition}
+  \begin{theorem}{}
+    Let $X, Y$ be discrete random variables taking values in sets $S_X, S_Y\sse\R$ and let $S = S_X\times S_Y$.
+    \begin{itemize}
+      \item If $a, b\in\R$ are constants and $g, h\colon S\to \R$ then
+      \[
+        \E[ag(X, Y) + bh(X, Y)] = a\E[g(X, Y)] + b\E[h(X, Y)].
+      \]
+      \item If $g(x, y) \leq h(x, y)$ for all $(x, y)\in S$ then
+      \[
+        \E[g(X, Y)] \leq \E[h(X, Y)].
+      \]
+      \item If $a\in\R$ is a constant then $\E[a] = a$.
+    \end{itemize}
+  \end{theorem}
+  \begin{theorem}{}
+    Let $X, Y$ be discrete random variables taking values in sets $S_X, S_Y\sse\R$. Let $g\colon S_X\to \R$ and $h\colon S_Y\to \R$. Then
+    \[
+      \E[g(X)] = \sum_{x\in S_X} g(x)p_X(x)\quad\text{and}\quad \E[h(Y)] = \sum_{y\in S_Y} h(y)p_Y(y).
+    \]
+    \begin{proof}
+      Let $G(x, y) = g(x)$. Then $G(X, Y) = g(X)$. Hence
+      \begin{align*}
+        \E[g(X)] &= \E[G(X, Y)] \\
+                 &= \sum_{x\in S_X}\sum_{y\in S_Y} G(x, y)p_{X, Y}(x, y) \\
+                 &= \sum_{x\in S_X}\sum_{y\in S_Y} g(x)p_{X, Y}(x, y) \\
+                 &= \sum_{x\in S_X}g(x)\sum_{y\in S_Y} p_{X, Y}(x, y) \\
+                 &= \sum_{x\in S_X}g(x)p_X(x).
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    Let $X, Y$ be \emph{independent} discrete random variables taking values in sets $S_X, S_Y\sse\R$. Let $g\colon S_X\to \R$ and $h\colon S_Y\to \R$. Then
+    \[
+      \E[g(X)h(Y)] = \E[g(X)]\E[h(Y)].
+    \]
+    \begin{proof}
+      We compute
+      \begin{align*}
+        \E[g(X)h(Y)] &= \sum_{x\in S_X}\sum_{y\in S_Y} g(x)h(y) p_{X, Y}(x, y) \\
+                     &= \sum_{x\in S_X}\sum_{y\in S_Y} g(x)h(y) p_X(x)p_Y(y) \tag{$X, Y$ independent} \\
+                     &= \sum_{x\in S_X}g(x)p_X(x)\sum_{y\in S_Y}h(y)p_Y(y) \\
+                     &= \E[g(X)]\E[h(Y)].
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{Cauchy--Schwarz Inequality}
+    Let $X, Y$ be discrete random variables. Then
+    \[
+      \abs{E[XY]} \leq \sqrt{\E[X^2]\E[Y^2]}.
+    \]
+    \begin{proof}
+      If $\E[Y^2] = 0$ then $Y = 0$ so the statement holds. If $\E[Y^2]\neq 0$, define $f(t) = \E[(X - tY)^2] \geq \E[0] = 0$. Furthermore, we may expand this as
+      \begin{align*}
+        f(t) &= \E[X^2 - 2tXY + t^2Y^2] \\ 
+             &= \E[X^2] - 2tE[XY] + t^2\E[Y^2].
+      \end{align*}
+      We know that the global value is achieved when $t = \frac{\E[XY]}{\E[Y^2]}$. Hence
+      \begin{align*}
+        0 &\leq f\paren{\frac{\E[XY]}{\E[Y^2]}} \\
+          &= \E[X^2] - 2 \frac{\E[XY]^2}{\E[Y^2]} + \frac{\E[XY]^2}{\E[Y^2]} \\
+          &= \E[X^2] - \frac{\E[XY]^2}{\E[Y^2]}.
+      \end{align*}
+      Rearranging terms, we have
+      \[
+        \abs{\E[XY]} \leq \sqrt{\E[X^2]\E[Y^2]}
+      \]
+    \end{proof}
+  \end{theorem}
+\end{document}

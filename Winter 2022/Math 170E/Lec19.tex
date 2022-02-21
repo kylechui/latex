@@ -1,0 +1,112 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 19}
+  \subsection{The Correlation Coefficient}
+  \begin{definition}{Covariance}
+    Let $X, Y$ be a pair of (discrete) random variables.
+    \begin{itemize}
+      \item We define the \emph{covariance} of $X, Y$ to be
+      \[
+        \cov(X, Y) = \E[(X - \E[X])(Y - \E[Y])].
+      \]
+      \item We use the notation $\sigma_{XY} = \cov(X, Y)$.
+    \end{itemize}
+  \end{definition}
+  \begin{note}{}
+    The covariance can give us a rough idea of if two variables are ``positively'' or ``negatively'' correlated.
+  \end{note}
+  \begin{theorem}{}
+    If $X, Y$ are random variables then
+    \[
+      \cov(X, Y) = \E[XY] - \E[X]\E[Y].
+    \]
+    \begin{proof}
+      Observe that
+      \begin{align*}
+        \cov(X, Y) &= \E[(X - \E[X])(Y - \E[Y])] \\
+                   &= \E[XY - \E[X]Y - \E[Y]X + \E[X]\E[Y]] \\
+                   &= \E[XY] - \E[X]\E[Y] - \E[Y]\E[X] + \E[X]\E[Y] \\
+                   &= \E[XY] - \E[X]\E[Y].
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $X$ is a random variable then $\cov(X, X) = \var(X)$.
+    \begin{proof}
+      We have
+      \[
+        \cov(X, X) = \E[X^2] - \E[X]\E[X] = \var(X).
+      \]
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    Let $X, Y$ be independent discrete random variables. Then $\cov(X, Y) = 0$.
+    \begin{proof}
+      We compute
+      \[
+        \cov(X, Y) = \E[XY] - \E[X]\E[Y] = \E[X]\E[Y] - \E[X]\E[Y] = 0.
+      \]
+    \end{proof}
+  \end{theorem}
+  \begin{note}{}
+    Independence implies that the covariance is 0, but not vice versa.
+  \end{note}
+  \begin{theorem}{}
+    If $X, Y$ are (discrete) random variables and $a, b\in\R$ then
+    \[
+      \cov(aX, bY) = ab\cov(X, Y).
+    \]
+    \begin{proof}
+      We compute
+      \begin{align*}
+        \cov(aX, bY) &= \E[(aX - \E[aX])(bY - \E[bY])] \\
+                     &= \E[(aX - a\E[X])(bY - b\E[Y])] \\
+                     &= \E[ab(X - \E[X])(Y - \E[Y])] \\
+                     &= ab\cov(X, Y).
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{definition}{Correlation Coefficient}
+    Let $X, Y$ be a pair of (discrete) random variables. We define the \emph{correlation coefficient} of $X, Y$ to be
+    \[
+      \rho(X, Y) = \frac{\cov(X, Y)}{\sqrt{\var(X)\var(Y)}} = \frac{\sigma_{XY}}{\sigma_X\sigma_Y}.
+    \]
+  \end{definition}
+  \begin{theorem}{}
+    If $X, Y$ are (discrete) random variables and $a, b > 0$ then
+    \[
+      \rho(aX, bY) = \rho(X, Y).
+    \]
+    \begin{proof}
+      We compute
+      \[
+        \rho(aX, bY) = \frac{\cov(aX, bY)}{\sqrt{\var(aX)\var(bY)}} = \frac{\cov(X, Y)}{\sqrt{\var(X)\var(Y)}} = \rho(X, Y).
+      \]
+    \end{proof}
+  \end{theorem}
+  \begin{theorem}{}
+    If $X, Y$ are (discrete) random variables then
+    \[
+      -1 \leq \rho(X, Y) \leq 1.
+    \]
+    \begin{proof}
+      We estimate
+      \begin{align*}
+        \abs{\cov(X, Y)} &= \abs{\E[(X - \E[X])(Y - \E[Y])]} \\
+                         &\leq \sqrt{\E[(X - \E[X])^2]\E[(Y - \E[Y])^2]} \\
+                         &= \sqrt{\var(X)\var(Y)}.
+      \end{align*}
+      Hence
+      \[
+        \abs{\rho(X, Y)} = \frac{\abs{\cov(X, Y)}}{\sqrt{\var(X)\var(Y)}} \leq 1.
+      \]
+    \end{proof}
+  \end{theorem}
+\end{document}
