@@ -1,0 +1,123 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 20}
+  \subsection{Conditional Expectation}
+  \begin{definition}{}
+    Let $X, Y$ be a pair of discrete random variables taking values in sets $S_X, S_Y\sse\R$.
+    \begin{itemize}
+      \item If $y\in S_Y$, we define the \emph{random variable} $X\mid y$ with PMF
+      \begin{align*}
+        p_{X\mid Y}(x\mid y) &= \P[X = x\mid Y = y]\quad\text{for}\quad x\in S_X \\
+                             &= \frac{p_{X, Y}(x, y)}{p_Y(y)}
+      \end{align*}
+      \item If $x\in S_X$, we define the \emph{random variable} $Y\mid x$ with PMF
+      \begin{align*}
+        p_{Y\mid X}(y\mid x) &= \P[Y = y\mid X = x]\quad\text{for}\quad y\in S_Y \\
+                             &= \frac{p_{X, Y}(x, y)}{p_X(x)}
+      \end{align*}
+    \end{itemize}
+  \end{definition}
+  \begin{theorem}{}
+    Let $X, Y$ be discrete random variables taking values in sets $S_X, S_Y\sse\R$.
+    \begin{itemize}
+      \item Given $y\in S_Y$ we have
+      \[
+        \sum_{x\in S_X}p_{X\mid Y}(x\mid y) = 1.
+      \]
+      \item Given $x\in S_X$ we have
+      \[
+        \sum_{y\in S_Y}p_{Y\mid X}(y\mid x) = 1.
+      \]
+    \end{itemize}
+    \begin{proof}
+      We shall just prove the first case, computing that
+      \begin{align*}
+        \sum_{x\in S_X}p_{X\mid Y}(x\mid y) &= \sum_{x\in S_X} \frac{p_{X, Y}(x, y)}{p_Y(y)} \\
+                                            &= \frac{1}{p_Y(y)}\sum_{x\in S_X}p_{X, Y}(x, y) \\
+                                            &= \frac{1}{p_Y(y)}\cdot p_Y(y) \\
+                                            &= 1.
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{definition}{Conditional Expectation}
+    Let $X, Y$ be discrete random variables taking values in sets $S_X, S_Y\sse\R$.
+    \begin{itemize}
+      \item Define the function $g\colon S_X\to \R$ by 
+      \[
+        g(x) = \E[Y\mid x].
+      \]
+      \item We define the \emph{conditional expectation} of $Y$ conditioned on $X$ to be the \emph{random variable}
+      \[
+        \E[Y\mid X] = g(X).
+      \]
+      \item We can define $\E[X\mid Y]$ in a similar fashion.
+    \end{itemize}
+  \end{definition}
+  \begin{theorem}{Law of Iterated Expectation}
+    Let $X, Y$ be discrete random variables. Then
+    \[
+      \E[\E[Y\mid X]] = \E[Y].
+    \]
+    \begin{proof}
+      Let $g(x) = \E[Y\mid x]$ so $\E[Y\mid X] = g(X)$. Then
+      \begin{align*}
+        \E[\E[Y\mid X]] &= \E[g(X)] \\
+                        &= \sum_{x\in S_X}g(x)p_X(x) \\
+                        &= \sum_{x\in S_X} \paren{\sum_{y\in S_Y}y\cdot \frac{p_{X, Y}(x, y)}{p_X(x)}\cdot p_X(x)} \\
+                        &= \sum_{y\in S_Y}\sum_{x\in S_X}y p_{X, Y}(x, y) \\
+                        &= \sum_{y\in S_Y}y\cdot p_Y(y) \\
+                        &= \E[Y].
+      \end{align*}
+    \end{proof}
+  \end{theorem}
+  \begin{definition}{Conditional Variance}
+    Let $X, Y$ be discrete random variables taking values in sets $S_X, S_Y\sse\R$.
+    \begin{itemize}
+      \item Define the function $h\colon S_X\to \R$ by
+      \[
+        h(x) = \var(Y\mid x).
+      \]
+      \item We define the \emph{conditional variance} of $Y$ conditioned on $X$ to be the \emph{random variable}
+      \[
+        \var(Y\mid X) = h(X).
+      \]
+      \item We can define $\var(X\mid Y)$ in a similar fashion.
+    \end{itemize}
+  \end{definition}
+  \begin{theorem}{Law of Total Variance}
+    Let $X, Y$ be discrete random variables. Then
+    \[
+      \E[\var(Y\mid X)] + \var(\E[Y\mid X]) = \var(Y).
+    \]
+    \begin{proof}
+      Let $g(x) = \E[Y\mid x]$ and $h(x) = \var(Y\mid x)$. We can think of these functions by the following:
+      \begin{align*}
+        g(x) &= \sum_{y\in S_Y} y\cdot p_{Y\mid X}(y\mid x) \\
+        h(x) &= \sum_{y\in S_Y} y^2\cdot p_{Y\mid X}(y\mid x) - g(x)^2.
+      \end{align*}
+      Hence we have
+      \begin{align*}
+        \E[\var(Y\mid X)] &= \E[h(X)] \\
+                          &= \sum_{x\in S_X}h(x)p_X(x) \\
+                          &= \sum_{x\in S_X}\sum_{y\in S_Y}y^2\cdot p_{Y\mid X}(y\mid x)p_X(x) - \sum_{x\in S_X}g(x)^2p_X(x) \\
+                          &= \sum_{x\in S_X}\sum_{y\in S_Y}y^2p_{X, Y}(x, y) - \sum_{x\in S_X}g(x)^2p_X(x) \\
+                          &= \E[Y^2] - \E[g(X)^2].
+      \end{align*}
+      Furthermore, we have
+      \begin{align*}
+        \var(\E[Y\mid X]) &= \var(g(X)) \\
+                          &= \E[g(X)^2] - \E[g(X)]^2 \\
+                          &= \E[g(X)^2] - \E[\E[Y\mid X]]^2 \\
+                          &= \E[g(X)^2] - \E[Y]^2.
+      \end{align*}
+      Summing these two expressions, we get $\E[Y^2] - \E[Y]^2 = \var(Y)$.
+    \end{proof}
+  \end{theorem}
+\end{document}
