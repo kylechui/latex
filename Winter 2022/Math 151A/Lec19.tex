@@ -1,0 +1,62 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 19}
+  For the second case, if we have that
+  \[
+    M = N_1(h) + k_1h^2 + k_2h^4 + k_3h^6 + \dotsb,
+  \]
+  then we can use the same method shown in the previous lecture to derive that
+  \[
+    N_k(h) = \frac{4^{k - 1}N_{k - 1}(\frac{h}{2}) - N_{k - 1}(h)}{4^{k - 1} - 1}.
+  \]
+  The error term is hence given by
+  \[
+    M = N_k(h) + \mathcal{O}(h^{2k}).
+  \]
+  Since the forward difference and backwards difference of $f'(x^*)$, as well as the central difference of $f''(x^*)$ are of the form in the first case, we may apply it to extrapolate. Similarly, the central difference for $f'(x^*)$ takes the form given in the second case.
+  \subsection{Numerical Integration}
+  Given a function $f(x)$ on $[a, b]$, we want to find an approximation for $\int_{a}^{b}f(x) \,\mathrm dx$. \par
+  \paragraph{Numerical Quadrature}
+  We know that
+  \[
+    \int_{a}^{b}f(x) \,\mathrm dx = \sum_{i=0}^{n} a_if(x_i) + \text{Error}.
+  \]
+  \begin{itemize}
+    \item Case 1: $x_0,x_1,\dotsc,x_n\in [a, b]$ are given, and we need to find $a_i$. \par
+    We have the points $(x_0, f(x_0)), (x_1, f(x_1)),\dotsc,(x_n, f(x_n))$. We then interpolate at the aforementioned points to get an approximation for $f(x)$, yielding $f(x) = P(x) + \text{Error}$. Hence
+    \[
+      \int_{a}^{b}f(x) \,\mathrm dx = \int_{a}^{b}P(x) \,\mathrm dx + \int_{a}^{b}\text{Error} \,\mathrm dx.
+    \]
+    Using our Lagrange interpolation we find that our coefficients take the form
+    \[
+      a_i = \int_{a}^{b}\ell_i(x) \,\mathrm dx.
+    \]
+    \item Case 2: Find $x_0,\dotsc,x_n\in [a, b]$ and $a_0,\dotsc,a_n\in\R$.
+  \end{itemize}
+  \subsubsection{Trapezoidal Rule}
+  \begin{theorem}{Weighted Mean Value for Integrals}
+    If we have a continuous function $f\in C[a, b]$, and $\int_{a}^{b}g(x) \,\mathrm dx$ exists and $g(x)$ does not change sign on $[a, b]$, then there exists $c\in (a, b)$ such that
+    \[
+      \int_{a}^{b}f(x)g(x) \,\mathrm dx = f(c)\int_{a}^{b}g(x) \,\mathrm dx.
+    \]
+  \end{theorem}
+  We know that the error term for Trapezoidal rule is given by
+  \begin{align*}
+    \text{Error}^* &= \int_{x_0}^{x_1} \frac{f''(\xi)}{2}(x - x_0)(x - x_1) \,\mathrm dx \\
+                   &= \frac{f''(\xi_c)}{2} \int_{x_0}^{x_1}(x - x_0)(x - x_1) \,\mathrm dx \tag*{$\xi_c\in (x_0, x_1)$} \\
+                   &= \frac{f''(\xi_c)}{2} \int_{0}^{h}z(z - h) \,\mathrm dz \\
+                   &= \frac{f''(\xi_c)}{2}\cdot -\frac{1}{6}h^3 \\
+                   &= -\frac{1}{12}f''(\xi_c)h^3
+  \end{align*}
+  Hence we may write
+  \[
+    \int_{a}^{b}f(x) \,\mathrm dx = \frac{h}{2}(f(x_0) + f(x_1)) - \frac{h^3}{12}f''(\xi_c) \tag*{$\xi_c\in (x_0, x_1)$}
+  \]
+\end{document}

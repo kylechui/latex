@@ -1,0 +1,32 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 20}
+  \paragraph{Trapezoidal Rule} Let $x_0 = a, x_1 = a + h = b$, with $h = b - a$. Then
+  \[
+    \int_{x_0}^{x_1}f(x) \,\mathrm dx = \underbrace{\frac{h}{2}(f(x_0) + f(x_1))}_{T(f)} - \underbrace{\frac{f''(\xi)}{12}h^3}_{E(f)} \tag*{$\xi\in (x_0, x_1)$}
+  \]
+  \paragraph{Simpson's Rule} Let $x_0 = a, x_1 = a + h, x_2 = b$, with $h = \frac{b - a}{2}$. We approximate $f(x)$ by $P(x)$ such that $f(x_0) = P(x_0), f(x_1) = P(x_1), f(x_2) = P(x_2)$. We then have
+  \[
+    \int_{a}^{b}f(x) \,\mathrm dx = a_0f(x_0) + a_1f(x_1) + a_2f(x_2) + \text{Error},
+  \]
+  where $a_0 = \frac{h}{3}, a_1 = \frac{4h}{3}, a_2 = \frac{h}{3}$. In other words, we may write
+  \[
+    \int_{x_0}^{x_2}f(x) \,\mathrm dx = \underbrace{\frac{h}{3}(f(x_0) + 4f(x_1) + f(x_2))}_{S(f)} - \underbrace{\frac{h^5}{90}f^{(4)}(\xi)}_{E(f)}. \tag*{$\xi\in (x_0, x_2)$}
+  \]
+  \begin{note}{}
+    Trapezoidal rule is exact for $x^0, x^1$, but not $x^2$. Simpson's rule is exact for $x^0, x^1, x^2, x^3$, but not $x^4$.
+  \end{note}
+  \begin{definition}{Degree of Precision}
+    The degree of precision of a numerical quadrature is ``$k$'' if the formula is exact for $x^0,\dotsc,x^k$ but not exact for $x^{k + 1}$.
+  \end{definition}
+  \begin{note}{}
+    If the quadrature rule has degree of precision ``$\ell$'', then the error has the form $Kf^{(\ell + 1)}(\xi)$, where $\xi\in (a, b)$.
+  \end{note}
+\end{document}
