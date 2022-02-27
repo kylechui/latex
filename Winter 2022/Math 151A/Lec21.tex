@@ -1,0 +1,41 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 21}
+  \begin{note}{}
+    We can increase our accuracy by increasing the number of quadrature points, but this leads to complicated quadrature rules.
+  \end{note}
+  \subsection{Composed Quadrature Rules}
+  \textbf{Idea.} We can cut up our interval into smaller sub-intervals, and use simpler quadrature rules to approximate the area.
+  \subsubsection{Composed Trapezoidal Rule}
+  We divide $[a, b]$ into ``$n$'' sub-intervals, so $a = x_0, b = x_n$. We can then sum the areas yielded by Trapezoidal rule over the intervals $[x_i, x_{i + 1}]$, for $i\in [0, n)$. The length of each interval is $h = \frac{b - a}{n}$, and $x_j = a + jh$. Hence we have
+  \begin{align*}
+    \int_{a}^{b}f(x) \,\mathrm dx &= \int_{x_0}^{x_1}f(x) \,\mathrm dx + \dotsb + \int_{x_{n - 1}}^{x_n}f(x) \,\mathrm dx \\
+                                  &= \sum_{j=1}^{n} \paren{\frac{h}{2}(f(x_j) + f(x_{j - 1})) - \frac{h^3}{12}f''(\xi_j)} \\
+                                  &= \frac{h}{2}(f(x_0) + 2f(x_1) + \dotsb + 2f(x_{n - 1}) + f(x_n)) - \frac{h^3}{12}\sum_{j=1}^{n}f''(\xi_j) \\
+                                  &= \frac{h}{2}(f(x_0) + 2f(x_1) + \dotsb + 2f(x_{n - 1}) + f(x_n)) - \frac{h^3}{12}\cdot nf''(\eta) \\
+                                  &= \underbrace{\frac{h}{2}(f(x_0) + 2f(x_1) + \dotsb + 2f(x_{n - 1}) + f(x_n))}_{C_T(f)} - \frac{h^2(b - a)}{12}f''(\eta).
+  \end{align*}
+  \subsubsection{Composed Simpson's Rule}
+  Again, we divide $[a, b]$ into $n$ sub-intervals, where $n$ is an even integer. We have
+  \begin{align*}
+    \int_{a}^{b}f(x) \,\mathrm dx &= \sum_{j=1}^{\frac{n}{2}} \int_{x_{2j - 2}}^{x_{2j}}f(x) \,\mathrm dx \\
+                                  &= \sum_{j=1}^{\frac{n}{2}} \frac{h}{3}(f(x_{2j - 2}) + f(4x_{2j - 1}) + f(x_{2j})) - \frac{h^5}{90}f^{(4)}(\xi_j) \\
+                                  &= \dotsb \\
+                                  &= \frac{h}{3}\paren{f(x_0) + 2\sum_{j=1}^{\frac{n}{2} - 1}f(x_{2j}) + 4\sum_{j=1}^{\frac{n}{2}} f(x_{2j - 1}) + f(x_n)} - \frac{h^5}{90}\sum_{j=1}^{\frac{n}{2}}f^{(4)}(\xi_j) \\
+                                  &= \underbrace{\frac{h}{3}\paren{f(x_0) + 2\sum_{j=1}^{\frac{n}{2} - 1}f(x_{2j}) + 4\sum_{j=1}^{\frac{n}{2}} f(x_{2j - 1}) + f(x_n)}}_{C_S(f)} - \frac{h^4(b - a)}{180}f^{(4)}(\eta).
+  \end{align*}
+  \subsubsection{Composed Midpoint Rule}
+  Again, we need to divide $[a, b]$ into $n$ sub-intervals, where $n$ is an even integer. Hence
+  \begin{align*}
+    \int_{a}^{b}f(x) \,\mathrm dx &= \sum_{j=1}^{\frac{n}{2}} \int_{x_{2j - 2}}^{x_{2j}}f(x) \,\mathrm dx \\
+                                  &= \sum_{j=1}^{\frac{n}{2}} 2hf(x_{2j - 1}) + \sum_{j=1}^{\frac{n}{2}} \frac{h^3}{3}f''(\xi_j) \\
+                                  &= 2h \sum_{j=1}^{\frac{n}{2}}f(x_{2j - 1}) + \frac{h^2(b - a)}{6}f''(\eta).
+  \end{align*}
+\end{document}
