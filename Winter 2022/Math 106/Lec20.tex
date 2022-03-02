@@ -1,0 +1,35 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 20}
+  \subsection{Rational Triangles}
+  \begin{definition}{Rational Triangle}
+    A triangle is \emph{rational} if the sides and area are both rational.
+  \end{definition}
+  \begin{note}{}
+    Equivalently, if all sides and the height on any side is rational then the triangle is rational.
+  \end{note}
+  Not all triangles with rational sides have rational area, i.e. the unit equilateral triangle.
+  \begin{note}{}
+    Any three rational numbers $a, b, c$ such that the sum of any two is larger than the third gives a triangle with rational sides.
+  \end{note}
+  Brahmagupta found that every rational triangle has sides that can be expressed in the following form:
+  \begin{align*}
+    a &= \frac{u^2 + v^2}{2} \\
+    b &= \frac{u^2 + w^2}{2} \\
+    c &= \frac{u^2 - v^2}{2} + \frac{u^2 - w^2}{2} \\
+    h &= 2u,
+  \end{align*}
+  where $u, v, w$ are rational. \par
+  \textbf{Idea.}
+  \begin{enumerate}[label=(\alph*)]
+    \item Use Pythagorean Theorem to show that $c_1,c_2$ are rational
+    \item Find a formula for \emph{right-angled} rational triangles
+  \end{enumerate}
+\end{document}

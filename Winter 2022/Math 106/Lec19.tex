@@ -1,0 +1,52 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 19}
+  \begin{note}{}
+    If $k > 1$, we can sometimes use it to find solutions.
+  \end{note}
+  Suppose $x_1^2 - ny_1^2 = k$. Composing with itself, we get a solution $(x_3, y_3)$ to $x^2 - ny^2 = k^2$, i.e.
+  \[
+    \frac{x_3^2}{k^2} - \frac{ny_3^2}{k^2} = 1,
+  \]
+  so $\paren{\frac{x_3}{k}, \frac{y_3}{k}}$ is a solution to the Pell equation.
+  \begin{note}{}
+    This is a \emph{rational} solution to the Pell equation, but not necessarily an \emph{integer} solution.
+  \end{note}
+  We hope that by composing a rational solution with itself enough times, we can find an integer solution.
+  \begin{example}{}
+    Consider the equation
+    \[
+      x^2 - 92y^2 = 1.
+    \]
+    We take our first guess to be ``small'', so $(x_1, y_1) = (10, 1)$. Hence we have $x_1^2 - 92y_1^2 = 8$. Composing this solution with itself, we have $(10\cdot 10 + 92\cdot 1\cdot 1, 10\cdot 1 + 1\cdot 10, 8^2) = (192, 20, 64)$. Dividing by $8^2$, we get the rational solution $(24, \frac{5}{2}, 1)$. We can then compose this new solution with itself, yielding $(24\cdot 24 + 92\cdot \frac{5}{2}\cdot \frac{5}{2}, 24\cdot \frac{5}{2} + \frac{5}{2}\cdot 24, 1^2) = (1151, 460, 1)$. Therefore we have $(x, y, k) = (1151, 120, 1)$ is an integer solution to
+    \[
+      x^2 - 92y^2 = 1.
+    \]
+  \end{example}
+  \textbf{Question.} Does this method always work? \par
+  No, but it does if we can find $x, y$ such that $x^2 - ny^2 = k$ for $k = \pm 1, \pm 2, \pm 4$. \par
+  500 years later, Bhaskara II discovered a new method, called the ``cyclic process'', which always leads to a solution where $k = \pm 1, \pm 2, \pm 4$.
+  \begin{note}{}
+    A proof that this always works was only given in the 18\tsup{th} century by Lagrange.
+  \end{note}
+  \subsection{Bhaskara's Method}
+  \begin{itemize}
+    \item Choose $a, b$ that are co prime, so $\gcd(a, b) = 1$, and $k \geq 1$ such that $a^2 - nb^2 = k$. In other words, the triple $(a, b, k)$ is a solution to the equation.
+    \item Choose $m$ and consider the triple $(m, 1, m^2 - n)$.
+    \item We can then compose them to get the triple $(am + nb, a + bm, k(m^2 - n))$.
+    \item Divide all sides of the equation by $k^2$ to get
+    \[
+      \paren{\frac{am + nb}{k}}^2 - n\paren{\frac{a + bm}{k}}^2 = \frac{m^2 - n}{k}.
+    \]
+    If we choose $m$ such that $\frac{m^2 - n}{k}$ is an integer, then also $\frac{am + nb}{k}$ and $\frac{a + bm}{k}$ are integers as well.
+  \end{itemize}
+  \textbf{Idea.} Choose $m$ in such a way that $\frac{m^2 - n}{k}$ is as small as possible. \\
+  \textbf{Fact.} Repeating this process eventually yields a solution with $\frac{m^2 - n}{k} = \pm 1, \pm 2, \pm 4$. 
+\end{document}
