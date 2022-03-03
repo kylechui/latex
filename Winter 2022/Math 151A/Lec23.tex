@@ -1,0 +1,50 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 23}
+  We now generalize the Gaussian quadrature from the interval $[-1, 1]$ to $[a, b]$. In other words, we want to solve for
+  \[
+    \int_{a}^{b}f(x) \,\mathrm dx = \int_{-1}^{1}g(t) \,\mathrm dt.
+  \]
+  Observe that the linear map $t = \frac{x - \frac{b + a}{2}}{\frac{b - a}{2}} = \frac{2x - b - a}{b - a}$ suffices. Solving for $x$ yields $x = \frac{b - a}{2}t + \frac{b + a}{2}$. Thus we may rewrite our integral as
+  \[
+    \int_{a}^{b}f(x) \,\mathrm dx = \int_{-1}^{1}\frac{b - a}{2}f\paren{\frac{b - a}{2}t + \frac{b + a}{2}} \,\mathrm dt.
+  \]
+  \subsection{Direct Methods for Solving Systems of Linear Equations}
+  Consider the following system:
+  \begin{align*}
+    x_{11}x_1 + a_{12}x_2 + \dotsb + a_{1n}x_n &= b_1 \\
+    x_{21}x_1 + a_{22}x_2 + \dotsb + a_{2n}x_n &= b_2 \\
+    x_{31}x_1 + a_{32}x_2 + \dotsb + a_{3n}x_n &= b_3 \\
+                                               &\vdots \\
+    x_{n1}x_1 + a_{n2}x_2 + \dotsb + a_{nn}x_n &= b_n
+  \end{align*}
+  We can express it as a matrix of the form
+  \[
+    A = \begin{bmatrix}
+      a_{11} & a_{12} & \dotsb & a_{1n} \\
+      a_{21} & a_{22} & \dotsb & a_{2n} \\
+      \vdots & \vdots & \ddots & \vdots \\
+      a_{n_1} & a_{n_2} & \dotsb & a_{nn}
+    \end{bmatrix}
+  \]
+  We have a few methods to yield the solutions:
+  \begin{itemize}
+    \item Direct methods: Give exact solutions in a finite number of steps
+    \item Iterative methods: Start with an initial guess $x^0$ and produce approximations $x^1,\dotsc,x^n$ which will converge to $x^*$
+  \end{itemize}
+  \subsubsection{Linear Systems of Equations and Gaussian Elimination}
+  The idea is we transform our equation $Ax = b$ into the equation $\tilde Ax = \tilde b$, which has the same solutions but is easier to solve. We have a few \emph{elementary row operations} that we can perform:
+  \begin{itemize}
+    \item $\lam E_i\to E_i$ for $\lam\neq 0$
+    \item $E_i + \lam E_j\to E_i$
+    \item $E_j \leftrightarrow E_i$
+  \end{itemize}
+  Once we get our system of equations into an upper-triangular matrix, we can use backwards-substitution to solve for $x_j$ for $j = 1,\dotsc,n$.
+\end{document}
