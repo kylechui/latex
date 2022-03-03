@@ -1,0 +1,40 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 22}
+  \subsection{Gaussian Quadrature Rule}
+  We compute a polynomial that has $2n - 1$ degrees of precision using $n$ points. To do this, we first consider using $n$ quadrature points over the interval $[-1, 1]$. To find the polynomial for this, we create the \emph{Legendre polynomials} $P_0(x),\dotsc,P_n(x)$:
+  \begin{itemize}
+    \item $P_n(x)$ is a \emph{monomial} of degree ``$n$''.
+    \item $\int_{-1}^{1}P(x)P_n(x) \,\mathrm dx = 0$ for any polynomial $P(x)$ of degree less than ``$n$''.
+  \end{itemize}
+  Thus we have that
+  \begin{align*}
+    P_0(x) &= 1 \\
+    P_1(x) &= x \\
+    P_2(x) &= x^2 - \frac{1}{3}.
+  \end{align*}
+  Observe that in the above, we have that
+  \begin{align*}
+    \int_{-1}^{1}P_0(x)P_1(x) \,\mathrm dx &= 0 \\
+    \int_{-1}^{1}P_0(x)P_2(x) \,\mathrm dx &= 0 \\
+    \int_{-1}^{1}P_1(x)P_2(x) \,\mathrm dx &= 0 \\
+  \end{align*}
+  Another way to obtain these monomials is to solve Legendre's equation:
+  \[
+    (1 - x^2)y'' - 2xy' + n(n + 1)y = 0.
+  \]
+  \begin{note}{}
+    The roots of the Legendre polynomial $P_n(x)$ are the Gaussian quadrature points $x_1,x_2,\dotsc,x_n$.
+  \end{note}
+  If $x_1,x_2,\dotsc,x_n$ are roots of the Legendre polynomial $P_n(x)$, then
+  \[
+    c_j = \int_{-1}^{1} \prod_{\substack{i = 1\\i\neq j}}^{n} \frac{x - x_i}{x_j - x_i}\,\mathrm dx
+  \]
+\end{document}
