@@ -1,0 +1,21 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 24}
+  \paragraph{Downsides of Gaussian Elimination}
+  \begin{itemize}
+    \item For it to work, we need $a_{jj} \neq 0$ at every step.
+    \item If the condition number is large, then we may have large inaccuracies (instability).
+  \end{itemize}
+  \subsection{Gaussian Elimination with Partial Pivoting}
+  We always assume that $Ax = b$ has a unique solution, so $A^{-1}$ exists and partial pivoting will give us the solution. \par
+  At the $j$\tsup{th} step, if $\abs{a_{jj}} < \max\limits_{j + 1 \leq \ell \leq n}\abs{a_{\ell j}}$, then swap the row at which the maximum is found with the $j$\tsup{th} row. This ensures that $a_{jj}\neq 0$. Adding partial pivoting also makes our solution \emph{stable}.
+  \subsection{Solving Linear Systems by Matrix Factorization}
+  Our goal is still to solve $Ax = b$. We want to factor $A = LU$, where $L$ is a lower triangular matrix and $U$ is an upper triangular matrix. We then set $Ux = y$, so $Ly = b$. Thus we can solve for $y$ via forwards substitution, and solve for $x$ via backwards substitution.
+\end{document}
