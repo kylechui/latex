@@ -1,0 +1,69 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 21}
+  \subsection{Bivariate Distributions of the Continuous Type}
+  All of this is basically the same as for the discrete case.
+  \begin{definition}{Joint Probability Density Function}
+    Given two continuous random variables $X, Y$ we may define a \emph{joint probability density function}
+    \[
+      f_{X, Y}\colon \R^2\to [0, \infty)
+    \]
+    so that for any $A\sse \R^2$ we have
+    \[
+      \P[(X, Y)\in A] = \iint_A f_{X, Y}(x, y)\,\mathrm{d}x\,\mathrm{d}y.
+    \]
+  \end{definition}
+  \begin{theorem}{}
+    If $X, Y$ are continuous random variables with joint PDF $f_{X, Y}(x, y)$ then
+    \[
+      \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f_{X, Y}(x, y) \,\mathrm dx \,\mathrm dy = 1.
+    \]
+  \end{theorem}
+  \begin{definition}{Marginal PDFs}
+    We define
+    \[
+      f_X(x) = \int_{-\infty}^{\infty}f_{X, Y}(x, y) \,\mathrm dy,
+    \]
+    and similarly for $y$.
+  \end{definition}
+  \begin{theorem}{}
+    Let $X, Y$ be continuous random variables and $f_X$ be the marginal PDF of $X$. If $a < b$ then
+    \[
+      \P[a < X \leq b] = \int_{a}^{b}f_X(x) \,\mathrm dx.
+    \]
+  \end{theorem}
+  \begin{definition}{Expected Value}
+    Let $X, Y$ be continuous random variables with joint PDF $f_{X, Y}(x, y)$. Given a function $g\colon \R^2\to \R$ we define the \emph{expected value} of $g(X, Y)$ to be
+    \[
+      \E[g(X, Y)] = \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} g(x, y)f_{X, Y}(x, y) \,\mathrm dx \,\mathrm dy.
+    \]
+  \end{definition}
+  Our previous properties of expected values still hold.
+  \begin{theorem}{}
+    Let $X, Y$ be continuous random variables with joint PDF $f_{X, Y}(x, y)$ and marginal PDFs $f_X(x), f_Y(y)$. Then if $g, h\colon \R\to \R$ we have
+    \begin{align*}
+      \E[g(X)] &= \int_{-\infty}^{\infty}g(x)f_X(x) \,\mathrm dx, \\
+      \E[h(Y)] &= \int_{-\infty}^{\infty}h(y)f_Y(y) \,\mathrm dy.
+    \end{align*}
+  \end{theorem}
+  \begin{definition}{Independence}
+    Let $X, Y$ be continuous random variables with joint PDF $f_{X, Y}(x, y)$ and marginal PDFs $f_X(x), f_Y(y)$. We say that $X, Y$ are \emph{independent} if
+    \[
+      f_{X, Y}(x, y) = f_X(x)f_Y(y)
+    \]
+    for all $(x, y)\in \R^2$.
+  \end{definition}
+  \begin{theorem}{}
+    Let $X, Y$ be \emph{independent} continuous random variables. Then if $g, h\colon \R\to \R$ we have
+    \[
+      \E[g(X)h(Y)] = \E[g(X)]\E[h(Y)].
+    \]
+  \end{theorem}
+\end{document}

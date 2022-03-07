@@ -1,0 +1,51 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 23}
+  \subsection{Functions of Random Variables}
+  Let $X$ be a discrete or continuous random variable. Given a function $u\colon \R\to \R$, define a random variable by
+  \[
+    Y = u(X).
+  \]
+  \textbf{Question.} How does the distribution of $Y$ depend on the distribution of $X$?
+  \begin{theorem}{}
+    Let $X$ be a discrete random variable taking values in a set $S\sse \R$ with PMF $p_X(x)$ and let $u\colon S\to \R$. The PMF of $Y = u(X)$ is then
+    \[
+      p_Y(y) = \sum_{x\in \set{x\in S\mid u(x) = y}}p_X(x).
+    \]
+  \end{theorem}
+  \begin{theorem}{}
+    Let $X$ be a continuous random variable with PDF $f_X(x)$. Let $S\sse\R$ so that $f_X(x) = 0$ for all $x\in \R\sm S$. Let $u\colon \R\to \R$ be a smooth function satisfying $u'(x) > 0$ or $u'(x) < 0$ for all $x\in S$. Then $Y = u(X)$ has PDF
+    \[
+      f_Y(y) = \abs{\frac{\mathrm{d}}{\mathrm{d}y}u^{-1}(y)}f_X(u^{-1}(y)).
+    \]
+  \end{theorem}
+  \subsection{Functions of Two Random Variables}
+  Let $X, Y$ be a pair of discrete or continuous random variables. Given a function $u\colon \R^2\to \R^2$ define random variables $Z, W$ by 
+  \[
+    (Z, W) = u(X, Y).
+  \]
+  \textbf{Question.} How does the distribution of $Z, W$ depend on the distribution of $X, Y$?
+  \begin{theorem}{}
+    Let $X, Y$ be discrete random variables taking values in sets $S_X, S_Y\sse\R$ and let $S = S_X\times S_Y$. Let $u\colon \R^2\to \R^2$ and $(Z, W) = u(X, Y)$. If $X, Y$ have joint PMF $p_{X, Y}(x, y)$ then $Z, W$ have joint PMF
+    \[
+      p_{Z, W}(z, w) = \sum_{(x, y)\in \set{(x, y)\in S\mid u(x, y) = (z, w)}} p_{X, Y}(x, y).
+    \]
+  \end{theorem}
+  \begin{theorem}{}
+    Let $X, Y$ be continuous random variables. Let $u\colon \R^2\to \R^2$ be smooth and invertible, with inverse $v(z, w)$. If $X, Y$ have joint PDF $f_{X, Y}(x, y)$ then $(Z, W) = u(X, Y)$ have joint PDF
+    \[
+      f_{Z, W}(z, w) = f_{X, Y}(v(z, w))\abs{\frac{\partial(x, y)}{\partial(z, w)}},
+    \]
+    where
+    \[
+      \frac{\partial(x, y)}{\partial(z, w)} = \frac{\partial x}{\partial z}\frac{\partial y}{\partial w} - \frac{\partial x}{\partial w}\frac{\partial y}{\partial z}.
+    \]
+  \end{theorem}
+\end{document}

@@ -1,0 +1,48 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 22}
+  \begin{definition}{Covariance and Correlation Coefficient}
+    Let $X, Y$ be continuous random variables. We define the \emph{covariance} of $X$ and $Y$ to be
+    \[
+      \cov(X, Y) = \E[(X - \E[X])(Y - \E[Y])] = \E[XY] - \E[X]\E[Y].
+    \]
+    We define the \emph{correlation coefficient} of $X$ and $Y$ to be
+    \[
+      \rho(X, Y) = \frac{\cov(X, Y)}{\sqrt{\var(X)\var(Y)}}.
+    \]
+    Furthermore, we have that $-1 \leq \rho(X, Y) \leq 1$.
+  \end{definition}
+  \begin{definition}{Conditional Distribution}
+    Let $X, Y$ be continuous random variables with joint PDF $f_{X, Y}(x, y)$. Given $x\in \R$ so that $f_X(x) > 0$, we define the continuous random variable $Y\mid x$ with PDF
+    \[
+      f_{Y\mid X}(y\mid x) = \frac{f_{X, Y}(x, y)}{f_X(x)}.
+    \]
+  \end{definition}
+  \begin{definition}{Conditional Expectation}
+    Let $X, Y$ be continuous random variables. Let $g(x) = \E[Y\mid x]$. We define the \emph{conditional expectation} to be the random variable
+    \[
+      \E[Y\mid X] = g(X).
+    \]
+    We have the \emph{Law of Iterated Expectation}:
+    \[
+      \E[\E[Y\mid X]] = \E[Y].
+    \]
+  \end{definition}
+  \begin{definition}{Conditional Variance}
+    Let $X, Y$ be continuous random variables. Let $h(x) = \var(Y\mid x)$. We define the \emph{conditional variance} to be the random variable
+    \[
+      \var(Y\mid X) = h(X).
+    \]
+    We have the \emph{Law of Total Variance}:
+    \[
+      \E[\var(Y\mid X)] + \var(\E[Y\mid X]) = \var(Y).
+    \]
+  \end{definition}
+\end{document}
