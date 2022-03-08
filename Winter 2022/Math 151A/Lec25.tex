@@ -1,0 +1,17 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 25}
+  For Gaussian Elimination, the number of operations needed is on the order of $\mathcal{O}(\frac{n^3}{3})$. For LU factorization, the number of operations needed is also on the order of $\mathcal{O}(\frac{n^3}{3})$. However, if we have multiple equations $Ax_i = b_i$, it is much more efficient to first LU factorize and then solve, as the complexity becomes $\mathcal{O}(n^2)$ for solving each equation.
+  \begin{theorem}{}
+    If Gaussian elimination can be performed on a system $Ax = b$ without row interchanges, then $A$ has an LU factorization.
+  \end{theorem}
+  What if we need row interchanges in our Gaussian elimination? \par
+  Then we can find a matrix $P$ (permutation matrix) such that we can perform Gaussian elimination on $PA$ without row exchanges. Furthermore, $Ax = b \iff PAx = Pb$.
+\end{document}
