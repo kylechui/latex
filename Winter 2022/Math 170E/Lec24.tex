@@ -1,0 +1,53 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 24}
+  \subsection{Several Random Variables}
+  \textbf{Question.} What happens when we have several random variables $X_1,\dotsc,X_n$? \par
+  There is a special case that we like to think about, where $X_1,\dotsc,X_n$ are \emph{independent and identically distributed} (i.i.d.). In this special case, we may think of it as repeated independent trials of some experiment.
+  \begin{note}{}
+    Everything in the $n$ variable case is basically the exact same as in the one or two-variable cases.
+  \end{note}
+  \begin{theorem}{}
+    Let $X_1,\dotsc,X_n$ be discrete or continuous random variables. Let $a_1,\dotsc,a_n\in \R$ and let
+    \[
+      Y = a_1X_1 + \dotsb + a_nX_n.
+    \]
+    Then
+    \[
+      \E[Y] = a_1\E[X_1] + \dotsb + a_n\E[X_n].
+    \]
+  \end{theorem}
+  \begin{theorem}{}
+    Let $X_1,\dotsc,X_n$ be independent discrete or continuous random variables. Let $g_1,\dotsc,g_n\colon \R\to \R$. Then
+    \[
+      \E[g_1(X_1)\dotsb g_n(X_n)] = \E[g_1(X_1)]\dotsb\E[g_n(X_n)].
+    \]
+  \end{theorem}
+  \begin{theorem}{}
+    Let $X_1,\dotsc,X_n$ be independent discrete or continuous random variables. Let $a_1,\dotsc,a_n\in \R$ and let
+    \[
+      Y = a_1X_1 + \dotsb + a_nX_n.
+    \]
+    Then
+    \[
+      \var(Y) = a_1^2\var(X_1) + \dotsb + a_n^2\var(X_n).
+    \]
+  \end{theorem}
+  \begin{definition}{Sample Sum and Average}
+    Let $X_1,\dotsc,X_n$ be independent and identically distributed. We define the \emph{sample sum} to be
+    \[
+      S_n = X_1 + \dotsb + X_n,
+    \]
+    and the \emph{sample average} to be
+    \[
+      \overline{X} = \frac{1}{n}(X_1 + \dotsb + X_n).
+    \]
+  \end{definition}
+\end{document}
