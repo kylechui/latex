@@ -1,0 +1,74 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 24}
+  \subsection{European Renaissance}
+  \subsubsection{Descartes}
+  He was a mathematician and philosopher and lived from 1596--1650.
+  \begin{itemize}
+    \item Left France when rather young, and lived mostly in the Netherlands.
+    \item He believed that the correct approach to philosophy was to be built on ``the indisputable facts of mathematics''.
+    \item He wrote several books, most famously ``Discourse on Method''. One of the appendices ``Geometry'' led to coordinate geometry.
+    \item Introduces the notation of $x, y, z$ for unknown quantities, and $a, b, c$ for known values.
+    \item Showed the relationship between geometry and algebra, linking equations and curves (analytic geometry).
+    \begin{itemize}
+      \item Allowed for people to ``plot'' the trajectories of the planets, making them easier to study.
+      \item Was a crucial step towards the development of calculus.
+      \item Allowed for generalizations to higher dimensions, which revolutionized physics and mathematics.
+    \end{itemize}
+  \end{itemize}
+  \subsubsection{Fermat}
+  He was a mathematician that lived from 1601--1665.
+  \begin{itemize}
+    \item He independently discovered analytic geometry, but didn't pursue it as far.
+    \item Laid down some of the foundations of calculus, calculating extrema and tangent lines with methods that resemble derivatives. He also expressed some integrals as infinite series.
+    \item Many discoveries in number theory:
+    \begin{itemize}
+      \item The Two Square Theorem: If a prime number $p$ leaves remainder 1 on division by 4, then it can be written as the sum of two squares.
+      \item Fermat's Little Theorem: If $p$ is a prime number and $a$ is not divisible by $p$, then $a^{p - 1}$ leaves remainder 1 on division by $p$.
+      \item Fermat's Last Theorem: If $n \geq 3$, then there are no integers $a, b, c$ such that $a^n + b^n = c^n$.
+    \end{itemize}
+    \item Fermat very rarely included proofs for his claims.
+    \item Most of the mathematics from Fermat come from letters to other mathematicians.
+    \item Some of his correspondences with Blaise Pascal contain the fundamentals of probability theory.
+  \end{itemize}
+  \subsubsection{Newton}
+  He was a mathematician, astronomer, physicist that lived from 1642--1727, and is considered by many to be one of the most influential men in history.
+  \begin{itemize}
+    \item His book, Principia, was one of the most influential books in the history of science, and dominated the scientific view of the universe for more than 300 years (until Einstein).
+    \item Founded the field of mechanics, discovered gravitation, showed that his laws of motion proved Kepler's findings that planets move in elliptic orbits, and discovered calculus.
+    \item Almost all of these discoveries were made in the span of just two years, from 1664--1666.
+    \item It took a while for the mathematical society to recognize and accept his results, and took a lot of effort to get it published.
+  \end{itemize}
+  \subsubsection{Leibniz}
+  He was a German philosopher and politician that lived from 1646--1716.
+  \begin{itemize}
+    \item He developed calculus independently from Newton, a little later, but publishing earlier. We now mostly use notation that was developed by Leibniz.
+    \item Made many contributions to philosophy and logic, and was one of the first to introduce and work with the binary number system.
+    \item He also had rudimentary forms of formal logical principles, like conjunction, disjunction, negation, set inclusion, and the empty set.
+  \end{itemize}
+  \subsection{Development of Calculus}
+  Usually Newton and Leibniz are both credited with the invention of calculus, since they did so independently around the same time. \par
+  \textbf{Question.} How did both of them come up with the same ideas at around the same time? \par
+  We actually see this happen rather often, where multiple people come up with the same mathematical discoveries. Many previous mathematicians had already made partial progress, and all of these bits and pieces were just waiting to be cemented together into a consistent ``general'' theory. \par
+  Integration was developed before differentiation. Indeed, Archimedes had already calculated certain areas with the method of exhaustion. The idea to calculate areas using rectangles was later extended by several mathematicians:
+  \begin{itemize}
+    \item Al-Hayatham, c. 965--1039 summed the series $1^k + 2^k + \dotsb + n^k$ for $k = 1, 2, 3, 4$ and used it to calculate the volume of a rotated parabola.
+    \item Cavalieri, 1635: Extended this sum for $k$ up to 9, essentially obtaining the formula
+    \[
+      \int_{0}^{a}x^k \,\mathrm dx = \frac{a^{k + 1}}{k + 1},
+    \]
+    and conjectured that this was true for all $k$.
+    \begin{note}{}
+      This conjecture was proven soon after by Fermat, Descartes, and Roberval. Fermat even proved it for $k$ rational.
+    \end{note}
+    \item Cavalieri introduced a ``method of indivisibles'', thinking of areas as infinitely thin strips (think integrals).
+    \item Torricelli discussed this method as well, and found that revolving $y = \frac{1}{x}$ is a solid with finite volume and infinite surface area.
+  \end{itemize}
+\end{document}

@@ -1,0 +1,55 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 25}
+  \subsection{Differentiation}
+  When differentiation was introduced in the early 17\tsup{th} century, the notion of a limit did not exist yet. Fermat introduced the idea of adding an $E$ as an ``infinitesimal'', and then just ignoring it later. Even though it wasn't rigorous at the time, it was made much more rigorous later on.
+  \begin{note}{}
+    This method only really works for polynomials. It can also be extended to more variables, which is basically a form of implicit differentiation.
+  \end{note}
+  \subsubsection{John Wallis 1616--1703}
+  He was one of the first to try to completely ``arithmetize'' the theory of areas and volumes.
+  \begin{itemize}
+    \item He proved that $\int_{0}^{1}x^p \,\mathrm dx = \frac{1}{p + 1}$.
+    \item He considered a new approach towards fractional powers, by considering $x^{\frac{1}{n}}$ as complementary to $x^n$.
+    \item He claimed a lot of results ``by induction'', but didn't show that much work.
+  \end{itemize}
+  \subsection{Newton's Calculus}
+  Calculus is an algebra of infinite series.
+  \begin{itemize}
+    \item The main problem is to represent functions as infinite series (of polynomials).
+    \item The starting point for a lot of Newton's calculus was the binomial theorem for $(1 + x)^n$, which he extended to fractional values of $n$.
+    \item He learned of Fermat's techniques for polynomial differentiation, which he considered to be basically complete, and so turned most of his efforts to integration.
+    \item He introduced the chain rule.
+    \item Motivated by infinite series, he was able to invert infinite series to find equations for other functions (i.e. using the series for $\ln x$ to compute a series for $e^x$).
+    \item He also discovered the \emph{fundamental theorem of calculus}, unifying the theories of differentiation and integration.
+  \end{itemize}
+  \subsection{Leibniz's Calculus}
+  Leibniz developed his calculus independently from Newton. Here are some main differences:
+  \begin{itemize}
+    \item Leibniz had a different (and better) notation.
+    \item His work was more on the level of ``ideas'', rather than detailed proofs or computations. It lacks much of the depth and rigor of Newton's works.
+    \item Leibniz preferred ``closed forms'' over infinite series representations.
+  \end{itemize}
+  Modern calculus uses Leibniz's ideas and notation, but Newton's computations. He introduced the following ideas:
+  \begin{itemize}
+    \item He was the first to use the word ``function'', and to think about calculus in terms of functions.
+    \item Introduced the notation $\frac{\mathrm{d}y}{\mathrm{d}x}$, and actually thought of it as a real quotient of infinitesimals.
+    \item Introduced the integral sign $\int$, and thought of it as an elongated ``s'' for ``sum''.
+    \begin{note}{}
+      The notation 
+      \[
+        \int f(x)\,\mathrm{d}x
+      \]
+      actually means to multiply the function ``height'' by an infinitesimal width.
+    \end{note}
+    \item He derived the fundamental theorem of calculus by observing that sums and differences cancel each other out.
+  \end{itemize}
+  Newton used $\dot{x}$ for derivatives, while Leibniz introduced $f'$ notation.
+\end{document}
