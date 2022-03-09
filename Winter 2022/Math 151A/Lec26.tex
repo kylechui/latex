@@ -1,0 +1,31 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 26}
+  \subsection{Iterative Methods for Solving Linear Systems}
+  Recall our fixed-point iteration for solving $f(x) = 0$. We create a function $g(x)$ and solve for when $g(x) = x$. We can then perform an iterative process with $g(x_n) = x_{n + 1}$, and so we have a sequence that hopefully converges to $x^*$. \par
+  Similarly, to solve $Ax = b$ for $x$, we define a function $F(x) = Ax - b$ and try to solve for $F(x) = 0$. Then we can define $G(x)$ so $G(x) = x$ and we can plug in our guess over and over to get a sequence that converges to $x^*$.
+  \begin{definition}{Vector Norm}
+    A \emph{vector norm} on $\R^n$ is a function $\norm{\cdot}\colon \R^n\to \R^+$ with the following properties:
+    \begin{itemize}
+      \item $\norm{x} \geq 0$ for all $x\in \R^n$
+      \item $\norm{x} = 0$ if and only if $x = 0$
+      \item $\norm{\alpha x} = \abs{\alpha}\norm{x}$ for $\alpha\in\R$ and $x\in\R^n$
+      \item $\norm{x + y} \leq \norm{x} + \norm{y}$ for $x, y\in\R^n$
+    \end{itemize}
+  \end{definition}
+  \begin{definition}{Special Norms}
+    We have the following commonly used special norms:
+    \begin{itemize}
+      \item $\ell_1$ norm: $\norm{x}_1 = \sum_{i=1}^{n} \abs{x_i}$
+      \item $\ell_2$ norm: $\norm{x}_2 = \paren{\sum_{i=1}^{n} \abs{x_i}^2}^{\frac{1}{2}}$
+      \item $\ell_\infty$ norm: $\norm{x}_\infty = \max\limits_{1 \leq i \leq n}\abs{x_i}$
+    \end{itemize}
+  \end{definition}
+\end{document}
