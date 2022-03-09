@@ -1,0 +1,59 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 25}
+  \subsection{Convergence of Real Numbers}
+  Given a sequence of real numbers $(x_n)\sse\R$ and a real number $x\in \R$ we say that
+  \[
+    x_n\to x\quad\text{as}\quad n\to\infty
+  \]
+  if, given $\eps > 0$ there exists some $N$ such that for all $n \geq N$ we have
+  \[
+    \abs{x_n - x} < \eps.
+  \]
+  \begin{definition}{Convergence of Random Variables}
+    Let $(X_n)$ be a sequence of random variables and $X$ be another random variable.
+    \begin{itemize}
+      \item We say that $X_n\to X$ \emph{in probability} as $n\to\infty$ if given any $\eps > 0$ we have 
+      \[
+        \P[\abs{X_n - X} \geq \eps] \to 0\quad\text{as}\quad n\to\infty.
+      \]
+    \end{itemize}
+  \end{definition}
+  \begin{theorem}{The (Weak) Law of Large Numbers}
+    Let $X_1,X_2,\dotsc$ be an i.i.d. sequence of random variables with $\E[\abs{X}] < \infty$. Then,
+    \[
+      \overline{X} = \frac{1}{n}\sum_{j=1}^{n} X_j\to \mu\quad\text{in probability as}\quad n\to\infty.
+    \]
+  \end{theorem}
+  \begin{theorem}{Markov's Inequality}
+    Let $X \geq 0$ be a non-negative random variable. Then, given $a > 0$ we have
+    \[
+      \P[X \geq a] \leq \frac{\E[X]}{a}.
+    \]
+  \end{theorem}
+  \begin{theorem}{Markov's Inequality v2}
+    Let $X \geq 0$ be a non-negative random variable. Then, given $a > 0$ and an integer $k \geq 1$ we have
+    \[
+      \P[X \geq a] \leq \frac{\E[X^k]}{a^k}.
+    \]
+  \end{theorem}
+  \begin{theorem}{Chebyshev's Inequality}
+    Let $X$ be a random variable with mean $\mu$ and variance $\sigma^2$. Then given $a > 0$ we have
+    \[
+      \P[\abs{X - \mu} \geq a] \leq \frac{\sigma^2}{a^2}.
+    \]
+  \end{theorem}
+  \begin{theorem}{The Chernoff Bound}
+    Let $X$ be a random variable. Then, given $a > 0$ we have
+    \[
+      \P[X \geq a] \leq \inf_{t > 0} \paren{e^{-ta}M_X(t)}.
+    \]
+  \end{theorem}
+\end{document}
