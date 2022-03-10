@@ -1,0 +1,48 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 26}
+  As mentioned before, Newton was heavily motivated by the study of infinite series, which is related to ``differences'' and differentiation. Newton and another mathematician called Gregory both considered the \emph{interpolation formula}
+  \[
+    f(a + h) = f(a) + \frac{h}{b}\Delta f(a) + \frac{\frac{h}{b}(\frac{h}{b} - 1)}{2!}\Delta^2f(a) + \dotsb
+  \]
+  When we cut off the series at level $n$, we get the unique $n$\tsup{th} degree polynomial which has the same values as $f$ at the points $a, a + b, \dotsc, a + nb$.
+  \begin{note}{}
+    Taking $b$ to 0 led Taylor to his ``Taylor series'' later on.
+  \end{note}
+  \subsection{A Brief History of Complex Numbers}
+  Complex numbers were first considered when some Italians (Cardano, Tartaglia, etc.) were trying to find solutions to cubic equations. This is because the formulas can involve square roots of negative numbers, even if all the solutions are real. Only after this observation did Cardano realize that this could be applied to quadratic equations as well.
+  \begin{note}{}
+    Cardano was the first in Europe to systematically use and accept negative numbers.
+  \end{note}
+  \subsubsection{Further Development of Complex Numbers}
+  \begin{itemize}
+    \item After Cardano's observations, Rafael Bombelli (1526--1572) was the first to systematically study complex numbers, writing any complex number in the form $a + b\sqrt{-1}$.
+    \item In 1637, Descartes coins the term ``imaginary number'' in one of his books, meant as an insult since he didn't believe that these ``quantities'' actually existed.
+    \item In 1685, Wallis suggested the geometrical interpretation for negative numbers as being to the left of zero on the number line. He then also hints at the fact that complex numbers can be interpreted as being in a plane.
+    \item In the 18\tsup{th} century, complex numbers gained more traction as mathematicians discovered their use in simplifying trigonometric functions.
+    \begin{itemize}
+      \item Abraham De Moivre (1667--1754) noted the formula
+      \[
+        (\cos\theta + i\sin\theta)^n = \cos(n\theta) + i\sin(n\theta).
+      \]
+      He indicated that he learned the formula from Newton.
+      \item Leonhard Euler (1707--1783) defined the complex exponential to be
+      \[
+        e^{i\theta} = \cos\theta + i\sin\theta.
+      \]
+      He was also the first to use the notation $i$ for $\sqrt{-1}$.
+    \end{itemize}
+    \item The first to give a complete interpretation of complex numbers as vectors in a plane was Caspar Wessel (1745--1818).
+    \item Jean-Robert Argand discovered this independently in 1806, and proved the Fundamental Theorem of Algebra.
+    \item Carl Friedrich Gauss (1777--1855) had proved the Fundamental Theorem of Algebra already in 1797 using a different method, but didn't publish until 1831 because of his doubts about the ``true metaphysics of the square root of $-1$''.
+    \item Gauss coined the term ``complex number'' for $a + bi$, and established complex numbers as a part of rigorous mathematics.
+    \item It still took a lot of time for most people to accept complex numbers.
+  \end{itemize}
+\end{document}
