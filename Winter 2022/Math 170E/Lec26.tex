@@ -1,0 +1,62 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 26}
+  \begin{theorem}{}
+    Let $X_1,\dotsc,X_n$ be a sequence of \emph{independent} random variables and $a_1,\dotsc,a_n\in\R$. Let
+    \[
+      Y = \sum_{j=1}^{n}a_jX_j.
+    \]
+    Then $Y$ has MGF
+    \[
+      M_Y(t) = \prod_{j=1}^{n}M_{X_j}(a_jt)
+    \]
+    whenever it is well-defined.
+  \end{theorem}
+  \begin{theorem}{}
+    Let $X, Y$ be random variables with MGFs $M_X(t)$ and $M_Y(t)$. Suppose that for some $h > 0$ and all $t\in (-h, h)$ we have
+    \[
+      M_X(t) = M_Y(t).
+    \]
+    Then $X$ and $Y$ are identically distributed.
+  \end{theorem}
+  \begin{note}{}
+    You can read the above as ``same MGF if and only if same distribution''.
+  \end{note}
+  \begin{theorem}{}
+    Let $X_1,\dotsc,X_n$ be independent, identically distributed random variables with common MGF $M(t)$. Then
+    \begin{align*}
+      M_{S_n}(t) &= [M(t)]^n \\
+      M_{\overline{X}}(t) &= \left[M\paren{\frac{t}{n}}\right]^n.
+    \end{align*}
+  \end{theorem}
+  \begin{definition}{Convergence in Distribution}
+    Let $X_1,\dotsc,X_n$ be a sequence of random variables. We say that $X_n\to X$ \emph{in distribution} as $n\to\infty$ if the CDF
+    \[
+      F_{X_n}(x)\to F_X(x)\quad\text{as}\quad n\to\infty
+    \]
+    for all $x\in\R$ so that $F_X(x)$ is continuous at $x$.
+  \end{definition}
+  \begin{theorem}{}
+    Let $X_1,\dotsc$ and $X$ be random variables. Suppose that for some $h > 0$ and all $t\in (-h, h)$ we have
+    \[
+      M_{X_n}(t)\to M_X(t)\quad\text{as}\quad n\to\infty.
+    \]
+    Then $X_n\to X$ in distribution as $n\to\infty$.
+  \end{theorem}
+  \subsection{The Central Limit Theorem}
+  Let $X_1,X_2,\dotsc$ be an independent and identically distributed sequence of random variables with mean $\mu$. Recall that the Weak Law of Large Numbers states that $\overline X\to \mu$ in probability as $n\to\infty$. \par
+  \textbf{What can we say about the fluctuations of $\overline X$?} We already know that $\var(\overline X) = \frac{\var(X)}{n}$.
+  \begin{theorem}{The Central Limit Theorem}
+    Let $X_1,\dotsc$ be an independent and identically distributed sequence of random variables with finite mean $\mu$ and variance $\sigma^2$. Then
+    \[
+      \frac{\overline X - \mu}{\frac{\sigma}{\sqrt{n}}}\to \mathcal{N}(0, 1)\quad\text{in distribution as}\quad n\to\infty.
+    \]
+  \end{theorem}
+\end{document}
