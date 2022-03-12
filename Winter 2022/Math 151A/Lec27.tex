@@ -1,0 +1,31 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 27}
+  \subsection{The Jacobi and Gauss--Seidel Iterative Methods}
+  \subsubsection{Jacobi Iterative Method}
+  To solve $Ax = b$, we first assume that it has a solution. Then we know that we may find an equivalent linear system $\tilde Ax = \tilde b$, such that the diagonal elements of $\tilde A$ are non-zero. Hence we can solve each row for $x_i$, and that is our function $G(x)$. \par
+  It remains to choose some $x^0$, so then we have $x^1 = G(x^0), x^2 = G(x^1)$, where $x^k = (x_1^k, x_2^k,\dotsc,x_n^k)\in\R^n$. If the Jacobi iteration converges (depends on our matrix $A$), it converges for \emph{any} initial guess. We have a few choices for $x^0$:
+  \begin{itemize}
+    \item $x^0 = (1, 1,\dotsc,1)$
+    \item $x^0 = b$
+    \item $x_i^0 = \frac{b_i}{a_{ii}}$ (best choice!)
+  \end{itemize}
+  For this we compute
+  \[
+    x = D^{-1}(b - (L + U)x),
+  \]
+  which converges if $\norm{D^{-1}(L + U)} < 1$.
+  \subsubsection{Gauss--Seidel Iterative Method}
+  Just use the variables as you're computing them, instead of using the variables from the last iteration. For this we compute
+  \[
+    x = (D + L)^{-1}(b - Ux).
+  \]
+  which converges if $\norm{(D + L)^{-1}U} < 1$.
+\end{document}
