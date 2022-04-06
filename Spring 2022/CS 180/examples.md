@@ -7,7 +7,7 @@ A person `p` is *famous* in a population `P` (consisting of `n` people) if:
 
 **Question**: How can we find a famous person in the population, if one exists?
 
-<details>
+<details> <!-- Brute Force -->
 <summary>Brute Force</summary>
 <h4>Algorithm</h4>
 
@@ -34,7 +34,7 @@ this algorithm takes on the order of `n^2` steps.
 
 </details>
 
-<details>
+<details> <!-- Clever Optimization -->
 <summary>Clever Optimization</summary>
 <b>Idea.</b> We waste a lot of efforts on asking questions to pairs of people that
 have already asked each other questions. Can we do better?
@@ -70,7 +70,7 @@ algorithm runs in linear time.
 
 </details>
 
-<details>
+<details> <!-- Notes -->
 <summary>Notes</summary>
 <ul>
   <li>
@@ -110,5 +110,87 @@ You are on a staircase with `n` steps, and have a certain quantity of eggs on
 you. You may drop an egg on any of the steps, and it will either stay intact or
 break.
 
-**Question:** Given some number of eggs, what is the minimum number of drops
+**Question**: Given some number of eggs, what is the minimum number of drops
 necessary to find the first step on which the eggs will start breaking?
+
+<!-- TODO: Write up problem solution -->
+
+# Interval Scheduling
+
+Suppose you have `n` errands to run, where the start and end times of the `i`th
+errand are `l_i` and `r_i`, respectively. You cannot perform multiple errands
+simultaneously.
+
+**Question**: What is the maximum number of non-overlapping errands that you
+can do?
+
+# Majority Vote
+
+Suppose we have `m` candidates in an election, labeled `c_1` through `c_m`, and
+`n` votes for the `m` candidates. A *majority* occurs when somebody wins
+*strictly more than* `n/2` votes.
+
+**Question**: Has anyone won a majority of the votes?
+
+<details> <!-- Brute Force -->
+<summary>Brute Force</summary>
+
+We iterate from candidate `1` all the way through candidate `m`, and count how
+many votes that candidate has won (by iterating through the votes). If we find a
+majority, then we can stop looking. The runtime is hence `O(m*n)`.
+
+</details>
+
+<details> <!-- Boyer-Moore Voting Algorithm -->
+<summary>Boyer-Moore Voting Algorithm</summary>
+
+If we remove two *distinct* votes, then the majority is maintained (if it
+exists). This is because you are guaranteed to remove <i>at most</i> one
+majority element.
+
+After many such removals of pairs, if we are left with one value, then we
+perform another pass to check if it is the majority candidate. To do this we
+keep track of the current potential majority candidate, and how many more times
+we have seen it than not.
+
+<h4>Algorithm</h4>
+
+Keep track of a variable `count = 0` and iterate through the list:
+
+<ul>
+  <li>
+    If <code>count == 0</code> then overwrite the potential majority and increment count.
+  </li>
+  <li>
+    Else if the current element is the same as the potential majority,
+    increment <code>count</code>
+  </li>
+  <li>
+    Otherwise the current element is different than the potential majority, so
+    decrement <code>count</code>
+  </li>
+</ul>
+
+If `count == 0` then there is no strict majority. Otherwise, take a final pass
+through the votes and check if your potential majority is indeed your <i>actual</i> majority.
+
+<h4>Analysis</h4>
+
+As we only perform a constant number of computations for each vote, this
+algorithm runs in `O(n)` time.
+
+</details>
+
+<details> <!-- Notes -->
+<summary>Notes</summary>
+
+<ul>
+  <li>
+    There is at most one majority candidate
+  </li>
+  <li>
+    This problem is another example of <i>problem reduction</i>
+  </li>
+</ul>
+
+</details>
