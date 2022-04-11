@@ -8,7 +8,9 @@ A person `p` is *famous* in a population `P` (consisting of `n` people) if:
 **Question**: How can we find a famous person in the population, if one exists?
 
 <details> <!-- Brute Force -->
-<summary>Brute Force</summary>
+
+<summary>Solution 1</summary>
+
 <h4>Algorithm</h4>
 
 For every person in the population:
@@ -35,7 +37,9 @@ this algorithm takes on the order of `n^2` steps.
 </details>
 
 <details> <!-- Clever Optimization -->
-<summary>Clever Optimization</summary>
+
+<summary>Solution 2</summary>
+
 <b>Idea.</b> We waste a lot of efforts on asking questions to pairs of people that
 have already asked each other questions. Can we do better?
 
@@ -124,6 +128,16 @@ simultaneously.
 **Question**: What is the maximum number of non-overlapping errands that you
 can do?
 
+<details> <!-- Brute Force -->
+<summary>Brute Force</summary>
+
+Construct the power set of the set of intervals and iterate through the subsets.
+Then find the maximum number of intervals in any subset with no overlapping
+intervals. Since we generate the power set, the time complexity of this method
+is `O(2^n)`.
+
+</details>
+
 # Majority Vote
 
 Suppose we have `m` candidates in an election, labeled `c_1` through `c_m`, and
@@ -133,7 +147,8 @@ Suppose we have `m` candidates in an election, labeled `c_1` through `c_m`, and
 **Question**: Has anyone won a majority of the votes?
 
 <details> <!-- Brute Force -->
-<summary>Brute Force</summary>
+
+<summary>Solution 1</summary>
 
 We iterate from candidate `1` all the way through candidate `m`, and count how
 many votes that candidate has won (by iterating through the votes). If we find a
@@ -142,7 +157,8 @@ majority, then we can stop looking. The runtime is hence `O(m*n)`.
 </details>
 
 <details> <!-- Boyer-Moore Voting Algorithm -->
-<summary>Boyer-Moore Voting Algorithm</summary>
+
+<summary>Solution 2</summary>
 
 If we remove two *distinct* votes, then the majority is maintained (if it
 exists). This is because you are guaranteed to remove <i>at most</i> one
@@ -192,5 +208,48 @@ algorithm runs in `O(n)` time.
     This problem is another example of <i>problem reduction</i>
   </li>
 </ul>
+
+</details>
+
+## Graphs
+
+* Adjacency matrix representation
+  * The vertices represent the rows and columns, and if you have an edge between
+    two vertices the corresponding element in the matrix is set to a 1,
+    otherwise 0
+  * Undirected graphs are *symmetric*, directed graphs not necessarily so
+* Adjacency list representation
+  * From each vertex, you have a linked list to all of its neighbors
+
+### Breadth First Search
+
+We traverse each edge twice, and every vertex once. Hence the time complexity is
+`O(e + n)`.
+
+* If the graph is connected, `O(e)` ≥ `O(n)` and we may simplify it to
+  `O(e)`
+* If the graph is disconnected, we modify the algorithm to "jump" when we run
+  out of nodes in the current component. We stop only when we have successfully
+  marked all nodes
+* Can be used to generate a minimal spanning tree (BFS Tree)
+  * The edges in this tree are called *primary edges*, with all other edges
+    being *secondary*
+
+### Depth First Search
+
+Again, we traverse each edge twice, and every vertex once. Hence the time
+complexity is `O(e + n)`.
+
+### Shortest Distance Algorithm
+
+Given two vertices `u` and `v` in a graph, find the *distance* (length of a
+shortest path) between them.
+
+<details>
+
+<summary>Solution 1</summary>
+
+The shortest path from `u` to `v` is the level of `v` with respect to `u`'s
+BFS tree.
 
 </details>
