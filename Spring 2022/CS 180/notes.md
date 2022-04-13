@@ -17,7 +17,8 @@ For every person in the population:
 
 <ul>
   <li>
-    Ask <code>p</code> if they know anybody else in <code>P</code>. If they do, then <code>p</code> is not famous
+    Ask <code>p</code> if they know anybody else in <code>P</code>. If they do,
+    then <code>p</code> is not famous
     and we move on to the next person
   </li>
   <li>
@@ -175,7 +176,8 @@ Keep track of a variable `count = 0` and iterate through the list:
 
 <ul>
   <li>
-    If <code>count == 0</code> then overwrite the potential majority and increment count.
+    If <code>count == 0</code> then overwrite the potential majority and
+    increment count.
   </li>
   <li>
     Else if the current element is the same as the potential majority,
@@ -253,3 +255,66 @@ The shortest path from `u` to `v` is the level of `v` with respect to `u`'s
 BFS tree.
 
 </details>
+
+## Topological Sort
+
+Consider a directed acyclic graph `G`. The *precedence relationship* between
+nodes `u` and `v` states that if there is a path from `u` to `v`, then `u` must
+come before `v`.
+
+**Question**: Find an ordering of the nodes that does not violate any
+*precedence relationships*.
+
+### Computing In/Outdegrees
+
+* We can find the outdegree of each node by traversing its linked list of
+  neighbors, and so we can compute the indegree of each node as well
+* We can traverse all the edges in `O(n^2)` time, and find the in/outdegrees of
+  all the nodes
+  * We can make this better by restricting it to `O(e + n)`, as on average it is
+    better than `O(n^2)`
+  * We need the `O(n)` because the graph might not be connected
+* A *source* of a graph is a node with indegree 0, so the above will find our
+  sources after another pass through all the nodes
+  * **Bonus**: Show that there exists at least once source
+
+<details>
+<summary>Solution 1</summary>
+
+BFS your way to victory
+
+We maintain a list of all the sources in our DAG.
+
+<ul>
+  <li>
+    After removing a source node, you output the node and remove any outgoing
+    edges
+  </li>
+  <ul>
+    <li>
+      The graph remains a DAG, and now we update the indegrees of the other
+      nodes and add our new sources to our list
+    </li>
+  </ul>
+</ul>
+
+It takes `O(e + n)` time to both find all in/outdegrees, as well as traverse
+through the graph and output all the nodes in topological order.
+
+</details>
+
+### DAG Grouping
+
+Let `G` be a DAG, and `k` the maximum length of any path in `G`. Partition the
+vertices into `k + 1` groups such that for each pair of vertices in the same
+group, there are no paths.
+
+<details>
+<summary>Solution 1</summary>
+
+Topological sort, but take out <i>all</i> sources at once instead of just some
+of them, and put them into their own group.
+
+</details>
+
+**Bonus**: Given a DAG, what is the length of the longest path in the DAG?
