@@ -281,8 +281,6 @@ come before `v`.
 <details>
 <summary>Solution 1</summary>
 
-BFS your way to victory
-
 We maintain a list of all the sources in our DAG.
 
 <ul>
