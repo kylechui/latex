@@ -1,3 +1,8 @@
+**Note:** This is not meant to be a comprehensive list of everything gone over
+in class. Rather, it is just a set of personal notes where I jot down what I
+perceive to be most important, including extra information wherever I see fit.
+Hopefully this is of help to you.
+
 # Famous Person
 
 A person `p` is *famous* in a population `P` (consisting of `n` people) if:
@@ -380,6 +385,8 @@ For some other node `v`, find the length of the shortest path from `s` to `v`.
 <details>
 <summary>Solution 1</summary>
 
+### Algorithm
+
 * Let `S` be the set of explored nodes
 * Set the distance from `s` to itself to be 0, and the distance to all other
   nodes to be infinite.
@@ -390,19 +397,24 @@ For some other node `v`, find the length of the shortest path from `s` to `v`.
   * Add such a `v` to `S`, and update `v`'s distance
   * Update `v`'s predecessor to be `u`
 
-Proof (Stay ahead):
+### Proof
 
-* Consider S
-  * For all u in S, show that P\_u is the shortest path from s
-* We induct on the size of S = |S| = k
-  * When k is 1, this clearly holds
-  * Let's this holds for some k, and we wish to add another node v to S
-  * Since this path has to come out of S at some point, all other paths will be
-    suboptimal compared to the shortest paths coming out of S
-    * STAC; If our path is not optimal, our algorithm would have picked the
-      other path (as it has already been considered)
+* Consider `S`
+  * For all `u` in `S`, show that `P_u` is the shortest path from `s`
+* We induct on the size of `S = |S| = k`
+  * When `k` is 1, this clearly holds
+  * Let's this holds for some `k`, and we wish to add another node `v` to `S`
+  * Since this path has to come out of `S` at some point, all other paths will be
+    suboptimal compared to the shortest paths coming out of `S`
+    * Suppose towards a contradiction that our path is suboptimal
+    * Since all other paths would have had to come out of `S` at some point
+      (before reaching `v`), our algorithm would have also considered them
+    * As our algorithm did not choose any of the other paths, our path must be
+      the shortest
 
-This algorithm runs in `O((e + n) * log(n))` (linear + heap).
+This algorithm runs in `O(n + e • log(n))`. This is because we traverse
+through every node and edge at most once, but for every edge, we need to manage
+a heap containing all neighbors of our current node.
 
 </details>
 
