@@ -373,7 +373,8 @@ two graphs are the same, then it is a strongly connected component.
 * If it is strongly connected, then all pairs of nodes are mutually reachable,
   so for all nodes `s`, we have that `s` is mutually reachable with every node.
 * If there exists some `s` for which `s` is mutually reachable with every node
-  `u`, then for all other nodes `v`, we have `u` is mutually reachable with `v`.
+  `u`, then for all other nodes `v`, we have `u` is mutually reachable with `v`
+  (by transitivity).
 
 </details>
 
@@ -420,11 +421,19 @@ a heap containing all neighbors of our current node.
 
 ## Parenthesis Theorem (For DFS)
 
+Motivation: When you consider a valid string of parentheses, we have close the
+most recent set of parentheses before closing older sets. For example, `([])` is
+a valid set but `([)]` is not.
+
 Suppose `G` is a graph and `u, v` are nodes in `G`.
 
 * Case 1: Then either `u` was processed before `v` was seen or vice versa.
 * Case 2: Then `u` was seen, `v` was seen, `v` was processed, `u` was processed
   * `v` is a descendant of `u`
+
+Relating back to the motivation, the above theorem just states that for a given
+DFS algorithm, one node has to have been processed before the other was seen
+(`()[]`), or we have case 2 in the above statement (`([])`).
 
 ## White Path Theorem
 
@@ -436,6 +445,9 @@ Consider a DFS forest of `G` (directed or not)
 ## Kasaraju's Algorithm
 
 * Make a stack
-* Perform DFS at any node
+* Perform DFS at any node and push nodes onto the stack
 * Compute the graph reversal
-* Pop off the stack and compute more DFS's with the graph reversals
+* Continuously pop off the stack
+  * Perform a DFS using the top of the stack and the graph reversal
+  * Each set of nodes that make up these new DFS trees is a strongly connected
+    component
