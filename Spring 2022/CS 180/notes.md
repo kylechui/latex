@@ -220,8 +220,10 @@ algorithm runs in `O(n)` time.
     two vertices the corresponding element in the matrix is set to a 1,
     otherwise 0
   * Undirected graphs are *symmetric*, directed graphs not necessarily so
+  * Space complexity `O(n^2)`
 * Adjacency list representation
   * From each vertex, you have a linked list to all of its neighbors
+  * Space complexity `O(e + n)`
 
 ### Breadth First Search
 
@@ -316,3 +318,112 @@ of them, and put them into their own group.
 </details>
 
 **Bonus**: Given a DAG, what is the length of the longest path in the DAG?
+
+## Graph Reversal
+
+Given a directed graph `G`, reverse the direction of all of the edges.
+
+<details>
+<summary>Solutions</summary>
+
+* Transpose the adjacency matrix
+* Traverse the linked lists and create a new set of linked lists
+
+The former runs in `O(n^2)` time, and the latter runs in `O(e + n)` time.
+
+</details>
+
+## Strongly and Weakly Connected Graphs
+
+We call directed graph `G` *strongly connected* if for all pairs of vertices
+`(u, v)`, if there exists a path from `u` to `v`, then there is a path from `v`
+to `u`. We say `u` and `v` are *mutually reachable*.
+
+* If `u` and `v` are mutually reachable, and `v` and `w` are mutually reachable,
+  then `u` and `w` are mutually reachable
+
+A *strong component* of a node `u` is the set of all vertices `x` in `V` such
+that `x` and `u` are mutually reachable.
+
+* For all `u, v` in `V`, we have that the strong components of `u` and `v` are
+  the same, or they are disjoint.
+  * If `u` and `v` are mutually reachable, then for any node `x` in the strong
+    component of `u`, we have `x` and `v` are mutually reachable. Hence the
+    strong components of `u` and `v` are the same.
+  * If they are not mutually reachable, then we show that the intersection of
+    the strong components is empty. Suppose towards a contradiction that there
+    exists some node `x` in the intersection. Then `u` and `v` are mutually
+    reachable, a contradiction.
+
+## Determine Whether a Graph is Strongly Connected
+
+Given a directed graph `G`, determine whether or not `G` is strongly connected.
+
+<details>
+<summary>Solution</summary>
+We pick some node <code>s</code> and BFS starting from <code>s</code>. Then we
+perform a graph reversal and try BFS from the same node <code>s</code>. If the
+two graphs are the same, then it is a strongly connected component.
+
+* If it is strongly connected, then all pairs of nodes are mutually reachable,
+  so for all nodes `s`, we have that `s` is mutually reachable with every node.
+* If there exists some `s` for which `s` is mutually reachable with every node
+  `u`, then for all other nodes `v`, we have `u` is mutually reachable with `v`.
+
+</details>
+
+## Shortest Path in a Weighted Graph
+
+Consider a weighted graph `G` with positive weights, and some starting node `s`.
+For some other node `v`, find the length of the shortest path from `s` to `v`.
+
+<details>
+<summary>Solution 1</summary>
+
+* Let `S` be the set of explored nodes
+* Set the distance from `s` to itself to be 0, and the distance to all other
+  nodes to be infinite.
+* while `S` and `V` are different:
+  * Iterate through all neighbors of `s` (call this neighbor `v`)
+  * If `v` not in `S`, then find such a `v` that results in the minimum distance
+    from the current node
+  * Add such a `v` to `S`, and update `v`'s distance
+  * Update `v`'s predecessor to be `u`
+
+Proof (Stay ahead):
+
+* Consider S
+  * For all u in S, show that P\_u is the shortest path from s
+* We induct on the size of S = |S| = k
+  * When k is 1, this clearly holds
+  * Let's this holds for some k, and we wish to add another node v to S
+  * Since this path has to come out of S at some point, all other paths will be
+    suboptimal compared to the shortest paths coming out of S
+    * STAC; If our path is not optimal, our algorithm would have picked the
+      other path (as it has already been considered)
+
+This algorithm runs in `O((e + n) * log(n))` (linear + heap).
+
+</details>
+
+## Parenthesis Theorem (For DFS)
+
+Suppose `G` is a graph and `u, v` are nodes in `G`.
+
+* Case 1: Then either `u` was processed before `v` was seen or vice versa.
+* Case 2: Then `u` was seen, `v` was seen, `v` was processed, `u` was processed
+  * `v` is a descendant of `u`
+
+## White Path Theorem
+
+Consider a DFS forest of `G` (directed or not)
+
+* `v` is a descendant of `u` if and only if at the time that `v` is discovered,
+  `u` has already been discovered
+
+## Kasaraju's Algorithm
+
+* Make a stack
+* Perform DFS at any node
+* Compute the graph reversal
+* Pop off the stack and compute more DFS's with the graph reversals
