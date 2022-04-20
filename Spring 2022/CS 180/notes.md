@@ -13,27 +13,18 @@ A person `p` is *famous* in a population `P` (consisting of `n` people) if:
 **Question**: How can we find a famous person in the population, if one exists?
 
 <details> <!-- Brute Force -->
-
 <summary>Solution 1</summary>
 
-<h4>Algorithm</h4>
+#### Algorithm
 
 For every person in the population:
 
-<ul>
-  <li>
-    Ask <code>p</code> if they know anybody else in <code>P</code>. If they do,
-    then <code>p</code> is not famous
-    and we move on to the next person
-  </li>
-  <li>
-    Ask if everybody else in <code>P</code> knows <code>p</code>. If any one
-    does not, then <code>p</code> is not famous and we move on to the next
-    person
-  </li>
-</ul>
+* Ask `p` if they know anybody else in `P`. If they do, then `p` is not famous
+  and we move on to the next person
+* Ask if everybody else in `P` knows `p`. If any one does not, then `p` is not
+  famous and we move on to the next person
 
-<h4>Analysis</h4>
+#### Analysis
 
 For the first person, we must ask `2n - 2` questions to determine whether or not
 they are famous. For each subsequent person, this count drops by 2 since we have
@@ -43,36 +34,25 @@ this algorithm takes on the order of `n^2` steps.
 </details>
 
 <details> <!-- Clever Optimization -->
-
 <summary>Solution 2</summary>
 
-<b>Idea.</b> We waste a lot of efforts on asking questions to pairs of people that
+**Idea.** We waste a lot of efforts on asking questions to pairs of people that
 have already asked each other questions. Can we do better?
 
-<h4>Algorithm</h4>
+#### Algorithm
 
 While there is more than one person left in the population:
 
-<ul>
-  <li>
-    Arbitrarily choose two people, say <code>p</code> and <code>p'</code>, and
-    ask if <code>p</code> knows <code>p'</code>
-  </li>
-  <ul>
-    <li>
-      If <code>p</code> does know <code>p'</code>, then <code>p</code> cannot be famous, and so we remove them
-      from our population
-    </li>
-    <li>
-      If <code>p</code> does not know <code>p'</code>, then <code>p'</code> cannot be famous, and so we remove
-      them from our population
-    </li>
-  </ul>
-</ul>
+* Arbitrarily choose two people, say `p` and `p'`, and ask if `p` knows `p'`
+* If `p` does know `p'`, then `p` cannot be famous, and so we remove them from
+  our population
+* If `p` does not know `p'`, then `p'` cannot be famous, and so we remove them
+  from our population
+
 Then go through one final time and ask if our final person knows anybody in the
 original population, and vice versa to determine if they are famous.
 
-<h4>Analysis</h4>
+#### Analysis
 
 We eliminate the first `n - 1` people in `n - 1` questions, and then take `2n -
 2` questions to ascertain whether the final person is famous or not. Hence this
@@ -82,15 +62,11 @@ algorithm runs in linear time.
 
 <details> <!-- Notes -->
 <summary>Notes</summary>
-<ul>
-  <li>
-    There can be <i>at most one</i> famous person in the population
-  </li>
-  <li>
-    Both solutions above use an <i>iterative</i> approach for solving this
-    problem, by eliminating one candidate from the pool at a time
-  </li>
-</ul>
+
+* There can be <i>at most one</i> famous person in the population
+* Both solutions above use an <i>iterative</i> approach for solving this
+  problem, by eliminating one candidate from the pool at a time
+
 </details>
 
 # Stable Matching
@@ -167,7 +143,7 @@ majority, then we can stop looking. The runtime is hence `O(m*n)`.
 <summary>Solution 2</summary>
 
 If we remove two *distinct* votes, then the majority is maintained (if it
-exists). This is because you are guaranteed to remove <i>at most</i> one
+exists). This is because you are guaranteed to remove *at most* one
 majority element.
 
 After many such removals of pairs, if we are left with one value, then we
@@ -175,29 +151,20 @@ perform another pass to check if it is the majority candidate. To do this we
 keep track of the current potential majority candidate, and how many more times
 we have seen it than not.
 
-<h4>Algorithm</h4>
+#### Algorithm
 
 Keep track of a variable `count = 0` and iterate through the list:
 
-<ul>
-  <li>
-    If <code>count == 0</code> then overwrite the potential majority and
-    increment count.
-  </li>
-  <li>
-    Else if the current element is the same as the potential majority,
-    increment <code>count</code>
-  </li>
-  <li>
-    Otherwise the current element is different than the potential majority, so
-    decrement <code>count</code>
-  </li>
-</ul>
+* If `count == 0` then overwrite the potential majority and increment count.
+* Else if the current element is the same as the potential majority, increment
+  `count`
+* Otherwise the current element is different than the potential majority, so
+  decrement `count`
 
 If `count == 0` then there is no strict majority. Otherwise, take a final pass
 through the votes and check if your potential majority is indeed your <i>actual</i> majority.
 
-<h4>Analysis</h4>
+#### Analysis
 
 As we only perform a constant number of computations for each vote, this
 algorithm runs in `O(n)` time.
@@ -207,14 +174,8 @@ algorithm runs in `O(n)` time.
 <details> <!-- Notes -->
 <summary>Notes</summary>
 
-<ul>
-  <li>
-    There is at most one majority candidate
-  </li>
-  <li>
-    This problem is another example of <i>problem reduction</i>
-  </li>
-</ul>
+* There is at most one majority candidate
+* This problem is another example of *problem reduction*
 
 </details>
 
@@ -255,7 +216,6 @@ Given two vertices `u` and `v` in a graph, find the *distance* (length of a
 shortest path) between them.
 
 <details>
-
 <summary>Solution 1</summary>
 
 The shortest path from `u` to `v` is the level of `v` with respect to `u`'s
@@ -290,18 +250,10 @@ come before `v`.
 
 We maintain a list of all the sources in our DAG.
 
-<ul>
-  <li>
-    After removing a source node, you output the node and remove any outgoing
-    edges
-  </li>
-  <ul>
-    <li>
-      The graph remains a DAG, and now we update the indegrees of the other
-      nodes and add our new sources to our list
-    </li>
-  </ul>
-</ul>
+* After removing a source node, you output the node and remove any outgoing
+  edges
+  * The graph remains a DAG, and now we update the indegrees of the other nodes
+    and add our new sources to our list
 
 It takes `O(e + n)` time to both find all in/outdegrees, as well as traverse
 through the graph and output all the nodes in topological order.
@@ -366,8 +318,9 @@ Given a directed graph `G`, determine whether or not `G` is strongly connected.
 
 <details>
 <summary>Solution</summary>
-We pick some node <code>s</code> and BFS starting from <code>s</code>. Then we
-perform a graph reversal and try BFS from the same node <code>s</code>. If the
+
+We pick some node `s` and BFS starting from `s`. Then we
+perform a graph reversal and try BFS from the same node `s`. If the
 two graphs are the same, then it is a strongly connected component.
 
 * If it is strongly connected, then all pairs of nodes are mutually reachable,
@@ -378,7 +331,7 @@ two graphs are the same, then it is a strongly connected component.
 
 </details>
 
-## Shortest Path in a Weighted Graph
+## Shortest Path in a Weighted Graph (Dijkstra's)
 
 Consider a weighted graph `G` with positive weights, and some starting node `s`.
 For some other node `v`, find the length of the shortest path from `s` to `v`.
@@ -386,7 +339,7 @@ For some other node `v`, find the length of the shortest path from `s` to `v`.
 <details>
 <summary>Solution 1</summary>
 
-### Algorithm
+#### Algorithm
 
 * Let `S` be the set of explored nodes
 * Set the distance from `s` to itself to be 0, and the distance to all other
@@ -398,7 +351,7 @@ For some other node `v`, find the length of the shortest path from `s` to `v`.
   * Add such a `v` to `S`, and update `v`'s distance
   * Update `v`'s predecessor to be `u`
 
-### Proof
+#### Proof
 
 * Consider `S`
   * For all `u` in `S`, show that `P_u` is the shortest path from `s`
