@@ -366,9 +366,13 @@ For some other node `v`, find the length of the shortest path from `s` to `v`.
     * As our algorithm did not choose any of the other paths, our path must be
       the shortest
 
-This algorithm runs in `O(n + e • log(n))`. This is because we traverse
-through every node and edge at most once, but for every edge, we need to manage
-a heap containing all neighbors of our current node.
+In the worst case, we process each edge *at most* once. When we process each
+edge, we perform a deletion and insertion to our heap to "update" the distances
+there. Hence the runtime complexity is `O(e log n)` or `O(e log e)`.
+
+An alternative method is for each node, update every other node and find the
+minimum that way. Hence the runtime would be `O(n^2)`. This is better when the
+graph is dense, but not when it is sparse.
 
 </details>
 
@@ -395,12 +399,45 @@ Consider a DFS forest of `G` (directed or not)
 * `v` is a descendant of `u` if and only if at the time that `v` is discovered,
   `u` has already been discovered
 
-## Kasaraju's Algorithm
+## Kosaraju's Algorithm
 
 * Make a stack
-* Perform DFS at any node and push nodes onto the stack
+* Perform DFS at any node and push nodes onto the stack (in post-order)
 * Compute the graph reversal
 * Continuously pop off the stack
   * Perform a DFS using the top of the stack and the graph reversal
   * Each set of nodes that make up these new DFS trees is a strongly connected
     component
+
+## Spanning Trees
+
+A *spanning tree* of connected graph `G` is a tree that contains all of the
+nodes in `G`. A *minimal spanning tree (MST)* of connected weighted graph `G` is
+the spanning tree that has the minimum total weight. *Cut edges* are edges that
+go from one partition to another.
+
+**Bonus:** Show that if the weights of a graph are unique, the MST is unique.
+
+### Finding a Minimal Spanning Tree (Prim's)
+
+Given a weighted, connected graph `G`, find a MST for `G`.
+
+<details>
+<summary>Solution 1</summary>
+
+We arbitrarily partition the nodes of `G` into two subsets. Then we claim that
+the minimum cut edge is a part of the MST.
+
+* Suppose towards a contradiction that such an edge is *not* a part of the MST
+* Then if we have the following cases:
+  * If there is no edge between these two partitions, then the graph is
+    disconnected, a contradiction
+  * If this minimal edge is not in the MST, we may produce a spanning tree with
+    smaller weight by replacing the edge in the MST with our minimal edge, a
+    contradiction
+
+If we perform this partitioning `n - 1` times and find `n - 1` edges, then we
+have our MST. In particular, we process each node and edge exactly once, so this
+algorithm runs in `O(e + n)` time.
+
+</details>
