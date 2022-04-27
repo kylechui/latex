@@ -134,7 +134,7 @@ Suppose we have `m` candidates in an election, labeled `c_1` through `c_m`, and
 
 We iterate from candidate `1` all the way through candidate `m`, and count how
 many votes that candidate has won (by iterating through the votes). If we find a
-majority, then we can stop looking. The runtime is hence `O(m*n)`.
+majority, then we can stop looking. The runtime is hence `O(mn)`.
 
 </details>
 
@@ -186,18 +186,18 @@ algorithm runs in `O(n)` time.
     two vertices the corresponding element in the matrix is set to a 1,
     otherwise 0
   * Undirected graphs are *symmetric*, directed graphs not necessarily so
-  * Space complexity `O(n^2)`
+  * Space complexity `O(|V|^2)`
 * Adjacency list representation
   * From each vertex, you have a linked list to all of its neighbors
-  * Space complexity `O(e + n)`
+  * Space complexity `O(|E| + |V|)`
 
 ### Breadth First Search
 
 We traverse each edge twice, and every vertex once. Hence the time complexity is
-`O(e + n)`.
+`O(|E| + |V|)`.
 
-* If the graph is connected, `O(e)` ≥ `O(n)` and we may simplify it to
-  `O(e)`
+* If the graph is connected, `O(|E|)` ≥ `O(|V|)` and we may simplify it to
+  `O(|E|)`
 * If the graph is disconnected, we modify the algorithm to "jump" when we run
   out of nodes in the current component. We stop only when we have successfully
   marked all nodes
@@ -208,7 +208,7 @@ We traverse each edge twice, and every vertex once. Hence the time complexity is
 ### Depth First Search
 
 Again, we traverse each edge twice, and every vertex once. Hence the time
-complexity is `O(e + n)`.
+complexity is `O(|E| + |V|)`.
 
 ### Shortest Distance Algorithm
 
@@ -236,11 +236,11 @@ come before `v`.
 
 * We can find the outdegree of each node by traversing its linked list of
   neighbors, and so we can compute the indegree of each node as well
-* We can traverse all the edges in `O(n^2)` time, and find the in/outdegrees of
-  all the nodes
-  * We can make this better by restricting it to `O(e + n)`, as on average it is
-    better than `O(n^2)`
-  * We need the `O(n)` because the graph might not be connected
+* We can traverse all the edges in `O(|V|^2)` time, and find the in/outdegrees
+  of all the nodes
+  * We can make this better by restricting it to `O(|E| + |V|)`, as on average it is
+    better than `O(|V|^2)`
+  * We need the `O(|V|)` because the graph might not be connected
 * A *source* of a graph is a node with indegree 0, so the above will find our
   sources after another pass through all the nodes
   * **Bonus**: Show that there exists at least once source
@@ -255,7 +255,7 @@ We maintain a list of all the sources in our DAG.
   * The graph remains a DAG, and now we update the indegrees of the other nodes
     and add our new sources to our list
 
-It takes `O(e + n)` time to both find all in/outdegrees, as well as traverse
+It takes `O(|E| + |V|)` time to both find all in/outdegrees, as well as traverse
 through the graph and output all the nodes in topological order.
 
 </details>
@@ -286,7 +286,7 @@ Given a directed graph `G`, reverse the direction of all of the edges.
 * Transpose the adjacency matrix
 * Traverse the linked lists and create a new set of linked lists
 
-The former runs in `O(n^2)` time, and the latter runs in `O(e + n)` time.
+The former runs in `O(|V|^2)` time, and the latter runs in `O(|E| + |V|)` time.
 
 </details>
 
@@ -299,10 +299,10 @@ to `u`. We say `u` and `v` are *mutually reachable*.
 * If `u` and `v` are mutually reachable, and `v` and `w` are mutually reachable,
   then `u` and `w` are mutually reachable
 
-A *strong component* of a node `u` is the set of all vertices `x` in `V` such
+A *strong component* of a node `u` is the set of all vertices `x` in `v` such
 that `x` and `u` are mutually reachable.
 
-* For all `u, v` in `V`, we have that the strong components of `u` and `v` are
+* For all `u, v` in `v`, we have that the strong components of `u` and `v` are
   the same, or they are disjoint.
   * If `u` and `v` are mutually reachable, then for any node `x` in the strong
     component of `u`, we have `x` and `v` are mutually reachable. Hence the
@@ -368,10 +368,10 @@ For some other node `v`, find the length of the shortest path from `s` to `v`.
 
 In the worst case, we process each edge *at most* once. When we process each
 edge, we perform a deletion and insertion to our heap to "update" the distances
-there. Hence the runtime complexity is `O(e log n)` or `O(e log e)`.
+there. Hence the runtime complexity is `O(|E| log |V|)` or `O(|E| log |E|)`.
 
 An alternative method is for each node, update every other node and find the
-minimum that way. Hence the runtime would be `O(n^2)`. This is better when the
+minimum that way. Hence the runtime would be `O(|V|^2)`. This is better when the
 graph is dense, but not when it is sparse.
 
 </details>
@@ -436,8 +436,80 @@ the minimum cut edge is a part of the MST.
     smaller weight by replacing the edge in the MST with our minimal edge, a
     contradiction
 
-If we perform this partitioning `n - 1` times and find `n - 1` edges, then we
-have our MST. In particular, we process each node and edge exactly once, so this
-algorithm runs in `O(e + n)` time.
+If we perform this partitioning `|V| - 1` times and find `|V| - 1` edges, then we
+have our MST. In particular, we process each node and edge exactly once.
+However, every time we process an edge, we must consider the minimal weight of
+all remaining edges connecting the groups (heap!), so this algorithm runs in
+`O(|V| + |E| log |E|)` time. We may alternatively use a list and linear search,
+yielding a runtime of `O(|V|^2)`
+
+</details>
+
+<details>
+<summary>Alternate Proof</summary>
+
+Consider a tree with `|E|` edges and `|V|` vertices. If we arbitrarily add a new
+edge to the tree, we will have `|V|` edges and *exactly* one cycle. If we then
+remove any edge from this cycle, the graph reverts to a tree (not necessarily
+the original).
+
+We claim that a MST always contains the minimal cut edge between the two groups
+of a partition of `|V|`.
+
+* Suppose towards a contradiction that the minimal spanning tree *does not*
+  contain the minimal edge
+  * We add the minimal edge to our minimal spanning tree, creating a cycle
+  * We may then remove any of the other edges in the cycle to obtain a spanning
+    tree with smaller weight than our MST, a contradiction
+
+</details>
+
+### Finding a Minimal Spanning Tree (Kruskal's)
+
+Given a weighted, connected graph `G`, find a MST for `G`.
+
+<details>
+<summary>Solution 1</summary>
+
+* Sort our `|E|` edges by weight
+* Choose the edge with smallest weight and put it into our MST
+  * As it has the smallest weight, it must be the minimal cut edge for any
+    bipartition
+* For our second edge, we create a bipartition by putting one end vertex in one
+  group and all other vertices in the other group
+* For every successive edge, we only add it to our MST if we can choose a
+  partition such that *it is the minimal cut edge for that partition*
+  * If adding this new edge creates a cycle, we can't add that edge to our MST,
+    as we wou/ld have another edge with smaller weight in our MST already
+    * We determine whether or not we create cycles using union-find
+    * This can be performed in `O(log |E|)` time
+
+Our sorting takes `O(|E| log |E|)` time, and we iterate through all the edges
+again, performing union-find, so our algorithm overall takes `O(|E| log |E|)`.
+
+#### Union-Find
+
+We have a bunch of subsets of elements. Union-find will return whether or not
+two elements belong to the same subset. We also want to be able to combine
+various subsets.
+
+* We start off with `|V|` separate subsets
+* The "union" operation: We take a pointer from the root and point it to another
+  group
+  * This operation takes constant time
+* The "find" operation: Follow both elements to their respective roots and
+  return whether or not they are the same element
+  * This operation takes time relative to the depths of both elements' rooted
+    trees (we must perform our "unions" in a *efficient* way)
+    * We *always* take the shorter rooted tree and point its root to the height
+      of the taller rooted tree
+    * Note that the height of the new tree is always going to be *at most* the
+      maximum height of the two trees
+    * If the heights of the two trees are the same, then the height of the new
+      rooted tree is one more than the height of the original rooted trees
+    * However, we have also increased the number of nodes, so we still have `h <
+      log n`, where `h` is the height of our rooted tree and `n` is the number
+      of nodes in the rooted tree
+  * Thus the union operation takes `O(log |E|)` time
 
 </details>
