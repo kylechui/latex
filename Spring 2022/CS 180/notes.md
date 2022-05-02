@@ -513,3 +513,106 @@ various subsets.
   * Thus the union operation takes `O(log |E|)` time
 
 </details>
+
+## Divide and Conquer
+
+### Sorting
+
+Given a list of `n` numbers, sort it to be in non-decreasing order.
+
+<details>
+<summary>Solution 1</summary>
+
+#### Merge Sort Algorithm
+
+* We first split our array into roughly two equal subarrays
+* Recursively split each subarray into "left" and "right" subarrays
+* At the very end of it all, we have `n` subarrays of size 1, which are already
+  sorted
+* We then take each set of "left" and "right" subarrays and *merge* them:
+  * Take two pointers to the first elements of the "left" and "right" subarrays
+  * Iterate through both arrays:
+    * If the left pointer's value is smaller, add it's value to a list and
+      increment the pointer
+    * Otherwise, add the right pointer's value to a list and increment that
+      pointer
+* The resulting list from merging the two subarrays is also sorted
+
+#### Analysis
+
+When merging two subarrays of size `x` and `y`, we have that it takes `O(x + y)`
+time, since each element in the merged array is a result of one operation
+(comparison and pointer advancement).
+
+As each "set" of merges iterates through all the elements in our array, it
+runs in `O(n)` time. Furthermore, we perform this merge `O(log n)` times,
+because we perform it as many times as we are able to split our array into left
+and right subarrays. Hence the runtime complexity is `O(n log n)`.
+
+Formal proof: Let the runtime be `T(n) = 2T(n/2) + cn`, for some constant `c`.
+
+</details>
+
+### List Inversions
+
+We say that a pair `x, y` is *inverted* in a list if the index of `x` is smaller
+than the index of `y`, but `x > y`. Find the number of inversions in an array of `n` values.
+
+<details>
+<summary>Solution 1</summary>
+
+#### Algorithm
+
+This algorithm is a simple modification of merge sort.
+
+* Consider that during the merge step, we compare two pointers from the left and
+  right subarrays
+  * If the number in the left subarray is larger than the number in the right
+    subarray, then we add the *remaining* number of elements in the left
+    subarray to our partial sum
+  * Otherwise, proceed with merge sort as usual
+
+Note that at each recursive step, we already have the number of inversions in
+the left and right subarrays, so all that remains is the number of inversions
+with one element in the left subarray and one in the right subarray.
+
+Since this only adds a constant number of operations to merge sort, it still
+runs in `O(n log n)`
+
+</details>
+
+## Computational Geometry
+
+For the following, we may use any distance metric we like (L1, L2, etc.).
+
+### Closest Pair Problem
+
+Given a set of `n` points in the xy-plane, find the pair of points that has the shortest
+distance between them.
+
+<details>
+<summary>Solution 1</summary>
+
+* Sort the points by their x-coordinate first
+* Then, sort the points by their y-coordinate and store that
+* Partition the points into two groups based on their x-coordinate
+* The minimum distance pair is the minimum of the minimum distance pairs of both
+  groups, or a new pair with one point in the left group and the other point in
+  the other group
+* Let the minimum distance for the right group be `d_2`
+  * If we create a "grid" where each square has length `d_2/2`, we have that we
+    only need to consider *at most* 8 squares for each point in the left
+    subgroup
+    * This is because considering anything other than the 8 closest squares
+      would be at a distance more than `d_2` away
+  * Furthermore, observe that each square of our grid contains *at most* 1
+    points, so we have a constant number of points to consider in the right
+    group, for every point in the left group
+    * We can then use our points that are sorted by y-coordinate to find the
+      8 closest neighbors, and then compare those to our point in the left group
+
+Hence we have that at each "merge" step, we perform a linear number of
+computations (constant for each point in the left subgroup), so the runtime
+complexity is also `O(n log n)`.
+
+</details>
