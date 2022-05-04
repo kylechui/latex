@@ -581,20 +581,18 @@ runs in `O(n log n)`
 
 </details>
 
-## Computational Geometry
-
-For the following, we may use any distance metric we like (L1, L2, etc.).
-
 ### Closest Pair Problem
 
-Given a set of `n` points in the xy-plane, find the pair of points that has the shortest
-distance between them.
+Given a set of `n` points in the xy-plane, find the pair of points that has the
+shortest distance between them. You may use any distance metric (L1 norm, L2
+norm, etc.).
 
 <details>
 <summary>Solution 1</summary>
 
 * Sort the points by their x-coordinate first
-* Then, sort the points by their y-coordinate and store that
+* Separately, sort the points by their y-coordinate and store that in a separate
+  list
 * Partition the points into two groups based on their x-coordinate
 * The minimum distance pair is the minimum of the minimum distance pairs of both
   groups, or a new pair with one point in the left group and the other point in
@@ -616,3 +614,59 @@ computations (constant for each point in the left subgroup), so the runtime
 complexity is also `O(n log n)`.
 
 </details>
+
+## Dynamic Programming (DP)
+
+Given a problem space, we partition it into subproblems and get the optimal
+answer to each subproblem. We then combine the solutions to the subproblems to
+get the solution to the overall problem.
+
+### Weighted Interval Scheduling
+
+Given a list of `n` weighted intervals, maximize the sums of the weights of
+non-overlapping intervals.
+
+We assume that the start and endpoints are *distinct*.
+
+<details>
+<summary>Solution 1</summary>
+
+#### Algorithm
+
+* Sort the intervals by ending time
+* Iterate through the sorted intervals list
+* For each interval in the list
+  * Compute the highest weight sum of the set of intervals that ends at (but
+    does not necessarily include) the current interval
+    * Binary search for the latest-ending interval that does not overlap with
+      the current interval
+    * Add that interval's maximal sum to the current interval's weight, and
+      compare it to the previous interval's maximal sum
+      * Set the current interval's maximal sum to whichever of the two sums is
+        larger
+* Return the final interval's maximal sum
+
+#### Analysis
+
+We first sort the intervals, and then for each interval we perform a binary
+search, so the runtime is `O(n log n)`.
+
+If we assume that the list is already sorted, and that the lookup in the DP
+array is constant, then the runtime complexity is `O(n)`.
+
+#### Idea
+
+* The general idea is that at each step, the current interval is either *in* the
+  optimal weighted sum up until that point, or it *is not*
+* Because of this, we can just find the maximal sum that doesn't overlap with
+  the current interval, add the current weight, and compare it to the most
+  recent maximal sum
+
+</details>
+
+## Knapsack Problem
+
+We are given a set of `n` items, each with size `s_i` and value `v_i`. You have
+a knapsack with some maximum size.
+
+**Question**: Find the maximal value of items that will fit in the knapsack.
