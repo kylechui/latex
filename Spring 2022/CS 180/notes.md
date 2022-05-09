@@ -667,6 +667,61 @@ array is constant, then the runtime complexity is `O(n)`.
 ## Knapsack Problem
 
 We are given a set of `n` items, each with size `s_i` and value `v_i`. You have
-a knapsack with some maximum size.
+a knapsack with some maximum size `S`.
 
 **Question**: Find the maximal value of items that will fit in the knapsack.
+
+**Related**: What if you can only have *at most* one of each kind of item? What
+if for all items `i`, you can have *at most* `K_i` of that kind of item?
+
+<details>
+<summary>Solution 1</summary>
+
+The Crux of the Problem:
+
+* Let the current item that we are considering be item `i`, and the current
+  knapsack size be `j`
+* Then we have two options:
+  * Include item `i` in our knapsack
+    * If this is the case, we have a value of `dp[i][j - s_i] + v_i`
+  * Don't include item `i` in our knapsack
+    * If this is the case, we have a value of `dp[i - 1][j]`
+* Hence we take the maximum of these two values, yielding `max(dp[i][j - S_i] +
+  v_i, dp[i - 1][j])`
+
+Since we only perform a constant number of operations for each element in our
+`dp` array, we have that our algorithm runs in a runtime complexity of `O(nS)`.
+
+**Note**: This algorithm is *not* a polynomial algorithm because it is not
+polynomial *with respect to the input parameters*. In particular, if `S` is a
+polynomial in terms of `n`, then we have a polynomial-time algorithm. If `S` is
+exponential in terms of `n`, then we don't. We call these kinds of algorithms
+*pseudo-polynomial*.
+
+</details>
+
+# Longest Common Subsequence
+
+From a given alphabet we have the strings `L` and `R`. A *subsequence* is a
+string formed by deleting an arbitrary number/count from another string. A
+*common subsequence* of strings `L` and `R` is a string that is a subsequence of
+both `L` and `R`.
+
+**Question**: Find the length of the longest common *subsequence* to `L` and
+`R`.
+
+**Related**: Find the length of the longest common *substring* to `L` and `R`.
+
+<details>
+<summary>Solution 1</summary>
+
+* Let `dp[i][j]` denote the length of the longest common subsequence for
+  substrings of `L` and `R` ending at indices `i, j`, respectively
+* If `L[i] == R[j]`:
+  * `dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - 1])`
+* `dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])`
+
+The runtime complexity of this algorithm is `O(mn)`, as we perform a constant
+number of computations for each possible character pair between the strings.
+
+</details>
