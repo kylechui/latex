@@ -725,3 +725,55 @@ The runtime complexity of this algorithm is `O(mn)`, as we perform a constant
 number of computations for each possible character pair between the strings.
 
 </details>
+
+## Generalized Dijkstra's (not positive)
+
+Consider a weighted graph `G` with potentially negative edges and no negative
+cycles, and some starting node `s`.
+
+**Question**: For some other node `v`, find the total weight of the shortest
+path from `s` to `v`.
+
+<details>
+<summary>Solution 1</summary>
+
+* We know that the maximum length of the smallest weighted path is at most
+  `|V| - 1`
+  * If we had `|V|` or more edges, then at least one vertex would have been in
+    our path twice, and we would have a cycle
+  * Since our cycle has to have positive weight, we have that removing the cycle
+    decreases the overall path length, and so our smallest weight path does not
+    have the smallest weight
+* We know how to find the distance to all other nodes of path length 1
+* Given the smallest weighted paths of lengths 1 to `k - 1`, we wish to find the
+  smallest weighted path of length `k`
+  * We iterate through all terminating points of path length `k - 1`, and
+    exhaustively compute the shortest paths of length `k`
+
+Since in the worst case we traverse every node and edge when updating our path
+length, and we iterate the length from 1 to `|V| - 1`, our worst-case time
+complexity is `O(|V| • (|V| + |E|))` or `O(|V|^3)`.
+
+</details>
+
+## Curve-Fitting
+
+Consider a set of points with another set of lines. We define an error function
+by `E = e + λl` (which could be different), where `e` is the net distance to the
+line segments from the points (via some norm), `λ` is some constant, and `l` is
+the number of lines.
+
+**Question**: Find an optimal set of line segments to minimize the error.
+
+<details>
+<summary>Solution 1</summary>
+
+* We start by sorting the points by x-coordinate
+* We try to find the best fit line for `i + 1` points, based on whether or not
+  we know the best fit line for `i` points
+* We know that the last line segment must either cover the last point, or we add
+  a new line segment that covers it
+  * Thus for every iteration, we compute `i` best fit lines that minimize error
+    through the last 1,2,... points
+
+</details>
