@@ -777,3 +777,57 @@ the number of lines.
     through the last 1,2,... points
 
 </details>
+
+## Network Design
+
+Consider a connected directed graph with one vertex designated as the *source*
+and another designated as a *sink*. Each edge has a *capacity* `c_i`. We call
+such a graph a *network*. The elements that we send along each edge is called
+*flow*, and is denoted `f_i`. Hence we have that `0 ≤ f_i ≤ c_i` for all `i`.
+
+<!-- Definition: Conservation of Flow -->
+
+> **Conservation of Flow:** The net flow going into a vertex must be equal to
+> the net flow leaving a vertex, except for potentially the source/sink.
+
+### Maximum Flow
+
+Consider a network `N` with integral capacities `c_i`. A network that contains
+reversed edges with capacities equivalent to the flow on their normal
+counterparts is called a *residual network* or *augmented network*.
+
+**Question**: Among all legal flows, find the one with maximum total flow
+leaving the source.
+
+<details>
+<summary>Solution 1</summary>
+
+#### Algorithm
+
+* Start with an outgoing flow of zero
+* While there exists a path from the source to the sink (with strictly positive
+  capacities)
+  * Increment the outgoing flow
+  * For every edge in the path from source to sink
+    * Decrement that edge's capacity
+    * Increment that edge's reversal's capacity
+* Return the number of outgoing flow
+
+#### Proof
+
+We bipartition the nodes in our network into a set containing the source, and a
+set containing the sink. Then we have a series of cut edges across the
+bipartition, say with capacities `c_1,...,c_m`. We know that to send flow from
+the source to sink, it must necessarily pass through one of those cut edges. We
+define the capacity of a cut to be the sum of `c_1,...,c_m`. Observe that the
+maximum flow is *at most* the capacity of the minimal cut.
+
+We claim that this flow we return is maximal.
+
+Suppose towards a contradiction that the maximum flow is unequal to the value
+returned by the algorithm. First, we assume that the maximum flow is less than
+the value returned by the algorithm. As the algorithm has already found a flow
+with larger flow than the maximum, we have a contradiction. Suppose that the
+maximum flow is strictly larger than the value returned by the algorithm.
+
+</details>
