@@ -830,4 +830,46 @@ the value returned by the algorithm. As the algorithm has already found a flow
 with larger flow than the maximum, we have a contradiction. Suppose that the
 maximum flow is strictly larger than the value returned by the algorithm.
 
+#### Runtime Analysis
+
+It takes `O(|E| + |V|)` to find an augmented path, and we perform it `|f|`
+times, so the runtime complexity of this algorithm is `O(|f|(|E| + |V|))`. Note
+that this is a pseudo-polynomial time algorithm, as `|f|` is independent of the
+number of edges and vertices in our network.
+
+</details>
+
+The following are equivalent:
+
+1. Flow `f` is a max flow
+2. There *does not* exist a augmented path in the residual network `N_f`
+3. We have `|f| = C(S, T)` for some cut `(S, T)` of `N`
+
+<details>
+<summary>Proofs</summary>
+
+1 ⇒ 2: Let `f` be a max flow. Suppose towards a contradiction that there exists
+an augmented path in the residual network `N_f`. Since by definition our
+augmented path has capacity ≥ 1 for all edges in the path, we may add that path
+to our flow, thus increasing the flow of `f`. Therefore `f` is not maximal, a
+contradiction.
+
+2 ⇒ 3: Consider some flow `f`. Let's call edges for which the flow `f_i` along
+them is equal to their capacity `c_i` *saturated edges*, and all other edges
+*unsaturated*. Let us remove all saturated edges from some network `N`. Since we
+know that there are no augmented paths in the residual network, we have no more
+paths from `S` to `T`. Hence we may partition the nodes into two sets, with each
+being in the same group as `S` **xor** the same group as `T`. For this
+particular cut, we have that all cut edges are saturated edges, and so `|f| =
+C(S, T)`, as desired.
+
+3 ⇒ 1: Let `f` be a flow in a network `N`. Observe that `|f| ≤ C(S, T)` for all
+possible cuts for `S` and `T`. Therefore if any flow `|f| = C(S, T)` for *any*
+cut, we know that it must be a maximum flow.
+
+More specifically, if `|f| = C_i(S, T)` for some cut `C_i`, then we have that
+`|f| ≥ min C(S, T)`, since `C_i(S, T) ≥ min C(S, T)`. As we know that for an
+arbitrary flow `g`, that `|g| ≤ min C(S, T)`, we have `|f| ≥ |g|`. Therefore `f`
+is a maximum flow.
+
 </details>
