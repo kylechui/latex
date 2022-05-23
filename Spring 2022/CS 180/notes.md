@@ -873,3 +873,72 @@ arbitrary flow `g`, that `|g| ≤ min C(S, T)`, we have `|f| ≥ |g|`. Therefore
 is a maximum flow.
 
 </details>
+
+### Maximum Matching
+
+<!-- Definition: Bipartite Graphs -->
+
+> **Bipartite Graphs:** A graph is called *bipartite* if there exists a
+> partition of the vertices into sets `V_1` and `V_2` such that every edge in
+> the graph is adjacent on exactly one node in `V_1` and one node in `V_2`.
+
+Fun Fact: If a graph contains a cycle of odd length, then it is not bipartite.
+
+**Question**: Given a bipartite match, find the maximum number of matches
+between the two sets of nodes.
+
+<details>
+<summary>Solution 1</summary>
+
+We can just add a source node connected to all nodes in group 1, and a sink node
+connected to all nodes in group 2, and then find the maximum flow, where the
+capacities on all these edges are 1. Furthermore, let all the edges in the
+original graph be directed from group 1 to group 2, with capacity 1.
+
+</details>
+
+### Cell Phone Reachability
+
+Suppose we have a number of cell phones, and a few base stations that service
+the cell phones with capacity `C`. A cell phone may only be serviced by a base
+station if it is within distance `R` of the base station.
+
+**Question**: What is the maximum number of cell phones that may be serviced?
+
+<details>
+<summary>Solution 1</summary>
+
+We create a source and sink node, and treat the cell phones and base stations as
+two groups in a bipartite graph. We connect the cell phones to the base
+stations if they are within `R` of each other. The capacities of the edges
+connecting cell phones to the source should be 1, and the capacities of the
+edges connecting base stations to the sink should be equal to their
+corresponding capacities. The edges between the stations and cell phones can be
+arbitrary.
+
+</details>
+
+## NP Completeness
+
+* The Travelling Salesman Problem: Given a weighted graph `G`, find the shortest
+  path that goes through all nodes
+* Satisfiability Problem: Given a boolean function `f`, find whether or not
+  there exists a set of boolean variables for which `f` is true
+* Hamiltonian Path Problem: Given a graph `G`, find a Hamiltonian path
+
+<!-- Definition: Hamiltonian Path -->
+
+> **Hamiltonian Path:** A path that contains every node exactly once
+
+## Lower Bounds (Sorting)
+
+* Most sorting algorithms that we come across use the *comparison exchange*
+  model of computation
+* We may construct a tree, where each comparison is a node and branches off into
+  two subtrees
+* The longest path represents the maximum number of computations necessary to
+  discern the sorted list
+* Note that our tree has `n!` leaves, since there are `n!` possible outputs
+* Hence the height of our tree is at least `log(n!) ≈ log (n ^ n) ≈ n log n`
+  (when the tree is balanced), we have a valid lower bound for all generalized
+  sorting algorithms
