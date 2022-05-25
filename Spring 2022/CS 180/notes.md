@@ -942,3 +942,55 @@ arbitrary.
 * Hence the height of our tree is at least `log(n!) ≈ log (n ^ n) ≈ n log n`
   (when the tree is balanced), we have a valid lower bound for all generalized
   sorting algorithms
+
+## Problem Transformations
+
+* If we can solve a problem `Y` by:
+  * Transforming the input of `Y`
+  * Feeding this transformed input into `X` (and solving it)
+  * Transforming the output of `X` (and returning it)
+* Then we write `Y ≤ X`
+  * If `Y` can be transformed to `X` in polynomial time, then we write `Y ≤_P X`
+* If `X` can be solved in polynomial time, and `Y ≤_P X`, then `Y` can also be
+  solved in polynomial time
+* If `Y` *cannot* be solved in polynomial time (NP-complete), and `Y ≤_P X`,
+  then `X` cannot be solved in polynomial time either
+
+### Maximum Clique Problem
+
+<!-- Definition: Clique -->
+
+> **Clique:** A set of `n` vertices that are all pairwise connected.
+
+### Maximum Independent Set Problem
+
+<!-- Definition: Independent Set -->
+
+> **Independent Set:** A set of `n` vertices such that no pair is connected.
+
+* We are given that MIS is NP-complete
+* We can transform MIS to Maximum Clique by taking all edges and inverting them,
+  and then solving Maximum Clique (we call this the *complement* of `G`) in
+  `O(n^2)` time
+  * Therefore Maximum Clique is also NP-complete
+
+### Minimal Vertex Cover
+
+<!-- Definition: Vertex Cover -->
+
+> **Vertex Cover:** A set of vertices such that all edges are adjacent on at
+> least one node in this set of vertices.
+
+### Minimal Set Cover
+
+<!-- Definition: Set Cover -->
+
+> **Set Cover:** A set of subsets such that all values in the original set are
+> in at least one of the subsets.
+
+* Suppose vertex cover is NP-complete
+* For every node `v` in a graph `G`, create a set of all of the edges that are
+  incident on `v` (in `O(|E|)` time)
+* Then we have a set of `n` subsets of `E`
+* We have thus transformed this problem into set cover, and so we have that set
+  cover is also NP-complete
