@@ -496,21 +496,22 @@ various subsets.
 * We start off with `|V|` separate subsets
 * The "union" operation: We take a pointer from the root and point it to another
   group
+  * For union-find, we always draw a pointer from the root of the shorter tree,
+    and point it to the root of the taller tree
   * This operation takes constant time
 * The "find" operation: Follow both elements to their respective roots and
   return whether or not they are the same element
   * This operation takes time relative to the depths of both elements' rooted
-    trees (we must perform our "unions" in a *efficient* way)
-    * We *always* take the shorter rooted tree and point its root to the height
-      of the taller rooted tree
-    * Note that the height of the new tree is always going to be *at most* the
-      maximum height of the two trees
+    trees (we must perform our "unions" in an *efficient* way)
+    * Since we *always* take the shorter rooted tree and point its root to the
+      height of the taller rooted tree, the height of the new tree is always
+      going to be *at most* the maximum height of the two trees
     * If the heights of the two trees are the same, then the height of the new
       rooted tree is one more than the height of the original rooted trees
     * However, we have also increased the number of nodes, so we still have `h <
       log n`, where `h` is the height of our rooted tree and `n` is the number
       of nodes in the rooted tree
-  * Thus the union operation takes `O(log |E|)` time
+  * Thus the find operation takes `O(log |E|)` time
 
 </details>
 
