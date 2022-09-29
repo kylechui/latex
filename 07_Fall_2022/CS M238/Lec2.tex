@@ -1,0 +1,117 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 2}
+  \begin{center}
+    \begin{tabular}{c|c|c}
+      & Classical Computing & Quantum Computing \\
+      \hline
+      Software & Boolean Algebra & Linear Algebra \\
+      \hline
+      Hardware & Classical Mechanics & Quantum Mechanics \\
+      & e.g. semiconductors & e.g. superconductors
+    \end{tabular}
+  \end{center}
+  \subsection{The Four Postulates of Quantum Mechanics}
+  \subsubsection{State Space Rule}
+  The state space is a unit vector with dimension $2^n$, where $n$ is the number of qubits. We use the following abbreviations:
+  \[
+    \ket{0} = \begin{pmatrix}
+      1 \\
+      0
+    \end{pmatrix}\quad\text{and}\quad \ket{1} = \begin{pmatrix}
+      0 \\
+      1
+    \end{pmatrix}.
+  \]
+  The state space rule says that we are working with superpositions (or linear combinations).
+  \subsubsection{Composition Rule}
+  We use the tensor product to compose objects; for each additional qubit the \emph{dimension} of our state space doubles.
+  \subsubsection{Step Rule}
+  We use unitary matrices to get from one state to the next state. This is because unitary matrices send unit vectors to unit vectors. For example,
+  \[
+    U\ket{\psi} = \ket{\varphi}.
+  \]
+  Note that this means that the size of $U$ is $2^n\times 2^n$.
+  \subsubsection{Measurement Rule}
+  There is a way to get information out of a quantum computer. When we measure a computation performed with $n$ qubits, we get $n$ bits out of the system.
+  \subsection{Computations}
+  For probabilistic programming, our state is no longer a bit vector, but rather a probability vector. The matrix used to update this state is called a stochastic matrix. We can take the tensor product of two vectors to get the next state.
+  \[
+    \begin{pmatrix}
+      a \\
+      b
+    \end{pmatrix}\otimes \begin{pmatrix}
+      c \\
+      d
+    \end{pmatrix} = \begin{pmatrix}
+      ac \\
+      ad \\
+      bc \\
+      bd
+    \end{pmatrix}.
+  \]
+  \begin{center}
+    \begin{tabular}{c|c|c}
+      & Probabilistic Computing & Quantum Computing \\
+      \hline
+      Numbers & Real & Complex \\
+      \hline
+      State & Vector of Probabilities & Vector of Amplitudes  \\
+            & $\sum p_i = 1$ & $\sum \abs{a_i}^2 = 1$ \\
+      \hline
+      Step & Stochastic Matrix & Unitary Matrix
+    \end{tabular}
+  \end{center}
+  The Hadamard matrix is given by
+  \[
+    H = \begin{pmatrix}
+      \frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}} \\
+      \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}
+    \end{pmatrix}.
+  \]
+  Observe that
+  \begin{align*}
+    H\ket{0} &= \frac{1}{\sqrt{2}}\begin{pmatrix}
+      1 & 1 \\
+      1 & -1
+    \end{pmatrix}\begin{pmatrix}
+      1 \\
+      0
+    \end{pmatrix} \\
+             &= \begin{pmatrix}
+              \frac{1}{\sqrt{2}} \\
+              \frac{1}{\sqrt{2}}
+             \end{pmatrix} \\
+             &= \frac{1}{\sqrt{2}}\ket{0} + \frac{1}{\sqrt{2}}\ket{1}.
+  \end{align*}
+  We also have
+  \begin{align*}
+    H\ket{1} &= \frac{1}{\sqrt{2}}\begin{pmatrix}
+      1 & 1 \\
+      1 & -1
+    \end{pmatrix}\begin{pmatrix}
+      0 \\
+      1
+    \end{pmatrix} \\
+             &= \begin{pmatrix}
+              \frac{1}{\sqrt{2}} \\
+              -\frac{1}{\sqrt{2}}
+             \end{pmatrix} \\
+             &= \frac{1}{\sqrt{2}}\ket{0} - \frac{1}{\sqrt{2}}\ket{1}.
+  \end{align*}
+  This is analogous to the ``fair flip'' matrix for probabilistic computing. \par
+  \subsection{Quantum Computing Trick \#1}
+  One of the problems is that many of our operations are non-unitary/irreversible, so how can we use them? With the help of a helper bit $b$, we may define $U_f\colon \set{0, 1}^2\to \set{0, 1}^2$ by
+  \[
+    U_f(x, b) = (x, b\oplus f(x)),
+  \]
+  where $\oplus$ is the XOR operator. Via some computation, we find that $(U_f\circ U_f)(x, b) = (x, b)$, so we have successfully made our operation reversible. \par
+  This allows us to run the quantum computation for a while. We can then stop it and reverse a few steps to help debug a program.
+\end{document}

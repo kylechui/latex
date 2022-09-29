@@ -1,0 +1,87 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 2}
+  One of the big ideas of data representation is \emph{composition}, e.g. we can take pairs of integers to represent the rationals.
+  \subsection{Prefix-Free Encoding}
+  \begin{definition}{Prefix-Free Encoding}
+    We say that a function $E\colon \Theta\to \set{0, 1}^*$ is \emph{prefix-free} if for all $x,y\in\Theta$ where $x\neq y$, we have $E(x)$ \emph{is not} a prefix of $E(y)$.
+  \end{definition}
+  \begin{example}{}
+    Consider the $NtoB$ function, that converts natural numbers to their binary counterparts. Then we know that $NtoB$ is \emph{not} a prefix-free encoding, since $NtoB(1) = 1$ is a prefix for $NtoB(3) = 11$.
+  \end{example}
+  \begin{example}{}
+    Consider the modified $\overline{ZtoB}$ encoding function (which duplicates each bit and adds 01 to the end). This is a prefix-free function, since the 01 for $x$ must match with the 01 in $y$; then for $x$ to be a prefix for $y$ we must have $x = y$.
+  \end{example}
+  Prefix-free encodings are quite useful, since the bit representation is unique and unambiguous (we don't need any special characters to demarcate objects).
+  \begin{theorem}{}
+    Suppose we have a prefix-free encoding
+    \[
+      E\colon \Theta\to \set{0, 1}^*.
+    \]
+    We define $\overline{E}\colon \Theta^*\to \set{0, 1}^*$ by
+    \[
+      \overline{E}((x_1,x_2,\dotsc,x_n)) = E(x_1)\circ E(x_2)\dotsb E(x_n).
+    \]
+    Then $\overline{E}$ is a valid encoding of $\Theta^*$.
+    
+  \end{theorem}
+  \begin{proof}
+    Suppose we have the binary sequence
+    \[
+      \overline{E}((x_1,x_2,\dotsc,x_n)) = E(x_1)\circ E(x_2)\dotsb E(x_n).
+    \]
+    Then we define the following decoding algorithm:
+    \begin{algorithm}
+      \DontPrintSemicolon
+      \caption{}
+      \While{we still have remaining bits}{
+        Keep reading in bits until the sequence matches an encoding.\;
+        Once we find it, that is the data representation for our next object; go to step 2.\;
+      }
+    \end{algorithm} \\
+    The above algorithm is a valid decoder, since our encoding is prefix-free and the data representation is unambiguous.
+  \end{proof}
+  \begin{theorem}{}
+    Suppose $E\colon \Theta\to \set{0, 1}^*$ is an encoding. We claim that there exists a prefix-free encoding $pfE\colon \Theta\to \set{0, 1}^*$ defined by the result of:
+    \begin{itemize}
+      \item Computing $E(a)$
+      \item Replacing each 0 with 00, and each 1 with 11
+      \item Appending 01 at the end
+    \end{itemize}
+    Then we have that $pfE$ is a prefix-free encoding.
+  \end{theorem}
+  \begin{proof}
+    Let $x$ have the binary representation $E(x) = b_0b_1\dotsc b_n$. Then $pfE(x) = b_0b_0b_1b_1\dotsc b_nb_n01$. Since the 01 may only occur at the end, we have that $pfE$ is a prefix-free encoding.
+  \end{proof}
+  We now have ways to:
+  \begin{itemize}
+    \item Represent integers as binary strings in $\set{0, 1}^*$.
+    \item Represent integers using a prefix-free encoding.
+    \item Represent lists of integers.
+    \item Represent lists of integers using a prefix-free encoding.
+    \item Represent lists of lists of integers.
+  \end{itemize}
+  \subsubsection{Efficiency of Prefix-Free Encodings}
+  The length of $pfE(x)$ is $2\cdot \abs{E(x)} + 2$. There exists a different transformation where the new encoding has length
+  \[
+    \abs{E(x)} + 2\cdot \log_2\abs{E(x)} + 2.
+  \]
+  Can we represent real numbers as $\set{0, 1}^*$? In other words, is there an injective mapping $E\colon \R\to \set{0, 1}^*$? \par
+  \begin{note}{Limitations of Encoding}
+    No, since the number of binary strings is countable and the number of real numbers is uncountable.
+  \end{note}
+  \subsection{Algorithms}
+  \begin{definition}{Boolean Circuit}
+    Some computations with AND/OR/NOT as basic operations.
+  \end{definition}
+  \begin{definition}{Directed Acyclic Graph}
+    A directed graph that has no cycles.
+  \end{definition}
+\end{document}

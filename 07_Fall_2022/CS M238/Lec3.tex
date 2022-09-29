@@ -1,0 +1,138 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 3}
+  \subsection{Math Definitions}
+  For the purposes of this class, a Hilbert space is a complex vector space with an inner product. We define our inner product to be
+  \[
+    \braket{\begin{pmatrix}
+      \alpha_1 \\
+      \alpha_2
+    \end{pmatrix}}{\begin{pmatrix}
+      \beta_1 \\
+      \beta_2
+    \end{pmatrix}} = \alpha_1^*\beta_1 + \alpha_2^*\beta_2 = \begin{pmatrix}
+      \alpha_1 \\
+      \alpha_2
+    \end{pmatrix}^\dagger \begin{pmatrix}
+      \beta_1 \\
+      \beta_2
+    \end{pmatrix},
+  \]
+  where $\alpha_1, \alpha_2, \beta_1, \beta_2\in\C$. We are also going to use Dirac notation:
+  \[
+    \ket{\psi} = \begin{pmatrix}
+      \alpha_1 \\
+      \alpha_2
+    \end{pmatrix}\quad\text{and}\quad \ket{\varphi} = \begin{pmatrix}
+      \beta_1 \\
+      \beta_2
+    \end{pmatrix}.
+  \]
+  Furthermore, $\ket{\psi}^\dagger = \bra{\psi}$. We also use the following notations:
+  \begin{align*}
+    \ket{+} &= \frac{1}{\sqrt{2}}(\ket{0} + \ket{1}) \\
+    \ket{-} &= \frac{1}{\sqrt{2}}(\ket{0} - \ket{1}).
+  \end{align*}
+  Then we have $H\ket{0} = \ket{+}$ and $H\ket{1} = \ket{-}$.
+  \begin{note}{}
+    Unitary matrices preserve inner products.
+  \end{note}
+  We also have a notion of an outer product, defined by
+  \[
+    \begin{pmatrix}
+      \alpha_1 \\
+      \alpha_2
+    \end{pmatrix} \begin{pmatrix}
+      \beta_1^* & \beta_2^*
+    \end{pmatrix} = \begin{pmatrix}
+      \alpha_1 \\
+      \alpha_2
+    \end{pmatrix} \begin{pmatrix}
+      \beta_1 \\
+      \beta_2
+    \end{pmatrix}^\dagger = \begin{pmatrix}
+      \alpha_1\beta_1^* & \alpha_1\beta_2^* \\
+      \alpha_2\beta_1^* & \alpha_2\beta_2^*
+    \end{pmatrix} = \ket{\psi}\bra{\varphi}.
+  \]
+  \subsection{Change of Basis}
+  Suppose we have two bases: $\set{\ket{0}, \ket{1}}$ and $\set{\ket{\psi}, \ket{\varphi}}$. Suppose we want to change a vector $\ket{v}$ from the former basis to the latter basis. Then we have
+  \begin{align*}
+    \ket{v} &= \braket{\psi}{v}\cdot \ket{\psi} + \braket{\varphi}{v}\cdot \ket{\varphi} \\
+            &= \abs{\braket{\psi}{v}}^2 + \abs{\braket{\varphi}{v}}^2.
+  \end{align*}
+  \subsection{Multiple Qubits}
+  Suppose we have the start state
+  \[
+    \ket{\psi} = \alpha_{00}\ket{00} + \alpha_{01}\ket{01} + \alpha_{10}\ket{10} + \alpha_{11}\ket{11}.
+  \]
+  Suppose we measured the first qubit to be zero. Then the new state is
+  \[
+    \frac{1}{\sqrt{\abs{\alpha_{00}}^2 + \abs{\alpha_{01}}^2}}(\alpha_{00}\ket{00} + \alpha_{01}\ket{01}) = \frac{\ket{0}}{\sqrt{\abs{\alpha_{00}}^2 + \abs{\alpha_{01}}^2}}\otimes (\alpha_{00}\ket{0} + \alpha_{01}\ket{1}).
+  \]
+  \subsection{Tensor Product}
+  \begin{definition}{Tensor Product}
+    We define the \emph{tensor product} (for two vectors) to be
+    \[
+      \begin{pmatrix}
+        \alpha_1 \\
+        \alpha_2
+      \end{pmatrix}\otimes \begin{pmatrix}
+        \beta_1^* & \beta_2^*
+      \end{pmatrix} = \begin{pmatrix}
+        \alpha_1\beta_1^* & \alpha_1\beta_2^* \\
+        \alpha_2\beta_1^* & \alpha_2\beta_2^*
+      \end{pmatrix},
+    \]
+    which is the same as the outer product. In general, we have
+    \[
+      \begin{pmatrix}
+        \alpha_{00} & \alpha_{01} \\
+        \alpha_{10} & \alpha_{11}
+      \end{pmatrix}\otimes B = \begin{pmatrix}
+        \alpha_{00}B & \alpha_{01}B \\
+        \alpha_{10}B & \alpha_{11}B
+      \end{pmatrix}.
+    \]
+  \end{definition}
+  Using this definition, we have
+  \begin{align*}
+    \ket{00} &= \ket{0}\otimes \ket{0} \\
+             &= \begin{pmatrix}
+              1 \\
+              0
+             \end{pmatrix} \otimes \begin{pmatrix}
+              1 \\
+              0
+             \end{pmatrix} \\
+             &= \begin{pmatrix}
+              1\cdot 1 \\
+              1\cdot 0 \\
+              0\cdot 1 \\
+              0\cdot 0
+             \end{pmatrix} \\
+             &= \begin{pmatrix}
+              1 \\
+              0 \\
+              0 \\
+              0
+             \end{pmatrix}.
+  \end{align*}
+  \begin{note}{}
+    If we have $\ket{\psi}$ where $\psi$ is some binary string of length $n$, then we have that $\ket{\psi}$ is a $2^n$-dimensional vector where the $\psi$\tsup{th} element (in decimal, zero-indexed) is a 1 and all the rest are 0.
+  \end{note}
+  \subsubsection{General Rules}
+  \begin{itemize}
+    \item The tensor product is \emph{not} commutative, but is associative
+    \item $A\otimes (B + C) = A\otimes B + A\otimes C$
+    \item $(A\otimes B)(C\otimes D) = (AC)\otimes (BD)$
+    \item $(\alpha A)\otimes B = A\otimes (\alpha B) = \alpha(A\otimes B)$
+  \end{itemize}
+\end{document}

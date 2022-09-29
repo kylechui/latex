@@ -1,0 +1,29 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 1}
+  \subsection{History}
+  Quantum computers only really came into existence in 2016, and modern quantum computers have 127 qubits. We hope that the number of qubits explodes in the next few years, with Google targeting 1 million qubits by 2029. \par
+  We will \emph{never} be able to simulate 100+ qubit quantum computers, since the state space just gets too large. Modern supercomputers can simulate a maximum of 70 qubits (Summit). \par
+  Normal computers typically have an error rate of once a year, which is mitigated by checksums and other mechanisms. To contrast, the error rate for a quantum computer is around 1\%, which is a lot higher. Furthermore, we need around 1000 qubits in order to ``validate'' that a single qubit is correct. We call these validated qubits ``perfect qubits''.
+  \begin{definition}{Neven's Law}
+    Quantum computers are gaining computational power at a doubly exponential rate.
+  \end{definition}
+  Quantum computers are \emph{very good} at solving linear algebra problems, e.g. machine learning or physics simulations, not \emph{all} problems. According to experts, roughly 6000 perfect qubits are needed to be better than a classical computer. \par
+  We can't perform that many computations per qubit because of their decoherence time.
+  \subsection{Basic Mathematics}
+  A qubit can be represented as a unit vector in $\C^2$. Every computation step takes a unit vector to a unit vector, i.e. they can be represented by unitary matrices. Quantum computing uses complex numbers to allow amplitudes (read: probabilities) to be ``negative'', while still having positive norm. \par
+  To convert amplitudes to probabilities, we use Born's law and take the square of the norm, i.e. the probability of an event with amplitude $-\frac{1}{\sqrt{2}}$ is
+  \[
+    \paren{-\frac{1}{\sqrt{2}}}^2 = \frac{1}{2}.
+  \]
+  \subsection{Abstractions}
+  Classical computing languages mostly differ in how they deal with abstractions; different choices lead to different languages. At the moment, quantum computing has little to no abstractions, and the languages are all more similar (this course uses Qiskit). \par
+  While in classical computing we can choose any two registers to perform some multi-register computation, for quantum computers there are more restrictions. Operations can only be performed on neighboring qubits, as opposed to any two arbitrary registers.
+\end{document}

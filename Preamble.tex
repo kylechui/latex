@@ -1,6 +1,7 @@
 % Import packages
 \usepackage[margin=1in]{geometry}
 
+\usepackage[linesnumbered,ruled,vlined]{algorithm2e}
 \usepackage{amssymb, amsthm}
 \usepackage{comment}
 \usepackage{enumitem}
@@ -46,6 +47,7 @@
 \DeclareMathOperator{\Exponential}{Exponential}
 \DeclareMathOperator{\var}{var}
 \DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\minimize}{minimize}
 % Macros for letters/variables
 \newcommand\ttilde{\kern -.15em\lower .7ex\hbox{\~{}}\kern .04em}
 \newcommand{\N}{\ensuremath{\mathbb{N}}}
@@ -76,6 +78,9 @@
 \newcommand{\floor}[1]{\ensuremath{\left\lfloor #1 \right\rfloor}}
 \newcommand{\ceil}[1]{\ensuremath{\left\lceil #1 \right\rceil}}
 \newcommand{\eclass}[1]{\ensuremath{\left[ #1 \right]}}
+\newcommand{\bra}[1]{\ensuremath{\left\langle #1 \right\rvert}}
+\newcommand{\ket}[1]{\ensuremath{\left\lvert #1 \right\rangle}}
+\newcommand{\braket}[2]{\ensuremath{\left.\left\langle #1\right\vert #2 \right\rangle}}
 
 \newcommand{\chapternum}{}
 \newcommand{\ex}[1]{\noindent\textbf{Exercise \chapternum.{#1}.}}
