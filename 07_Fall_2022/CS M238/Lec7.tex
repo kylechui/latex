@@ -1,0 +1,26 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 7}
+  \subsection{Simon's Problem}
+  Suppose we have some function $f\colon \set{0, 1}^n\to \set{0, 1}^n$. We assume that there exists some $s\in\set{0, 1}^n$ such that for all $x, y\in \set{0, 1}^n$, we have $f(x) = f(y)$ if and only if $x + y\in \set{0^n, s}$. We wish to find $s$.
+  \subsection{Simon's Algorithm}
+  The high-level idea here is that we use a quantum computer to map $f$ to a series of equations, and then use classical computers to find $s$. Since this is a probabilistic computation, we repeat this process until we're ``fairly certain'' that we have found $s$.
+  \begin{note}{}
+    It is very easy to check if a given guess $s$ is a valid solution to the problem. We can just choose an arbitrary $x$ and compare $f(x)$ with $f(x\oplus s)$.
+  \end{note}
+  After running the quantum computer, we will end up with $n - 1$ equations of the form
+  \begin{align*}
+    y_1\cdot s &= 0 \\
+    y_2\cdot s &= 0 \\
+    \vdots \\
+    y_{n - 1}\cdot s &= 0.
+  \end{align*}
+  Ideally we wish all $y_i$ to be linearly independent, so $s$ is orthogonal to the $n - 1$ bit strings. The probability that all of the $y_i$'s are linearly independent is greater than $\frac{1}{4}$.
+\end{document}

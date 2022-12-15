@@ -1,0 +1,48 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 5}
+  \subsection{Deutsch--Jozsa}
+  We're given a function $f\colon \set{0, 1}^n\to \set{0, 1}$, which is either \emph{constant} ($f(x)$ is always 0 or always 1), or \emph{balanced} ($f(x)$ is 0 half the time and 1 the other half). How can we determine if $f$ is constant or balanced? \par
+  Let's first consider the case where $n = 1$, so $f\colon \set{0, 1}\to \set{0, 1}$. We use the same encoding trick from previous lectures to define $U_f$ by
+  \[
+    U_f(\ket{x}\otimes \ket{b}) = \ket{x}\otimes \ket{b\oplus f(x)}.
+  \]
+  In this case we have four cases for $f$, where two are constant and two are balanced:
+  \begin{center}
+    \begin{tabular}{c|cccc}
+      Input & $f_0$ & $f_1$ & $f_2$ & $f_3$ \\
+      \hline
+      0 & 0 & 0 & 1 & 1 \\
+      1 & 0 & 1 & 0 & 1
+    \end{tabular}
+  \end{center}
+  Thus we have
+  \begin{align*}
+    U_{f_0}(\ket{0}\otimes \ket{b}) &= \ket{0}\otimes \ket{b} \\
+    U_{f_0}(\ket{1}\otimes \ket{b}) &= \ket{1}\otimes \ket{b}.
+  \end{align*}
+  Since $U_{f_0}$ maps things to themselves, $f_0$ must be the identity map. Note that if $f$ is constant, then $f(0)\oplus f(1) = 0$, and if $f$ is balanced, then $f(0)\oplus f(1) = 1$. \par
+  \begin{algorithm}
+    \DontPrintSemicolon
+    \caption{Deutsch--Jozsa Algorithm}
+    Take two qubits and initialize them to $\ket{0}$ and $\ket{1}$\;
+    Send each qubit through a Hadamard gate\;
+    Send both qubits through $U_f$\;
+    Send the first qubit through another Hadamard gate\;
+    Measure the first qubit\;
+    \If{the measurement is zero}{
+      \Return{$f$ is constant}
+    }
+    \Else{
+      \Return{$f$ is balanced}
+    }
+  \end{algorithm}
+  For the generalized case, we use $n + 1$ qubits, with all but the last initially set to $\ket{0}$. We then pass the $n$ qubits through $n$ Hadamard gates, then all of the qubits through $U_f$. Finally, we pass the first $n$ qubits through another $n$ Hadamard gates, and measure the $n$ qubits. If the $n$ measured bits are all zero, then we output ``constant'', otherwise ``balanced''.
+\end{document}

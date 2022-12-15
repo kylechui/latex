@@ -1,0 +1,39 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 8}
+  \subsection{Grover's Algorithm}
+  The main ideas of this algorithm are \emph{amplitude amplification} and \emph{quadratic speedup}. \par
+  We wish to search in an unstructured database. We may restructure this problem as: we are given a function $f\colon \set{0, 1}^n\to \set{0, 1}$, and wish to find $x$ such that $f(x) = 1$. We assume that there exists exactly one such $x$. \par
+  We use the notation:
+  \begin{itemize}
+    \item $z_f\ket{x} = (-1)^{f(x)}\ket{x}$
+    \item $z_0\ket{x} = \begin{cases}
+      -\ket{x} & \text{if }x = 0^n \\
+      \ket{x} & \text{otherwise}
+    \end{cases}$
+  \end{itemize}
+  \begin{note}{}
+    Both of these can be computed using basic quantum gates, but they get quite large/involved, so we assume that they can be constructed.
+  \end{note}
+  Let
+  \[
+    G\ket{x} = -H^{\otimes n}z_0H^{\otimes n}z_f\ket{x}.
+  \]
+  \begin{algorithm}
+    \DontPrintSemicolon
+    \caption{Grover's Algorithm}
+    Set $x$ to be $n$ qubits, all in the zero state\;
+    Apply $n$ Hadamard gates to $X$\;
+    \For{\phantom{.}}{
+      Apply $G$ to $x$ ($\mathcal{O}(\sqrt{2^n})$ times)
+    }
+    Measure $x$ and get the result
+  \end{algorithm}
+\end{document}

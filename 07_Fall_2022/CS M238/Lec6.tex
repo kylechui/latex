@@ -1,0 +1,36 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 6}
+  \subsection{Bernstein--Vazirani's Algorithm}
+  Suppose we have a function $f\colon \set{0, 1}^n\to \set{0, 1}$. We assume that $f(x) = a\cdot x\oplus b$ for some $n$-bit string $a$, and singular bit $b$. We would like to find $a, b$. \par
+  \begin{note}{}
+    If $a = 0$, then $f(x) = x\cdot 0\oplus b = b$, and so $f$ is constant. If $a\neq 0$, then each bit string $x$ has an inverse, and so $f$ is balanced.
+  \end{note}
+  \subsection{Big Ideas}
+  \begin{itemize}
+    \item Superposition (apply $f$ to everything in one shot)
+    \item We are again going to use $U_f$ to have the operations be reversible
+    \begin{itemize}
+      \item This will move ``something'' into the exponent (of $-1$)
+    \end{itemize}
+    \item The Hadamard gate will move the exponent ($a$) back down
+  \end{itemize}
+  Our goal is to find the final state $\ket{a}$. \par
+  \begin{algorithm}
+    \DontPrintSemicolon
+    \caption{Bernstein--Vazirani's Algorithm}
+    We initially have all $n$ qubits in state $\ket{0}$, and a helper qubit in state $\ket{1}$\;
+    Apply the Hadamard gate to all $n + 1$ qubits\;
+    Apply $U_f$ to all qubits\;
+    Apply the Hadamard gate to the first $n$ qubits\;
+    Measure the end state to get $a$\;
+  \end{algorithm}
+  By doing some math, we can show that the final state of the circuit is $(-1)^{b}\ket{a}$ with 100\% probability, as desired.
+\end{document}

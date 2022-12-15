@@ -1,0 +1,88 @@
+\documentclass[class=article, crop=false]{standalone}
+\input{../../Preamble}
+
+\fancyhf{}
+\lhead{Kyle Chui}
+\rhead{Page \thepage}
+\pagestyle{fancy}
+
+\begin{document}
+  \section{Lecture 4}
+  \subsection{Quantum Circuits}
+  A quantum circuit consists of a series of ``wires'', and time passes from left to right. We say that at each time step or ``moment'', some action is performed (which takes the form of a unitary matrix). At each moment, the unitary matrix being applied is the tensor product of all of the unitary matrices on each wire. In the case that there is no matrix applied on a given wire, we substitute in the identity matrix.
+  \begin{note}{}
+    From a physical perspective, it is actually \emph{more} error prone to do nothing, than it is to apply some transformation. Thus real-world quantum compilers may substitute the identity for pairs of operations that cancel out, e.g. $I = Z^2$.
+  \end{note}
+  The CNOT gate has the control bit on top (filled circle), and the target bit on the bottom (empty circle). For example,
+  \begin{align*}
+    CNOT\cdot (H\otimes I)\cdot \ket{00} &= CNOT\cdot \frac{1}{\sqrt{2}}(\ket{00} + \ket{10}) \\
+                                         &= \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}).
+  \end{align*}
+  \subsection{Superdense Coding}
+  \begin{theorem}{Holevo's Theorem}
+    We must use $n$ qubits to encode $n$ bits of information.
+  \end{theorem}
+  Consider the problem where Alice wants to share 2 bits of information ($ab$) with Bob using ``fewer'' qubits.
+  \begin{itemize}
+    \item Bob first creates two qubits entangled in the state $\frac{1}{\sqrt{2}}(\ket{00} + \ket{11})$, and sends one to Alice
+    \item Alice does the following:
+    \begin{itemize}
+      \item If $a = 1$, then apply $Z$ to qubit $A$
+      \item If $b = 1$, then apply $X$ to qubit $A$
+      \item Send qubit $A$ to Bob
+    \end{itemize}
+    \item Bob then performs the following:
+    \begin{itemize}
+      \item Apply $CNOT(A, B)$
+      \item Apply $H$ to $A$
+      \item Measure both $A$ and $B$ to get $ab$
+    \end{itemize}
+  \end{itemize}
+  Through some math, we can show that when Bob measures $A, B$, that the qubits collapse to $ab$.
+  \subsection{No Cloning}
+  Suppose Alice has an unknown qubit that she wants to send to Bob. We start with an Bell pair: $\frac{1}{\sqrt{2}}(\ket{00} + \ket{11})$, and suppose Alice's qubit is in the state $\alpha\ket{0} + \beta\ket{1}$. Then we may apply Alice's qubit to the Bell pair,
+  \[
+    (\alpha\ket{0} + \beta\ket{1})\otimes \frac{1}{\sqrt{2}}(\ket{00} + \ket{11}) = \frac{1}{\sqrt{2}}(\alpha\ket{000} + \alpha\ket{011} + \beta\ket{100} + \beta\ket{111}).
+  \]
+  Alice first applies the $CNOT$ gate to $A, B$, then the Hadamard gate to $A$. After the $CNOT$ transformation, our state is
+  \[
+    \frac{1}{\sqrt{2}}(\alpha\ket{000} + \alpha\ket{011} + \beta\ket{110} + \beta\ket{101}).
+  \]
+  Then after the Hadamard transformation, we have
+  \[
+    \frac{1}{2}(\alpha\ket{000} + \alpha\ket{100} + \alpha\ket{011} + \alpha\ket{111} + \beta\ket{010} - \beta\ket{110} + \beta\ket{001} - \beta\ket{101}).
+  \]
+  Simplifying yields
+  \[
+    \frac{1}{2}(\ket{00}(\alpha\ket{0} + \beta\ket{1}) + \ket{01}(\alpha\ket{1} + \beta\ket{0}) + \ket{10}(\alpha\ket{0} - \beta\ket{1}) + \ket{11}(\alpha\ket{1} - \beta\ket{0})).
+  \]
+  Now when Alice measures her two qubits and sends them over to Bob, he can apply the following protocol:
+  \begin{itemize}
+    \item If $b = 1$, then Bob applies $X$ to his qubit
+    \item If $a = 1$, then Bob applies $Z$ to his qubit
+  \end{itemize}
+  He then ends up with $\alpha\ket{0} + \beta\ket{1}$, the original qubit. \par
+  Notice that in the previous example, when we teleported a qubit from Alice to Bob, we \emph{destroyed} Alice's qubit.
+  \begin{theorem}{No Cloning Theorem}
+    It is \emph{impossible} to clone an unknown qubit. In other words, no operation can map $\ket{\psi}\ket{0}$ to $\ket{\psi}\ket{\psi}$.
+    \begin{proof}
+      Suppose towards a contradiction that there exists some operation $U$ such that for all $\ket{\psi}$, we have
+      \[
+        U\ket{\psi}\ket{0} = \ket{\psi}\ket{\psi}.
+      \]
+      We pick some $\ket{\psi_1}, \ket{\psi_2}$ that are non-orthogonal and non-proportional, i.e.
+      \[
+        \braket{\psi_1}{\psi_2}\neq 0\quad\text{and}\quad \braket{\psi_1}{\psi_2}\neq 1.
+      \]
+      We compute
+      \begin{align*}
+        \braket{\psi_1}{\psi_2} &= \braket{\psi_1}{\psi_2}\braket{0}{0} \\
+                                &= \braket{\psi_1\otimes \ket{0}}{\psi_2\otimes \ket{0}} \\
+                                &= \braket{U(\psi_1\otimes \ket{0})}{U(\psi_2\otimes \ket{0})} \\
+                                &= \braket{\ket{\psi_1}\ket{\psi_1}}{\ket{\psi_2}\ket{\psi_2}} \\
+                                &= \braket{\psi_1}{\psi_2}^2,
+      \end{align*}
+      so $\braket{\psi_1}{\psi_2} = 0$ or $\braket{\psi_1}{\psi_2} = 1$. Thus we have arrived at a contradiction, so we cannot clone an unknown qubit.
+    \end{proof}
+  \end{theorem}
+\end{document}
